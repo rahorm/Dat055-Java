@@ -9,4 +9,5 @@ public class ChatRoomModel extends Observable {
     private Messages[] msg;
     private Users[] members;
     private Users activeUser;
+    private int chatID;
 }

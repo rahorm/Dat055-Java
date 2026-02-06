@@ -4,7 +4,7 @@ import Model.ChatRoomModel;
 
 public class Controller {
 
-    public void setActiveRoom(Integer room){
+    public void setActiveRoom(int chatID){
 
     }
 
