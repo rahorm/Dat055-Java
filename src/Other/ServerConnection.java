@@ -1,5 +1,5 @@
 package Other;
 
 public class ServerConnection {
-    private Users[] users;
+    private User[] users;
 }

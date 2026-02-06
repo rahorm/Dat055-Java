@@ -2,10 +2,10 @@ package Other;
 
 import java.time.LocalDateTime;
 
-public class Messages {
+public class Message {
     public String content;
     public LocalDateTime timestamp;
-    public Users sender;
+    public User sender;
     public int chatID;
 
 }
