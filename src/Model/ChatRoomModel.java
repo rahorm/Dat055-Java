@@ -12,7 +12,7 @@ public class ChatRoomModel {
     private User activeUser;
     private int chatID;
 
-    ArrayList<Message> public retriveMSGList(variabler){
-
+    ArrayList<Message> retriveMSGList(){
+        return new ArrayList<>();
     }
 }
