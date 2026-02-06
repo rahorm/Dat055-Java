@@ -1,5 +1,7 @@
 package Controller;
 
+import java.time.LocalDateTime;
+
 /**
  * Notes:
  * - Change UML name to controller
@@ -23,15 +25,16 @@ public class Controller {
      * @param msg string that represents a message that has been input from a user
      * @param userID integer value that represents a user in the active chat that is the sender of the message
      * @throws IllegalArgumentException if userID is not an existing user
-     * @throws NumberFormatException if msg isn't a string*/
-    public void sendMessage(String msg, int userID){
+     * @throws NumberFormatException if msg isn't a string
+     * */
+    public void sendMessage(String msg, int userID, LocalDateTime timeStamp){
 
     }
     /**
      * Removes the chatRoom, you can not remove the activeChatRoom
      * @param chatID integer that represents a chatRoom
      * @throws IllegalArgumentException if chatID does not represent a chatRoom that exists
-     * @throws IllegalArgumentException if the chaTID given is the activeChatRoom
+     * @throws IllegalArgumentException if the chatID given is the activeChatRoom
      * */
     public void removeChatRoom(int chatID){
 
@@ -45,27 +48,6 @@ public class Controller {
 
     }
 
-    /**
-     * */
-    public void addObserver(){
 
-    }
-
-    public void removeObserver(){
-
-    }
-
-    public void notifyObservers(){
-
-    }
-
-    /**
-     * Takes an integer representing an existing chatRoom ID and makes that the active chatRoom
-     * @param chatID integer representing a chatRoom
-     * @throws IllegalArgumentException if chatID isn't an existing ID for a chatRoom
-     * */
-    public void changeActiveRoom(int chatID){
-
-    }
 
 }
