@@ -4,6 +4,9 @@ import java.sql.*;
 import java.util.*;
 
 public class ServerConnection {
+
+    IdGenerator idGen = new IdGenerator();
+
     /**
      * Creates a new chat in the database
      * <p>
