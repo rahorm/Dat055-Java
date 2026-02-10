@@ -64,12 +64,15 @@ public class ServerConnection {
      * This cannot be undone.
      * This method returns an int, 0, if no problems were encountered.
      *
-     * @param user id of user to be deleted
+     * @param userId id of user to be deleted
      * @return int message
      *
      * @throws SQLException
      */
 
+    int deleteUser(int userId){
+        return 0;
+    }
     int deleteUser(User user){
         return 0;
     }
