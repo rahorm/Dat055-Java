@@ -1,9 +1,15 @@
 package View;
 
+import Controller.Controller;
+import Model.ChatRoomFacade;
+
 import java.util.Observable;
 import java.util.Observer;
 
 public class ChatRoomView implements Observer {
+    Controller controller;
+    ChatRoomFacade model;
+    UI ui;
     /**
      * Used by an observable running notifyObservers() or notifyObservers(Object arg)
      * @param o
@@ -13,6 +19,13 @@ public class ChatRoomView implements Observer {
      *            when arg isn't specified everything in the view gets updated
      */
     public void update(Observable o, Object arg) {
+
+    }
+
+    public ChatRoomView(Controller controller, ChatRoomFacade model) {
+        this.controller = controller;
+        this.model = model;
+        this.ui = new UI(controller);
 
     }
 }
