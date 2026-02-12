@@ -5,8 +5,6 @@ import java.util.*;
 
 public class ServerConnection {
 
-
-
     IdGenerator idGen = new IdGenerator();
 
     /**
@@ -45,7 +43,7 @@ public class ServerConnection {
     /**
      * Creates a new user in the database
      * <p>
-     * The parameter userName is the intended display name of the user. The user will recieve an id for internal use.
+     * The parameter userName is the intended display name of the user. The user will receive an id for internal use.
      * This method returns an int, 0, if no problems were encountered.
      *
      * @param userName display name of user
