@@ -1,14 +1,56 @@
 package Other;
 
+import java.io.*;
+import java.net.Socket;
 import java.sql.*;
 import java.util.*;
 
 public class ServerConnection {
 
+    private Socket socket;
+    private BufferedReader bufferedReader;
+    private BufferedWriter bufferedWriter;
+
+    private IdGenerator idGen = new IdGenerator();
+
+    public ServerConnection(Socket socket){
+        try {
+            this.socket = socket;
+            this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+// ------ Getters and setters ------------------------
+    public Socket getSocket() {
+    return socket;
+}
+    public void setSocket(Socket socket) {
+        this.socket = socket;
+    }
+    public BufferedReader getBufferedReader() {
+        return bufferedReader;
+    }
+    public void setBufferedReader(BufferedReader bufferedReader) {
+        this.bufferedReader = bufferedReader;
+    }
+    public BufferedWriter getBufferedWriter() {
+        return bufferedWriter;
+    }
+    public void setBufferedWriter(BufferedWriter bufferedWriter) {
+        this.bufferedWriter = bufferedWriter;
+    }
+    public IdGenerator getIdGen() {
+        return idGen;
+    }
+    public void setIdGen(IdGenerator idGen) {
+        this.idGen = idGen;
+    }
 
 
-    IdGenerator idGen = new IdGenerator();
-
+// -----Server related actions ----------------------------------
     /**
      * Creates a new chat in the database
      * <p>
@@ -41,7 +83,6 @@ public class ServerConnection {
         return 0;
     }
 
-
     /**
      * Creates a new user in the database
      * <p>
@@ -56,7 +97,6 @@ public class ServerConnection {
     String createUser(String userName){
         return "name";
     }
-
 
     /**
      * Deletes a user from the database
@@ -191,4 +231,6 @@ public class ServerConnection {
 
     //boolean checkLogIn(String username, String password){}
     //boolean checkUserExists(String username){}
+
+
 }
