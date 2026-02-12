@@ -5,6 +5,8 @@ import java.util.*;
 
 public class ServerConnection {
 
+
+
     IdGenerator idGen = new IdGenerator();
 
     /**
@@ -47,12 +49,12 @@ public class ServerConnection {
      * This method returns an int, 0, if no problems were encountered.
      *
      * @param userName display name of user
-     * @return int message
+     * @return string returns the username
      *
      * @throws SQLException
      */
-    int createUser(String userName){
-        return 0;
+    String createUser(String userName){
+        return "name";
     }
 
 
@@ -162,7 +164,6 @@ public class ServerConnection {
         return new ArrayList<>();
     }
 
-
     /**
      * Gets members of specified chat.
      * ChatId specifies the id of the chat for which to get the members.
@@ -187,4 +188,7 @@ public class ServerConnection {
     ArrayList<Integer> getAvailableChats(User user){
         return new ArrayList<>();
     }
+
+    //boolean checkLogIn(String username, String password){}
+    //boolean checkUserExists(String username){}
 }
