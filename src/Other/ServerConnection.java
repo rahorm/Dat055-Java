@@ -23,6 +23,23 @@ public class ServerConnection {
             System.out.println(e.getMessage());
         }
     }
+    public void connectionTest(){
+        try {
+            Scanner s = new Scanner(System.in);
+
+            while(socket.isConnected()){
+                int in = s.nextInt();
+
+                bufferedWriter.write("client ping");
+                bufferedWriter.newLine();
+                bufferedWriter.flush();
+            }
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 // ------ Getters and setters ------------------------
     public Socket getSocket() {
     return socket;
