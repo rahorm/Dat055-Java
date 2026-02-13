@@ -249,5 +249,4 @@ public class ServerConnection {
     //boolean checkLogIn(String username, String password){}
     //boolean checkUserExists(String username){}
 
-
 }
