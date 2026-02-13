@@ -39,6 +39,9 @@ public class ServerConnection {
         return 0;
     }
 
+    //boolean checkUserExists(String username){}
+
+    //boolean checkLogIn(String username, String password){}
 
     /**
      * Creates a new user in the database
@@ -46,12 +49,13 @@ public class ServerConnection {
      * The parameter userName is the intended display name of the user. The user will receive an id for internal use.
      * This method returns an int, 0, if no problems were encountered.
      *
-     * @param userName display name of user
+     * @param username users username
+     * @param password users password
      * @return string returns the username
      *
      * @throws SQLException
      */
-    String createUser(String userName){
+    String createUser(String username, String password){
         return "name";
     }
 
@@ -64,13 +68,13 @@ public class ServerConnection {
      * This cannot be undone.
      * This method returns an int, 0, if no problems were encountered.
      *
-     * @param userId id of user to be deleted
+     * @param username id of user to be deleted
      * @return int message
      *
      * @throws SQLException
      */
 
-    int deleteUser(int userId){
+    int deleteUser(String username){
         return 0;
     }
     int deleteUser(User user){
@@ -187,6 +191,4 @@ public class ServerConnection {
         return new ArrayList<>();
     }
 
-    //boolean checkLogIn(String username, String password){}
-    //boolean checkUserExists(String username){}
 }
