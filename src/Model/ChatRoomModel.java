@@ -33,11 +33,6 @@ public class ChatRoomModel {
 
     }
 
-    /**
-     *
-     * @return
-     */
-
     public ArrayList<Message> retriveMSGList(){
         /**
          * This method retrieves all messages from
@@ -55,16 +50,16 @@ public class ChatRoomModel {
          * @param none
          * @return list of Users
          */
-    return new ArrayList<> (user);
+    return new ArrayList<> (members);
     }
 }
 
     public int getChatID(){
-        return chatID;
+        return chatID;    //                     Uppdatera
     }
 
     public void setActiveUser(User activeUser) {
-        this.activeUser = activeUser;
+        this.activeUser = activeUser;  //       Lägg till / uppdatera
     }
 
 
