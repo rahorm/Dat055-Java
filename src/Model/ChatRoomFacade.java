@@ -32,7 +32,7 @@ public class ChatRoomFacade extends Observable {
 		 public ChatRoomModel getState(){
 			 return this.model;
     } */
-}
+
 
 /**
  * Adds a user to the member list of this chat room.
