@@ -21,7 +21,6 @@ public class ChatRoomModel {
     private User activeUser;
     private final int chatID;
 
-
     /**
      * This method creates a new chatroom model with chatID
      * and activeUser
