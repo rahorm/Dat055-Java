@@ -19,7 +19,8 @@ public class ChatRoomView implements Observer {
      *            when arg isn't specified everything in the view gets updated
      */
     public void update(Observable o, Object arg) {
-
+        msg = o.getMsg();
+        UI.setMsg(msg);
     }
 
     public ChatRoomView(Controller controller, ChatRoomFacade model) {

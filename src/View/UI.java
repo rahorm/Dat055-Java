@@ -4,6 +4,7 @@ import Controller.Controller;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDateTime;
 
 public class UI {
     Controller controller;
@@ -18,7 +19,7 @@ public class UI {
         btn.setSize(100, 100);
 
         JButton btn2 = new JButton("create new chat room");
-        btn2.addActionListener((_) -> controller.addChatRoom());
+        btn2.addActionListener((_) -> controller.sendMessage("hello server", 1, LocalDateTime.now()));
         btn2.setSize(100, 100);
 
         frame.add(btn);
