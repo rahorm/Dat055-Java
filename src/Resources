@@ -20,9 +20,10 @@ Until the 17th we will make the sequence data base
 # DIVISION OF LABOUR
     * Madde : Handler, SQL
     * Mona : update Msg variables and describe in comments how they should be implemented in common
+        // Andy: i dont really remember what i meant by this mona, feel free to ignore it if you don't remember what it was we talked about
     * Mona : I/O use objects streams in server connection
-    ? Name : Make user serializable
-    ? Name : make Message serializable
+    ? idk : Make user serializable
+    ? idk : make Message serializable
     * Andy : Common
     * Mona : ServerConnection
     * Choi : ModelFacade and Model
