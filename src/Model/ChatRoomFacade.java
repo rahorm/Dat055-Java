@@ -51,23 +51,6 @@ public void addMember(User user) {
 }
 
 /**
- * Adds a user to the member list of this chat room.
- * If the user is already a member, nothing
- *
- * @param user user to add; must not be null
- * @throws IllegalArgumentException if  user is null
- */
-public void addMember(User user) {
-
-    if (user == null) {
-        throw new IllegalArgumentException("user must not be null");
-    }
-    if (!members.contains(user)) {
-        members.add(user);
-    }
-}
-
-/**
  * Removes a user from the member list of this chat room.
  * If the user is not a member, nothing happens.
  *
