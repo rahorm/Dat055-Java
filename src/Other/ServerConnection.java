@@ -1,12 +1,73 @@
 package Other;
 
+import java.io.*;
+import java.net.Socket;
 import java.sql.*;
 import java.util.*;
 
 public class ServerConnection {
 
-    IdGenerator idGen = new IdGenerator();
+    private Socket socket;
+    private BufferedReader bufferedReader;
+    private BufferedWriter bufferedWriter;
 
+    private IdGenerator idGen = new IdGenerator();
+
+    public ServerConnection(Socket socket){
+        try {
+            this.socket = socket;
+            this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void connectionTest(){
+        try {
+            Scanner s = new Scanner(System.in);
+
+            while(socket.isConnected()){
+                int in = s.nextInt();
+
+                bufferedWriter.write("client ping");
+                bufferedWriter.newLine();
+                bufferedWriter.flush();
+            }
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+// ------ Getters and setters ------------------------
+    public Socket getSocket() {
+    return socket;
+}
+    public void setSocket(Socket socket) {
+        this.socket = socket;
+    }
+    public BufferedReader getBufferedReader() {
+        return bufferedReader;
+    }
+    public void setBufferedReader(BufferedReader bufferedReader) {
+        this.bufferedReader = bufferedReader;
+    }
+    public BufferedWriter getBufferedWriter() {
+        return bufferedWriter;
+    }
+    public void setBufferedWriter(BufferedWriter bufferedWriter) {
+        this.bufferedWriter = bufferedWriter;
+    }
+    public IdGenerator getIdGen() {
+        return idGen;
+    }
+    public void setIdGen(IdGenerator idGen) {
+        this.idGen = idGen;
+    }
+
+
+// -----Server related actions ----------------------------------
     /**
      * Creates a new chat in the database
      * <p>
@@ -39,7 +100,6 @@ public class ServerConnection {
         return 0;
     }
 
-
     /**
      * Creates a new user in the database
      * <p>
@@ -47,14 +107,13 @@ public class ServerConnection {
      * This method returns an int, 0, if no problems were encountered.
      *
      * @param userName display name of user
-     * @return int message
+     * @return string returns the username
      *
      * @throws SQLException
      */
-    int createUser(String userName){
-        return 0;
+    String createUser(String userName){
+        return "name";
     }
-
 
     /**
      * Deletes a user from the database
@@ -162,7 +221,6 @@ public class ServerConnection {
         return new ArrayList<>();
     }
 
-
     /**
      * Gets members of specified chat.
      * ChatId specifies the id of the chat for which to get the members.
@@ -187,4 +245,8 @@ public class ServerConnection {
     ArrayList<Integer> getAvailableChats(User user){
         return new ArrayList<>();
     }
+
+    //boolean checkLogIn(String username, String password){}
+    //boolean checkUserExists(String username){}
+
 }
