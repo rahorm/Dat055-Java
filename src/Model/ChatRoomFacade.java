@@ -1,5 +1,8 @@
 package Model;
 
+import Other.Message;
+import Other.User;
+
 import java.util.Observable;
 
 public class ChatRoomFacade extends Observable {
@@ -29,4 +32,79 @@ public class ChatRoomFacade extends Observable {
 		 public ChatRoomModel getState(){
 			 return this.model;
     } */
+}
+
+/**
+ * Adds a user to the member list of this chat room.
+ * If the user is already a member, nothing
+ *
+ * @param user user to add; must not be  null
+ * @throws IllegalArgumentException if user is null
+ */
+public void addMember(User user) {
+    if (user == null) {
+        throw new IllegalArgumentException("user must not be null");
+    }
+    if (!members.contains(user)) {
+        members.add(user);
+    }
+}
+
+/**
+ * Adds a user to the member list of this chat room.
+ * If the user is already a member, nothing
+ *
+ * @param user user to add; must not be null
+ * @throws IllegalArgumentException if  user is null
+ */
+public void addMember(User user) {
+
+    if (user == null) {
+        throw new IllegalArgumentException("user must not be null");
+    }
+    if (!members.contains(user)) {
+        members.add(user);
+    }
+}
+
+/**
+ * Removes a user from the member list of this chat room.
+ * If the user is not a member, nothing happens.
+ *
+ * @param user user to remove; must not be  null
+ * @throws IllegalArgumentException if  user is null
+ */
+public void removeMember(User user) {
+    if (user == null) {
+        throw new IllegalArgumentException("user must not be null");
+    }
+    members.remove(user);
+}
+
+/**
+ * Adds a new message to this chat room.
+ *
+ * @param message message to add; must not be null
+ * @throws NullPointerException if  message is  null
+ */
+public void addMessage(Message message) {
+    if (message == null) {
+        throw new IllegalArgumentException("message must not be null");
+    }
+    messages.add(message);
+}
+
+/**
+ * Removes a message from this chat room.
+ * If the message is not found, nothing happens.
+ *
+ * @param message message to remove; must not be null
+ * @throws IllegalArgumentException if message is null
+ */
+public void removeMessage(Message message) {
+    if (message == null) {
+        throw new IllegalArgumentException("message must not be null");
+    }
+    messages.remove(message);
+}
 }
