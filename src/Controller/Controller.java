@@ -60,7 +60,6 @@ public class Controller {
 
     }
 
-
     /**
      * Outputs the id of the current user
      *
