@@ -11,6 +11,7 @@ public class ClientHandler implements Runnable{
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private String clientUsername;
+    private ActionHandler actionHandler;
 
     public ClientHandler(Socket socket){
         try {
