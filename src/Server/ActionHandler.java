@@ -1,5 +1,6 @@
 package Server;
 
+import Common.SendMsgWrapper;
 import Other.Message;
 import Other.User;
 
@@ -24,7 +25,7 @@ public class ActionHandler {
 
 
     public void handle(Object obj){
-        if(obj instanceof SendMessage){
+        if(obj instanceof SendMsgWrapper){
             Message message = obj.getMessage();
             DBcon.sendMsg(message);
         }
