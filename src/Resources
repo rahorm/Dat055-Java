@@ -6,3 +6,38 @@ https://www.plantuml.com/plantuml/uml/RP91Ry8m38Nl-HM-SG5nHsE2RPeqQUommUvfQo1hwa
 
 Sekvensdiagram - create new user
 www.plantuml.com/plantuml/png/XP0nQiGm44LxdMBAfF05N0G7Gy1jWjCFqe2DfH6CPET2ESDUm1TRpU9bruR5ZOh_dvxuQb96oNFmnlI91AeFwBiQa9VrdnqAO-2d1chmwoKHHt7xE4sZdH3UtekeqxIDd2LwJrA35S9CofV-KIZsGxAGb8p9vZ4o57eWEstmiQvsvZFNxkKpMQ7dHBgOp47S3fY_OmnVQD6HhgNyMHJBtNm0LFmxqXyOFLyPjhkAt7xH6DCGkpduAm00
+
+Sekvensdiagram - initial program plans made 260213
+www.plantuml.com/plantuml/png/TLDDRnCn4Btlh_0j8ANAlQAeeGW9GK62XhkzdYHk_15vRDB-UzvEOcMJBb4k7h-FjtxsFHUTIms-Mp5bTVDHhRwgMrM7nRxobbYPMagAQZ5JQnStcCyMNGSKi0yfbfoyfmoEY_jQthqVW0zggwFr89SjgS0RuOpGu3ucI_wBxhKba1LJj8-yQVoOYbix22I3A7zFhcCE97xB3cGZzSMb21qkAPFeTDsRRKaSWW2JUNvAHyI0FSxFea18eh7I1T_gedz-6r6dyrYpsWDATZhGzJ6CuEhDv_vnT1Yw4SHtnsKA9CihL2U_nGojDPrRjQpe9XRNQudoYtYV8bCdBjVTBYNle1OfJqCsL9xefNnABzD5ixRdG-r6m_yK2M0hw6HuuNYXSFgeyUp3ZOoEmU38bvPjK-xPQwjcCai3BKsgvGSTFgFvYIgllpJI0RR3iHkzIq45AMOzx58SdbBauynZoId8rTKwoysQBS3J_1ft6ThzsIO0hu5lzYhrszDg3eLC_GxkM1Mtqrvv5v-faMmAeii7l6DrXvS-7qM-usgupyveusakvmDC6r865V_k7htKuFy1
+
+//----------- 260213 -----------//
+Until the 17th we will make the sequence data base
+
+# REMEMBER
+    * use the Message class in this iteration of this program even tho this iteration is very simple
+    * write in discord if you are unsure how things should be implemented
+
+# DIVISION OF LABOUR
+    * Madde : Handler
+    X Madde : SQL
+    * Mona : update Msg variables and describe in comments how they should be implemented in common
+        // Andy: i dont really remember what i meant by this mona, feel free to ignore it if you don't remember what it was we talked about
+    * Mona : I/O use objects streams in server connection
+    X Madde : Make user serializable
+    X Madde : make Message serializable
+    * Andy : Common
+    * Mona : ServerConnection
+    * Choi : ModelFacade and Model
+    * Ada : View and UI
+
+# GENERAL
+    * ServerConnection class should be moved to directory Client
+
+# WHAT WE TALKED ABOUT AND NEED TO LEARN
+    * Handler
+    * serializable
+    * input output stream
+    * Strategy pattern (uses handler)
+    * visitor pattern
+    * threads
+    * singleton

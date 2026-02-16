@@ -1,6 +1,19 @@
 package Other;
 
-public class User {
-    private String username; // why not just name it name?
-    private int userId; // Andy: why not just name it id?
+import java.io.Serializable;
+
+public class User implements Serializable {
+    private String username;
+
+    public User(String username){
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

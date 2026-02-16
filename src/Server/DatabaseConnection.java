@@ -1,23 +1,27 @@
 package  Server;
+
+import Other.Message;
+
 import java.sql.*;
 import java.util.Properties;
 
-public class DatabaseConnection {
+public final class DatabaseConnection {
 
     static final String DBNAME = "DAT055_ChatDB";
     static final String DATABASE = "jdbc:postgresql://localhost:5432/"+DBNAME;
     static final String USERNAME = "postgres";
     static final String PASSWORD = "Dia:23Postgres";
 
+    private static DatabaseConnection instance;
     private Connection conn;
 
 //-----------------Connection init-----------------//
 
-    public DatabaseConnection() throws SQLException, ClassNotFoundException {
+    private DatabaseConnection() throws SQLException, ClassNotFoundException {
         this(DATABASE, USERNAME, PASSWORD);
     }
 
-    public DatabaseConnection(String db, String user, String pwd) throws SQLException, ClassNotFoundException {
+    private DatabaseConnection(String db, String user, String pwd) throws SQLException, ClassNotFoundException {
         Class.forName("org.postgresql.Driver");
         Properties props = new Properties();
         props.setProperty("user", user);
@@ -25,8 +29,15 @@ public class DatabaseConnection {
         conn = DriverManager.getConnection(db, props);
     }
 
+    public static DatabaseConnection getInstance() throws SQLException, ClassNotFoundException {
+        if (instance == null){
+            instance = new DatabaseConnection();
+        }
+        return instance;
+    }
+
 //-----------------QUERIES-----------------//
-    /*
+   /*
     * createChatRoom(String chatName)
     * deleteChatRoom(int chatId)
     * boolean checkUserExists(String username)
@@ -46,11 +57,24 @@ public class DatabaseConnection {
         return username;
     }
 
+    public void sendMsg(Message msg){
+        try(PreparedStatement ps = conn.prepareStatement(
+                "INSERT INTO ChatMessages VALUES (?, ?, ?, ?, ?, ?)");){
+            ps.setString(1, "1"); //needs fixing
+            ps.setString(2, String.valueOf(msg.getChatID()));
+            ps.setString(4, String.valueOf(msg.getTimestamp()));
+            ps.setString(5, msg.getContent());
+            ps.setString(6, "false"); //needs fixing
+            ps.executeUpdate();
+        }  catch (SQLException e) {
+            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+        }
+    }
+
     /*
      * deleteUser(String username)
      * addChatMember(int chatId, String username)
      * removeChatMember(int chatId, String username)
-     * sendMsg(Message msg)
      * editMsg(Message msg, Message updateMsg)
      * deleteMsg(int msgId)/deleteMsg(Message msg)
      * getChatMessages(int chatId)
@@ -68,8 +92,8 @@ public class DatabaseConnection {
        return message;
     }
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    /*public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DatabaseConnection DBconn = new DatabaseConnection();
         System.out.println(DBconn.createUser("user4", "pswd4"));
-    }
+    }*/
 }

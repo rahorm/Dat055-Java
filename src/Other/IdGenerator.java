@@ -1,17 +1,34 @@
 package Other;
 
-public class IdGenerator {
-    /**
-     * Generates an id
-     * Type specifies if the id is for a chat, user or message. Use 'c' for chat, 'u' for user, 'm' for message, 'p' for picture.
-     *
-     * @param type
-     * @return int generated id
-     *
-     * @throws IllegalArgumentException if type isn't specified
-     */
+public final class IdGenerator {
 
-    int generateId(char type){
-        return 0;
+    private static IdGenerator instance;
+    private int nextId;
+
+
+    private IdGenerator(){
+        this.nextId = 0;
+    }
+
+    /**
+     * If no IdGenerator has been initialized, intializes one and returns it. Otherwise returns the existing IdGenerator.
+     * @return IdGenerator
+     */
+    public static  IdGenerator getInstance(){
+        if (instance == null){
+            instance = new IdGenerator();
+        }
+        return instance;
+    }
+
+    /**
+     * Generates an unique id
+     *
+     * @return int generated id
+     */
+    int generateId(){
+        int id = nextId;
+        nextId++;
+        return id;
     }
 }

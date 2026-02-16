@@ -1,4 +1,8 @@
-package Other;
+package Client;
+
+import Other.IdGenerator;
+import Other.Message;
+import Other.User;
 
 import java.io.*;
 import java.net.Socket;
@@ -11,7 +15,7 @@ public class ServerConnection {
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
 
-    private IdGenerator idGen = new IdGenerator();
+    private IdGenerator idGen = IdGenerator.getInstance();
 
     public ServerConnection(Socket socket){
         try {
@@ -60,12 +64,11 @@ public class ServerConnection {
         this.bufferedWriter = bufferedWriter;
     }
     public IdGenerator getIdGen() {
-        return idGen;
+        return IdGenerator.getInstance();
     }
-    public void setIdGen(IdGenerator idGen) {
-        this.idGen = idGen;
+    public void setIdGen() {
+        this.idGen = IdGenerator.getInstance();
     }
-
 
 // -----Server related actions ----------------------------------
     /**
@@ -128,7 +131,6 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-
     int deleteUser(int userId){
         return 0;
     }
