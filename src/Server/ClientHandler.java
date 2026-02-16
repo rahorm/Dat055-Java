@@ -36,6 +36,12 @@ public class ClientHandler implements Runnable{
                 messageFromClient = bufferedReader.readLine();
                 System.out.println(messageFromClient);
                 broadcastMessage(messageFromClient);
+                /*
+                * ovan får vi in ett object från en client
+                * baserat på detta objektet ska en strategi väljas och köras
+                * */
+
+
             } catch (IOException e) {
                 closeEverything(socket, bufferedReader, bufferedWriter);
                 break;

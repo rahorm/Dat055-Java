@@ -68,8 +68,8 @@ public class DatabaseConnection {
        return message;
     }
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    /*public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DatabaseConnection DBconn = new DatabaseConnection();
         System.out.println(DBconn.createUser("user4", "pswd4"));
-    }
+    }*/
 }
