@@ -13,13 +13,14 @@ public class ActionHandler {
 
     private DatabaseConnection DBcon;
 
-    {
+    public ActionHandler() {
         try {
             DBcon = DatabaseConnection.getInstance();
         } catch (SQLException | ClassNotFoundException e) {
-        System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
+
 
 
     public void handle(Object obj){

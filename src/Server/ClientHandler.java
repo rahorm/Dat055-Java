@@ -18,6 +18,7 @@ public class ClientHandler implements Runnable{
             this.socket = socket;
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));  //bytestream wrapped in charstream, used to send things
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream())); //used to recieve things
+            this.actionHandler = new ActionHandler();
 
             this.clientUsername = bufferedReader.readLine();
             clientHandlers.add(this);
@@ -40,6 +41,7 @@ public class ClientHandler implements Runnable{
                 /*
                 * ovan får vi in ett object från en client
                 * baserat på detta objektet ska en strategi väljas och köras
+                * Här nånstans ska actionhandler kallas
                 * */
 
 
@@ -86,4 +88,5 @@ public class ClientHandler implements Runnable{
             System.out.println(e.getMessage());
         }
     }
+
 }
