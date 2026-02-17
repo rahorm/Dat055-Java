@@ -45,7 +45,8 @@ Until the 17th we will make the sequence data base
 //----------- 260217 -----------//
 
 # TO DO
-[] update UML sequence to include more server classes (vertical line? slanted lines?)
-[] update UML diagram to include more server classes
-[] userID -> username update, should e a string
+    [] update UML sequence to include more server classes (vertical line? slanted lines?)
+    [] update UML diagram to include more server classes
+    [] userID -> username update, should e a string
+    [] change method objToServer() to sendMsg() in ServerConnection
 
