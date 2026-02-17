@@ -65,4 +65,8 @@ public class Message implements Serializable {
     public void setMessageID(int messageID) {
         this.messageID = messageID;
     }
+
+    public String toString(){
+        return "msgId: "+this.messageID+", sender: "+this.sender+", chatId: "+this.chatID+", time: "+this.timestamp+", content: "+this.content+"hasImg: ";
+    }
 }
