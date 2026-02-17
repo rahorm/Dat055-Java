@@ -23,8 +23,12 @@ public class ActionHandler {
 
     public void handle(Object obj){
         if(obj instanceof SendMsgWrapper){
-            Message message = obj.getMessage();
+            SendMsgWrapper input = (SendMsgWrapper)obj;
+            Message message = input.getMsg();
             DBcon.sendMsg(message);
+            //1. ask dbcon for msgHistory
+            //2. package as whatever
+            //3. send to all clients
         }
         /* Objects that need handling
         createChatRoom
