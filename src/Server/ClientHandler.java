@@ -35,12 +35,7 @@ public class ClientHandler implements Runnable{
                 objectFromClient = objectInputstream.readObject();
                 System.out.println(objectFromClient);
                 actionHandler.handle(objectFromClient);
-                broadcastMessage(objectFromClient);
-                /*
-                * ovan får vi in ett object från en client
-                * baserat på detta objektet ska en strategi väljas och köras
-                * Här nånstans ska actionhandler kallas
-                * */
+                //Behöver det tas någon mer action här?
 
 
             } catch (IOException | ClassNotFoundException e) {
@@ -51,18 +46,17 @@ public class ClientHandler implements Runnable{
     }
 
     public void broadcastMessage(Object obj){
-        /*for(ClientHandler ch : clientHandlers){
+        for(ClientHandler ch : clientHandlers){
             try {
-                if(!ch.clientUsername.equals(clientUsername)){
-                    ch.bufferedWriter.write(messageToSend);
-                    ch.bufferedWriter.newLine();
-                    ch.bufferedWriter.flush();
+                if(!ch.equals(this)){
+                    ch.objectOutputStream.writeObject(obj);
+                    ch.objectOutputStream.flush();
                 }
 
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
-        }*/
+        }
     }
 
     public void removeClientHandler(){
