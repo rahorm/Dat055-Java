@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.*;
+import Common.SendMsgWrapper;
 // byt bufferedwrtier till input object stream och input output stream
 public class ServerConnection {
 
@@ -20,17 +21,16 @@ public class ServerConnection {
 
 
 
-    public ServerConnection(Socket socket){
-          public ServerConnection(Socket socket) {
-            try {
-                this.socket = socket;
+    public ServerConnection(Socket socket) {
+        try {
+            this.socket = socket;
 
-                this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-                this.objectInputStream  = new ObjectInputStream(socket.getInputStream());
-            } catch (IOException e) {
-                System.err.println("Connection failed: " + e.getMessage());
-            }
+            this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            this.objectInputStream = new ObjectInputStream(socket.getInputStream());
+        } catch (IOException e) {
+            System.err.println("Connection failed: " + e.getMessage());
         }
+    }
 
         //-----Getters och setters--------
     public ObjectInputStream getObjectInputStream() {
@@ -47,7 +47,7 @@ public class ServerConnection {
     public void setObjectInputStream(ObjectInputStream objectInputStream) {
         this.objectInputStream = objectInputStream;
     }
-}
+
 
 
 // ------>OLD Getters and setters ------------------------
@@ -172,11 +172,16 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    int sendMsg(String msg, int userID, LocalDateTime timeStamp){
-        if (msg == null) return -1;
-        ObjectOutputStream.writeObject(msg);
-        ObjectOutputStream.flush();
-        ObjectOutputStream.reset();
+    int sendMsg(Message msg){
+       SendMsgWrapper sendMsgWrapper = new SendMsgWrapper(msg);
+       try {
+
+
+           objectOutputStream.writeObject(msg);
+           objectOutputStream.flush();
+       } catch (IOException e) {
+           throw new RuntimeException(e);
+       }
         return 0;
 
     }
@@ -261,4 +266,4 @@ public class ServerConnection {
         } catch (IOException ignored) { }
     }
 }
-}
+
