@@ -1,8 +1,10 @@
 package  Server;
 
 import Other.Message;
+import Other.User;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -80,7 +82,9 @@ public final class DatabaseConnection {
      * deleteMsg(int msgId)/deleteMsg(Message msg)
      */
 
-     public void getChatMessages(int chatId){
+     public ArrayList<Message> getChatMessages(int chatId){
+         ArrayList<Message> msgHistory = new ArrayList<Message>();
+
          try (PreparedStatement ps = conn.prepareStatement(
                  "SELECT * FROM chatmessages WHERE chat = ? ORDER BY time ASC;");){
              ps.setInt(1, chatId);
@@ -88,19 +92,22 @@ public final class DatabaseConnection {
 
              while(rs.next()) {
 
-                 System.out.println("msgId: " + rs.getInt(1));
-                 System.out.println("chat: " + rs.getInt(2));
-                 System.out.println("sender: " + rs.getString(3));
-                 System.out.println("time: " + rs.getTimestamp(4));
-                 System.out.println("content: " + rs.getString(5));
-                 System.out.println("hasImg: " + rs.getBoolean(6));
-                 System.out.println("---------------");
+                 int msgId = rs.getInt(1);
+                 int chat = rs.getInt(2);
+                 String sender = rs.getString(3);
+                 LocalDateTime time = rs.getTimestamp(4).toLocalDateTime();
+                 String content = rs.getString(5);
+                 boolean hasImg = rs.getBoolean(6);
+                 Message msg = new Message(msgId, new User(sender), chat, content, time);
+                 msgHistory.add(msg);
 
              }
 
          } catch (Exception e) {
              System.out.println(e.getMessage());
          }
+
+         return msgHistory;
      }
 
     /* getChatMembers(int chatId)
@@ -119,6 +126,7 @@ public final class DatabaseConnection {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DatabaseConnection DBconn = DatabaseConnection.getInstance();
-        DBconn.getChatMessages(1);
+        ArrayList<Message> msg = DBconn.getChatMessages(1);
+        System.out.println("ArrayList : " + msg);
     }
 }
