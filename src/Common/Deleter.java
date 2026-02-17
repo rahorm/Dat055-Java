@@ -1,24 +1,29 @@
 package Common;
 
-import Common.Wrapper.ChatRoomWrapper;
-import Common.Wrapper.MsgWrapper;
-import Common.Wrapper.UserWrapper;
+import Common.Wrapper.ChatRoomElement;
+import Common.Wrapper.MsgElement;
+import Common.Wrapper.UserElement;
 
-// concrete ServerVisitor that implements based on the input
-public class Deleter implements ServerVisitor {
+/**
+ * Concrete Servervisitor
+ *
+ * This class implements the Visitor interface and provides the specific behavior for each visit method.
+ * It contains the logic for the operations that need to be performed on the elements.
+ * */
+public class Deleter implements Visitor {
 
     @Override
-    public void visit(MsgWrapper s) {
+    public void visit(MsgElement s) {
 
     }
 
     @Override
-    public void visit(ChatRoomWrapper cr) {
+    public void visit(ChatRoomElement cr) {
 
     }
 
     @Override
-    public void visit(UserWrapper cu) {
+    public void visit(UserElement cu) {
 
     }
 }

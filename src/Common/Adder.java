@@ -1,24 +1,29 @@
 package Common;
 
-import Common.Wrapper.ChatRoomWrapper;
-import Common.Wrapper.UserWrapper;
-import Common.Wrapper.MsgWrapper;
+import Common.Wrapper.ChatRoomElement;
+import Common.Wrapper.UserElement;
+import Common.Wrapper.MsgElement;
 
-// concrete ServerVisitor that implements based on the input
-class Adder implements ServerVisitor {
+/**
+ * Concrete Servervisitor
+ *
+ * This class implements the Visitor interface and provides the specific behavior for each visit method.
+ * It contains the logic for the operations that need to be performed on the elements.
+ * */
+class Adder implements Visitor {
 
     @Override
-    public void visit(MsgWrapper m) {
+    public void visit(MsgElement m) {
         System.out.println("logic for putting a msg in the server");
     }
 
     @Override
-    public void visit(ChatRoomWrapper c) {
+    public void visit(ChatRoomElement c) {
 
     }
 
     @Override
-    public void visit(UserWrapper u) {
+    public void visit(UserElement u) {
 
     }
 }
