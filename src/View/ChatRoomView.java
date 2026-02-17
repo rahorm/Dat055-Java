@@ -2,6 +2,7 @@ package View;
 
 import Controller.Controller;
 import Model.ChatRoomFacade;
+import Other.Message;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -19,7 +20,8 @@ public class ChatRoomView implements Observer {
      *            when arg isn't specified everything in the view gets updated
      */
     public void update(Observable o, Object arg) {
-
+        Message[] msg = model.getMsg();
+        ui.setMsg(msg);
     }
 
     public ChatRoomView(Controller controller, ChatRoomFacade model) {
