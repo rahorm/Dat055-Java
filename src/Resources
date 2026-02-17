@@ -51,4 +51,6 @@ Until the 17th we will make the sequence data base
     [] change method objToServer() to sendMsg() in ServerConnection
     [] remove timestamp as a parameter and only initiate it in ModelFacade where we make the message instance
     [] delete the class user
+    [] wrapper for arraylist
+    [] in serverconnection -> handler to use array list wrapper
 
