@@ -3,6 +3,7 @@ package  Server;
 import Other.Message;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public final class DatabaseConnection {
@@ -77,8 +78,32 @@ public final class DatabaseConnection {
      * removeChatMember(int chatId, String username)
      * editMsg(Message msg, Message updateMsg)
      * deleteMsg(int msgId)/deleteMsg(Message msg)
-     * getChatMessages(int chatId)
-     * getChatMembers(int chatId)
+     */
+
+     public void getChatMessages(int chatId){
+         try (PreparedStatement ps = conn.prepareStatement(
+                 "SELECT * FROM ChatMessages");){
+
+             ResultSet rs = ps.executeQuery();
+
+             while(rs.next()) {
+
+                 System.out.println("msgId: " + rs.getString(1));
+                 System.out.println("chat: " + rs.getString(2));
+                 System.out.println("sender: " + rs.getString(3));
+                 System.out.println("time: " + rs.getString(4));
+                 System.out.println("content: " + rs.getString(5));
+                 System.out.println("hasImg: " + rs.getString(6));
+                 System.out.println("---------------");
+
+             }
+
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
+     }
+
+    /* getChatMembers(int chatId)
      * getAvailableChats(String username)
      */
 
@@ -92,8 +117,8 @@ public final class DatabaseConnection {
        return message;
     }
 
-    /*public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DatabaseConnection DBconn = new DatabaseConnection();
         System.out.println(DBconn.createUser("user4", "pswd4"));
-    }*/
+    }
 }
