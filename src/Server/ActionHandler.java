@@ -4,11 +4,9 @@ import Common.SendMsgWrapper;
 import Other.Message;
 import Other.User;
 
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
-import static Server.DatabaseConnection.*;
 
 public class ActionHandler {
 
