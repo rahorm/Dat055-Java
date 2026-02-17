@@ -41,3 +41,11 @@ Until the 17th we will make the sequence data base
     * visitor pattern
     * threads
     * singleton
+
+//----------- 260217 -----------//
+
+# TO DO
+[] update UML sequence to include more server classes (vertical line? slanted lines?)
+[] update UML diagram to include more server classes
+[] userID -> username update, should e a string
+

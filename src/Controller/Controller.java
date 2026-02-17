@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.ChatRoomFacade;
+
 import java.time.LocalDateTime;
 
 /**
@@ -9,7 +11,13 @@ import java.time.LocalDateTime;
  * - should msgs and user params be of type user and message?
  * - i think numberformatexception is wrong
  * */
-public class Controller {
+public class Controller(ChatRoomFacade modelF) {
+
+    private ChatRoomFacade modelF
+
+    public Controller(ChatRoomFacade modelF) {
+        this.modelF = modelF;
+    }
 
     /**
      * Takes an integer representing an existing chatRoom ID and makes that the active chatRoom
@@ -28,8 +36,7 @@ public class Controller {
      * @throws NumberFormatException if msg isn't a string
      * */
     public void sendMessage(String msg, int userID, LocalDateTime timeStamp){
-        modelF.StoreMsg();
-
+        modelF.StoreMsg(msg, userID, timeStamp);
     }
     /**
      * Removes the chatRoom, you can not remove the activeChatRoom
