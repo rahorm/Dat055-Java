@@ -41,7 +41,7 @@ public class ServerConnection {
     public void setObjectOutputStream(ObjectOutputStream objectOutputStream) {
         this.objectOutputStream = objectOutputStream;
     }
-}
+
 
 
 // ------ Getters and setters ------------------------

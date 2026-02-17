@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * */
 public class Controller(ChatRoomFacade modelF) {
 
-    private ChatRoomFacade modelF
+    private ChatRoomFacade modelF;
 
     public Controller(ChatRoomFacade modelF) {
         this.modelF = modelF;
