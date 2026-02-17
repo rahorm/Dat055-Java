@@ -3,6 +3,7 @@ package Model;
 import Other.Message;
 import Other.User;
 
+import java.time.LocalDateTime;
 import java.util.Observable;
 
 public class ChatRoomFacade extends Observable {
@@ -70,13 +71,25 @@ public void removeMember(User user) {
  * @param message message to add; must not be null
  * @throws NullPointerException if  message is  null
  */
-public void addMessage(Message message) {
+
+
+    public void addMessage(Message message) {
     if (message == null) {
         throw new IllegalArgumentException("message must not be null");
     }
     messages.add(message);
 }
 
+    /**
+     * Takes message and sends it to serverconnection
+     * @param msg string that represents a message that has been input from a user
+     * @param userID integer value that represents a user in the active chat that is the sender of the message
+     * @throws IllegalArgumentException if userID is not an existing user
+     * @throws NumberFormatException if msg isn't a string
+     * */
+    public void StoreMsg(String msg, int userID, LocalDateTime timeStamp){
+        ServerConnection.SendMsg(msg, userID, timeStamp);
+    }
 /**
  * Removes a message from this chat room.
  * If the message is not found, nothing happens.

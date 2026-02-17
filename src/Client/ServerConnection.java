@@ -7,42 +7,42 @@ import Other.User;
 import java.io.*;
 import java.net.Socket;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.*;
-
+// byt bufferedwrtier till input object stream och input output stream
 public class ServerConnection {
 
     private Socket socket;
-    private BufferedReader bufferedReader;
-    private BufferedWriter bufferedWriter;
+    private ObjectInputStream objectInputStream;
+    private ObjectOutputStream objectOutputStream;
 
     private IdGenerator idGen = IdGenerator.getInstance();
 
+    public void setObjectInputStream(ObjectInputStream objectInputStream) {
+        this.objectInputStream = objectInputStream;
+    }
+
     public ServerConnection(Socket socket){
-        try {
-            this.socket = socket;
-            this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+        this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+        this.objectInputStream  = new ObjectInputStream(socket.getInputStream());
 
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+    } catch (IOException e) {
+        System.err.println("Connection failed: " + e.getMessage());
     }
-    public void connectionTest(){
-        try {
-            Scanner s = new Scanner(System.in);
 
-            while(socket.isConnected()){
-                int in = s.nextInt();
-
-                bufferedWriter.write("client ping");
-                bufferedWriter.newLine();
-                bufferedWriter.flush();
-            }
-
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+    public ObjectInputStream getObjectInputStream() {
+        return objectInputStream;
     }
+
+    public ObjectOutputStream getObjectOutputStream() {
+        return objectOutputStream;
+    }
+
+    public void setObjectOutputStream(ObjectOutputStream objectOutputStream) {
+        this.objectOutputStream = objectOutputStream;
+    }
+}
+
 
 // ------ Getters and setters ------------------------
     public Socket getSocket() {
@@ -51,18 +51,8 @@ public class ServerConnection {
     public void setSocket(Socket socket) {
         this.socket = socket;
     }
-    public BufferedReader getBufferedReader() {
-        return bufferedReader;
-    }
-    public void setBufferedReader(BufferedReader bufferedReader) {
-        this.bufferedReader = bufferedReader;
-    }
-    public BufferedWriter getBufferedWriter() {
-        return bufferedWriter;
-    }
-    public void setBufferedWriter(BufferedWriter bufferedWriter) {
-        this.bufferedWriter = bufferedWriter;
-    }
+
+
     public IdGenerator getIdGen() {
         return IdGenerator.getInstance();
     }
@@ -176,8 +166,13 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    int sendMsg(Message msg){
+    int sendMsg(String msg, int userID, LocalDateTime timeStamp){
+        if (msg == null) return -1;
+        ObjectOutputStream.writeObject(msg);
+        ObjectOutputStream.flush();
+        ObjectOutputStream.reset();
         return 0;
+
     }
 
     /**
