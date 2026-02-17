@@ -37,7 +37,6 @@ public class ClientHandler implements Runnable{
                 actionHandler.handle(objectFromClient);
                 //Behöver det tas någon mer action här?
 
-
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println(e.getMessage());
                 break;

@@ -11,4 +11,12 @@ public class SendMsgWrapper implements Serializable {
     public SendMsgWrapper(Message msg) {
         this.msg = msg;
     }
+
+    public Message getMsg() {
+        return msg;
+    }
+
+    public void setMsg(Message msg) {
+        this.msg = msg;
+    }
 }
