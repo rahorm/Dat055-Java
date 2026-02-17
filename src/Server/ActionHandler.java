@@ -1,5 +1,6 @@
 package Server;
 
+import Common.MsgHistoryWrapper;
 import Common.SendMsgWrapper;
 import Other.Message;
 import Other.User;
@@ -21,14 +22,18 @@ public class ActionHandler {
     }
 
 
-    public void handle(Object obj){
+    public Object handle(Object obj){
+        Object objToReturn = null;
+
         if(obj instanceof SendMsgWrapper){
             SendMsgWrapper input = (SendMsgWrapper)obj;
             Message message = input.getMsg();
             DBcon.sendMsg(message);
+            MsgHistoryWrapper updatedMsgs = new MsgHistoryWrapper(DBcon.getChatMessages(message.getChatID()));
             //1. ask dbcon for msgHistory
             //2. package as whatever
             //3. send to all clients
+            objToReturn = updatedMsgs;
         }
         /* Objects that need handling
         createChatRoom
@@ -45,5 +50,7 @@ public class ActionHandler {
         getChatMessages
         getChatMembers
         getAvailableChats*/
+
+        return objToReturn;
     }
 }
