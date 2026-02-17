@@ -19,7 +19,7 @@ public class ChatRoomModel {
     private final ArrayList<Message> messages = new ArrayList<>();
     private final ArrayList<User> members = new ArrayList<>();
     private User activeUser;
-    private final int chatID;
+    private int chatID;
 
     /**
      * This method creates a new chatroom model with chatID
@@ -54,13 +54,16 @@ public class ChatRoomModel {
         return new ArrayList<>(members);
     }
 
+    // BLAH BLAH
 
     public int getChatID() {
-        return chatID;    //                     Uppdatera
+
+        return chatID; //  Uppdatera
     }
 
     public void setActiveUser(User activeUser) {
-        this.activeUser = activeUser;  //       Lägg till / uppdatera
+
+            this.activeUser = activeUser;  //  Lägg till / uppdatera
     }
 }
 

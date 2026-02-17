@@ -21,7 +21,6 @@ public class ActionHandler {
     }
 
 
-
     public void handle(Object obj){
         if(obj instanceof SendMsgWrapper){
             Message message = obj.getMessage();

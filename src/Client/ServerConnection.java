@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.*;
+import Common.SendMsgWrapper;
 // byt bufferedwrtier till input object stream och input output stream
 public class ServerConnection {
 
@@ -18,18 +19,20 @@ public class ServerConnection {
 
     private IdGenerator idGen = IdGenerator.getInstance();
 
-    public void setObjectInputStream(ObjectInputStream objectInputStream) {
-        this.objectInputStream = objectInputStream;
+
+
+    public ServerConnection(Socket socket) {
+        try {
+            this.socket = socket;
+
+            this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            this.objectInputStream = new ObjectInputStream(socket.getInputStream());
+        } catch (IOException e) {
+            System.err.println("Connection failed: " + e.getMessage());
+        }
     }
 
-    public ServerConnection(Socket socket){
-        this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-        this.objectInputStream  = new ObjectInputStream(socket.getInputStream());
-
-    } catch (IOException e) {
-        System.err.println("Connection failed: " + e.getMessage());
-    }
-
+        //-----Getters och setters--------
     public ObjectInputStream getObjectInputStream() {
         return objectInputStream;
     }
@@ -41,10 +44,13 @@ public class ServerConnection {
     public void setObjectOutputStream(ObjectOutputStream objectOutputStream) {
         this.objectOutputStream = objectOutputStream;
     }
+    public void setObjectInputStream(ObjectInputStream objectInputStream) {
+        this.objectInputStream = objectInputStream;
+    }
 
 
 
-// ------ Getters and setters ------------------------
+// ------>OLD Getters and setters ------------------------
     public Socket getSocket() {
     return socket;
 }
@@ -166,11 +172,16 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    int sendMsg(String msg, int userID, LocalDateTime timeStamp){
-        if (msg == null) return -1;
-        ObjectOutputStream.writeObject(msg);
-        ObjectOutputStream.flush();
-        ObjectOutputStream.reset();
+    int sendMsg(Message msg){
+       SendMsgWrapper sendMsgWrapper = new SendMsgWrapper(msg);
+       try {
+
+
+           objectOutputStream.writeObject(msg);
+           objectOutputStream.flush();
+       } catch (IOException e) {
+           throw new RuntimeException(e);
+       }
         return 0;
 
     }
@@ -246,4 +257,13 @@ public class ServerConnection {
     //boolean checkLogIn(String username, String password){}
     //boolean checkUserExists(String username){}
 
+    //---------Tillägg för closing------------------
+    public void close() {
+        try {
+            if (objectOutputStream != null) objectOutputStream.close();
+            if (objectInputStream  != null) objectInputStream.close();
+            if (socket != null) socket.close();
+        } catch (IOException ignored) { }
+    }
 }
+
