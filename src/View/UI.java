@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Controller;
+import Other.Message;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +9,10 @@ import java.time.LocalDateTime;
 
 public class UI {
     Controller controller;
+    JLabel messages;
+
     public UI(Controller controller) {
+        this.messages = new JLabel();
         this.controller = controller;
         LayoutManager layout = new GridLayout(1, 1);
 
@@ -24,10 +28,15 @@ public class UI {
 
         frame.add(btn);
         frame.add(btn2);
+        frame.add(messages);
 
         frame.setSize(500, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(layout);
         frame.setVisible(true);
+    }
+
+    public void setMsg(Message[] msg) {
+        messages.setText(msg[0].getContent());
     }
 }
