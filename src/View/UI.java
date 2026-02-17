@@ -43,6 +43,6 @@ public class UI {
             s = s.concat(message.getContent());
             s = s.concat("\n");
         }
-        messages.setText(msg[0].getContent());
+        messages.setText(s);
     }
 }

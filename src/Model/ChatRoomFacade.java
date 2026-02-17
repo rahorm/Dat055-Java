@@ -4,6 +4,7 @@ import Other.Message;
 import Other.User;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Observable;
 
 public class ChatRoomFacade extends Observable {
@@ -102,5 +103,9 @@ public void removeMessage(Message message) {
         throw new IllegalArgumentException("message must not be null");
     }
     messages.remove(message);
+}
+
+public ArrayList<Message> getMessages() {
+    return model.retriveMSGList();
 }
 }
