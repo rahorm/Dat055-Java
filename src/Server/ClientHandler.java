@@ -34,8 +34,11 @@ public class ClientHandler implements Runnable{
             try {
                 objectFromClient = objectInputstream.readObject();
                 System.out.println(objectFromClient);
-                actionHandler.handle(objectFromClient);
-                //Behöver det tas någon mer action här?
+                Object output = actionHandler.handle(objectFromClient);
+                //skickar nu responsen till alla clients som är anslutna, får ta beslut om huruvida det är korrekt eller inte
+                if(output != null){
+                    broadcastMessage(output);
+                }
 
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println(e.getMessage());
