@@ -1,6 +1,7 @@
 package Other;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Message implements Serializable {
@@ -17,6 +18,13 @@ public class Message implements Serializable {
         this.timestamp = LocalDateTime.now();
         IdGenerator generator = IdGenerator.getInstance();
         this.messageID = generator.generateId();
+    }
+    public Message(int msgId, User sender, int chatID, String content, LocalDateTime time){
+        this.content = content;
+        this.sender = sender;
+        this.chatID = chatID;
+        this.timestamp = time;
+        this.messageID = msgId;
     }
 
     public String getContent() {
@@ -48,5 +56,13 @@ public class Message implements Serializable {
     }
     public void setChatID(int chatID) {
         this.chatID = chatID;
+    }
+
+    public int getMessageID() {
+        return messageID;
+    }
+
+    public void setMessageID(int messageID) {
+        this.messageID = messageID;
     }
 }
