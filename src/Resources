@@ -18,12 +18,13 @@ Until the 17th we will make the sequence data base
     * write in discord if you are unsure how things should be implemented
 
 # DIVISION OF LABOUR
-    * Madde : Handler, SQL
+    * Madde : Handler
+    X Madde : SQL
     * Mona : update Msg variables and describe in comments how they should be implemented in common
         // Andy: i dont really remember what i meant by this mona, feel free to ignore it if you don't remember what it was we talked about
     * Mona : I/O use objects streams in server connection
-    * Madde : Make user serializable
-    * Madde : make Message serializable
+    X Madde : Make user serializable
+    X Madde : make Message serializable
     * Andy : Common
     * Mona : ServerConnection
     * Choi : ModelFacade and Model

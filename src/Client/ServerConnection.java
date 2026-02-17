@@ -1,4 +1,8 @@
-package Other;
+package Client;
+
+import Other.IdGenerator;
+import Other.Message;
+import Other.User;
 
 import java.io.*;
 import java.net.Socket;
