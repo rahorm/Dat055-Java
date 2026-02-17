@@ -61,11 +61,11 @@ public final class DatabaseConnection {
     public void sendMsg(Message msg){
         try(PreparedStatement ps = conn.prepareStatement(
                 "INSERT INTO ChatMessages VALUES (?, ?, ?, ?, ?, ?)");){
-            ps.setString(1, "1"); //needs fixing
-            ps.setString(2, String.valueOf(msg.getChatID()));
-            ps.setString(4, String.valueOf(msg.getTimestamp()));
+            ps.setInt(1, 1); //needs fixing
+            ps.setInt(2, msg.getChatID());
+            ps.setTimestamp(4, Timestamp.valueOf(msg.getTimestamp()));
             ps.setString(5, msg.getContent());
-            ps.setString(6, "false"); //needs fixing
+            ps.setBoolean(6, false); //needs fixing
             ps.executeUpdate();
         }  catch (SQLException e) {
             System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
@@ -82,18 +82,18 @@ public final class DatabaseConnection {
 
      public void getChatMessages(int chatId){
          try (PreparedStatement ps = conn.prepareStatement(
-                 "SELECT * FROM ChatMessages");){
-
+                 "SELECT * FROM chatmessages WHERE chat = ? ORDER BY time ASC;");){
+             ps.setInt(1, chatId);
              ResultSet rs = ps.executeQuery();
 
              while(rs.next()) {
 
-                 System.out.println("msgId: " + rs.getString(1));
-                 System.out.println("chat: " + rs.getString(2));
+                 System.out.println("msgId: " + rs.getInt(1));
+                 System.out.println("chat: " + rs.getInt(2));
                  System.out.println("sender: " + rs.getString(3));
-                 System.out.println("time: " + rs.getString(4));
+                 System.out.println("time: " + rs.getTimestamp(4));
                  System.out.println("content: " + rs.getString(5));
-                 System.out.println("hasImg: " + rs.getString(6));
+                 System.out.println("hasImg: " + rs.getBoolean(6));
                  System.out.println("---------------");
 
              }
