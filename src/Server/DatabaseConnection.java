@@ -83,7 +83,7 @@ public final class DatabaseConnection {
      */
 
     /**
-     * Fetches chatHistory, in descending order by timestamp, from specified chat
+     * Fetches chatHistory, in ascending order by timestamp, from specified chat
      * @param chatId which chat to get history for
      * @return ArrayList<Message> returns an arraylist with Messages
      */
@@ -129,9 +129,9 @@ public final class DatabaseConnection {
        return message;
     }
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    /*public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DatabaseConnection DBconn = DatabaseConnection.getInstance();
         ArrayList<Message> msg = DBconn.getChatMessages(1);
         System.out.println("ArrayList : " + msg);
-    }
+    }*/
 }
