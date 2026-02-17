@@ -29,11 +29,7 @@ public class ActionHandler {
             SendMsgWrapper input = (SendMsgWrapper)obj;
             Message message = input.getMsg();
             DBcon.sendMsg(message);
-            MsgHistoryWrapper updatedMsgs = new MsgHistoryWrapper(DBcon.getChatMessages(message.getChatID()));
-            //1. ask dbcon for msgHistory
-            //2. package as whatever
-            //3. send to all clients
-            objToReturn = updatedMsgs;
+            objToReturn = new MsgHistoryWrapper(DBcon.getChatMessages(message.getChatID()));
         }
         /* Objects that need handling
         createChatRoom
