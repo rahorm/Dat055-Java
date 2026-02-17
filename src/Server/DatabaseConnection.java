@@ -82,6 +82,11 @@ public final class DatabaseConnection {
      * deleteMsg(int msgId)/deleteMsg(Message msg)
      */
 
+    /**
+     * Fetches chatHistory, in descending order by timestamp, from specified chat
+     * @param chatId which chat to get history for
+     * @return ArrayList<Message> returns an arraylist with Messages
+     */
      public ArrayList<Message> getChatMessages(int chatId){
          ArrayList<Message> msgHistory = new ArrayList<Message>();
 
@@ -98,8 +103,8 @@ public final class DatabaseConnection {
                  LocalDateTime time = rs.getTimestamp(4).toLocalDateTime();
                  String content = rs.getString(5);
                  boolean hasImg = rs.getBoolean(6);
-                 Message msg = new Message(msgId, new User(sender), chat, content, time);
-                 msgHistory.add(msg);
+
+                 msgHistory.add(new Message(msgId, new User(sender), chat, content, time));
 
              }
 
