@@ -1,14 +1,14 @@
-package Common;
+package Common.Wrapper;
 
 import Other.Message;
 
 import java.io.Serializable;
 
-public class SendMsgWrapper implements Serializable {
+public class MsgWrapper implements Serializable {
 
     private Message msg;
 
-    public SendMsgWrapper(Message msg) {
+    public MsgWrapper(Message msg) {
         this.msg = msg;
     }
 }
