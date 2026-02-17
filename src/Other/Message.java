@@ -8,12 +8,15 @@ public class Message implements Serializable {
     private LocalDateTime timestamp;
     private User sender;
     private int chatID;
+    private int messageID;
 
     public Message(User sender, int chatID, String content){
         this.content = content;
         this.sender = sender;
         this.chatID = chatID;
         this.timestamp = LocalDateTime.now();
+        IdGenerator generator = IdGenerator.getInstance();
+        this.messageID = generator.generateId();
     }
 
     public String getContent() {

@@ -4,7 +4,6 @@ import Other.Message;
 import Other.User;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Observable;
 
 public class ChatRoomFacade extends Observable {
@@ -23,17 +22,18 @@ public class ChatRoomFacade extends Observable {
      * @param chatID of a chatroom that user wants to open
      */
     public void changeActiveRoom(int chatID) {
-        //model.changeActiveRoom(chatID);
+        model.changeActiveRoom(chatID);
 
         setChanged(); // Apparently it should be used before using notifyObservers
 
-        //notifyObservers(Object o);
+        notifyObservers(); // ingen parameter
+
     }
 
-		 /* Not needed now but can be useful to have/know
-		 public ChatRoomModel getState(){
-			 return this.model;
-    } */
+    public void getMSGList(){
+        // listan av meddelande
+        return model.retriveMSGList();
+    }
 
 
 /**
@@ -50,6 +50,13 @@ public void addMember(User user) {
     if (!members.contains(user)) {
         members.add(user);
     }
+}
+
+    // Message ID,
+public void StoreMsg(String msg, int userID, LocalDateTime timeStamp){
+
+    ServerConnection.SendMsg(new Message(userID, model.getChatID(), msg));
+
 }
 
 /**
@@ -72,25 +79,13 @@ public void removeMember(User user) {
  * @param message message to add; must not be null
  * @throws NullPointerException if  message is  null
  */
-
-
-    public void addMessage(Message message) {
+public void addMessage(Message message) {
     if (message == null) {
         throw new IllegalArgumentException("message must not be null");
     }
     messages.add(message);
 }
 
-    /**
-     * Takes message and sends it to serverconnection
-     * @param msg string that represents a message that has been input from a user
-     * @param userID integer value that represents a user in the active chat that is the sender of the message
-     * @throws IllegalArgumentException if userID is not an existing user
-     * @throws NumberFormatException if msg isn't a string
-     * */
-    public void StoreMsg(String msg, int userID, LocalDateTime timeStamp){
-        ServerConnection.SendMsg(msg, userID, timeStamp);
-    }
 /**
  * Removes a message from this chat room.
  * If the message is not found, nothing happens.
@@ -104,8 +99,7 @@ public void removeMessage(Message message) {
     }
     messages.remove(message);
 }
+}
 
-public ArrayList<Message> getMessages() {
-    return model.retriveMSGList();
-}
-}
+
+
