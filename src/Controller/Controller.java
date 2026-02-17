@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * - should msgs and user params be of type user and message?
  * - i think numberformatexception is wrong
  * */
-public class Controller(ChatRoomFacade modelF) {
+public class Controller {
 
     private ChatRoomFacade modelF;
 
