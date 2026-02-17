@@ -18,18 +18,21 @@ public class ServerConnection {
 
     private IdGenerator idGen = IdGenerator.getInstance();
 
-    public void setObjectInputStream(ObjectInputStream objectInputStream) {
-        this.objectInputStream = objectInputStream;
-    }
+
 
     public ServerConnection(Socket socket){
-        this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-        this.objectInputStream  = new ObjectInputStream(socket.getInputStream());
+          public ServerConnection(Socket socket) {
+            try {
+                this.socket = socket;
 
-    } catch (IOException e) {
-        System.err.println("Connection failed: " + e.getMessage());
-    }
+                this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+                this.objectInputStream  = new ObjectInputStream(socket.getInputStream());
+            } catch (IOException e) {
+                System.err.println("Connection failed: " + e.getMessage());
+            }
+        }
 
+        //-----Getters och setters--------
     public ObjectInputStream getObjectInputStream() {
         return objectInputStream;
     }
@@ -41,10 +44,13 @@ public class ServerConnection {
     public void setObjectOutputStream(ObjectOutputStream objectOutputStream) {
         this.objectOutputStream = objectOutputStream;
     }
+    public void setObjectInputStream(ObjectInputStream objectInputStream) {
+        this.objectInputStream = objectInputStream;
+    }
 }
 
 
-// ------ Getters and setters ------------------------
+// ------>OLD Getters and setters ------------------------
     public Socket getSocket() {
     return socket;
 }
@@ -246,4 +252,13 @@ public class ServerConnection {
     //boolean checkLogIn(String username, String password){}
     //boolean checkUserExists(String username){}
 
+    //---------Tillägg för closing------------------
+    public void close() {
+        try {
+            if (objectOutputStream != null) objectOutputStream.close();
+            if (objectInputStream  != null) objectInputStream.close();
+            if (socket != null) socket.close();
+        } catch (IOException ignored) { }
+    }
+}
 }
