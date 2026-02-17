@@ -6,6 +6,7 @@ import Other.Message;
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class UI {
     Controller controller;
@@ -36,7 +37,12 @@ public class UI {
         frame.setVisible(true);
     }
 
-    public void setMsg(Message[] msg) {
+    public void setMsg(ArrayList<Message> msg) {
+        String s = "";
+        for (Message message : msg) {
+            s = s.concat(message.getContent());
+            s = s.concat("\n");
+        }
         messages.setText(msg[0].getContent());
     }
 }
