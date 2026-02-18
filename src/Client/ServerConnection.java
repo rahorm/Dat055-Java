@@ -22,7 +22,6 @@ public class ServerConnection {
     public ServerConnection(Socket socket) {
         try {
             this.socket = socket;
-
             this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             this.objectInputStream = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
@@ -30,23 +29,19 @@ public class ServerConnection {
         }
     }
 
-        //-----Getters och setters--------
+//-----Getters och setters--------
     public ObjectInputStream getObjectInputStream() {
         return objectInputStream;
     }
-
     public ObjectOutputStream getObjectOutputStream() {
         return objectOutputStream;
     }
-
     public void setObjectOutputStream(ObjectOutputStream objectOutputStream) {
         this.objectOutputStream = objectOutputStream;
     }
     public void setObjectInputStream(ObjectInputStream objectInputStream) {
         this.objectInputStream = objectInputStream;
     }
-
-
 
 // ------>OLD Getters and setters ------------------------
     public Socket getSocket() {
@@ -55,8 +50,6 @@ public class ServerConnection {
     public void setSocket(Socket socket) {
         this.socket = socket;
     }
-
-
     public IdGenerator getIdGen() {
         return IdGenerator.getInstance();
     }
@@ -76,7 +69,7 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    int createChatRoom(String chatName){
+    public int createChatRoom(String chatName){
 
         return 0;
     }
@@ -93,7 +86,7 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    int deleteChatRoom(int chatId){
+    public int deleteChatRoom(int chatId){
         return 0;
     }
 
@@ -108,7 +101,7 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    String createUser(String userName){
+    public String createUser(String userName){
         return "name";
     }
 
@@ -125,10 +118,10 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    int deleteUser(int userId){
+    public int deleteUser(int userId){
         return 0;
     }
-    int deleteUser(User user){
+    public int deleteUser(User user){
         return 0;
     }
 
@@ -143,7 +136,7 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    int addChatMember(int chatId, User user){
+    public int addChatMember(int chatId, User user){
         return 0;
     }
 
@@ -158,7 +151,7 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    int removeChatMember(int chatId, User user){
+    public int removeChatMember(int chatId, User user){
         return 0;
     }
 
@@ -170,18 +163,31 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    int sendMsg(Message msg){
+    public int sendMsg(Message msg){
        SendMsgWrapper sendMsgWrapper = new SendMsgWrapper(msg);
        try {
            objectOutputStream.writeObject(msg);
            objectOutputStream.flush();
        }
-
        catch (IOException e) {
            throw new RuntimeException(e);
        }
         return 0;
+    }
 
+    /**
+     * recives Message history for active chat from server
+     * UNDER CONSTRUCTION
+     */
+    public int receiveMsg(Message msg){
+        try {
+            objectOutputStream.writeObject(msg);
+            objectOutputStream.flush();
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
     }
 
     /**
@@ -195,7 +201,7 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    int editMsg(Message msg, Message updatedMsg){
+    public int editMsg(Message msg, Message updatedMsg){
         return 0;
     }
 
@@ -207,10 +213,10 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    int deleteMsg(int msgId){
+    public int deleteMsg(int msgId){
         return 0;
     }
-    int deleteMsg(Message msg){
+    public int deleteMsg(Message msg){
         return 0;
     }
 
@@ -223,7 +229,7 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    ArrayList<Message> getChatMessages(int chatId){
+    public ArrayList<Message> getChatMessages(int chatId){
         return new ArrayList<>();
     }
 
@@ -236,7 +242,7 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    ArrayList<User> getChatMembers(int chatId){
+    public ArrayList<User> getChatMembers(int chatId){
         return new ArrayList<>();
     }
 
@@ -248,14 +254,14 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    ArrayList<Integer> getAvailableChats(User user){
+    public ArrayList<Integer> getAvailableChats(User user){
         return new ArrayList<>();
     }
 
     //boolean checkLogIn(String username, String password){}
     //boolean checkUserExists(String username){}
 
-    //---------Tillägg för closing------------------
+    //--------- Closing ------------------
     public void close() {
         try {
             if (objectOutputStream != null) objectOutputStream.close();

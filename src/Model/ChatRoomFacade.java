@@ -15,7 +15,7 @@ public class ChatRoomFacade extends Observable {
 
     public ChatRoomFacade(ChatRoomModel model) {
         this.model = model;
-        this.serverConnection = new ServerConnection(new Socket());
+        this.serverConnection = new ServerConnection(new Socket(3356));
     }
 
     /**
@@ -44,7 +44,6 @@ public class ChatRoomFacade extends Observable {
      * Uer writes a new message. Then this message information will be passed to the server
      * @param msg message that user write
      * @param username user that wrote this message
-     * @param timeStamp this one is not needed -> When new Message is created time will be stamped automatically
      */
     public void StoreMsg(String msg, String username){
 
