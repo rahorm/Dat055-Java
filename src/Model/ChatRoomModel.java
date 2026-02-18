@@ -44,6 +44,10 @@ public class ChatRoomModel {
         return new ArrayList<>(messages);
     }
 
+    public void addMessage(Message message) {
+        messages.add(message);
+    }
+
     public ArrayList<User> retrieveUserList() {
         /**
          * This method retrieves all User from
@@ -54,17 +58,35 @@ public class ChatRoomModel {
         return new ArrayList<>(members);
     }
 
+    public void addUser(User user) {
+        members.add(user);
+    }
+
     // BLAH BLAH
 
     public int getChatID() {
 
-        return chatID; //  Uppdatera
+        return chatID;
     }
 
     public void setActiveUser(User activeUser) {
 
             this.activeUser = activeUser;  //  Lägg till / uppdatera
     }
+
+    public User getActiveUser(){
+
+        return this.activeUser;
+    }
+
+    /*
+    public void setActiveUser(String username) {
+
+            User currentuser = new User(username)
+            this.activeUser = currentuser;
+    }
+    */
+
 }
 
 

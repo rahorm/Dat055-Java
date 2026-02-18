@@ -50,10 +50,9 @@ public class ClientHandler implements Runnable{
     public void broadcastMessage(Object obj){
         for(ClientHandler ch : clientHandlers){
             try {
-                if(!ch.equals(this)){
-                    ch.objectOutputStream.writeObject(obj);
-                    ch.objectOutputStream.flush();
-                }
+                ch.objectOutputStream.writeObject(obj);
+                ch.objectOutputStream.flush();
+
 
             } catch (IOException e) {
                 System.out.println(e.getMessage());

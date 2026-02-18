@@ -30,6 +30,7 @@ public class Message implements Serializable {
     public String getContent() {
         return content;
     }
+
     public void setContent(String content) {
         this.content = content;
     }
@@ -40,6 +41,7 @@ public class Message implements Serializable {
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
+
     public void setTimestamp() {
         this.timestamp = LocalDateTime.now();
     }
@@ -47,6 +49,7 @@ public class Message implements Serializable {
     public User getSender() {
         return sender;
     }
+
     public void setSender(User sender) {
         this.sender = sender;
     }
@@ -54,6 +57,7 @@ public class Message implements Serializable {
     public int getChatID() {
         return chatID;
     }
+
     public void setChatID(int chatID) {
         this.chatID = chatID;
     }

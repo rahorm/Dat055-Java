@@ -1,5 +1,6 @@
 package Model;
 
+import Client.ServerConnection;
 import Other.Message;
 import Other.User;
 
@@ -8,7 +9,6 @@ import java.util.Observable;
 
 public class ChatRoomFacade extends Observable {
     private ChatRoomModel model;
-
 
     public ChatRoomFacade(ChatRoomModel model) {
         this.model = model;
@@ -32,9 +32,21 @@ public class ChatRoomFacade extends Observable {
 
     public void getMSGList(){
         // listan av meddelande
-        return model.retriveMSGList();
+        model.retriveMSGList();
     }
 
+
+    /**
+     * Uer writes a new message. Then this message information will be passed to the server
+     * @param msg message that user write
+     * @param username user that wrote this message
+     * @param timeStamp this one is not needed -> When new Message is created time will be stamped automatically
+     */
+    public void StoreMsg(String msg, String username, LocalDateTime timeStamp){
+
+        ServerConnection.SendMsg(new Message(model.getActiveUser(), model.getChatID(), msg));
+
+    }
 
 /**
  * Adds a user to the member list of this chat room.
@@ -52,12 +64,6 @@ public void addMember(User user) {
     }
 }
 
-    // Message ID,
-public void StoreMsg(String msg, int userID, LocalDateTime timeStamp){
-
-    ServerConnection.SendMsg(new Message(userID, model.getChatID(), msg));
-
-}
 
 /**
  * Removes a user from the member list of this chat room.
@@ -100,6 +106,8 @@ public void removeMessage(Message message) {
     messages.remove(message);
 }
 }
+
+
 
 
 

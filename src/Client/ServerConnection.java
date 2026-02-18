@@ -19,8 +19,6 @@ public class ServerConnection {
 
     private IdGenerator idGen = IdGenerator.getInstance();
 
-
-
     public ServerConnection(Socket socket) {
         try {
             this.socket = socket;
@@ -175,11 +173,11 @@ public class ServerConnection {
     int sendMsg(Message msg){
        SendMsgWrapper sendMsgWrapper = new SendMsgWrapper(msg);
        try {
-
-
            objectOutputStream.writeObject(msg);
            objectOutputStream.flush();
-       } catch (IOException e) {
+       }
+
+       catch (IOException e) {
            throw new RuntimeException(e);
        }
         return 0;
