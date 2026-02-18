@@ -66,13 +66,27 @@ public class ChatRoomModel {
 
     public int getChatID() {
 
-        return chatID; //  Uppdatera
+        return chatID;
     }
 
     public void setActiveUser(User activeUser) {
 
             this.activeUser = activeUser;  //  Lägg till / uppdatera
     }
+
+    public User getActiveUser(){
+
+        return this.activeUser;
+    }
+
+    /*
+    public void setActiveUser(String username) {
+
+            User currentuser = new User(username)
+            this.activeUser = currentuser;
+    }
+    */
+
 }
 
 

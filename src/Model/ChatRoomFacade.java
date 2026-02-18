@@ -4,19 +4,14 @@ import Client.ServerConnection;
 import Other.Message;
 import Other.User;
 
-import java.net.Socket;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Observable;
 
 public class ChatRoomFacade extends Observable {
     private ChatRoomModel model;
-    private ServerConnection serverConnection;
-
 
     public ChatRoomFacade(ChatRoomModel model) {
         this.model = model;
-        this.serverConnection = new ServerConnection(new Socket());
     }
 
     /**
@@ -35,11 +30,23 @@ public class ChatRoomFacade extends Observable {
 
     }
 
-    public ArrayList<Message> getMSGList(){
+    public void getMSGList(){
         // listan av meddelande
-        return model.retriveMSGList();
+        model.retriveMSGList();
     }
 
+
+    /**
+     * Uer writes a new message. Then this message information will be passed to the server
+     * @param msg message that user write
+     * @param username user that wrote this message
+     * @param timeStamp this one is not needed -> When new Message is created time will be stamped automatically
+     */
+    public void StoreMsg(String msg, String username, LocalDateTime timeStamp){
+
+        ServerConnection.SendMsg(new Message(model.getActiveUser(), model.getChatID(), msg));
+
+    }
 
 /**
  * Adds a user to the member list of this chat room.
@@ -52,18 +59,11 @@ public void addMember(User user) {
     if (user == null) {
         throw new IllegalArgumentException("user must not be null");
     }
-    ArrayList<User> members = model.retrieveUserList();
     if (!members.contains(user)) {
-        model.addUser(user);
+        members.add(user);
     }
 }
 
-    // Message ID,
-public void StoreMsg(String msg, String userID, LocalDateTime timeStamp){
-
-    serverConnection.SendMsg(new Message(new User(userID), model.getChatID(), msg));
-
-}
 
 /**
  * Removes a user from the member list of this chat room.
@@ -76,7 +76,6 @@ public void removeMember(User user) {
     if (user == null) {
         throw new IllegalArgumentException("user must not be null");
     }
-    ArrayList<User> members = model.retrieveUserList();
     members.remove(user);
 }
 
@@ -90,7 +89,7 @@ public void addMessage(Message message) {
     if (message == null) {
         throw new IllegalArgumentException("message must not be null");
     }
-    model.addMessage(message);
+    messages.add(message);
 }
 
 /**
@@ -107,6 +106,8 @@ public void removeMessage(Message message) {
     messages.remove(message);
 }
 }
+
+
 
 
 
