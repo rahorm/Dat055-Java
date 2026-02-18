@@ -24,7 +24,7 @@ public class UI {
         btn.setSize(100, 100);
 
         JButton btn2 = new JButton("create new chat room");
-        btn2.addActionListener((_) -> controller.sendMessage("hello server", "a", LocalDateTime.now()));
+        btn2.addActionListener((_) -> controller.sendMessage("hello server", "a"));
         btn2.setSize(100, 100);
 
         frame.add(btn);
