@@ -62,6 +62,10 @@ public class ChatRoomModel {
         members.add(user);
     }
 
+    public void removeUser(User user) {
+        members.remove(user);
+    }
+
     // BLAH BLAH
 
     public int getChatID() {
