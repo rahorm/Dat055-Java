@@ -3,17 +3,15 @@ package Server;
 import Common.MsgHistoryWrapper;
 import Common.SendMsgWrapper;
 import Other.Message;
-import Other.User;
 
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 
 
-public class ActionHandler {
+public class ClientActionHandler {
 
     private DatabaseConnection DBcon;
 
-    public ActionHandler() {
+    public ClientActionHandler() {
         try {
             DBcon = DatabaseConnection.getInstance();
         } catch (SQLException | ClassNotFoundException e) {

@@ -10,14 +10,14 @@ public class ClientHandler implements Runnable{
     private Socket socket;
     private ObjectInputStream objectInputstream;
     private ObjectOutputStream objectOutputStream;
-    private ActionHandler actionHandler;
+    private ClientActionHandler actionHandler;
 
     public ClientHandler(Socket socket){
         try {
             this.socket = socket;
             this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());  //bytestream wrapped in charstream, used to send things
             this.objectInputstream = new ObjectInputStream(socket.getInputStream()); //used to recieve things
-            this.actionHandler = new ActionHandler();
+            this.actionHandler = new ClientActionHandler();
 
             clientHandlers.add(this);
 

@@ -3,61 +3,34 @@ package Client;
 import Other.IdGenerator;
 import Other.Message;
 import Other.User;
-
 import java.io.*;
 import java.net.Socket;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.*;
 import Common.SendMsgWrapper;
-// byt bufferedwrtier till input object stream och input output stream
+
 public class ServerConnection {
 
-    private Socket socket;
-    private ObjectInputStream objectInputStream;
-    private ObjectOutputStream objectOutputStream;
-
+    private ServerHandler serverHandler;
     private IdGenerator idGen = IdGenerator.getInstance();
 
     public ServerConnection(Socket socket) {
-        try {
-            this.socket = socket;
-            this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            this.objectInputStream = new ObjectInputStream(socket.getInputStream());
-        } catch (IOException e) {
-            System.err.println("Connection failed: " + e.getMessage());
-        }
+            this.serverHandler = new ServerHandler(socket);
     }
 
-//-----Getters och setters--------
-    public ObjectInputStream getObjectInputStream() {
-        return objectInputStream;
-    }
-    public ObjectOutputStream getObjectOutputStream() {
-        return objectOutputStream;
-    }
-    public void setObjectOutputStream(ObjectOutputStream objectOutputStream) {
-        this.objectOutputStream = objectOutputStream;
-    }
-    public void setObjectInputStream(ObjectInputStream objectInputStream) {
-        this.objectInputStream = objectInputStream;
+    /**
+     * Adds a message to the history of specified chat.
+     *
+     * @param msg the message to be sent
+     * @return int message
+     *
+     * @throws SQLException
+     */
+    public void sendMsg(Message msg){
+        serverHandler.broadcastMessage(new SendMsgWrapper(msg));
     }
 
-// ------>OLD Getters and setters ------------------------
-    public Socket getSocket() {
-    return socket;
-}
-    public void setSocket(Socket socket) {
-        this.socket = socket;
-    }
-    public IdGenerator getIdGen() {
-        return IdGenerator.getInstance();
-    }
-    public void setIdGen() {
-        this.idGen = IdGenerator.getInstance();
-    }
-
-// -----Server related actions ----------------------------------
     /**
      * Creates a new chat in the database
      * <p>
@@ -70,7 +43,6 @@ public class ServerConnection {
      * @throws SQLException
      */
     public int createChatRoom(String chatName){
-
         return 0;
     }
 
@@ -121,6 +93,7 @@ public class ServerConnection {
     public int deleteUser(int userId){
         return 0;
     }
+
     public int deleteUser(User user){
         return 0;
     }
@@ -152,41 +125,6 @@ public class ServerConnection {
      * @throws SQLException
      */
     public int removeChatMember(int chatId, User user){
-        return 0;
-    }
-
-    /**
-     * Adds a message to the history of specified chat.
-     *
-     * @param msg the message to be sent
-     * @return int message
-     *
-     * @throws SQLException
-     */
-    public int sendMsg(Message msg){
-       SendMsgWrapper sendMsgWrapper = new SendMsgWrapper(msg);
-       try {
-           objectOutputStream.writeObject(msg);
-           objectOutputStream.flush();
-       }
-       catch (IOException e) {
-           throw new RuntimeException(e);
-       }
-        return 0;
-    }
-
-    /**
-     * recives Message history for active chat from server
-     * UNDER CONSTRUCTION
-     */
-    public int receiveMsg(Message msg){
-        try {
-            objectOutputStream.writeObject(msg);
-            objectOutputStream.flush();
-        }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         return 0;
     }
 
@@ -261,13 +199,20 @@ public class ServerConnection {
     //boolean checkLogIn(String username, String password){}
     //boolean checkUserExists(String username){}
 
-    //--------- Closing ------------------
-    public void close() {
-        try {
-            if (objectOutputStream != null) objectOutputStream.close();
-            if (objectInputStream  != null) objectInputStream.close();
-            if (socket != null) socket.close();
-        } catch (IOException ignored) { }
+//-----Getters och setters--------
+
+    public IdGenerator getIdGen() {
+        return IdGenerator.getInstance();
+    }
+    public void setIdGen() {
+        this.idGen = IdGenerator.getInstance();
+    }
+    public ServerHandler getServerHandler() {
+        return serverHandler;
+    }
+
+    public void setServerHandler(ServerHandler serverHandler) {
+        this.serverHandler = serverHandler;
     }
 }
 
