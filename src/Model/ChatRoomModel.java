@@ -64,7 +64,7 @@ public class ChatRoomModel {
         members.add(user);
     }
 
-    public void removeUser(User user) {
+    public void removeUser(String user) {
         members.remove(user);
     }
 
@@ -80,7 +80,7 @@ public class ChatRoomModel {
             this.activeUser = activeUser;  //  Lägg till / uppdatera
     }
 
-    public User getActiveUser(){
+    public String getActiveUser(){
 
         return this.activeUser;
     }

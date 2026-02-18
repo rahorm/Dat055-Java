@@ -15,7 +15,7 @@ public class ChatRoomFacade extends Observable {
 
     public ChatRoomFacade(ChatRoomModel model) {
         this.model = model;
-        this.serverConnection = new ServerConnection(new Socket(3356));
+        this.serverConnection = new ServerConnection(new Socket("192.168.1.28", 3356));
     }
 
     /**
@@ -36,7 +36,7 @@ public class ChatRoomFacade extends Observable {
 
     public ArrayList<Message> getMSGList(){
         // listan av meddelande
-        model.retriveMSGList();
+        return model.retriveMSGList();
     }
 
 
@@ -63,7 +63,7 @@ public void addMember(String user) {
         throw new IllegalArgumentException("user must not be null");
     }
 
-    ArrayList<User> members = model.retrieveUserList();
+    ArrayList<String> members = model.retrieveUserList();
     if (!members.contains(user)) {
         model.addUser(user);
     }

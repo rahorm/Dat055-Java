@@ -7,11 +7,11 @@ import java.time.LocalDateTime;
 public class Message implements Serializable {
     private String content;
     private LocalDateTime timestamp;
-    private User sender;
+    private String sender;
     private int chatID;
     private int messageID;
 
-    public Message(User sender, int chatID, String content){
+    public Message(String sender, int chatID, String content){
         this.content = content;
         this.sender = sender;
         this.chatID = chatID;
@@ -19,7 +19,7 @@ public class Message implements Serializable {
         IdGenerator generator = IdGenerator.getInstance();
         this.messageID = generator.generateId();
     }
-    public Message(int msgId, User sender, int chatID, String content, LocalDateTime time){
+    public Message(int msgId, String sender, int chatID, String content, LocalDateTime time){
         this.content = content;
         this.sender = sender;
         this.chatID = chatID;
@@ -46,11 +46,11 @@ public class Message implements Serializable {
         this.timestamp = LocalDateTime.now();
     }
 
-    public User getSender() {
+    public String getSender() {
         return sender;
     }
 
-    public void setSender(User sender) {
+    public void setSender(String sender) {
         this.sender = sender;
     }
 
@@ -71,6 +71,6 @@ public class Message implements Serializable {
     }
 
     public String toString(){
-        return "msgId: "+this.messageID+", sender: "+this.sender.getUsername()+", chatId: "+this.chatID+", time: "+this.timestamp+", content: "+this.content+", hasImg: ";
+        return "msgId: "+this.messageID+", sender: "+this.sender+", chatId: "+this.chatID+", time: "+this.timestamp+", content: "+this.content+", hasImg: ";
     }
 }

@@ -104,7 +104,7 @@ public final class DatabaseConnection {
                  String content = rs.getString(5);
                  boolean hasImg = rs.getBoolean(6);
 
-                 msgHistory.add(new Message(msgId, new User(sender), chat, content, time));
+                 msgHistory.add(new Message(msgId, sender, chat, content, time));
 
              }
 
