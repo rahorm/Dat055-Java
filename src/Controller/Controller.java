@@ -35,8 +35,8 @@ public class Controller {
      * @throws IllegalArgumentException if userID is not an existing user
      * @throws NumberFormatException if msg isn't a string
      * */
-    public void sendMessage(String msg, String userID, LocalDateTime timeStamp){
-        modelF.StoreMsg(msg, userID, timeStamp);
+    public void sendMessage(String msg, String username){
+        modelF.StoreMsg(msg, username);
     }
     /**
      * Removes the chatRoom, you can not remove the activeChatRoom

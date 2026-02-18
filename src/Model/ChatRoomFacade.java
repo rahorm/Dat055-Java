@@ -46,7 +46,7 @@ public class ChatRoomFacade extends Observable {
      * @param username user that wrote this message
      * @param timeStamp this one is not needed -> When new Message is created time will be stamped automatically
      */
-    public void StoreMsg(String msg, String username, LocalDateTime timeStamp){
+    public void StoreMsg(String msg, String username){
 
         serverConnection.SendMsg(new Message(model.getActiveUser(), model.getChatID(), msg));
 
@@ -59,7 +59,7 @@ public class ChatRoomFacade extends Observable {
  * @param user user to add; must not be  null
  * @throws IllegalArgumentException if user is null
  */
-public void addMember(User user) {
+public void addMember(String user) {
     if (user == null) {
         throw new IllegalArgumentException("user must not be null");
     }
@@ -78,7 +78,7 @@ public void addMember(User user) {
  * @param user user to remove; must not be  null
  * @throws IllegalArgumentException if  user is null
  */
-public void removeMember(User user) {
+public void removeMember(String user) {
     if (user == null) {
         throw new IllegalArgumentException("user must not be null");
     }

@@ -17,8 +17,10 @@ import java.util.Observable;
 public class ChatRoomModel {
 
     private final ArrayList<Message> messages = new ArrayList<>();
-    private final ArrayList<User> members = new ArrayList<>();
-    private User activeUser;
+    private final ArrayList<String> members = new ArrayList<>();
+    private String activeUser;
+   // private final ArrayList<User> members = new ArrayList<>();
+   // private User activeUser;
     private int chatID;
 
     /**
@@ -28,7 +30,7 @@ public class ChatRoomModel {
      * @param chatID
      * @param activeUser
      */
-    public ChatRoomModel(int chatID, User activeUser) {
+    public ChatRoomModel(int chatID, String activeUser) {
         this.chatID = chatID;
         this.activeUser = activeUser;
 
@@ -48,7 +50,7 @@ public class ChatRoomModel {
         messages.add(message);
     }
 
-    public ArrayList<User> retrieveUserList() {
+    public ArrayList<String> retrieveUserList() {
         /**
          * This method retrieves all User from
          * currently stored in UserList for the room
@@ -58,7 +60,7 @@ public class ChatRoomModel {
         return new ArrayList<>(members);
     }
 
-    public void addUser(User user) {
+    public void addUser(String user) {
         members.add(user);
     }
 
@@ -73,7 +75,7 @@ public class ChatRoomModel {
         return chatID;
     }
 
-    public void setActiveUser(User activeUser) {
+    public void setActiveUser(String activeUser) {
 
             this.activeUser = activeUser;  //  Lägg till / uppdatera
     }
