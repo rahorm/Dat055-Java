@@ -175,9 +175,7 @@ public class ServerConnection {
     int sendMsg(Message msg){
        SendMsgWrapper sendMsgWrapper = new SendMsgWrapper(msg);
        try {
-
-
-           objectOutputStream.writeObject(msg);
+           objectOutputStream.writeObject(sendMsgWrapper);
            objectOutputStream.flush();
        } catch (IOException e) {
            throw new RuntimeException(e);
