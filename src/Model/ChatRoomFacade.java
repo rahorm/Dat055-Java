@@ -34,7 +34,7 @@ public class ChatRoomFacade extends Observable {
 
     }
 
-    public void getMSGList(){
+    public ArrayList<Message> getMSGList(){
         // listan av meddelande
         model.retriveMSGList();
     }
@@ -47,7 +47,7 @@ public class ChatRoomFacade extends Observable {
      */
     public void StoreMsg(String msg, String username){
 
-        serverConnection.SendMsg(new Message(model.getActiveUser(), model.getChatID(), msg));
+        serverConnection.sendMsg(new Message(model.getActiveUser(), model.getChatID(), msg));
 
     }
 
