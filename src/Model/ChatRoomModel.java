@@ -44,6 +44,10 @@ public class ChatRoomModel {
         return new ArrayList<>(messages);
     }
 
+    public void addMessage(Message message) {
+        messages.add(message);
+    }
+
     public ArrayList<User> retrieveUserList() {
         /**
          * This method retrieves all User from
@@ -52,6 +56,10 @@ public class ChatRoomModel {
          * @return list of Users
          */
         return new ArrayList<>(members);
+    }
+
+    public void addUser(User user) {
+        members.add(user);
     }
 
     // BLAH BLAH

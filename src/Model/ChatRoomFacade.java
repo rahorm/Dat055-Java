@@ -1,17 +1,22 @@
 package Model;
 
+import Client.ServerConnection;
 import Other.Message;
 import Other.User;
 
+import java.net.Socket;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Observable;
 
 public class ChatRoomFacade extends Observable {
     private ChatRoomModel model;
+    private ServerConnection serverConnection;
 
 
     public ChatRoomFacade(ChatRoomModel model) {
         this.model = model;
+        this.serverConnection = new ServerConnection(new Socket());
     }
 
     /**
@@ -30,7 +35,7 @@ public class ChatRoomFacade extends Observable {
 
     }
 
-    public void getMSGList(){
+    public ArrayList<Message> getMSGList(){
         // listan av meddelande
         return model.retriveMSGList();
     }
@@ -47,15 +52,16 @@ public void addMember(User user) {
     if (user == null) {
         throw new IllegalArgumentException("user must not be null");
     }
+    ArrayList<User> members = model.retrieveUserList();
     if (!members.contains(user)) {
-        members.add(user);
+        model.addUser(user);
     }
 }
 
     // Message ID,
-public void StoreMsg(String msg, int userID, LocalDateTime timeStamp){
+public void StoreMsg(String msg, String userID, LocalDateTime timeStamp){
 
-    ServerConnection.SendMsg(new Message(userID, model.getChatID(), msg));
+    serverConnection.SendMsg(new Message(new User(userID), model.getChatID(), msg));
 
 }
 
@@ -70,6 +76,7 @@ public void removeMember(User user) {
     if (user == null) {
         throw new IllegalArgumentException("user must not be null");
     }
+    ArrayList<User> members = model.retrieveUserList();
     members.remove(user);
 }
 
@@ -83,7 +90,7 @@ public void addMessage(Message message) {
     if (message == null) {
         throw new IllegalArgumentException("message must not be null");
     }
-    messages.add(message);
+    model.addMessage(message);
 }
 
 /**
