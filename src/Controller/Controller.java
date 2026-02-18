@@ -35,7 +35,7 @@ public class Controller {
      * @throws IllegalArgumentException if userID is not an existing user
      * @throws NumberFormatException if msg isn't a string
      * */
-    public void sendMessage(String msg, int userID, LocalDateTime timeStamp){
+    public void sendMessage(String msg, String userID, LocalDateTime timeStamp){
         modelF.StoreMsg(msg, userID, timeStamp);
     }
     /**
