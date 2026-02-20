@@ -44,20 +44,22 @@ Until the 17th we will make the sequence data base
 //----------- 260217 -----------//
 
 # TO DO
-    [] update UML sequence to include more server classes (vertical line? slanted lines?)
-    [] update UML diagram to include more server classes
-    [] userID -> username update, should e a string
-    [] change method objToServer() to sendMsg() in ServerConnection
-    [] remove timestamp as a parameter and only initiate it in ModelFacade where we make the message instance
     [] delete the class user
+    [] update UML diagram to include more server classes
+    [X] update UML sequence to include more server classes (vertical line? slanted lines?)
+    [X] userID -> username update, should e a string
+    [X] change method objToServer() to sendMsg() in ServerConnection
+    [X] remove timestamp as a parameter and only initiate it in ModelFacade where we make the message instance
     [X] wrapper for arraylist
-    [] in serverconnection -> handler to use array list wrapper
+    [X] in serverconnection -> handler to use array list wrapper
 
 //----------- 260220 -----------//
-[] Message - add hasImg var
-[] DB - table för bilder
-[] ? - user ska kunna ladda upp bilder
-[] DBConn - queries i alla funktioner
-[] ClientActionHandler - övriga fall
-[] ServerActionHandler - övriga fall
-[] ModelFacade -> ServerActionHandler
+    [] Message - add hasImg var
+    [] DB - table för bilder
+    [] ? - user ska kunna ladda upp bilder
+    [] DBConn - queries i alla funktioner
+    [] ClientActionHandler - övriga fall
+    [] ServerActionHandler - övriga fall
+    [] ModelFacade -> ServerActionHandler
+    [] Göra ModelFacade till singleton
+    [] Göra server singleton
