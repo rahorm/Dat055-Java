@@ -92,6 +92,9 @@ public class ChatRoomModel {
             this.activeUser = currentuser;
     }
     */
+    public void changeActiveRoom(int chatID) {
+        this.chatID = chatID;
+    }
 
 }
 
