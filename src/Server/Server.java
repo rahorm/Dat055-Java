@@ -41,7 +41,5 @@ public class Server {
         ServerSocket serverSocket = new ServerSocket(3356);
         Server server = new Server(serverSocket);
         server.startServer();
-
-
     }
 }

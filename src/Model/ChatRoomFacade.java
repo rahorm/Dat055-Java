@@ -17,7 +17,7 @@ public class ChatRoomFacade extends Observable {
     public ChatRoomFacade(ChatRoomModel model) {
         this.model = model;
         try {
-            this.serverConnection = new ServerConnection(new Socket("192.168.1.28", 3356));
+            this.serverConnection = new ServerConnection(new Socket("localhost", 3356));
         } catch (IOException e) {
             System.out.println("Error:"+e.getMessage());
         }
