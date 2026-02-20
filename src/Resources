@@ -41,14 +41,14 @@ Until the 17th we will make the sequence data base
     * threads
     * singleton
 
-//----------- 260217 -----------//
+//----------- 260220 -----------//
 
 # TO DO
     [] update UML sequence to include more server classes (vertical line? slanted lines?)
     [] update UML diagram to include more server classes
-    [] userID -> username update, should e a string
+    [x] userID -> username update, should e a string
     [] change method objToServer() to sendMsg() in ServerConnection
-    [] remove timestamp as a parameter and only initiate it in ModelFacade where we make the message instance
+    [x] remove timestamp as a parameter and only initiate it in ModelFacade where we make the message instance
     [] delete the class user
     [X] wrapper for arraylist
     [] in serverconnection -> handler to use array list wrapper
