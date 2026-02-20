@@ -10,8 +10,10 @@ import java.util.ArrayList;
 
 
 public class ServerActionHandler {
+    Model.ChatRoomFacade facade;
 
     public ServerActionHandler() {
+        facade = Model.ChatRoomFacade.getInstance();
     }
 
     public void handle(Object obj){
