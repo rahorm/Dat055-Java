@@ -65,7 +65,8 @@ public final class DatabaseConnection {
                 "INSERT INTO ChatMessages VALUES (?, ?, ?, ?, ?, ?)");){
             ps.setInt(1, 1); //needs fixing
             ps.setInt(2, msg.getChatID());
-            ps.setTimestamp(4, Timestamp.valueOf(msg.getTimestamp()));
+            ps.setString(3, msg.getSender());
+            ps.setTimestamp(4, Timestamp.valueOf(msg.getTimestamp().withNano(0)));
             ps.setString(5, msg.getContent());
             ps.setBoolean(6, false); //needs fixing
             ps.executeUpdate();
