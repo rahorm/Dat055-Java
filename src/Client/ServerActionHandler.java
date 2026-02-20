@@ -17,8 +17,9 @@ public class ServerActionHandler {
     public void handle(Object obj){
         Object objToReturn = null;
 
-        if(obj instanceof MsgHistoryWrapper){
-            MsgHistoryWrapper input = (MsgHistoryWrapper)obj;
+        if(obj instanceof MsgHistoryWrapper input){
+
+            System.out.println("Output: "+input.toString());
             // MODEL FACADE CONNECTION? input.getMsgHistory();
         }
     }

@@ -4,6 +4,7 @@ import Client.ServerConnection;
 import Other.Message;
 import Other.User;
 
+import java.io.IOException;
 import java.net.Socket;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,7 +16,11 @@ public class ChatRoomFacade extends Observable {
 
     public ChatRoomFacade(ChatRoomModel model) {
         this.model = model;
-        this.serverConnection = new ServerConnection(new Socket("192.168.1.28", 3356));
+        try {
+            this.serverConnection = new ServerConnection(new Socket("192.168.1.28", 3356));
+        } catch (IOException e) {
+            System.out.println("Error:"+e.getMessage());
+        }
     }
 
     /**
