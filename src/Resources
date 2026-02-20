@@ -53,3 +53,11 @@ Until the 17th we will make the sequence data base
     [X] wrapper for arraylist
     [] in serverconnection -> handler to use array list wrapper
 
+//----------- 260220 -----------//
+[] Message - add hasImg var
+[] DB - table för bilder
+[] ? - user ska kunna ladda upp bilder
+[] DBConn - queries i alla funktioner
+[] ClientActionHandler - övriga fall
+[] ServerActionHandler - övriga fall
+[] ModelFacade -> ServerActionHandler
