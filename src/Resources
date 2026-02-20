@@ -44,8 +44,6 @@ Until the 17th we will make the sequence data base
 //----------- 260217 -----------//
 
 # TO DO
-    [] delete the class user
-    [] update UML diagram to include more server classes
     [X] update UML sequence to include more server classes (vertical line? slanted lines?)
     [X] userID -> username update, should e a string
     [X] change method objToServer() to sendMsg() in ServerConnection
@@ -54,16 +52,20 @@ Until the 17th we will make the sequence data base
     [X] in serverconnection -> handler to use array list wrapper
 
 //----------- 260220 -----------//
-    [] Message - add hasImg var
-    [] DB - table för bilder
+    [Andy] delete the class user
+    [Mona] update UML diagram to include more server classes
+    [Choi] Message - add hasImg var
+    [Choi] DB - table för bilder
     [] ? - user ska kunna ladda upp bilder
-    [] DBConn - queries i alla funktioner
+    [Madde] DBConn - queries i alla funktioner
     [] ClientActionHandler - övriga fall
-    [] ServerActionHandler - övriga fall
+    [Mona] ServerActionHandler - övriga fall
     [] ModelFacade -> ServerActionHandler
-    [] Göra ModelFacade till singleton
-    [] Göra server singleton
-    [] Like ALLLLLA wrappers
-    [] Input från user (UI)
-    [] Controller
-    [] Model / Fasad
+    [X] Göra ModelFacade till singleton
+    [] Se till att ModelFasaden faktiskt används som singleton överallt
+    [Madde] Göra server singleton
+    [Andy] Like ALLLLLA wrappers
+    [Ada] Input från user (UI)
+    [Andy] Controller
+    [?Mona?] Model / Fasad
+    [] notify() metod observer etc?
