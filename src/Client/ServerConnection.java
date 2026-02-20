@@ -13,10 +13,11 @@ import Common.SendMsgWrapper;
 public class ServerConnection {
 
     private ServerHandler serverHandler;
-    private IdGenerator idGen = IdGenerator.getInstance();
 
     public ServerConnection(Socket socket) {
             this.serverHandler = new ServerHandler(socket);
+            Thread thread = new Thread(serverHandler);
+            thread.start();
     }
 
     /**
@@ -201,12 +202,6 @@ public class ServerConnection {
 
 //-----Getters och setters--------
 
-    public IdGenerator getIdGen() {
-        return IdGenerator.getInstance();
-    }
-    public void setIdGen() {
-        this.idGen = IdGenerator.getInstance();
-    }
     public ServerHandler getServerHandler() {
         return serverHandler;
     }

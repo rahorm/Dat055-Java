@@ -19,4 +19,7 @@ public class SendMsgWrapper implements Serializable {
     public void setMsg(Message msg) {
         this.msg = msg;
     }
+    public String toString(){
+        return "SendMsgWrapper, contains msg: "+msg.toString();
+    }
 }

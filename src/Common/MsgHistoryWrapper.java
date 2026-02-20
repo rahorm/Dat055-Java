@@ -19,4 +19,8 @@ public class MsgHistoryWrapper implements Serializable {
     public void setMsgHistory(ArrayList<Message> msgHistory) {
         this.msgHistory = msgHistory;
     }
+
+    public String toString(){
+        return "msgHistoryWrapper contains array: "+msgHistory.toString();
+    }
 }
