@@ -1,6 +1,7 @@
 package Model;
 
 import Client.ServerConnection;
+import Other.IdGenerator;
 import Other.Message;
 import Other.User;
 
@@ -10,7 +11,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public class ChatRoomFacade extends Observable {
+public final class ChatRoomFacade extends Observable {
+    private static ChatRoomFacade instance;
     private ChatRoomModel model;
     private ServerConnection serverConnection;
 
@@ -21,6 +23,13 @@ public class ChatRoomFacade extends Observable {
         } catch (IOException e) {
             System.out.println("Error:"+e.getMessage());
         }
+    }
+
+    public static ChatRoomFacade getInstance() {
+        if (instance == null){
+            instance = new ChatRoomFacade(new ChatRoomModel(1, "User1"));
+        }
+        return instance;
     }
 
     /**
