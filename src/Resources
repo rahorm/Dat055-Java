@@ -69,3 +69,6 @@ Until the 17th we will make the sequence data base
     [Andy] Controller
     [?Mona?] Model / Fasad
     [] notify() metod observer etc?
+    [] Initialize model med chat nummer etc
+    [] hantera "AvailableChats"
+    [] Hur loggar man in som användare? ska clienthandler ha en variable username (ja?)
