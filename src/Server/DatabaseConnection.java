@@ -45,15 +45,31 @@ public final class DatabaseConnection {
      * Inserts a chatroom into the database
      * uses table Chats
      * Unique chatId is required
-     * @param chatId
-     * @param chatName
-     * @return
+     * @param chatId used to identify chat
+     * @param chatName name to display in app
      */
-    public void createChatRoom(int chatId, String chatName){}
+    public void createChatRoom(int chatId, String chatName){
+        try(PreparedStatement ps = conn.prepareStatement(
+                "INSERT INTO Chats VALUES (?, ?)");){
+            ps.setInt(1,chatId);
+            ps.setString(2,chatName);
+            ps.executeUpdate();
+        }  catch (SQLException e) {
+            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+        }
+
+    }
+
     public void deleteChatRoom(int chatId){}
+
+    /**
+     * Checks if username already exists
+     * @return if user already exists
+     */
     public boolean checkUserExists(String username){
         return true;
     }
+
     public boolean checkLogIn(String username, String password){
         return true;
     }
