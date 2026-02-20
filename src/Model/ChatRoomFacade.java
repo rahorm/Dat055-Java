@@ -1,21 +1,35 @@
 package Model;
 
 import Client.ServerConnection;
+import Other.IdGenerator;
 import Other.Message;
 import Other.User;
 
+import java.io.IOException;
 import java.net.Socket;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public class ChatRoomFacade extends Observable {
+public final class ChatRoomFacade extends Observable {
+    private static ChatRoomFacade instance;
     private ChatRoomModel model;
     private ServerConnection serverConnection;
 
     public ChatRoomFacade(ChatRoomModel model) {
         this.model = model;
-        this.serverConnection = new ServerConnection(new Socket("192.168.1.28", 3356));
+        try {
+            this.serverConnection = new ServerConnection(new Socket("localhost", 3356));
+        } catch (IOException e) {
+            System.out.println("Error:"+e.getMessage());
+        }
+    }
+
+    public static ChatRoomFacade getInstance() {
+        if (instance == null){
+            instance = new ChatRoomFacade(new ChatRoomModel(1, "User1"));
+        }
+        return instance;
     }
 
     /**

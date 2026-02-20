@@ -41,15 +41,34 @@ Until the 17th we will make the sequence data base
     * threads
     * singleton
 
-//----------- 260220 -----------//
+//----------- 260217 -----------//
 
 # TO DO
-    [] update UML sequence to include more server classes (vertical line? slanted lines?)
-    [] update UML diagram to include more server classes
-    [x] userID -> username update, should e a string
-    [] change method objToServer() to sendMsg() in ServerConnection
-    [x] remove timestamp as a parameter and only initiate it in ModelFacade where we make the message instance
-    [] delete the class user
+    [X] update UML sequence to include more server classes (vertical line? slanted lines?)
+    [X] userID -> username update, should e a string
+    [X] change method objToServer() to sendMsg() in ServerConnection
+    [X] remove timestamp as a parameter and only initiate it in ModelFacade where we make the message instance
     [X] wrapper for arraylist
-    [] in serverconnection -> handler to use array list wrapper
+    [X] in serverconnection -> handler to use array list wrapper
 
+//----------- 260220 -----------//
+    [Andy] delete the class user
+    [Mona] update UML diagram to include more server classes
+    [Choi] Message - add hasImg var
+    [Choi] DB - table för bilder
+    [] ? - user ska kunna ladda upp bilder
+    [Madde] DBConn - queries i alla funktioner
+    [] ClientActionHandler - övriga fall
+    [Mona] ServerActionHandler - övriga fall
+    [] ModelFacade -> ServerActionHandler
+    [X] Göra ModelFacade till singleton
+    [] Se till att ModelFasaden faktiskt används som singleton överallt
+    [Madde] Göra server singleton
+    [Andy] Like ALLLLLA wrappers
+    [Ada] Input från user (UI)
+    [Andy] Controller
+    [?Mona?] Model / Fasad
+    [] notify() metod observer etc?
+    [] Initialize model med chat nummer etc
+    [] hantera "AvailableChats"
+    [] Hur loggar man in som användare? ska clienthandler ha en variable username (ja?)
