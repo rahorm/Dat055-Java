@@ -40,12 +40,16 @@ public final class DatabaseConnection {
     }
 
 //-----------------QUERIES-----------------//
-   /*
-    * createChatRoom(String chatName)
-    * deleteChatRoom(int chatId)
-    * boolean checkUserExists(String username)
-    * checkLogIn(String username, String password)
-    */
+
+    public void createChatRoom(String chatName){}
+    public void deleteChatRoom(int chatId){}
+    public boolean checkUserExists(String username){
+        return true;
+    }
+    public boolean checkLogIn(String username, String password){
+        return true;
+    }
+
 
     public String createUser(String username, String password){
 
@@ -75,13 +79,13 @@ public final class DatabaseConnection {
         }
     }
 
-    /*
-     * deleteUser(String username)
-     * addChatMember(int chatId, String username)
-     * removeChatMember(int chatId, String username)
-     * editMsg(Message msg, Message updateMsg)
-     * deleteMsg(int msgId)/deleteMsg(Message msg)
-     */
+
+    public void deleteUser(String username){}
+    public void addChatMember(int chatId, String username){}
+    public void removeChatMember(int chatId, String username){}
+    public void editMsg(Message msg, Message updateMsg){}
+    public void deleteMsg(int msgId){}
+    public void deleteMsg(Message msg){}
 
     /**
      * Fetches chatHistory, in ascending order by timestamp, from specified chat
