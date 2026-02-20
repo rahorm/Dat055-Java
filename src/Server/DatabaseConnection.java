@@ -41,7 +41,15 @@ public final class DatabaseConnection {
 
 //-----------------QUERIES-----------------//
 
-    public void createChatRoom(String chatName){}
+    /**
+     * Inserts a chatroom into the database
+     * uses table Chats
+     * Unique chatId is required
+     * @param chatId
+     * @param chatName
+     * @return
+     */
+    public void createChatRoom(int chatId, String chatName){}
     public void deleteChatRoom(int chatId){}
     public boolean checkUserExists(String username){
         return true;
@@ -50,7 +58,14 @@ public final class DatabaseConnection {
         return true;
     }
 
-
+    /**
+     * Inserts a user into the database
+     * uses table Users
+     * Unique username is required
+     * @param username username of user to create
+     * @param password password linked to that user
+     * @return
+     */
     public String createUser(String username, String password){
 
         try(PreparedStatement ps = conn.prepareStatement(
@@ -64,6 +79,13 @@ public final class DatabaseConnection {
         return username;
     }
 
+    /**
+     * Inserts a given message into the database
+     * Uses table ChatMessages
+     * Unique id required, user and chat must exist
+     *
+     * @param msg Message containing information to insert
+     */
     public void sendMsg(Message msg){
         try(PreparedStatement ps = conn.prepareStatement(
                 "INSERT INTO ChatMessages VALUES (?, ?, ?, ?, ?, ?)");){
