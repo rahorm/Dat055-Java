@@ -63,3 +63,4 @@ Until the 17th we will make the sequence data base
     [] ModelFacade -> ServerActionHandler
     [] Göra ModelFacade till singleton
     [] Göra server singleton
+    [] Like ALLLLLA wrappers
