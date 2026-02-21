@@ -60,6 +60,10 @@ public final class DatabaseConnection {
 
     }
 
+    /**
+     *
+     * @param chatId
+     */
     public void deleteChatRoom(int chatId){}
 
     /**
@@ -80,7 +84,7 @@ public final class DatabaseConnection {
      * Unique username is required
      * @param username username of user to create
      * @param password password linked to that user
-     * @return
+     * @return returns the username of just created user
      */
     public String createUser(String username, String password){
 
@@ -203,13 +207,30 @@ public final class DatabaseConnection {
      *
      * @param chatId
      */
-    public void getChatMembers(int chatId){}
+    public ArrayList<String> getChatMembers(int chatId) {
+        ArrayList<String> chatMembers = new ArrayList<>();
 
+        try (PreparedStatement ps = conn.prepareStatement(
+                "SELECT member FROM chatmembers WHERE chat = ?;");) {
+            ps.setInt(1, chatId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                chatMembers.add(rs.getString(1));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return chatMembers;
+    }
     /**
      *
      * @param username
      */
     public void getAvailableChats(String username){}
+
 
     // This is a hack to turn an SQLException into a JSON string error message. No need to change.
     public static String getError(SQLException e){
@@ -220,9 +241,9 @@ public final class DatabaseConnection {
        return message;
     }
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    /*public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DatabaseConnection DBconn = DatabaseConnection.getInstance();
         ArrayList<Message> msg = DBconn.getChatMessages(1);
         System.out.println("ArrayList : " + msg);
-    }
+    }*/
 }
