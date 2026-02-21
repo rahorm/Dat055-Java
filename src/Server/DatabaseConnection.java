@@ -65,7 +65,13 @@ public final class DatabaseConnection {
      * @param chatId
      */
     public void deleteChatRoom(int chatId){
-        //DELETE FROM Chats WHERE chatId =
+        try(PreparedStatement ps = conn.prepareStatement(
+                "DELETE FROM Chats WHERE chatId = ?");){
+            ps.setInt(1, chatId);
+            ps.executeUpdate();
+        }  catch (SQLException e) {
+            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+        }
     }
 
     /**
@@ -268,8 +274,23 @@ public final class DatabaseConnection {
      *
      * @param username
      */
-    public void getAvailableChats(String username){
-        //SELECT chat FROM chatmembers WHERE member = 'User1'
+    public ArrayList<Integer> getAvailableChats(String username){
+        ArrayList<Integer> availableChats = new ArrayList<>();
+
+        try (PreparedStatement ps = conn.prepareStatement(
+                "SELECT chat FROM chatmembers WHERE member = ?;");) {
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                availableChats.add(rs.getInt(1));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return availableChats;
 
     }
 
