@@ -80,7 +80,7 @@ public final class DatabaseConnection {
      */
     public boolean checkUserExists(String username){
         try (PreparedStatement ps = conn.prepareStatement(
-                "SELECT * FROM Users WHERE username = ?");){
+                "SELECT username FROM Users WHERE username = ?");){
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
 
@@ -96,7 +96,20 @@ public final class DatabaseConnection {
     }
 
     public boolean checkLogIn(String username, String password){
-        return true;
+        try (PreparedStatement ps = conn.prepareStatement(
+                "SELECT pswd FROM Users WHERE username = ?");){
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()) {
+                return (rs.getString(1).equals(password));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return false;
     }
 
     /**
@@ -319,7 +332,7 @@ public final class DatabaseConnection {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DatabaseConnection DBconn = DatabaseConnection.getInstance();
-        Object obj = DBconn.checkUserExists("User1");
+        Object obj = DBconn.checkLogIn("User1", "Pswd1");
         System.out.println("Output : " + obj);
     }
 }
