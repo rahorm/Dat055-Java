@@ -64,7 +64,9 @@ public final class DatabaseConnection {
      *
      * @param chatId
      */
-    public void deleteChatRoom(int chatId){}
+    public void deleteChatRoom(int chatId){
+        //DELETE FROM Chats WHERE chatId =
+    }
 
     /**
      * Checks if username already exists
@@ -125,7 +127,15 @@ public final class DatabaseConnection {
      *
      * @param username
      */
-    public void deleteUser(String username){}
+    public void deleteUser(String username){
+        try(PreparedStatement ps = conn.prepareStatement(
+                "DELETE FROM Users WHERE username = ?");){
+            ps.setString(1, username);
+            ps.executeUpdate();
+        }  catch (SQLException e) {
+            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+        }
+    }
 
     /**
      *
@@ -148,27 +158,54 @@ public final class DatabaseConnection {
      * @param chatId
      * @param username
      */
-    public void removeChatMember(int chatId, String username){}
+    public void removeChatMember(int chatId, String username){
+        try(PreparedStatement ps = conn.prepareStatement(
+                "DELETE FROM ChatMembers WHERE (chat = ? AND member = ?)");){
+            ps.setInt(1, chatId);
+            ps.setString(2, username);
+            ps.executeUpdate();
+        }  catch (SQLException e) {
+            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+        }
+    }
 
     /**
      *
      * @param msg
      * @param updateMsg
      */
-    public void editMsg(Message msg, Message updateMsg){}
+    public void editMsg(Message msg, Message updateMsg){
+
+    }
 
     /**
      *
      * @param msgId
      */
-    public void deleteMsg(int msgId){}
+    public void deleteMsg(int msgId){
+        try(PreparedStatement ps = conn.prepareStatement(
+                "DELETE FROM ChatMessages WHERE msgId = ?");){
+            ps.setInt(1, msgId);
+            ps.executeUpdate();
+        }  catch (SQLException e) {
+            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+        }
+    }
 
 
     /**
      *
      * @param msg
      */
-    public void deleteMsg(Message msg){}
+    public void deleteMsg(Message msg){
+        try(PreparedStatement ps = conn.prepareStatement(
+                "DELETE FROM ChatMessages WHERE msgId = ?");){
+            ps.setInt(1, msg.getMessageID());
+            ps.executeUpdate();
+        }  catch (SQLException e) {
+            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+        }
+    }
 
     /**
      * Fetches chatHistory, in ascending order by timestamp, from specified chat
@@ -206,6 +243,7 @@ public final class DatabaseConnection {
     /**
      *
      * @param chatId
+     * @return ArrayList<String> list of members
      */
     public ArrayList<String> getChatMembers(int chatId) {
         ArrayList<String> chatMembers = new ArrayList<>();
@@ -225,11 +263,15 @@ public final class DatabaseConnection {
 
         return chatMembers;
     }
+
     /**
      *
      * @param username
      */
-    public void getAvailableChats(String username){}
+    public void getAvailableChats(String username){
+        //SELECT chat FROM chatmembers WHERE member = 'User1'
+
+    }
 
 
     // This is a hack to turn an SQLException into a JSON string error message. No need to change.
@@ -241,9 +283,9 @@ public final class DatabaseConnection {
        return message;
     }
 
-    /*public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DatabaseConnection DBconn = DatabaseConnection.getInstance();
-        ArrayList<Message> msg = DBconn.getChatMessages(1);
-        System.out.println("ArrayList : " + msg);
-    }*/
+        Object obj = DBconn.getChatMembers(1);
+        System.out.println("Output : " + obj);
+    }
 }
