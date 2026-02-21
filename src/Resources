@@ -54,10 +54,10 @@ Until the 17th we will make the sequence data base
 //----------- 260220 -----------//
     [Andy] delete the class user
     [Mona] update UML diagram to include more server classes
-    [Choi] Message - add hasImg var
+    [Choi] Message - add hasImg var, getter and setter
     [Choi] DB - table för bilder
     [] ? - user ska kunna ladda upp bilder
-    [Madde] DBConn - queries i alla funktioner
+    [X] DBConn - queries i alla funktioner
     [] ClientActionHandler - övriga fall
     [Mona] ServerActionHandler - övriga fall
     [] ModelFacade -> ServerActionHandler
