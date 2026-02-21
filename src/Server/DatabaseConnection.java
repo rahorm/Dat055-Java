@@ -79,7 +79,20 @@ public final class DatabaseConnection {
      * @return if user already exists
      */
     public boolean checkUserExists(String username){
-        return true;
+        try (PreparedStatement ps = conn.prepareStatement(
+                "SELECT * FROM Users WHERE username = ?");){
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()) {
+                return true;
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return false;
     }
 
     public boolean checkLogIn(String username, String password){
@@ -306,7 +319,7 @@ public final class DatabaseConnection {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DatabaseConnection DBconn = DatabaseConnection.getInstance();
-        Object obj = DBconn.getChatMembers(1);
+        Object obj = DBconn.checkUserExists("User1");
         System.out.println("Output : " + obj);
     }
 }
