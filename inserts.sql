@@ -28,12 +28,14 @@ INSERT INTO ChatMessages VALUES (1, 1, 'User2', '2026-01-29 15:15:09', 'This is 
 INSERT INTO ChatMessages VALUES (2, 1, 'User2', '2026-01-29 15:16:49', 'This is more text', false);
 INSERT INTO ChatMessages VALUES (3, 1, 'User1', '2026-01-30 12:12:39', 'This is most definitely text', false);
 
-INSERT INTO ChatMessages VALUES (0, 2, 'User4', '2026-01-29 14:56:59', 'This is text in another chat', false);
-INSERT INTO ChatMessages VALUES (1, 2, 'User2', '2026-01-29 15:15:09', 'This is also text in another chat', false);
-INSERT INTO ChatMessages VALUES (2, 2, 'User4', '2026-01-29 15:16:49', 'This is more text in another chat', false);
+INSERT INTO ChatMessages VALUES (4, 2, 'User4', '2026-01-29 14:56:59', 'This is text in another chat', false);
+INSERT INTO ChatMessages VALUES (5, 2, 'User2', '2026-01-29 15:15:09', 'This is also text in another chat', false);
+INSERT INTO ChatMessages VALUES (6, 2, 'User4', '2026-01-29 15:16:49', 'This is more text in another chat', false);
 
-INSERT INTO ChatMessages VALUES (0, 3, 'User3', '2026-01-29 14:56:59', 'This is text in a third chat', false);
-INSERT INTO ChatMessages VALUES (1, 3, 'User4', '2026-01-29 15:15:09', 'This is also text in a third chat', false);
-INSERT INTO ChatMessages VALUES (2, 3, 'User3', '2026-01-29 15:16:49', 'This is more text in a third chat', false);
-INSERT INTO ChatMessages VALUES (3, 3, 'User1', '2026-01-30 12:12:39', 'This is most definitely text in a third chat', false);
+INSERT INTO ChatMessages VALUES (7, 3, 'User3', '2026-01-29 14:56:59', 'This is text in a third chat', false);
+INSERT INTO ChatMessages VALUES (8, 3, 'User4', '2026-01-29 15:15:09', 'This is also text in a third chat', false);
+INSERT INTO ChatMessages VALUES (9, 3, 'User3', '2026-01-29 15:16:49', 'This is more text in a third chat', false);
+INSERT INTO ChatMessages VALUES (10, 3, 'User1', '2026-01-30 12:12:39', 'This is most definitely text in a third chat', false);
+
+
 
