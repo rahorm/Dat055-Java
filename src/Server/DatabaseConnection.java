@@ -117,12 +117,53 @@ public final class DatabaseConnection {
         }
     }
 
-
+    /**
+     *
+     * @param username
+     */
     public void deleteUser(String username){}
-    public void addChatMember(int chatId, String username){}
+
+    /**
+     *
+     * @param chatId
+     * @param username
+     */
+    public void addChatMember(int chatId, String username){
+        try(PreparedStatement ps = conn.prepareStatement(
+                "INSERT INTO ChatMembers VALUES (?, ?);");){
+            ps.setInt(1, chatId); //needs fixing
+            ps.setString(2, username);
+            ps.executeUpdate();
+        }  catch (SQLException e) {
+            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+        }
+    }
+
+    /**
+     *
+     * @param chatId
+     * @param username
+     */
     public void removeChatMember(int chatId, String username){}
+
+    /**
+     *
+     * @param msg
+     * @param updateMsg
+     */
     public void editMsg(Message msg, Message updateMsg){}
+
+    /**
+     *
+     * @param msgId
+     */
     public void deleteMsg(int msgId){}
+
+
+    /**
+     *
+     * @param msg
+     */
     public void deleteMsg(Message msg){}
 
     /**
@@ -158,10 +199,17 @@ public final class DatabaseConnection {
          return msgHistory;
      }
 
-    /* getChatMembers(int chatId)
-     * getAvailableChats(String username)
+    /**
+     *
+     * @param chatId
      */
+    public void getChatMembers(int chatId){}
 
+    /**
+     *
+     * @param username
+     */
+    public void getAvailableChats(String username){}
 
     // This is a hack to turn an SQLException into a JSON string error message. No need to change.
     public static String getError(SQLException e){
