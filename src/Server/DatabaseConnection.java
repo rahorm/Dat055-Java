@@ -95,6 +95,12 @@ public final class DatabaseConnection {
         return false;
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     public boolean checkLogIn(String username, String password){
         try (PreparedStatement ps = conn.prepareStatement(
                 "SELECT pswd FROM Users WHERE username = ?");){
@@ -128,7 +134,7 @@ public final class DatabaseConnection {
             ps.setString(2,password);
             ps.executeUpdate();
         }  catch (SQLException e) {
-            return "{\"success\":false, \"error\":\""+getError(e)+"\"}";
+            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
         }
         return username;
     }
@@ -202,11 +208,21 @@ public final class DatabaseConnection {
     }
 
     /**
-     *
+     *  Om ett meddelande editeras kommer det att behålla sitt gamla id och sin gamla timestam
      * @param msg
      * @param updateMsg
      */
     public void editMsg(Message msg, Message updateMsg){
+
+        try(PreparedStatement ps = conn.prepareStatement(
+                "UPDATE ChatMessages SET Content = ?, hasimg = ? WHERE msgId = ?");){
+            ps.setString(1,updateMsg.getContent());
+            ps.setBoolean(2,updateMsg.getHasImg());
+            ps.setInt(3, msg.getMessageID());
+            ps.executeUpdate();
+        }  catch (SQLException e) {
+            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+        }
 
     }
 
