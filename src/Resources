@@ -83,6 +83,13 @@ Until the 17th we will make the sequence data base
     [] hantera "AvailableChats"
     [] Hur loggar man in som användare? ska clienthandler ha en variable username (ja?)
 
+    /***********************************************
+     Andy: Things I've hardcoded for now:
+     - password in Add user in handle in ClientActionHandler
+     - tagit bort EDIT msg som ett option ty det kan implementeras senare
+     - user in GET_AVLIBLE_CHATS in handle in ClientActionHandler
+    ************************************************/
+
 // ---------- REFERENCES ---------- //
 
 ANDY:

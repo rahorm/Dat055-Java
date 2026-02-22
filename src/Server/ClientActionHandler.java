@@ -85,7 +85,7 @@ public class ClientActionHandler {
 
             case ADD_USER -> {
                 String username = (String) request.getData();
-                DBcon.createUser(username);
+                DBcon.createUser(username, "password123");
 
                 objToReturn = new RequestWrapper(
                         RequestType.ADD_USER,
@@ -132,15 +132,15 @@ public class ClientActionHandler {
                 );
             }
 
-            case EDIT_MESSAGE -> {
-                Message message = (Message) request.getData();
-                DBcon.editMsg(message);
-
-                objToReturn = new RequestWrapper(
-                        RequestType.GET_MESSAGES,
-                        DBcon.getChatMessages(message.getChatID())
-                );
-            }
+//            case EDIT_MESSAGE -> {
+//                Message message = (Message) request.getData();
+//                DBcon.editMsg();
+//
+//                objToReturn = new RequestWrapper(
+//                        RequestType.GET_MESSAGES,
+//                        DBcon.getChatMessages(message.getChatID())
+//                );
+//            }
 
             case DELETE_MESSAGE -> {
                 Message message = (Message) request.getData();
@@ -173,7 +173,7 @@ public class ClientActionHandler {
             case GET_AVAILABLE_CHATS -> {
                 objToReturn = new RequestWrapper(
                         RequestType.GET_AVAILABLE_CHATS,
-                        DBcon.getAvailableChats()
+                        DBcon.getAvailableChats("User1")
                 );
             }
 
