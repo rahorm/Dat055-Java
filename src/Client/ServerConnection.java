@@ -37,15 +37,13 @@ public class ServerConnection {
      * The parameter chatName is the intended display name of the chat. The chat will recieve an id for internal use.
      * This method returns an int, 0, if no problems were encountered.
      *
-     * @param chatName display name of chat
-     * @return int message
-     *
-     * @throws SQLException
+     * @param chat int id of chat
      */
-    public int createChatRoom(java.lang.String chatName){
-        return 0;
+    public void createChatRoom(int chat){
+        serverHandler.broadcastMessage(
+                new RequestWrapper(RequestType.ADD_CHATROOM, chat)
+        );
     }
-
     /**
      * Deletes a chat from the database
      * <p>
@@ -53,13 +51,14 @@ public class ServerConnection {
      * This cannot be undone.
      * This method returns an int, 0, if no problems were encountered.
      *
-     * @param chatId id of chat to be deleted
-     * @return int message
+     * @param chat int of id of chat to be deleted
      *
      * @throws SQLException
      */
-    public int deleteChatRoom(int chatId){
-        return 0;
+    public void deleteChatRoom(int chat){
+        serverHandler.broadcastMessage(
+                new RequestWrapper(RequestType.DELETE_CHATROOM, chat)
+        );
     }
 
     /**
@@ -68,13 +67,12 @@ public class ServerConnection {
      * The parameter userName is the intended display name of the user. The user will recieve an id for internal use.
      * This method returns an int, 0, if no problems were encountered.
      *
-     * @param userName display name of user
-     * @return string returns the username
-     *
-     * @throws SQLException
+     * @param user id of user
      */
-    public java.lang.String createUser(java.lang.String userName){
-        return "name";
+    public void createUser(String user){
+        serverHandler.broadcastMessage(
+                new RequestWrapper(RequestType.ADD_USER, user)
+        );
     }
 
     /**
@@ -85,92 +83,82 @@ public class ServerConnection {
      * This cannot be undone.
      * This method returns an int, 0, if no problems were encountered.
      *
-     * @param userId id of user to be deleted
-     * @return int message
-     *
-     * @throws SQLException
+     * @param user int id of user to be deleted
      */
-    public int deleteUser(int userId){
-        return 0;
-    }
-
-    public int deleteUser(String user){
-        return 0;
+    public void deleteUser(int user){
+        serverHandler.broadcastMessage(
+                new RequestWrapper(RequestType.DELETE_USER, user)
+        );
     }
 
     /**
-     * Adds a user to the specified chat.
-     * <p>
-     * This method returns an int, 0, if no problems were encountered.
-     *
-     * @param chatId id of chat user should be added to
+     * Adds a user to the activeChat
+    *
      * @param user the user that should be added
-     * @return int message
-     *
-     * @throws SQLException
      */
-    public int addChatMember(int chatId, String user){
-        return 0;
+    public void addChatMember(String user){
+
+        serverHandler.broadcastMessage(
+                new RequestWrapper(RequestType.ADD_CHAT_MEMBER, user)
+        );
     }
 
     /**
-     * Removes a user from the specified chat.
-     * <p>
-     * This method returns an int, 0, if no problems were encountered.
+     * Removes a user from the activeChat
      *
-     * @param chatId id of chat user should be added to
      * @param user the user that should be removed
-     * @return int message
-     *
-     * @throws SQLException
      */
-    public int removeChatMember(int chatId, String user){
+    public int removeChatMember(String user){
+
+        serverHandler.broadcastMessage(
+                new RequestWrapper(RequestType.REMOVE_CHAT_MEMBER, user)
+        );
         return 0;
     }
 
-    /**
-     * Replaces the previous message with updated message.
-     * <p>
-     * msg is the previous message which will be replaced. updatedMsg is what will be saved in its place.
-     *
-     * @param msg old message
-     * @param updatedMsg updated message
-     * @return int message
-     *
-     * @throws SQLException
-     */
-    public int editMsg(Message msg, Message updatedMsg){
-        return 0;
-    }
+//    /**
+//     * Replaces the previous message with updated message.
+//     *
+//     * msg is the previous message which will be replaced. updatedMsg is what will be saved in its place.
+//     *
+//     * @param msg old message
+//     * @param updatedMsg updated message
+//     * @return int message
+//     *
+//     * @throws SQLException
+//     */
+//    public int editMsg(Message msg, Message updatedMsg){
+//        return 0;
+//    }
 
     /**
      * Removes a message from the history of specified chat.
      *
      * @param msgId the message to be removed
-     * @return int message
-     *
-     * @throws SQLException
      */
-    public int deleteMsg(int msgId){
-        return 0;
-    }
-    public int deleteMsg(Message msg){
-        return 0;
+    public void deleteMsg(Message msg){
+        serverHandler.broadcastMessage(
+                new RequestWrapper(RequestType.DELETE_MESSAGE, msg)
+        );
     }
 
+    // PROB WRONG
     /**
      * Gets chat history from specified chat, with the newest message last in the array.
      * ChatId specifies the id of the chat for which to get the history.
      *
      * @param chatId chat to get history for
      * @return Arraylist<Message> chatHistory
-     *
-     * @throws SQLException
      */
     public ArrayList<Message> getChatMessages(int chatId){
+        serverHandler.broadcastMessage(
+                new RequestWrapper(RequestType.GET_MESSAGES, chatId)
+        );
         return new ArrayList<>();
     }
 
+
+    // PROB WRONG
     /**
      * Gets members of specified chat.
      * ChatId specifies the id of the chat for which to get the members.
@@ -181,9 +169,13 @@ public class ServerConnection {
      * @throws SQLException
      */
     public ArrayList<String> getChatMembers(int chatId){
+        serverHandler.broadcastMessage(
+                new RequestWrapper(RequestType.GET_CHAT_MEMBERS, chatId)
+        );
         return new ArrayList<>();
     }
 
+    //PROB WRONG
     /**
      * Gets the id's of all chats the specified user is a member in.
      *
@@ -193,13 +185,16 @@ public class ServerConnection {
      * @throws SQLException
      */
     public ArrayList<Integer> getAvailableChats(String user){
+        serverHandler.broadcastMessage(
+                new RequestWrapper(RequestType.GET_AVAILABLE_CHATS, user)
+        );
         return new ArrayList<>();
     }
 
     //boolean checkLogIn(String username, String password){}
     //boolean checkUserExists(String username){}
 
-//-----Getters och setters--------
+
 
     public ServerHandler getServerHandler() {
         return serverHandler;
