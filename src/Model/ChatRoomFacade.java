@@ -38,9 +38,7 @@ public final class ChatRoomFacade extends Observable {
      */
     public void changeActiveRoom(int chatID) {
         model.changeActiveRoom(chatID);
-
         setChanged(); // Apparently it should be used before using notifyObservers
-
         notifyObservers(); // ingen parameter
 
     }
@@ -126,6 +124,12 @@ public void removeMessage(Message message) {
 
     public String getActiveUser() {
         return model.getActiveUser();
+    }
+
+    public void createChatRoom() {
+
+    }
+    public void removeChatRoom(int chatID) {
     }
 }
 

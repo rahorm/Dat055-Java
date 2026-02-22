@@ -54,7 +54,7 @@ Until the 17th we will make the sequence data base
 //----------- 260220 -----------//
     [X Andy] delete the class user
     [Mona] update UML diagram to include more server classes
-    [X Choi] DB - table för bilder // ups sry choi gjorde denna i farten
+    [X Choi] DB - table för bilder // ups sry choi gjorde denna i farten //Andy
     [] ? - user ska kunna ladda upp bilder
     [X] DBConn - queries i alla funktioner
     [] ClientActionHandler - övriga fall
@@ -88,6 +88,9 @@ Until the 17th we will make the sequence data base
      - tagit bort EDIT msg som ett option ty det kan implementeras senare
      - user in GET_AVLIBLE_CHATS in handle in ClientActionHandler
     ************************************************/
+
+    [] implement method addChatRoom in ChatRoomFacade
+    [] implement method removeChatRoom in ChatRoomFacade
 
 // ---------- REFERENCES ---------- //
 
