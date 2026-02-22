@@ -313,7 +313,7 @@ public final class DatabaseConnection {
 
     /**
      *
-     * @param username
+     * @param username for the active user so we can find chats that are avalibe for that particular user
      */
     public ArrayList<Integer> getAvailableChats(String username){
         ArrayList<Integer> availableChats = new ArrayList<>();
