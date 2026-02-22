@@ -87,6 +87,7 @@ Until the 17th we will make the sequence data base
      - password in Add user in handle in ClientActionHandler
      - tagit bort EDIT msg som ett option ty det kan implementeras senare
      - user in GET_AVLIBLE_CHATS in handle in ClientActionHandler
+     - chat id in addchatroom in client action handler
     ************************************************/
 
     [] implement method addChatRoom in ChatRoomFacade
