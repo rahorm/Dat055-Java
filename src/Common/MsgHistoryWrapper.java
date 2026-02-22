@@ -20,6 +20,7 @@ public class MsgHistoryWrapper implements Serializable {
         this.msgHistory = msgHistory;
     }
 
+    @Override
     public String toString(){
         return "msgHistoryWrapper contains array: "+msgHistory.toString();
     }

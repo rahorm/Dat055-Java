@@ -1,5 +1,7 @@
 package Client;
 
+import Common.RequestType;
+import Common.RequestWrapper;
 import Other.Message;
 
 import java.net.Socket;
@@ -26,7 +28,7 @@ public class ServerConnection {
      * @throws SQLException
      */
     public void sendMsg(Message msg){
-        serverHandler.broadcastMessage(new SendMsgWrapper(msg));
+        serverHandler.broadcastMessage(new RequestWrapper(RequestType.SEND_MESSAGE, msg));
     }
 
     /**
