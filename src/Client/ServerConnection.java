@@ -7,7 +7,7 @@ import Other.Message;
 import java.net.Socket;
 import java.sql.*;
 import java.util.*;
-import Common.SendMsgWrapper;
+// import Common.SendMsgWrapper;
 
 public class ServerConnection {
 
@@ -204,7 +204,6 @@ public class ServerConnection {
     public ServerHandler getServerHandler() {
         return serverHandler;
     }
-
     public void setServerHandler(ServerHandler serverHandler) {
         this.serverHandler = serverHandler;
     }

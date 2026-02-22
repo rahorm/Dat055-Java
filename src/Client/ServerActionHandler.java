@@ -30,7 +30,7 @@ public class ServerActionHandler {
                 // modelFacade.setHistory(history);
                 break;
 
-            case SEND_MESSAGE:
+            case ADD_MESSAGE:
                 Message msg = (Message) request.getData();
                 System.out.println("Message received: " + msg);
                 // modelFacade.sendMessage(msg);
