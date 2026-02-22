@@ -28,7 +28,7 @@ public class ServerConnection {
      * @throws SQLException
      */
     public void sendMsg(Message msg){
-        serverHandler.broadcastMessage(new RequestWrapper(RequestType.SEND_MESSAGE, msg));
+        serverHandler.broadcastMessage(new RequestWrapper(RequestType.ADD_MESSAGE, msg));
     }
 
     /**

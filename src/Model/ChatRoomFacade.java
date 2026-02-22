@@ -123,6 +123,10 @@ public void removeMessage(Message message) {
     ArrayList<Message> messages = model.retriveMSGList();
     messages.remove(message);
 }
+
+    public String getActiveUser() {
+        return model.getActiveUser();
+    }
 }
 
 

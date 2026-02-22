@@ -1,11 +1,8 @@
 package Client;
 
-import Common.MsgHistoryWrapper;
 import Common.RequestWrapper;
-import Common.SendMsgWrapper;
 import Other.Message;
-import Server.DatabaseConnection;
-import java.sql.SQLException;
+
 import java.util.ArrayList;
 
 public class ServerActionHandler {
@@ -26,7 +23,7 @@ public class ServerActionHandler {
 
         switch (request.getType()) {
 
-            case GET_MESSAGE_HISTORY:
+            case GET_MESSAGES:
                 ArrayList<Message> history;
                 history = (ArrayList<Message>) request.getData();
                 System.out.println("Message history received: " + history);

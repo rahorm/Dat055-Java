@@ -1,9 +1,8 @@
 package Server;
 
-import Common.MsgHistoryWrapper;
 import Common.RequestType;
 import Common.RequestWrapper;
-import Common.SendMsgWrapper;
+import Model.ChatRoomFacade;
 import Other.Message;
 
 import java.sql.SQLException;
@@ -32,42 +31,44 @@ public class ClientActionHandler {
 
         switch (request.getType()) {
 
-            case SEND_MESSAGE -> {
+            case ADD_MESSAGE -> {
                 Message message = (Message) request.getData();
                 DBcon.sendMsg(message);
 
                 objToReturn = new RequestWrapper(
-                        RequestType.GET_CHAT_MESSAGES,
+                        RequestType.GET_MESSAGES,
                         DBcon.getChatMessages(message.getChatID())
                 );
             }
 
-            case CREATE_CHATROOM -> {
+            case ADD_CHATROOM -> {
                 String chatRoomName = (String) request.getData();
                 DBcon.createChatRoom(666, chatRoomName);
+                ChatRoomFacade model = ChatRoomFacade.getInstance();
 
                 objToReturn = new RequestWrapper(
                         RequestType.GET_AVAILABLE_CHATS,
-                        DBcon.getAvailableChats()
+                        DBcon.getAvailableChats(model.getActiveUser())
                 );
             }
 
             case DELETE_CHATROOM -> {
                 int chatRoomName = (Integer) request.getData();
                 DBcon.deleteChatRoom(chatRoomName);
+                ChatRoomFacade model = ChatRoomFacade.getInstance();
 
                 objToReturn = new RequestWrapper(
                         RequestType.GET_AVAILABLE_CHATS,
-                        DBcon.getAvailableChats()
+                        DBcon.getAvailableChats(model.getActiveUser())
                 );
             }
 
-            case CHECK_USER_EXISTS -> {
+            case GET_USERS -> {
                 String username = (String) request.getData();
                 boolean exists = DBcon.checkUserExists(username);
 
                 objToReturn = new RequestWrapper(
-                        RequestType.CHECK_USER_EXISTS,
+                        RequestType.GET_USERS,
                         exists
                 );
             }
@@ -82,12 +83,12 @@ public class ClientActionHandler {
                 );
             }
 
-            case CREATE_USER -> {
+            case ADD_USER -> {
                 String username = (String) request.getData();
                 DBcon.createUser(username);
 
                 objToReturn = new RequestWrapper(
-                        RequestType.CREATE_USER,
+                        RequestType.ADD_USER,
                         true
                 );
             }
@@ -136,7 +137,7 @@ public class ClientActionHandler {
                 DBcon.editMsg(message);
 
                 objToReturn = new RequestWrapper(
-                        RequestType.GET_CHAT_MESSAGES,
+                        RequestType.GET_MESSAGES,
                         DBcon.getChatMessages(message.getChatID())
                 );
             }
@@ -146,16 +147,16 @@ public class ClientActionHandler {
                 DBcon.deleteMsg(message);
 
                 objToReturn = new RequestWrapper(
-                        RequestType.GET_CHAT_MESSAGES,
+                        RequestType.GET_MESSAGES,
                         DBcon.getChatMessages(message.getChatID())
                 );
             }
 
-            case GET_CHAT_MESSAGES -> {
+            case GET_MESSAGES -> {
                 int chatID = (int) request.getData();
 
                 objToReturn = new RequestWrapper(
-                        RequestType.GET_CHAT_MESSAGES,
+                        RequestType.GET_MESSAGES,
                         DBcon.getChatMessages(chatID)
                 );
             }

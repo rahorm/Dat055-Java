@@ -350,4 +350,8 @@ public final class DatabaseConnection {
         Object obj = DBconn.checkLogIn("User1", "Pswd1");
         System.out.println("Output : " + obj);
     }
+
+    public boolean checkLogin(String username) {
+        return true;
+    }
 }
