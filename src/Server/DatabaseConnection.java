@@ -296,7 +296,7 @@ public final class DatabaseConnection {
         ArrayList<String> chatMembers = new ArrayList<>();
 
         try (PreparedStatement ps = conn.prepareStatement(
-                "SELECT member FROM chatmembers WHERE chat = ?;");) {
+            "SELECT member FROM chatmembers WHERE chat = ?;");) {
             ps.setInt(1, chatId);
             ResultSet rs = ps.executeQuery();
 

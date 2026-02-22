@@ -57,7 +57,7 @@ Until the 17th we will make the sequence data base
     [X Choi] DB - table för bilder // ups sry choi gjorde denna i farten //Andy
     [] ? - user ska kunna ladda upp bilder
     [X] DBConn - queries i alla funktioner
-    [] ClientActionHandler - övriga fall
+    [x Andy] ClientActionHandler - övriga fall
     [Mona] ServerActionHandler - övriga fall
     [] ModelFacade -> ServerActionHandler
     [X] Göra ModelFacade till singleton
@@ -65,7 +65,7 @@ Until the 17th we will make the sequence data base
     [Madde] Göra server singleton
     [X Andy ] Like ALLLLLA wrappers
     [Ada] Input från user (UI)
-    [Andy] Controller
+    [X Andy] Controller
     [?Mona?] Model / Fasad
     [] notify() metod observer etc?
 
@@ -92,6 +92,9 @@ Until the 17th we will make the sequence data base
 
     [] implement method addChatRoom in ChatRoomFacade
     [] implement method removeChatRoom in ChatRoomFacade
+    [] confused about how throws should work in server connection
+    [] CreateChatRoom in serverConnection does not deal with display name like intended right now. solution?
+    [] ^ similar thing with createUser
 
 // ---------- REFERENCES ---------- //
 
