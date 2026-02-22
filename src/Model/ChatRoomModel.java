@@ -1,10 +1,8 @@
 package Model;
 
 import Other.Message;
-import Other.User;
 
 import java.util.ArrayList;
-import java.util.Observable;
 
 /**
  * The class represents the local state of a chatroom in'

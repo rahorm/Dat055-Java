@@ -1,13 +1,10 @@
 package Model;
 
 import Client.ServerConnection;
-import Other.IdGenerator;
 import Other.Message;
-import Other.User;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Observable;
 

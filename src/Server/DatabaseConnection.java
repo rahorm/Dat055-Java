@@ -1,7 +1,6 @@
 package  Server;
 
 import Other.Message;
-import Other.User;
 
 import java.sql.*;
 import java.time.LocalDateTime;

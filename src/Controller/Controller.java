@@ -31,7 +31,7 @@ public class Controller {
     /**
      * Takes message and stores it in the program
      * @param msg string that represents a message that has been input from a user
-     * @param userID integer value that represents a user in the active chat that is the sender of the message
+     * @param username integer value that represents a user in the active chat that is the sender of the message
      * @throws IllegalArgumentException if userID is not an existing user
      * @throws NumberFormatException if msg isn't a string
      * */

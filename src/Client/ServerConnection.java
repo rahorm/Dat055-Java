@@ -1,12 +1,9 @@
 package Client;
 
-import Other.IdGenerator;
 import Other.Message;
-import Other.User;
-import java.io.*;
+
 import java.net.Socket;
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.*;
 import Common.SendMsgWrapper;
 
@@ -43,7 +40,7 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    public int createChatRoom(String chatName){
+    public int createChatRoom(java.lang.String chatName){
         return 0;
     }
 
@@ -74,7 +71,7 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    public String createUser(String userName){
+    public java.lang.String createUser(java.lang.String userName){
         return "name";
     }
 
@@ -95,7 +92,7 @@ public class ServerConnection {
         return 0;
     }
 
-    public int deleteUser(User user){
+    public int deleteUser(String user){
         return 0;
     }
 
@@ -110,7 +107,7 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    public int addChatMember(int chatId, User user){
+    public int addChatMember(int chatId, String user){
         return 0;
     }
 
@@ -125,7 +122,7 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    public int removeChatMember(int chatId, User user){
+    public int removeChatMember(int chatId, String user){
         return 0;
     }
 
@@ -181,7 +178,7 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    public ArrayList<User> getChatMembers(int chatId){
+    public ArrayList<String> getChatMembers(int chatId){
         return new ArrayList<>();
     }
 
@@ -193,7 +190,7 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    public ArrayList<Integer> getAvailableChats(User user){
+    public ArrayList<Integer> getAvailableChats(String user){
         return new ArrayList<>();
     }
 
