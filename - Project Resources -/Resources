@@ -54,12 +54,15 @@ Until the 17th we will make the sequence data base
 //----------- 260220 -----------//
     [X Andy] delete the class user
     [Mona] update UML diagram to include more server classes
-    [Choi] DB - table för bilder
+    [X Choi] DB - table för bilder
     [] ? - user ska kunna ladda upp bilder
+   /***********************************************
+    ^^ Göra sekvensdiagram för detta?!
+    ************************************************/
     [X Madde] DBConn - queries i alla funktioner
     [x Andy] ClientActionHandler - övriga fall
     [Mona] ServerActionHandler - övriga fall
-    [] ModelFacade -> ServerActionHandler
+    [X] ModelFacade -> ServerActionHandler
     [X] Göra ModelFacade till singleton
     [X Madde] Se till att ModelFasaden faktiskt används som singleton överallt
     [X Madde] Göra server singleton
@@ -68,7 +71,7 @@ Until the 17th we will make the sequence data base
     [Ada] Input från user (UI)
     [X Andy] Controller
     [?Mona?] Model / Fasad
-    [] notify() metod observer etc?
+    [--] notify() metod observer etc? (Fanns redan implementerat i java)
 
     [] Initialize model med chat nummer etc
     /***********************************************
@@ -80,7 +83,13 @@ Until the 17th we will make the sequence data base
     //Madde
     ************************************************/
 
-    [] hantera "AvailableChats"
+    [Choi] hantera "AvailableChats"
+   /***********************************************
+     ^^
+     - Sparas i Modelfasad?
+     - En lista över vilka chattar (id och namn) som finns tillgängliga för den inloggade användaren 
+    ************************************************/
+
     [] Hur loggar man in som användare? ska clienthandler ha en variable username (ja?)
 
     /***********************************************
