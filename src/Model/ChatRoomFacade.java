@@ -51,6 +51,9 @@ public final class ChatRoomFacade extends Observable {
     public void createChatRoom(String user) {
         IdGenerator idGen = IdGenerator.getInstance();
         int new_id = idGen.generateId();
+        //databasconnection -> createChat(chatId, chatName)
+        //dbcon -> addMember(chatId, activeUser)
+        //changeActiveRoom(chatId)
         model = new ChatRoomModel(new_id, user);
         // changeActiveRoom to be called either here or in the controller
 
