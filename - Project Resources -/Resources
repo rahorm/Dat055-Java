@@ -91,8 +91,8 @@ Until the 17th we will make the sequence data base
      - chat id in addchatroom in client action handler
     ************************************************/
 
-    [] implement method addChatRoom in ChatRoomFacade
-    [] implement method removeChatRoom in ChatRoomFacade
+    [Under construction - Choi] implement method addChatRoom in ChatRoomFacade - Need feedback !
+    [Under construction - Choi ] implement method removeChatRoom in ChatRoomFacade - Need feedback !
     [] confused about how throws should work in server connection
     [] CreateChatRoom in serverConnection does not deal with display name like intended right now. solution?
     [] ^ similar thing with createUser
