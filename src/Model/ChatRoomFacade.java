@@ -129,7 +129,7 @@ public final class ChatRoomFacade extends Observable {
 }
 
 
-    /// ----------------------------- Messages <-> Server -----------------------------
+    /// ----------------------------- Messages <-> UI!  -----------------------------
 
     /**
      * Adds a new message to this chat room.
