@@ -1,6 +1,7 @@
 package Model;
 
 import Client.ServerConnection;
+import Other.IdGenerator;
 import Other.Message;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ public final class ChatRoomFacade extends Observable {
     private ChatRoomModel model;
     private ServerConnection serverConnection;
 
-    public ChatRoomFacade(ChatRoomModel model) {
+    private ChatRoomFacade(ChatRoomModel model) {
         this.model = model;
         try {
             this.serverConnection = new ServerConnection(new Socket("localhost", 3356));
@@ -44,9 +45,23 @@ public final class ChatRoomFacade extends Observable {
     }
 
     public ArrayList<Message> getMSGList(){
-        // listan av meddelande
-        return model.retriveMSGList();
+        return model.retriveMSGList(); // how many elements to show?
     }
+
+    public void createChatRoom(String user) {
+        IdGenerator idGen = IdGenerator.getInstance();
+        int new_id = idGen.generateId();
+        model = new ChatRoomModel(new_id, user);
+        // changeActiveRoom to be called either here or in the controller
+
+    }
+    public void removeChatRoom(int chatID) {
+
+        model.removeChatRoom(chatID);
+        setChanged();
+        notifyObservers();
+    }
+
 
 
     /**
@@ -107,6 +122,7 @@ public void addMessage(Message message) {
     messages.add(message);
 }
 
+
 /**
  * Removes a message from this chat room.
  * If the message is not found, nothing happens.
@@ -126,11 +142,7 @@ public void removeMessage(Message message) {
         return model.getActiveUser();
     }
 
-    public void createChatRoom() {
 
-    }
-    public void removeChatRoom(int chatID) {
-    }
 }
 
 

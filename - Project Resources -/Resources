@@ -56,13 +56,14 @@ Until the 17th we will make the sequence data base
     [Mona] update UML diagram to include more server classes
     [Choi] DB - table för bilder
     [] ? - user ska kunna ladda upp bilder
-    [X] DBConn - queries i alla funktioner
+    [X Madde] DBConn - queries i alla funktioner
     [x Andy] ClientActionHandler - övriga fall
     [Mona] ServerActionHandler - övriga fall
     [] ModelFacade -> ServerActionHandler
     [X] Göra ModelFacade till singleton
-    [] Se till att ModelFasaden faktiskt används som singleton överallt
-    [Madde] Göra server singleton
+    [X Madde] Se till att ModelFasaden faktiskt används som singleton överallt
+    [X Madde] Göra server singleton
+    [Madde] Kolla om vissa DB metoder borde kasta exceptions
     [X Andy ] Like ALLLLLA wrappers
     [Ada] Input från user (UI)
     [X Andy] Controller
@@ -90,11 +91,12 @@ Until the 17th we will make the sequence data base
      - chat id in addchatroom in client action handler
     ************************************************/
 
-    [] implement method addChatRoom in ChatRoomFacade
-    [] implement method removeChatRoom in ChatRoomFacade
+    [Under construction - Choi] implement method addChatRoom in ChatRoomFacade - Need feedback !
+    [Under construction - Choi ] implement method removeChatRoom in ChatRoomFacade - Need feedback !
     [] confused about how throws should work in server connection
     [] CreateChatRoom in serverConnection does not deal with display name like intended right now. solution?
     [] ^ similar thing with createUser
+    [Madde] Lägga till table för bilder, SQL
 
 // ---------- REFERENCES ---------- //
 

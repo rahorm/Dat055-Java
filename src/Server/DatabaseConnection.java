@@ -60,8 +60,10 @@ public final class DatabaseConnection {
     }
 
     /**
+     * !THIS CANNOT BE UNDONE!
+     * Deletes a chatroom from the database and all related chat- and member-records
      *
-     * @param chatId
+     * @param chatId which chat to delete
      */
     public void deleteChatRoom(int chatId){
         try(PreparedStatement ps = conn.prepareStatement(
@@ -95,12 +97,13 @@ public final class DatabaseConnection {
     }
 
     /**
-     *
-     * @param username
-     * @param password
-     * @return
+     * Checks if users login info is correct, meaning does
+     * the users saved password match the one that was entered?
+     * @param username what user to login
+     * @param password password the user has entered
+     * @return if the information is correct
      */
-    public boolean checkLogIn(String username, String password){
+    public boolean checkLogin(String username, String password){
         try (PreparedStatement ps = conn.prepareStatement(
                 "SELECT pswd FROM Users WHERE username = ?");){
             ps.setString(1, username);
@@ -161,8 +164,10 @@ public final class DatabaseConnection {
     }
 
     /**
-     *
-     * @param username
+     * !THIS CANNOT BE UNDONE!
+     * Deletes a user from the database, removes them from any chats they were in and
+     * deletes all messages sent by them.
+     * @param username the user to delete
      */
     public void deleteUser(String username){
         try(PreparedStatement ps = conn.prepareStatement(
@@ -175,9 +180,9 @@ public final class DatabaseConnection {
     }
 
     /**
-     *
-     * @param chatId
-     * @param username
+     * Adds a user to a chat
+     * @param chatId which chat the user should be added to
+     * @param username what user to add
      */
     public void addChatMember(int chatId, String username){
         try(PreparedStatement ps = conn.prepareStatement(
@@ -191,9 +196,10 @@ public final class DatabaseConnection {
     }
 
     /**
-     *
-     * @param chatId
-     * @param username
+     * !THIS CANNOT BE UNDONE!
+     * Removes a user from specified chat and all messages sent by the user
+     * @param chatId what chat to remove user from
+     * @param username which user to remove
      */
     public void removeChatMember(int chatId, String username){
         try(PreparedStatement ps = conn.prepareStatement(
@@ -207,9 +213,11 @@ public final class DatabaseConnection {
     }
 
     /**
-     *  Om ett meddelande editeras kommer det att behålla sitt gamla id och sin gamla timestam
-     * @param msg
-     * @param updateMsg
+     * Edits an already existing message.
+     * The message will have the same msgId and timestamp as before,
+     * but the content and image properties may be changed
+     * @param msg the original message
+     * @param updateMsg the new message
      */
     public void editMsg(Message msg, Message updateMsg){
 
@@ -226,8 +234,9 @@ public final class DatabaseConnection {
     }
 
     /**
-     *
-     * @param msgId
+     * !THIS CANNOT BE UNDONE!
+     * Deletes a message from a chat
+     * @param msgId the message id of the message to be deleted
      */
     public void deleteMsg(int msgId){
         try(PreparedStatement ps = conn.prepareStatement(
@@ -241,8 +250,9 @@ public final class DatabaseConnection {
 
 
     /**
-     *
-     * @param msg
+     * !THIS CANNOT BE UNDONE!
+     * Deletes a message from a chat
+     * @param msg the message to be deleted
      */
     public void deleteMsg(Message msg){
         try(PreparedStatement ps = conn.prepareStatement(
@@ -288,15 +298,15 @@ public final class DatabaseConnection {
      }
 
     /**
-     *
-     * @param chatId
+     * Gets all members in a chat
+     * @param chatId what chat to get members for
      * @return ArrayList<String> list of members
      */
     public ArrayList<String> getChatMembers(int chatId) {
         ArrayList<String> chatMembers = new ArrayList<>();
 
         try (PreparedStatement ps = conn.prepareStatement(
-            "SELECT member FROM chatmembers WHERE chat = ?;");) {
+                "SELECT member FROM chatmembers WHERE chat = ?;");) {
             ps.setInt(1, chatId);
             ResultSet rs = ps.executeQuery();
 
@@ -312,8 +322,9 @@ public final class DatabaseConnection {
     }
 
     /**
-     *
-     * @param username for the active user so we can find chats that are avalibe for that particular user
+     * Gets all chats available to the specified user
+     * @param username what user to get chats for
+     * @return an ArrayList of chatIds
      */
     public ArrayList<Integer> getAvailableChats(String username){
         ArrayList<Integer> availableChats = new ArrayList<>();
@@ -349,9 +360,5 @@ public final class DatabaseConnection {
         DatabaseConnection DBconn = DatabaseConnection.getInstance();
         Object obj = DBconn.checkLogIn("User1", "Pswd1");
         System.out.println("Output : " + obj);
-    }
-
-    public boolean checkLogin(String username) {
-        return true;
     }
 }
