@@ -3,6 +3,7 @@ package Model;
 import Client.ServerConnection;
 import Other.IdGenerator;
 import Other.Message;
+import Server.DatabaseConnection;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -30,6 +31,8 @@ public final class ChatRoomFacade extends Observable {
         return instance;
     }
 
+
+    /// ----------------------------- ChatRoom <-> UI -----------------------------
     /**
      * User wants to change an active room, the chatroom that user wants to
      * open will be identified by chatID, this chatID should be sent as a parameter
@@ -44,29 +47,38 @@ public final class ChatRoomFacade extends Observable {
 
     }
 
-    public ArrayList<Message> getMSGList(){
-        return model.retriveMSGList(); // how many elements to show?
-    }
-
-    public void createChatRoom(String user) {
+    /// ----------------------------- ChatRoom <-> Server -----------------------------
+    public void createChatRoom() {
         IdGenerator idGen = IdGenerator.getInstance();
         int new_id = idGen.generateId();
-        //databasconnection -> createChat(chatId, chatName)
-        //dbcon -> addMember(chatId, activeUser)
-        //changeActiveRoom(chatId)
-        model = new ChatRoomModel(new_id, user);
+
+        serverConnection.createChatRoom(new_id);
+        serverConnection.addChatMember(model.getActiveUser());  // adding myself or inviting a new member?
+
         // changeActiveRoom to be called either here or in the controller
+        changeActiveRoom(new_id);
+
+        // dbconn creatChat has two arguments: chatiD, chatName
+        // serverConn has one argument: chatID
 
     }
+
+    /// ----------------------------- ChatRoom <-> Server -----------------------------
     public void removeChatRoom(int chatID) {
 
+        serverConnection.deleteChatRoom(chatID);
         model.removeChatRoom(chatID);
         setChanged();
         notifyObservers();
     }
 
+    /// ----------------------------- Message <-> UI -----------------------------
+    public ArrayList<Message> getMSGList(){
+        return model.retriveMSGList(); // how many elements to show?
+    }
 
 
+    /// ----------------------------- Message <-> Server -----------------------------
     /**
      * Uer writes a new message. Then this message information will be passed to the server
      * @param msg message that user write
@@ -78,14 +90,15 @@ public final class ChatRoomFacade extends Observable {
 
     }
 
-/**
- * Adds a user to the member list of this chat room.
- * If the user is already a member, nothing
- *
- * @param user user to add; must not be  null
- * @throws IllegalArgumentException if user is null
- */
-public void addMember(String user) {
+    /// ----------------------------- Member <-> Server -----------------------------
+    /**
+    * Adds a user to the member list of this chat room.
+    * If the user is already a member, nothing
+    *
+    * @param user user to add; must not be  null
+    * @throws IllegalArgumentException if user is null
+    */
+    public void addMember(String user) {
     if (user == null) {
         throw new IllegalArgumentException("user must not be null");
     }
@@ -94,35 +107,44 @@ public void addMember(String user) {
     if (!members.contains(user)) {
         model.addUser(user);
     }
+
+    serverConnection.addChatMember(user);
 }
 
-
-/**
- * Removes a user from the member list of this chat room.
- * If the user is not a member, nothing happens.
- *
- * @param user user to remove; must not be  null
- * @throws IllegalArgumentException if  user is null
- */
-public void removeMember(String user) {
+    /// ----------------------------- Member <-> Server -----------------------------
+    /**
+     * Removes a user from the member list of this chat room.
+     * If the user is not a member, nothing happens.
+     *
+     * @param user user to remove; must not be  null
+     * @throws IllegalArgumentException if  user is null
+     */
+    public void removeMember(String user) {
     if (user == null) {
         throw new IllegalArgumentException("user must not be null");
     }
     model.removeUser(user);
+
+    serverConnection.removeChatMember(user);
 }
 
-/**
- * Adds a new message to this chat room.
- *
- * @param message message to add; must not be null
- * @throws NullPointerException if  message is  null
- */
-public void addMessage(Message message) {
+
+    /// ----------------------------- Messages <-> Server -----------------------------
+
+    /**
+     * Adds a new message to this chat room.
+     *
+     * @param message message to add; must not be null
+     * @throws NullPointerException if  message is  null
+     */
+    public void addMessage(Message message) {
     if (message == null) {
         throw new IllegalArgumentException("message must not be null");
     }
     ArrayList<Message> messages = model.retriveMSGList();
     messages.add(message);
+
+    // model.addMessage(message); <- can't we just use this method call instead of the above two lines?
 }
 
 
@@ -141,6 +163,8 @@ public void removeMessage(Message message) {
     messages.remove(message);
 }
 
+
+// Duplicated method, existed both in facade and model ???
     public String getActiveUser() {
         return model.getActiveUser();
     }
