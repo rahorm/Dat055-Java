@@ -55,11 +55,10 @@ CREATE TABLE ChatMessages(
          ON UPDATE CASCADE
 );
 
-------- Inte färdig ---------------
---CREATE TABLE Images(
-    -- imgId ? eller räcker det med msgId
-  --msg CHAR(14),
-  --image BLOB NOT NULL,
-  --PRIMARY KEY (msg/img ID),
-  --FOREIGN KEY (msg) REFERENCES ChatMessages.msgId
---);
+CREATE TABLE Images(
+    imgId INT,
+    message INT NOT NULL,
+    image BYTEA NOT NULL,
+    PRIMARY KEY (imgId),
+    FOREIGN KEY (message) REFERENCES ChatMessages(msgId)
+);
