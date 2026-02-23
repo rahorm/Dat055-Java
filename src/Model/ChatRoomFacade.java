@@ -13,7 +13,7 @@ public final class ChatRoomFacade extends Observable {
     private ChatRoomModel model;
     private ServerConnection serverConnection;
 
-    public ChatRoomFacade(ChatRoomModel model) {
+    private ChatRoomFacade(ChatRoomModel model) {
         this.model = model;
         try {
             this.serverConnection = new ServerConnection(new Socket("localhost", 3356));
