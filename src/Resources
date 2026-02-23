@@ -54,7 +54,7 @@ Until the 17th we will make the sequence data base
 //----------- 260220 -----------//
     [X Andy] delete the class user
     [Mona] update UML diagram to include more server classes
-    [X Choi] DB - table för bilder // ups sry choi gjorde denna i farten //Andy
+    [Choi] DB - table för bilder
     [] ? - user ska kunna ladda upp bilder
     [X] DBConn - queries i alla funktioner
     [x Andy] ClientActionHandler - övriga fall
