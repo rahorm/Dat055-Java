@@ -56,13 +56,14 @@ Until the 17th we will make the sequence data base
     [Mona] update UML diagram to include more server classes
     [X Choi] DB - table för bilder // ups sry choi gjorde denna i farten //Andy
     [] ? - user ska kunna ladda upp bilder
-    [X] DBConn - queries i alla funktioner
+    [X Madde] DBConn - queries i alla funktioner
     [x Andy] ClientActionHandler - övriga fall
     [Mona] ServerActionHandler - övriga fall
     [] ModelFacade -> ServerActionHandler
     [X] Göra ModelFacade till singleton
-    [] Se till att ModelFasaden faktiskt används som singleton överallt
-    [Madde] Göra server singleton
+    [Madde] Se till att ModelFasaden faktiskt används som singleton överallt
+    [X Madde] Göra server singleton
+    [] Kolla om vissa DB metoder borde kasta exceptions
     [X Andy ] Like ALLLLLA wrappers
     [Ada] Input från user (UI)
     [X Andy] Controller
