@@ -1,13 +1,10 @@
 package Model;
 
 import Client.ServerConnection;
-import Other.IdGenerator;
 import Other.Message;
-import Other.User;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -41,9 +38,7 @@ public final class ChatRoomFacade extends Observable {
      */
     public void changeActiveRoom(int chatID) {
         model.changeActiveRoom(chatID);
-
         setChanged(); // Apparently it should be used before using notifyObservers
-
         notifyObservers(); // ingen parameter
 
     }
@@ -126,6 +121,16 @@ public void removeMessage(Message message) {
     ArrayList<Message> messages = model.retriveMSGList();
     messages.remove(message);
 }
+
+    public String getActiveUser() {
+        return model.getActiveUser();
+    }
+
+    public void createChatRoom() {
+
+    }
+    public void removeChatRoom(int chatID) {
+    }
 }
 
 
