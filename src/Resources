@@ -52,21 +52,20 @@ Until the 17th we will make the sequence data base
     [X] in serverconnection -> handler to use array list wrapper
 
 //----------- 260220 -----------//
-    [Andy] delete the class user
+    [X Andy] delete the class user
     [Mona] update UML diagram to include more server classes
-    [Choi] Message - add hasImg var, getter and setter
-    [Choi] DB - table för bilder
+    [X Choi] DB - table för bilder // ups sry choi gjorde denna i farten //Andy
     [] ? - user ska kunna ladda upp bilder
     [X] DBConn - queries i alla funktioner
-    [] ClientActionHandler - övriga fall
+    [x Andy] ClientActionHandler - övriga fall
     [Mona] ServerActionHandler - övriga fall
     [] ModelFacade -> ServerActionHandler
     [X] Göra ModelFacade till singleton
     [] Se till att ModelFasaden faktiskt används som singleton överallt
     [Madde] Göra server singleton
-    [Andy] Like ALLLLLA wrappers
+    [X Andy ] Like ALLLLLA wrappers
     [Ada] Input från user (UI)
-    [Andy] Controller
+    [X Andy] Controller
     [?Mona?] Model / Fasad
     [] notify() metod observer etc?
 
@@ -82,3 +81,23 @@ Until the 17th we will make the sequence data base
 
     [] hantera "AvailableChats"
     [] Hur loggar man in som användare? ska clienthandler ha en variable username (ja?)
+
+    /***********************************************
+     Andy: Things I've hardcoded for now:
+     - password in Add user in handle in ClientActionHandler
+     - tagit bort EDIT msg som ett option ty det kan implementeras senare
+     - user in GET_AVLIBLE_CHATS in handle in ClientActionHandler
+     - chat id in addchatroom in client action handler
+    ************************************************/
+
+    [] implement method addChatRoom in ChatRoomFacade
+    [] implement method removeChatRoom in ChatRoomFacade
+    [] confused about how throws should work in server connection
+    [] CreateChatRoom in serverConnection does not deal with display name like intended right now. solution?
+    [] ^ similar thing with createUser
+
+// ---------- REFERENCES ---------- //
+
+ANDY:
+- Hashmap logic in message - chatGPT
+- RequestType and Request Wrapper - chatGPT
