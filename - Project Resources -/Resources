@@ -112,6 +112,8 @@ Until the 17th we will make the sequence data base
      - Behöver lägga till en kolumn i ChatMessages (DB table) som kan referera vilken bild
        som hör till ett meddelande.
        Kan den vara null? Ksk ett check constraint som kollar korrelationen mellan hasImg och imgId
+
+     - Actually göra id random för att slippa göra setup varje gågn man startar appen? 
     ************************************************/
 
 // ---------- REFERENCES ---------- //
