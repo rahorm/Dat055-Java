@@ -54,7 +54,7 @@ public final class DatabaseConnection {
             ps.setString(2,chatName);
             ps.executeUpdate();
         }  catch (SQLException e) {
-            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+            System.out.println("{\"error\":\""+getError(e)+"\"}");
         }
 
     }
@@ -71,7 +71,7 @@ public final class DatabaseConnection {
             ps.setInt(1, chatId);
             ps.executeUpdate();
         }  catch (SQLException e) {
-            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+            System.out.println("{\"error\":\""+getError(e)+"\"}");
         }
     }
 
@@ -136,7 +136,7 @@ public final class DatabaseConnection {
             ps.setString(2,password);
             ps.executeUpdate();
         }  catch (SQLException e) {
-            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+            System.out.println("{\"error\":\""+getError(e)+"\"}");
         }
         return username;
     }
@@ -159,7 +159,7 @@ public final class DatabaseConnection {
             ps.setBoolean(6, false); //needs fixing
             ps.executeUpdate();
         }  catch (SQLException e) {
-            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+            System.out.println("{\"error\":\""+getError(e)+"\"}");
         }
     }
 
@@ -175,7 +175,7 @@ public final class DatabaseConnection {
             ps.setString(1, username);
             ps.executeUpdate();
         }  catch (SQLException e) {
-            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+            System.out.println("{\"error\":\""+getError(e)+"\"}");
         }
     }
 
@@ -186,12 +186,12 @@ public final class DatabaseConnection {
      */
     public void addChatMember(int chatId, String username){
         try(PreparedStatement ps = conn.prepareStatement(
-                "INSERT INTO ChatMembers VALUES (?, ?);");){
+                "INSERT INTO ChatMembers VALUES (?, ?)");){
             ps.setInt(1, chatId); //needs fixing
             ps.setString(2, username);
             ps.executeUpdate();
         }  catch (SQLException e) {
-            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+            System.out.println("{\"error\":\""+getError(e)+"\"}");
         }
     }
 
@@ -208,7 +208,7 @@ public final class DatabaseConnection {
             ps.setString(2, username);
             ps.executeUpdate();
         }  catch (SQLException e) {
-            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+            System.out.println("{\"error\":\""+getError(e)+"\"}");
         }
     }
 
@@ -228,7 +228,7 @@ public final class DatabaseConnection {
             ps.setInt(3, msg.getMessageID());
             ps.executeUpdate();
         }  catch (SQLException e) {
-            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+            System.out.println("{\"error\":\""+getError(e)+"\"}");
         }
 
     }
@@ -244,7 +244,7 @@ public final class DatabaseConnection {
             ps.setInt(1, msgId);
             ps.executeUpdate();
         }  catch (SQLException e) {
-            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+            System.out.println("{\"error\":\""+getError(e)+"\"}");
         }
     }
 
@@ -260,7 +260,7 @@ public final class DatabaseConnection {
             ps.setInt(1, msg.getMessageID());
             ps.executeUpdate();
         }  catch (SQLException e) {
-            System.out.println("{\"success\":false, \"error\":\""+getError(e)+"\"}");
+            System.out.println("{\"error\":\""+getError(e)+"\"}");
         }
     }
 
@@ -273,7 +273,7 @@ public final class DatabaseConnection {
          ArrayList<Message> msgHistory = new ArrayList<Message>();
 
          try (PreparedStatement ps = conn.prepareStatement(
-                 "SELECT * FROM chatmessages WHERE chat = ? ORDER BY time ASC;");){
+                 "SELECT * FROM chatmessages WHERE chat = ? ORDER BY time ASC");){
              ps.setInt(1, chatId);
              ResultSet rs = ps.executeQuery();
 
@@ -306,7 +306,7 @@ public final class DatabaseConnection {
         ArrayList<String> chatMembers = new ArrayList<>();
 
         try (PreparedStatement ps = conn.prepareStatement(
-                "SELECT member FROM chatmembers WHERE chat = ?;");) {
+                "SELECT member FROM chatmembers WHERE chat = ?");) {
             ps.setInt(1, chatId);
             ResultSet rs = ps.executeQuery();
 
@@ -330,7 +330,7 @@ public final class DatabaseConnection {
         ArrayList<Integer> availableChats = new ArrayList<>();
 
         try (PreparedStatement ps = conn.prepareStatement(
-                "SELECT chat FROM chatmembers WHERE member = ?;");) {
+                "SELECT chat FROM chatmembers WHERE member = ?");) {
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
 
@@ -356,9 +356,9 @@ public final class DatabaseConnection {
        return message;
     }
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    /*public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DatabaseConnection DBconn = DatabaseConnection.getInstance();
-        Object obj = DBconn.checkLogIn("User1", "Pswd1");
+        Object obj = DBconn.checkLogin("User1", "Pswd1");
         System.out.println("Output : " + obj);
-    }
+    }*/
 }

@@ -61,10 +61,10 @@ Until the 17th we will make the sequence data base
     [Mona] ServerActionHandler - övriga fall
     [] ModelFacade -> ServerActionHandler
     [X] Göra ModelFacade till singleton
-    [Madde] Se till att ModelFasaden faktiskt används som singleton överallt
+    [X Madde] Se till att ModelFasaden faktiskt används som singleton överallt
     [X Madde] Göra server singleton
     [] Kolla om vissa DB metoder borde kasta exceptions
-    [X Andy ] Like ALLLLLA wrappers
+    [X Andy] Like ALLLLLA wrappers
     [Ada] Input från user (UI)
     [X Andy] Controller
     [?Mona?] Model / Fasad
