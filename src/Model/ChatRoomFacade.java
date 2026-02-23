@@ -49,7 +49,8 @@ public final class ChatRoomFacade extends Observable {
     }
 
     public void createChatRoom(String user) {
-        int new_id = IdGenerator.generateId();
+        IdGenerator idGen = IdGenerator.getInstance();
+        int new_id = idGen.generateId();
         model = new ChatRoomModel(new_id, user);
         // changeActiveRoom to be called either here or in the controller
 

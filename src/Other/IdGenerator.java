@@ -26,7 +26,7 @@ public final class IdGenerator {
      *
      * @return int generated id
      */
-    int generateId(){
+    public int generateId(){
         int id = nextId;
         nextId++;
         return id;
