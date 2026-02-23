@@ -119,3 +119,6 @@ Until the 17th we will make the sequence data base
 ANDY:
 - Hashmap logic in message - chatGPT
 - RequestType and Request Wrapper - chatGPT
+
+MADDE:
+- BYTEA docs, https://www.postgresql.org/docs/current/datatype-binary.html
