@@ -15,7 +15,7 @@ Until the 17th we will make the sequence data base
 # REMEMBER
     * use the Message class in this iteration of this program even tho this iteration is very simple
     * write in discord if you are unsure how things should be implemented
-
+:
 # DIVISION OF LABOUR
     * Madde : Handler
     X Madde : SQL
@@ -63,7 +63,7 @@ Until the 17th we will make the sequence data base
     [X] Göra ModelFacade till singleton
     [X Madde] Se till att ModelFasaden faktiskt används som singleton överallt
     [X Madde] Göra server singleton
-    [Madde] Kolla om vissa DB metoder borde kasta exceptions
+    [X Madde] Kolla om vissa DB metoder borde kasta exceptions
     [X Andy ] Like ALLLLLA wrappers
     [Ada] Input från user (UI)
     [X Andy] Controller
