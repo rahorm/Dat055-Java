@@ -102,6 +102,17 @@ Until the 17th we will make the sequence data base
     [] ^ similar thing with createUser
     [Madde] Lägga till table för bilder, SQL
 
+    /***********************************************
+     Madde: DB notes
+     - Om ett message har en bild måste det meddelande även ha en referens till bildens id
+     - Förslag: gör en subklass av message (ex. PictureMessage)
+        Message - samma som innan fast utan hasImg
+        PictureMessage - Message + int imgId + byte[] imgFile + lämpliga metoder
+     - Behöver lägga till en kolumn i ChatMessages (DB table) som kan referera vilken bild
+       som hör till ett meddelande.
+       Kan den vara null? Ksk ett check constraint som kollar korrelationen mellan hasImg och imgId
+    ************************************************/
+
 // ---------- REFERENCES ---------- //
 
 ANDY:
