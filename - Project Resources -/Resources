@@ -89,6 +89,10 @@ Until the 17th we will make the sequence data base
      - tagit bort EDIT msg som ett option ty det kan implementeras senare
      - user in GET_AVLIBLE_CHATS in handle in ClientActionHandler
      - chat id in addchatroom in client action handler
+
+     Madde: Other hardcoded things:
+     - hasImg is still hardcoded to false from previous
+       tests in sendMessage, DBconnection
     ************************************************/
 
     [Under construction - Choi] implement method addChatRoom in ChatRoomFacade - Need feedback !
