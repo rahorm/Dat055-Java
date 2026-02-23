@@ -103,7 +103,7 @@ public final class DatabaseConnection {
      * @param password password the user has entered
      * @return if the information is correct
      */
-    public boolean checkLogIn(String username, String password){
+    public boolean checkLogin(String username, String password){
         try (PreparedStatement ps = conn.prepareStatement(
                 "SELECT pswd FROM Users WHERE username = ?");){
             ps.setString(1, username);
