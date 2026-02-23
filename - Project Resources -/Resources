@@ -113,7 +113,17 @@ Until the 17th we will make the sequence data base
        som hör till ett meddelande.
        Kan den vara null? Ksk ett check constraint som kollar korrelationen mellan hasImg och imgId
 
-     - Actually göra id random för att slippa göra setup varje gågn man startar appen? 
+     - Actually göra id random för att slippa göra setup varje gågn man startar appen?
+     - Förslag:
+      public int generateId() {
+           Random r = new Random();
+           int randNum = r.nextInt(9999 - 999) + 999;
+   
+           LocalTime t = LocalTime.now();
+   
+           return (t.getMinute()*100000)+(t.getSecond()*1000)+randNum;
+       }
+
     ************************************************/
 
 // ---------- REFERENCES ---------- //
