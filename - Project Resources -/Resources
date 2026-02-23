@@ -63,7 +63,7 @@ Until the 17th we will make the sequence data base
     [X] Göra ModelFacade till singleton
     [X Madde] Se till att ModelFasaden faktiskt används som singleton överallt
     [X Madde] Göra server singleton
-    [] Kolla om vissa DB metoder borde kasta exceptions
+    [Madde] Kolla om vissa DB metoder borde kasta exceptions
     [X Andy ] Like ALLLLLA wrappers
     [Ada] Input från user (UI)
     [X Andy] Controller
@@ -96,6 +96,7 @@ Until the 17th we will make the sequence data base
     [] confused about how throws should work in server connection
     [] CreateChatRoom in serverConnection does not deal with display name like intended right now. solution?
     [] ^ similar thing with createUser
+    [Madde] Lägga till table för bilder, SQL
 
 // ---------- REFERENCES ---------- //
 
