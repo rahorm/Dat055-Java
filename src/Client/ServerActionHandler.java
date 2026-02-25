@@ -39,7 +39,7 @@ public class ServerActionHandler {
             case ADD_USER:
                 String user = (String) request.getData();
                 System.out.println("User received: " + user);
-                // modelFacade.addUser(user);
+               //  facade.addUser(user);
                 break;
 
             case ADD_CHATROOM:
@@ -52,6 +52,13 @@ public class ServerActionHandler {
                 String chatRoom = (String) request.getData();
                 System.out.println("Delete chatroom: " + chatRoom);
                 // modelFacade.deleteChatRoom(roomName);
+                break;
+
+            //Tillägg
+            case ADD_CHAT_MEMBER:
+                String userName = (String) request.getData();
+                System.out.println("Chat member received: " + userName);
+                //facade.addMember(userName);
                 break;
 
             default:

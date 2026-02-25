@@ -136,8 +136,8 @@ Until the 17th we will make the sequence data base
     Mona-
     [X]Ändra createChatRoom(int chat) → createChatRoom(String chatName) och skicka AddChatRoomWrapper(id, name) istället.
     [X] Ändrat för wrapperanvändning som den är uppbygd nu för alla funktioner i ServerConn
-    [X] Skapat skal för CreateUserWrapper
-    [X] Skapat skal för DeleteUserWrapper
+    [X] Skapat skelett för CreateUserWrapper (chat)
+    [X] Skapat skelett för DeleteUserWrapper (chat)
 
     UML-    [X] ServerActionHandler
             [X] ChatRoomFacade
@@ -158,7 +158,13 @@ Until the 17th we will make the sequence data base
          [] Kolla/göra klart implementering av övriga wrappers, rödmarkerade i våra filer
          [] Heads up från både mig och Choi, när nytt chatRoom görs bla används bara det nya chatId:t från Facade,
          skickas även namn till Server som det ser ut nu? Koll i Facade och ändring i ServerCon därefter.
-         [] CreateUser- behövs kanske i Facade också? Används i Serverconnection. Controller använder param user.
+
+     För createUser/AddUser testning:
+         [] AddUser- behövs kanske i Facade/ Model också? Används i Serverconnection och
+         ServerActionHandler(createUser) + wrapping. Controller använder param user. Nu finns bara AddMember för att lägga till
+         i Chatrum.
+         --> när AddUser skapad/löst i Model/fasad avkommentera rad 42 i ServerActionHandler och hela
+         CreateUserWrapper för testning. Om fix behövs i Serverconn, ändra accordingly efter det som görs.
 
     ************************************************/
 

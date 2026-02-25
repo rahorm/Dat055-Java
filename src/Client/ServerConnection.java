@@ -100,6 +100,8 @@ public class ServerConnection {
      *
      * @param user String id of user
      */
+
+    //Int för Id eller string?
     public void createUser(int user){
         serverHandler.broadcastMessage(
                 new RequestWrapper(RequestType.ADD_USER, CreateUserWrapper(user)));
