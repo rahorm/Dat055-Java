@@ -59,7 +59,7 @@ Until the 17th we will make the sequence data base
     ************************************************/
     [X Madde] DBConn - queries i alla funktioner
     [x Andy] ClientActionHandler - övriga fall
-    [Mona] ServerActionHandler - övriga fall
+    [X Mona] ServerActionHandler - övriga fall
     [X] ModelFacade -> ServerActionHandler
     [X] Göra ModelFacade till singleton
     [X Madde] Se till att ModelFasaden faktiskt används som singleton överallt
@@ -145,18 +145,12 @@ Until the 17th we will make the sequence data base
             [X] ServerHandler
             [X] RequestWrapper + SendMsgWrapper, AddChatRoomWrapper, DeleteChatRoomWrapper, MsgHistoryWrapper
 
-    ------------
-    Copied from Chois notes:
-     [] CreateChatRoom in serverConnection does not deal with display name like intended right now. solution?
-     [] ^ similar thing with createUser
-    ------------
-
-    Planering/vad behövs: Message + bilder
+    Planering: Message + bilder
          Antingen fortsätt med HashMap (imgId som attachment),
-
          [] eller lägg till en PictureMessage‑subklass och uppdatera UML.
-         [] Kolla/göra klart implementering av övriga wrappers, rödmarkerade i våra filer
-         [] Heads up från både mig och Choi, när nytt chatRoom görs bla används bara det nya chatId:t från Facade,
+
+    Fundering:
+        * Heads up från både mig och Choi, när nytt chatRoom görs bla används bara det nya chatId:t från Facade,
          skickas även namn till Server som det ser ut nu? Koll i Facade och ändring i ServerCon därefter.
 
      För createUser/AddUser testning:
