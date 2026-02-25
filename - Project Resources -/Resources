@@ -181,7 +181,7 @@ MONA:
     implementation can be done similarly throughout the program.
 
 # to-do:
-    [] Implementera removeChatRoom i model, ska kalla på funktioner som tar bort cahtrummet från databasen.
+    [Choi] Implementera removeChatRoom i model, ska kalla på funktioner som tar bort cahtrummet från databasen.
         exists but poorly
     [] Clear message box after sending the msg
     [] load msg history when at launch or opening chat
