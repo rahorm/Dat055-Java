@@ -133,6 +133,24 @@ Until the 17th we will make the sequence data base
        }
 
     ************************************************/
+    Mona-
+    [X]Ändra createChatRoom(int chat) → createChatRoom(String chatName) och skicka AddChatRoomWrapper(id, name) istället.
+    UML-    [X] ServerActionHandler
+            [X] ChatRoomFacade
+            [X] ChatRoomModel
+            [X] ServerHandler
+            [X] RequestWrapper + SendMsgWrapper, AddChatRoomWrapper, DeleteChatRoomWrapper, MsgHistoryWrapper
+
+    Copied from Chois notes:
+     [] CreateChatRoom in serverConnection does not deal with display name like intended right now. solution?
+     [] ^ similar thing with createUser
+
+    Planering: Message + bilder
+         Antingen fortsätt med HashMap (imgId som attachment),
+
+         [] eller lägg till en PictureMessage‑subklass och uppdatera UML.
+    ************************************************/
+
 
 // ---------- REFERENCES ---------- //
 

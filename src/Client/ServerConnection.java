@@ -1,12 +1,19 @@
 package Client;
 
+/* ---Imports som kan behövas om de används direkt---
+import Common.AddChatRoomWrapper;
+import Common.DeleteChatRoomWrapper;
+import Common.MsgHistoryWrapper;
+import Common.SendMsgWrapper;
+*/
+
 import Common.RequestType;
 import Common.RequestWrapper;
 import Other.Message;
 import java.net.Socket;
 import java.sql.*;
 import java.util.*;
-// import Common.SendMsgWrapper;
+
 
 public class ServerConnection {
 
@@ -33,13 +40,12 @@ public class ServerConnection {
      * Adds a new chat in the database
      * </p>
      * // The parameter chatName is the intended display name of the chat. The chat will recieve an id for internal use.
-     * // This method returns an int, 0, if no problems were encountered.
      *
-     * @param chat int id of chat
+     * @param chatName string name of chat
      */
-    public void createChatRoom(int chat){
+    public void createChatRoom(String chatName){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.ADD_CHATROOM, chat)
+                new RequestWrapper(RequestType.ADD_CHATROOM, chatName)
         );
     }
 
