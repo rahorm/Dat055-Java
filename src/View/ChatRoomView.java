@@ -29,6 +29,7 @@ public class ChatRoomView implements Observer {
         this.controller = controller;
         this.model = model;
         this.ui = new UI(controller);
+        model.addObserver(this);
 
     }
 }
