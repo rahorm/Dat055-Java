@@ -201,7 +201,7 @@ MONA:
     [] create new chat
     [] display available chats
     [] add members to chat
-    [] picture msg subclass
+    [Choi] picture msg subclass
         byte array
         bild id
         is msg
