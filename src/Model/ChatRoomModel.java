@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class ChatRoomModel {
 
-    private final ArrayList<Message> messages = new ArrayList<>();
+    private ArrayList<Message> messages = new ArrayList<>();
     private final ArrayList<String> members = new ArrayList<>();
     private String activeUser;
    // private final ArrayList<User> members = new ArrayList<>();
@@ -51,6 +51,7 @@ public class ChatRoomModel {
         return new ArrayList<>(messages);
     }
 
+    public void setHistory(ArrayList<Message> history){ this.messages = history;}
     public void addMessage(Message message) {
         messages.add(message);
     }

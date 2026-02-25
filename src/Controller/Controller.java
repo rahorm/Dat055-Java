@@ -36,7 +36,7 @@ public class Controller {
         if (user == null || user.isEmpty()) {
             throw new IllegalArgumentException("Username cannot be null or empty");
         }
-        facade.StoreMsg(msg, user);
+        facade.storeMsg(msg, user);
     }
     /**
      * Removes the chatRoom, you can not remove the activeChatRoom
@@ -98,5 +98,9 @@ public class Controller {
      * */
     public void changeActiveUser(String user) {
         facade.addMember(user);
+    }
+
+    public boolean login(String user, String password){
+        return true;
     }
 }

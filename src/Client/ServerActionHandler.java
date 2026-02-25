@@ -1,6 +1,8 @@
 package Client;
 
 import Common.RequestWrapper;
+import Model.ChatRoomFacade;
+import Model.ChatRoomModel;
 import Other.Message;
 
 import java.util.ArrayList;
@@ -9,7 +11,7 @@ public class ServerActionHandler {
     Model.ChatRoomFacade facade;
 
     public ServerActionHandler() {
-        facade = Model.ChatRoomFacade.getInstance();
+        //facade = Model.ChatRoomFacade.getInstance();
     }
 
     public void handle(Object obj) {
@@ -27,13 +29,8 @@ public class ServerActionHandler {
                 ArrayList<Message> history;
                 history = (ArrayList<Message>) request.getData();
                 System.out.println("Message history received: " + history);
-                // modelFacade.setHistory(history);
-                break;
-
-            case ADD_MESSAGE:
-                Message msg = (Message) request.getData();
-                System.out.println("Message received: " + msg);
-                // modelFacade.sendMessage(msg);
+                ChatRoomFacade facade = Model.ChatRoomFacade.getInstance();
+                facade.setHistory(history);
                 break;
 
             case ADD_USER:

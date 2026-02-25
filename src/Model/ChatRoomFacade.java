@@ -84,9 +84,17 @@ public final class ChatRoomFacade extends Observable {
      * @param msg message that user write
      * @param username user that wrote this message
      */
-    public void StoreMsg(String msg, String username){
+    public void storeMsg(String msg, String username){
 
         serverConnection.sendMsg(new Message(model.getActiveUser(), model.getChatID(), msg));
+
+    }
+
+    public void setHistory(ArrayList<Message> history){
+        model.setHistory(history);
+
+        setChanged(); // Apparently it should be used before using notifyObservers
+        notifyObservers(); // ingen parameter
 
     }
 
