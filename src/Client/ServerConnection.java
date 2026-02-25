@@ -1,11 +1,18 @@
 package Client;
 
-/* ---Imports som kan behövas om de används direkt---
 import Common.AddChatRoomWrapper;
+// Wrappers som inte är implementerade än
 import Common.DeleteChatRoomWrapper;
-import Common.MsgHistoryWrapper;
+import Common.DeleteMessageWrapper;
 import Common.SendMsgWrapper;
-*/
+import Common.MsgHistoryWrapper;
+import Common.CreateUserWrapper;
+import Common.DeleteUserWrapper;
+import Common.GetChatMembersWrapper;
+import Common.AddChatMemberWrapper;
+import Common.RemoveChatMemberWrapper;
+import Common.GetAvailableChatsWrapper;
+
 
 import Common.RequestType;
 import Common.RequestWrapper;
@@ -21,32 +28,54 @@ public class ServerConnection {
 
     public ServerConnection(Socket socket) {
             this.serverHandler = new ServerHandler(socket);
-            Thread thread = new Thread(serverHandler);
+            Thread thread = new Thread(serverHandler);  //För att starta lyssnartråden
             thread.start();
     }
 
 
+    //------------------------------- Messages med nya wrappers------------------------------
     /**
      * Adds a message to the database
      * </p>
      * @param msg the message to be sent in type Message
      */
-    public void sendMsg(Message msg){
-        serverHandler.broadcastMessage(new RequestWrapper(RequestType.ADD_MESSAGE, msg));
+    public void sendMsg(Message msg) {
+        serverHandler.broadcastMessage(new RequestWrapper(RequestType.ADD_MESSAGE, SendMsgWrapper(msg)));
+
+    }
+    /**
+     * Removes a message from the history of specified chat.
+     * </p>
+     * @param msg - the message to be removed
+     */
+    public void deleteMsg(Message msg){
+        serverHandler.broadcastMessage(
+                new RequestWrapper(RequestType.DELETE_MESSAGE, DeleteMessageWrapper(msg)));
     }
 
-    // IS NOT IMPLEMENTED LIKE THE JAVADOC YET DUE TO SIMPLISITY
+    /**
+     * Gets chat history from specified chat, with the newest message last in the array.
+     * ChatId specifies the id of the chat for which to get the history.
+     * </p>
+     * @param chatId chat to get history for
+     */
+    public ArrayList<Message> getChatMessages(int chatId){
+        serverHandler.broadcastMessage(
+                new RequestWrapper(RequestType.GET_MESSAGES, MsgHistoryWrapper(chatId)));
+    }
+
+
+//------------------------------------Chats med nya Wrappers----------------------------
     /**
      * Adds a new chat in the database
      * </p>
      * // The parameter chatName is the intended display name of the chat. The chat will recieve an id for internal use.
      *
-     * @param chatName string name of chat
+     * @param chatId string name of chat
      */
-    public void createChatRoom(String chatName){
+    public void createChatRoom(String chatId){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.ADD_CHATROOM, chatName)
-        );
+                new RequestWrapper(RequestType.ADD_CHATROOM, AddChatRoomWrapper(chatId)));
     }
 
     /**
@@ -57,13 +86,12 @@ public class ServerConnection {
      *
      * @param chat int of id of chat to be deleted
      */
-    public void deleteChatRoom(int chat){
+    public void deleteChatRoom(int chatId){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.DELETE_CHATROOM, chat)
-        );
+                new RequestWrapper(RequestType.DELETE_CHATROOM, DeleteChatRoomWrapper(chatId)));
     }
 
-// unsure if display names are implemented yet
+//---------------------------------User med nya wrappers-----------------------------
     /**
      * Creates a new user in the database
      * </p>
@@ -72,10 +100,9 @@ public class ServerConnection {
      *
      * @param user String id of user
      */
-    public void createUser(String user){
+    public void createUser(int user){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.ADD_USER, user)
-        );
+                new RequestWrapper(RequestType.ADD_USER, CreateUserWrapper(user)));
     }
 
     /**
@@ -90,10 +117,10 @@ public class ServerConnection {
      */
     public void deleteUser(int user){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.DELETE_USER, user)
-        );
+                new RequestWrapper(RequestType.DELETE_USER, DeleteUserWrapper(user)));
     }
 
+    //---------------------------------Chat med nya wrappers---------------------------------
     /**
      * Adds a user to the activeChat
      * </p>
@@ -102,8 +129,7 @@ public class ServerConnection {
     public void addChatMember(String user){
 
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.ADD_CHAT_MEMBER, user)
-        );
+                new RequestWrapper(RequestType.ADD_CHAT_MEMBER, AddChatMemberWrapper(user)));
     }
 
     /**
@@ -114,10 +140,53 @@ public class ServerConnection {
     public void removeChatMember(String user){
 
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.REMOVE_CHAT_MEMBER, user)
-        );
+                new RequestWrapper(RequestType.REMOVE_CHAT_MEMBER, RemoveChatMemberWrapper (user)));
     }
 
+    /**
+     * Gets members of specified chat.
+     * ChatId specifies the id of the chat for which to get the members.
+     * </p>
+     * @param chatId chat to get history for
+     * @return Arraylist<User> members
+     *
+     * @throws SQLException
+     */
+    public ArrayList<String> getChatMembers(int chatId){
+        serverHandler.broadcastMessage(
+                new RequestWrapper(RequestType.GET_CHAT_MEMBERS, GetChatMembersWrapper(chatId)));
+        //return new ArrayList<>();                   //Behövs väl ej?
+    }
+
+
+    /**
+     * Gets the id's of all chats the specified user is a member in.
+     * </p>
+     * @param user user to get chats for
+     * @return Arraylist<int> chatId's
+     *
+     * @throws SQLException
+     */
+    public ArrayList<Integer> getAvailableChats(String user){
+        serverHandler.broadcastMessage(
+                new RequestWrapper(RequestType.GET_AVAILABLE_CHATS, GetAvailableChatsWrapper(user)));
+     //   return new ArrayList<>();
+    }
+
+
+        public ServerHandler getServerHandler() {
+        return serverHandler;
+        }
+        public void setServerHandler(ServerHandler serverHandler) {
+        this.serverHandler = serverHandler;
+    }
+}
+
+
+//----------------------GAMLA ANTECKNINGAR---------------------------------
+//    //boolean checkLogIn(String username, String password){}
+//    //boolean checkUserExists(String username){}
+//
 //    /**
 //     * Replaces the previous message with updated message.
 //     *
@@ -132,77 +201,3 @@ public class ServerConnection {
 //    public int editMsg(Message msg, Message updatedMsg){
 //        return 0;
 //    }
-
-    /**
-     * Removes a message from the history of specified chat.
-     * </p>
-     * @param msg the message to be removed
-     */
-    public void deleteMsg(Message msg){
-        serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.DELETE_MESSAGE, msg)
-        );
-    }
-
-    // PROB WRONG
-    /**
-     * Gets chat history from specified chat, with the newest message last in the array.
-     * ChatId specifies the id of the chat for which to get the history.
-     * </p>
-     * @param chatId chat to get history for
-     * @return Arraylist<Message> chatHistory
-     */
-    public ArrayList<Message> getChatMessages(int chatId){
-        serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.GET_MESSAGES, chatId)
-        );
-        return new ArrayList<>();
-    }
-
-
-    // PROB WRONG
-    /**
-     * Gets members of specified chat.
-     * ChatId specifies the id of the chat for which to get the members.
-     * </p>
-     * @param chatId chat to get history for
-     * @return Arraylist<User> members
-     *
-     * @throws SQLException
-     */
-    public ArrayList<String> getChatMembers(int chatId){
-        serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.GET_CHAT_MEMBERS, chatId)
-        );
-        return new ArrayList<>();
-    }
-
-    //PROB WRONG
-    /**
-     * Gets the id's of all chats the specified user is a member in.
-     * </p>
-     * @param user user to get chats for
-     * @return Arraylist<int> chatId's
-     *
-     * @throws SQLException
-     */
-    public ArrayList<Integer> getAvailableChats(String user){
-        serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.GET_AVAILABLE_CHATS, user)
-        );
-        return new ArrayList<>();
-    }
-
-    //boolean checkLogIn(String username, String password){}
-    //boolean checkUserExists(String username){}
-
-
-
-    public ServerHandler getServerHandler() {
-        return serverHandler;
-    }
-    public void setServerHandler(ServerHandler serverHandler) {
-        this.serverHandler = serverHandler;
-    }
-}
-

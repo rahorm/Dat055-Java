@@ -135,20 +135,31 @@ Until the 17th we will make the sequence data base
     ************************************************/
     Mona-
     [X]Ändra createChatRoom(int chat) → createChatRoom(String chatName) och skicka AddChatRoomWrapper(id, name) istället.
+    [X] Ändrat för wrapperanvändning som den är uppbygd nu för alla funktioner i ServerConn
+    [X] Skapat skal för CreateUserWrapper
+    [X] Skapat skal för DeleteUserWrapper
+
     UML-    [X] ServerActionHandler
             [X] ChatRoomFacade
             [X] ChatRoomModel
             [X] ServerHandler
             [X] RequestWrapper + SendMsgWrapper, AddChatRoomWrapper, DeleteChatRoomWrapper, MsgHistoryWrapper
 
+    ------------
     Copied from Chois notes:
      [] CreateChatRoom in serverConnection does not deal with display name like intended right now. solution?
      [] ^ similar thing with createUser
+    ------------
 
-    Planering: Message + bilder
+    Planering/vad behövs: Message + bilder
          Antingen fortsätt med HashMap (imgId som attachment),
 
          [] eller lägg till en PictureMessage‑subklass och uppdatera UML.
+         [] Kolla/göra klart implementering av övriga wrappers, rödmarkerade i våra filer
+         [] Heads up från både mig och Choi, när nytt chatRoom görs bla används bara det nya chatId:t från Facade,
+         skickas även namn till Server som det ser ut nu? Koll i Facade och ändring i ServerCon därefter.
+         [] CreateUser- behövs kanske i Facade också? Används i Serverconnection. Controller använder param user.
+
     ************************************************/
 
 
