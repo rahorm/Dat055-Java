@@ -54,8 +54,6 @@ public class UI {
         JButton loginBtn = new JButton("login");
         //@TODO skapa loginmetod i controller och använd getpassword istället för gettext;
         loginBtn.addActionListener((_) -> controller.login(usernameInput.getText(), passwordInput.getText()));
-        ChatRoomFacade facade = Model.ChatRoomFacade.getInstance(); //test
-        facade.setActiveUser(usernameInput.getText());// För att prova att skicka meddelanden
 
         //lägger till knappar till ui:n
         //frame.add(btn);

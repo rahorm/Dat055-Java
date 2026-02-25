@@ -40,11 +40,12 @@ public class ServerHandler implements Runnable{
     }
 
     public void broadcastMessage(Object obj){
+        System.out.println("broadcasting");
             try {
                 objectOutputStream.writeObject(obj);
                 objectOutputStream.flush();
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                System.out.println("Error: "+e.getMessage());
             }
     }
 

@@ -16,6 +16,7 @@ package Client;
 
 import Common.RequestType;
 import Common.RequestWrapper;
+import Common.SendMsgWrapper;
 import Other.Message;
 import java.net.Socket;
 import java.sql.*;
@@ -40,8 +41,9 @@ public class ServerConnection {
      * @param msg the message to be sent in type Message
      */
     public void sendMsg(Message msg) {
-        serverHandler.broadcastMessage(new RequestWrapper(RequestType.ADD_MESSAGE, msg));
-
+        System.out.println("message entered connection");
+        serverHandler.broadcastMessage(new SendMsgWrapper(msg));
+        System.out.println("message left connection");
     }
     /**
      * Removes a message from the history of specified chat.

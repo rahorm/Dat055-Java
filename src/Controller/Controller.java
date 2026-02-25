@@ -30,6 +30,7 @@ public class Controller {
      * @throws NumberFormatException if msg isn't a string
      * */
     public void sendMessage(String msg, String user){
+        System.out.println("message entered controller");
         if (msg == null || msg.isEmpty()) {
             throw new IllegalArgumentException("Message cannot be null or empty");
         }
@@ -37,6 +38,7 @@ public class Controller {
             throw new IllegalArgumentException("Username cannot be null or empty");
         }
         facade.storeMsg(msg);
+        System.out.println("message left controller");
     }
     /**
      * Removes the chatRoom, you can not remove the activeChatRoom
@@ -101,6 +103,8 @@ public class Controller {
     }
 
     public boolean login(String user, String password){
+        ChatRoomFacade facade = Model.ChatRoomFacade.getInstance(); //test
+        facade.setActiveUser(user);// För att prova att skicka meddelanden
         return true;
     }
 }

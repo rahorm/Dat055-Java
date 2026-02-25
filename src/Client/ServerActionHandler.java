@@ -1,5 +1,6 @@
 package Client;
 
+import Common.MsgHistoryWrapper;
 import Common.RequestWrapper;
 import Model.ChatRoomFacade;
 import Model.ChatRoomModel;
@@ -9,9 +10,10 @@ import java.util.ArrayList;
 
 public class ServerActionHandler {
 
-    public ServerActionHandler() {}
+    public ServerActionHandler() {
+    }
 
-    public void handle(Object obj) {
+    /*public void handle(Object obj) {
 
         if (!(obj instanceof RequestWrapper request)) {
             System.out.println("Unknown object received: " + obj);
@@ -59,17 +61,22 @@ public class ServerActionHandler {
             default:
                 System.out.println("Unhandled request type: " + request.getType());
         }
+
+*/
+
+    public void handle(Object obj) {
+        Object objToReturn = null;
+
+        if (obj instanceof MsgHistoryWrapper input) {
+
+            System.out.println("Output: " + input.toString());
+            ArrayList<Message> history;
+            history = (ArrayList<Message>) input.getMsgHistory();
+            System.out.println("Message history received: " + history);
+            ChatRoomFacade facade = Model.ChatRoomFacade.getInstance();
+            facade.setHistory(history);
+        }
+
+
     }
-
-
-//    public void handle(Object obj){
-//        Object objToReturn = null;
-//
-//        if(obj instanceof MsgHistoryWrapper input){
-//
-//            System.out.println("Output: "+input.toString());
-//            // MODEL FACADE CONNECTION? input.getMsgHistory();
-//        }
-
-
-    }
+}

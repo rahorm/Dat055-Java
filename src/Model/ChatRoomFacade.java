@@ -84,14 +84,14 @@ public final class ChatRoomFacade extends Observable {
      * @param msg message that user write
      */
     public void storeMsg(String msg){
-
+        System.out.println("message entered facade");
         serverConnection.sendMsg(new Message(model.getActiveUser(), model.getChatID(), msg));
+        System.out.println("message left facade");
 
     }
 
     public void setHistory(ArrayList<Message> history){
         model.setHistory(history);
-
         setChanged(); // Apparently it should be used before using notifyObservers
         notifyObservers(); // ingen parameter
 
