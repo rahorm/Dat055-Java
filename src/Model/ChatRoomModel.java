@@ -1,10 +1,8 @@
 package Model;
 
 import Other.Message;
-import Other.User;
 
 import java.util.ArrayList;
-import java.util.Observable;
 
 /**
  * The class represents the local state of a chatroom in'
@@ -31,11 +29,18 @@ public class ChatRoomModel {
      * @param activeUser
      */
     public ChatRoomModel(int chatID, String activeUser) {
+        if (activeUser == null || chatID <= 0) {
+            throw new IllegalArgumentException("This chat room can not be created");
+        }
+
         this.chatID = chatID;
         this.activeUser = activeUser;
 
     }
 
+
+
+    /// ----------------------------- Message -----------------------------
     public ArrayList<Message> retriveMSGList() {
         /**
          * This method retrieves all messages from
@@ -50,6 +55,11 @@ public class ChatRoomModel {
         messages.add(message);
     }
 
+    public void removeMessage(){
+        messages.clear();
+    }
+
+    /// ----------------------------- USER -----------------------------
     public ArrayList<String> retrieveUserList() {
         /**
          * This method retrieves all User from
@@ -68,16 +78,9 @@ public class ChatRoomModel {
         members.remove(user);
     }
 
-    // BLAH BLAH
-
-    public int getChatID() {
-
-        return chatID;
-    }
-
     public void setActiveUser(String activeUser) {
 
-            this.activeUser = activeUser;  //  Lägg till / uppdatera
+        this.activeUser = activeUser;  //  Lägg till / uppdatera
     }
 
     public String getActiveUser(){
@@ -85,17 +88,21 @@ public class ChatRoomModel {
         return this.activeUser;
     }
 
-    /*
-    public void setActiveUser(String username) {
 
-            User currentuser = new User(username)
-            this.activeUser = currentuser;
+    /// ----------------------------- ChatRoom-----------------------------
+    public int getChatID() {
+
+        return chatID;
     }
-    */
+
     public void changeActiveRoom(int chatID) {
         this.chatID = chatID;
     }
 
+
+    public void removeChatRoom(int chatID) { // I don't know how to remove an existing model!!!! - choi
+        System.out.println("model wants to remove chatroom right now");
+    }
 }
 
 

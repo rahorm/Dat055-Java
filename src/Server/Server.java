@@ -5,9 +5,21 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
+    private static Server instance;
     private ServerSocket serverSocket;
 
-    public Server(ServerSocket serverSocket){
+    public static Server getInstance(){
+        if(instance == null){
+            try{
+                instance = new Server(new ServerSocket(3356));
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return instance;
+    }
+
+    private Server(ServerSocket serverSocket){
         this.serverSocket = serverSocket;
     }
 
@@ -38,8 +50,7 @@ public class Server {
 
 
     public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(3356);
-        Server server = new Server(serverSocket);
+        Server server = Server.getInstance();
         server.startServer();
     }
 }
