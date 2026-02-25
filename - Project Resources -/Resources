@@ -176,5 +176,6 @@ MONA:
 - Wrapper logic för createUser - Perplexity AI
 
 //----------- 260250 -----------//
-[] Implementera displayname i createChatRoom
-[] Implementera removeChatRoom i model, ska kalla på funktioner som tar bort cahtrummet från databasen. 
+    [] Implementera displayname i createChatRoom
+    [] Implementera removeChatRoom i model, ska kalla på funktioner som tar bort cahtrummet från databasen.
+    [] Implementera Login i controller
