@@ -176,9 +176,43 @@ MONA:
 - Wrapper logic för createUser - Perplexity AI
 
 //----------- 260250 -----------//
-to-do:
-    [] Implementera displayname i createChatRoom
+
+    when u write on a to do list item: write your name and how you think the logic should be done so that the
+    implementation can be done similarly throughout the program.
+
+# to-do:
     [] Implementera removeChatRoom i model, ska kalla på funktioner som tar bort cahtrummet från databasen.
-    [] Implementera Login i controller
+        exists but poorly
+    [] Clear message box after sending the msg
+    [] load msg history when at launch or opening chat
+    [] implement login all over program
+        passwords
+        logic exists in database
+        error messages
+    [] create user (sign up box)
+        controller - needs password
+        serverconn - needs usrname, password
+        (add member används i detta syfte i facaden, det ärnog fel, kolla in på det)
+        lägg till create user i facade?
+    [] scrollable msg box
+    [] write which user has made which msg
+    [] -||- timestamp
+    [] funktion för att ladda upp bilder i databasen
+    [] create new chat
+    [] display available chats
+    [] add members to chat
+    [] picture msg subclass
+        byte array
+        bild id
+        is msg
+    [] chat name implementation all over program (finns redan i databsen)
+    []
+
+    [] edit msg
+    [] pictures
+
+# SEQUENCE DIAGRAM (?)
+    [] add msg
+    []
 
 
