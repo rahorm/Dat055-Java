@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class UI {
+    JFrame frame;
     Controller controller;
     JTextArea messages;
     JTextArea messageInput;
@@ -37,7 +38,7 @@ public class UI {
 
         SpringLayout layout = new SpringLayout();
 
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         Container contentPane = frame.getContentPane();
 
         //testknapp
@@ -101,5 +102,6 @@ public class UI {
             s = s.concat("\n");
         }
         messages.setText(s);
+        frame.repaint();
     }
 }
