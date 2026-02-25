@@ -29,10 +29,10 @@ public class UI {
         messageInput.setRows(5);
 
         this.usernameInput = new JTextField();
-        usernameInput.setSize(100, 30);
+        usernameInput.setColumns(20);
 
         this.passwordInput = new JPasswordField();
-        passwordInput.setSize(100, 30);
+        passwordInput.setColumns(20);
 
         SpringLayout layout = new SpringLayout();
 
@@ -49,14 +49,20 @@ public class UI {
         btn2.addActionListener((_) -> controller.sendMessage(messageInput.getText(), "User1"));
         btn2.setSize(100, 100);
 
+        //loggar in som en användare
+        JButton loginBtn = new JButton("login");
+        //@TODO skapa loginmetod i controller och använd getpassword istället för gettext;
+        loginBtn.addActionListener((_) -> controller.login(usernameInput.getText(), passwordInput.getText()));
+
 
         //lägger till knappar till ui:n
         //frame.add(btn);
         contentPane.add(btn2);
         contentPane.add(messages);
         contentPane.add(messageInput);
-        //frame.add(usernameInput);
-        //frame.add(passwordInput);
+        contentPane.add(usernameInput);
+        contentPane.add(passwordInput);
+        contentPane.add(loginBtn);
 
         //constraints för springlayout
 
@@ -70,8 +76,16 @@ public class UI {
 
         //position message
         layout.putConstraint("North", messageInput, 10, "South", messages);
-        //layout.putConstraint("South", messages, 10, "North", messageInput);
         layout.putConstraint("East", messages, 10, "East", contentPane);
+
+        //position usernameInput
+        layout.putConstraint("West", usernameInput, 10, "West", contentPane);
+
+        //position passwordInput
+        layout.putConstraint("North", passwordInput, 10, "South", usernameInput);
+
+        //position för loginBtn
+        layout.putConstraint("North", loginBtn, 10, "South", passwordInput);
 
         //setup för fönstret
         frame.setSize(500, 500);
