@@ -90,7 +90,7 @@ public class ServerConnection {
      * This method deletes the chat and all related information, such as members and messages from the database.
      * This cannot be undone.
      *
-     * @param chat int of id of chat to be deleted
+     * @param chatId int of id of chat to be deleted
      */
     public void deleteChatRoom(int chatId){
         serverHandler.broadcastMessage(
@@ -191,21 +191,22 @@ public class ServerConnection {
 }
 
 
-//----------------------GAMLA ANTECKNINGAR---------------------------------
-//    //boolean checkLogIn(String username, String password){}
-//    //boolean checkUserExists(String username){}
-//
-//    /**
-//     * Replaces the previous message with updated message.
-//     *
-//     * msg is the previous message which will be replaced. updatedMsg is what will be saved in its place.
-//     *
-//     * @param msg old message
-//     * @param updatedMsg updated message
-//     * @return int message
-//     *
-//     * @throws SQLException
-//     */
-//    public int editMsg(Message msg, Message updatedMsg){
-//        return 0;
-//    }
+/*----------------------GAMLA ANTECKNINGAR---------------------------------
+    //boolean checkLogIn(String username, String password){}
+    //boolean checkUserExists(String username){}
+
+    /**
+     * Replaces the previous message with updated message.
+     *
+     * msg is the previous message which will be replaced. updatedMsg is what will be saved in its place.
+     *
+     * @param msg old message
+     * @param updatedMsg updated message
+     * @return int message
+     *
+     * @throws SQLException
+     */
+   /*public int editMsg(Message msg, Message updatedMsg){
+        return 0;
+    }
+*/

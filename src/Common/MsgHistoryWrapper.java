@@ -1,4 +1,4 @@
-package Common;
+/*package Common;
 
 import Other.Message;
 
@@ -25,3 +25,4 @@ public class MsgHistoryWrapper implements Serializable {
         return "msgHistoryWrapper contains array: "+msgHistory.toString();
     }
 }
+*/

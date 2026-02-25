@@ -1,4 +1,4 @@
-package Common;
+/*package Common;
 
 import Other.Message;
 
@@ -24,3 +24,4 @@ public class SendMsgWrapper implements Serializable {
         return "SendMsgWrapper, contains msg: "+msg.toString();
     }
 }
+*/
