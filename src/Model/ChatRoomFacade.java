@@ -82,7 +82,6 @@ public final class ChatRoomFacade extends Observable {
     /**
      * Uer writes a new message. Then this message information will be passed to the server
      * @param msg message that user write
-     * @param username user that wrote this message
      */
     public void storeMsg(String msg){
 
@@ -96,6 +95,10 @@ public final class ChatRoomFacade extends Observable {
         setChanged(); // Apparently it should be used before using notifyObservers
         notifyObservers(); // ingen parameter
 
+    }
+
+    public void setActiveUser(String username){
+        model.setActiveUser(username);
     }
 
     /// ----------------------------- Member <-> Server -----------------------------

@@ -8,11 +8,8 @@ import Other.Message;
 import java.util.ArrayList;
 
 public class ServerActionHandler {
-    Model.ChatRoomFacade facade;
 
-    public ServerActionHandler() {
-        //facade = Model.ChatRoomFacade.getInstance();
-    }
+    public ServerActionHandler() {}
 
     public void handle(Object obj) {
 
@@ -36,7 +33,8 @@ public class ServerActionHandler {
             case ADD_USER:
                 String user = (String) request.getData();
                 System.out.println("User received: " + user);
-               //  facade.addUser(user);
+                //ChatRoomFacade facade = Model.ChatRoomFacade.getInstance();
+                //facade.addUser(user);
                 break;
 
             case ADD_CHATROOM:
