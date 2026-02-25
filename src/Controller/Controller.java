@@ -36,7 +36,7 @@ public class Controller {
         if (user == null || user.isEmpty()) {
             throw new IllegalArgumentException("Username cannot be null or empty");
         }
-        facade.storeMsg(msg, user);
+        facade.storeMsg(msg);
     }
     /**
      * Removes the chatRoom, you can not remove the activeChatRoom

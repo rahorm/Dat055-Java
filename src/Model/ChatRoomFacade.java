@@ -84,7 +84,7 @@ public final class ChatRoomFacade extends Observable {
      * @param msg message that user write
      * @param username user that wrote this message
      */
-    public void storeMsg(String msg, String username){
+    public void storeMsg(String msg){
 
         serverConnection.sendMsg(new Message(model.getActiveUser(), model.getChatID(), msg));
 
