@@ -1,17 +1,17 @@
 package Client;
 
-import Common.AddChatRoomWrapper;
-// Wrappers som inte är implementerade än
-import Common.DeleteChatRoomWrapper;
-import Common.DeleteMessageWrapper;
-import Common.SendMsgWrapper;
-import Common.MsgHistoryWrapper;
-import Common.CreateUserWrapper;
-import Common.DeleteUserWrapper;
-import Common.GetChatMembersWrapper;
-import Common.AddChatMemberWrapper;
-import Common.RemoveChatMemberWrapper;
-import Common.GetAvailableChatsWrapper;
+//import Common.AddChatRoomWrapper;
+//// Wrappers som inte är implementerade än
+//import Common.DeleteChatRoomWrapper;
+//import Common.DeleteMessageWrapper;
+//import Common.SendMsgWrapper;
+//import Common.MsgHistoryWrapper;
+//import Common.CreateUserWrapper;
+//import Common.DeleteUserWrapper;
+//import Common.GetChatMembersWrapper;
+//import Common.AddChatMemberWrapper;
+//import Common.RemoveChatMemberWrapper;
+//import Common.GetAvailableChatsWrapper;
 
 
 import Common.RequestType;
@@ -40,7 +40,7 @@ public class ServerConnection {
      * @param msg the message to be sent in type Message
      */
     public void sendMsg(Message msg) {
-        serverHandler.broadcastMessage(new RequestWrapper(RequestType.ADD_MESSAGE, SendMsgWrapper(msg)));
+        serverHandler.broadcastMessage(new RequestWrapper(RequestType.ADD_MESSAGE, msg));
 
     }
     /**
@@ -50,18 +50,22 @@ public class ServerConnection {
      */
     public void deleteMsg(Message msg){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.DELETE_MESSAGE, DeleteMessageWrapper(msg)));
+                new RequestWrapper(RequestType.DELETE_MESSAGE, msg));
     }
 
+
+    //OBS WEIRD HARDCODING RIGHT NOW
     /**
      * Gets chat history from specified chat, with the newest message last in the array.
-     * ChatId specifies the id of the chat for which to get the history.
+     * ChatId specifies the id of the chat f
+     * r which to get the history.
      * </p>
      * @param chatId chat to get history for
      */
     public ArrayList<Message> getChatMessages(int chatId){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.GET_MESSAGES, MsgHistoryWrapper(chatId)));
+                new RequestWrapper(RequestType.GET_MESSAGES, chatId));
+        return new ArrayList<>(0);
     }
 
 
@@ -71,11 +75,11 @@ public class ServerConnection {
      * </p>
      * // The parameter chatName is the intended display name of the chat. The chat will recieve an id for internal use.
      *
-     * @param chatId string name of chat
+     * @param chatId int name of chat
      */
-    public void createChatRoom(String chatId){
+    public void createChatRoom(int chatId){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.ADD_CHATROOM, AddChatRoomWrapper(chatId)));
+                new RequestWrapper(RequestType.ADD_CHATROOM, chatId));
     }
 
     /**
@@ -88,7 +92,7 @@ public class ServerConnection {
      */
     public void deleteChatRoom(int chatId){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.DELETE_CHATROOM, DeleteChatRoomWrapper(chatId)));
+                new RequestWrapper(RequestType.DELETE_CHATROOM, chatId));
     }
 
 //---------------------------------User med nya wrappers-----------------------------
@@ -104,7 +108,7 @@ public class ServerConnection {
     //Int för Id eller string?
     public void createUser(int user){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.ADD_USER, CreateUserWrapper(user)));
+                new RequestWrapper(RequestType.ADD_USER, user));
     }
 
     /**
@@ -119,7 +123,7 @@ public class ServerConnection {
      */
     public void deleteUser(int user){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.DELETE_USER, DeleteUserWrapper(user)));
+                new RequestWrapper(RequestType.DELETE_USER, user));
     }
 
     //---------------------------------Chat med nya wrappers---------------------------------
@@ -131,7 +135,7 @@ public class ServerConnection {
     public void addChatMember(String user){
 
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.ADD_CHAT_MEMBER, AddChatMemberWrapper(user)));
+                new RequestWrapper(RequestType.ADD_CHAT_MEMBER, user));
     }
 
     /**
@@ -142,7 +146,7 @@ public class ServerConnection {
     public void removeChatMember(String user){
 
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.REMOVE_CHAT_MEMBER, RemoveChatMemberWrapper (user)));
+                new RequestWrapper(RequestType.REMOVE_CHAT_MEMBER, user));
     }
 
     /**
@@ -156,8 +160,8 @@ public class ServerConnection {
      */
     public ArrayList<String> getChatMembers(int chatId){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.GET_CHAT_MEMBERS, GetChatMembersWrapper(chatId)));
-        //return new ArrayList<>();                   //Behövs väl ej?
+                new RequestWrapper(RequestType.GET_CHAT_MEMBERS, chatId));
+        return new ArrayList<>();                   //Behövs väl ej?
     }
 
 
@@ -171,8 +175,8 @@ public class ServerConnection {
      */
     public ArrayList<Integer> getAvailableChats(String user){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.GET_AVAILABLE_CHATS, GetAvailableChatsWrapper(user)));
-     //   return new ArrayList<>();
+                new RequestWrapper(RequestType.GET_AVAILABLE_CHATS, user));
+        return new ArrayList<>();
     }
 
 

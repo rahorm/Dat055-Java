@@ -73,18 +73,18 @@ public class ClientActionHandler {
                 );
             }
 
-            case CHECK_LOGIN -> {
-                String username = (String) request.getData();
-                boolean valid = DBcon.checkLogin(username);
-                /************
-                 * Behöver ha med passord också!!
-                 ***********/
-
-                objToReturn = new RequestWrapper(
-                        RequestType.CHECK_LOGIN,
-                        valid
-                );
-            }
+//            case CHECK_LOGIN -> {
+//                String username = (String) request.getData();
+//                boolean valid = DBcon.checkLogin(username);
+//                /************
+//                 * Behöver ha med passord också!!
+//                 ***********/
+//
+//                objToReturn = new RequestWrapper(
+//                        RequestType.CHECK_LOGIN,
+//                        valid
+//                );
+//            }
 
             case ADD_USER -> {
                 String username = (String) request.getData();

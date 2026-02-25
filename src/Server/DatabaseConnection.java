@@ -224,7 +224,7 @@ public final class DatabaseConnection {
         try(PreparedStatement ps = conn.prepareStatement(
                 "UPDATE ChatMessages SET Content = ?, hasimg = ? WHERE msgId = ?");){
             ps.setString(1,updateMsg.getContent());
-            ps.setBoolean(2,updateMsg.getHasImg());
+            // ps.setBoolean(2,updateMsg.getHasImg());
             ps.setInt(3, msg.getMessageID());
             ps.executeUpdate();
         }  catch (SQLException e) {

@@ -10,7 +10,6 @@ public class Message implements Serializable {
     private String sender;
     private int chatID;
     private int messageID;
-    private HashMap<String, String> hashMap;
 
 
     public Message(String sender, int chatID, String content){
@@ -20,7 +19,6 @@ public class Message implements Serializable {
         this.timestamp = LocalDateTime.now();
         IdGenerator generator = IdGenerator.getInstance();
         this.messageID = generator.generateId();
-        this.hashMap = new HashMap<>();
     }
     public Message(int msgId, String sender, int chatID, String content, LocalDateTime time){
         this.content = content;
@@ -28,22 +26,6 @@ public class Message implements Serializable {
         this.chatID = chatID;
         this.timestamp = time;
         this.messageID = msgId;
-    }
-
-    public void addAttachment(String key, String value) {
-        hashMap.put(key, value);
-    }
-
-    public HashMap<String, String> getHashMap() {
-        return hashMap;
-    }
-
-    public void setHashMap(HashMap<String, String> hashMap) {
-        this.hashMap = hashMap;
-    }
-
-    public boolean getHasImg() {
-        return hashMap != null && !hashMap.isEmpty();
     }
 
     public String getContent() {

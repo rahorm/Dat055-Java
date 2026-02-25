@@ -1,5 +1,8 @@
 package Other;
 
+import java.time.LocalTime;
+import java.util.Random;
+
 public final class IdGenerator {
 
     private static IdGenerator instance;
@@ -26,9 +29,10 @@ public final class IdGenerator {
      *
      * @return int generated id
      */
-    public int generateId(){
-        int id = nextId;
-        nextId++;
-        return id;
+    public int generateId() {
+        Random r = new Random();
+        int randNum = r.nextInt(9999 - 999) + 999;
+        LocalTime t = LocalTime.now();
+        return (t.getMinute()*100000)+(t.getSecond()*1000)+randNum;
     }
 }
