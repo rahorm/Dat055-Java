@@ -13,7 +13,7 @@ public class ServerActionHandler {
     public ServerActionHandler() {
     }
 
-    /*public void handle(Object obj) {
+    public void handle(Object obj) {
 
         if (!(obj instanceof RequestWrapper request)) {
             System.out.println("Unknown object received: " + obj);
@@ -62,9 +62,10 @@ public class ServerActionHandler {
                 System.out.println("Unhandled request type: " + request.getType());
         }
 
-*/
+    }
+}
 
-    public void handle(Object obj) {
+    /*public void handle(Object obj) {
         Object objToReturn = null;
 
         if (obj instanceof MsgHistoryWrapper input) {
@@ -78,5 +79,4 @@ public class ServerActionHandler {
         }
 
 
-    }
-}
+    }*/

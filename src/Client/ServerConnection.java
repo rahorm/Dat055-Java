@@ -42,7 +42,7 @@ public class ServerConnection {
      */
     public void sendMsg(Message msg) {
         System.out.println("message entered connection");
-        serverHandler.broadcastMessage(new SendMsgWrapper(msg));
+        serverHandler.broadcastMessage(new RequestWrapper(RequestType.ADD_MESSAGE, msg));
         System.out.println("message left connection");
     }
     /**

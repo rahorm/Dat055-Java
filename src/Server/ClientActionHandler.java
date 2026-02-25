@@ -22,7 +22,7 @@ public class ClientActionHandler {
         }
     }
 
-    /*public Object handle(Object obj) {
+    public Object handle(Object obj) {
 
         if (!(obj instanceof RequestWrapper request)) {
             System.out.println("Unknown object received: " + obj);
@@ -88,7 +88,7 @@ public class ClientActionHandler {
 //                );
 //            }
 
-            /*case ADD_USER -> {
+            case ADD_USER -> {
                 String username = (String) request.getData();
                 DBcon.createUser(username, "password123");
 
@@ -135,7 +135,7 @@ public class ClientActionHandler {
                         RequestType.GET_CHAT_MEMBERS,
                         DBcon.getChatMembers(chatID)
                 );
-            }*/
+            }
 
 //            case EDIT_MESSAGE -> {
 //                Message message = (Message) request.getData();
@@ -147,7 +147,7 @@ public class ClientActionHandler {
 //                );
 //            }
 
-        /*
+
             case DELETE_MESSAGE -> {
                 Message message = (Message) request.getData();
                 DBcon.deleteMsg(message);
@@ -188,9 +188,9 @@ public class ClientActionHandler {
 
         return objToReturn;
     }
-    */
+
 //
-    public Object handle(Object obj){
+    /*public Object handle(Object obj){
         Object objToReturn = null;
 
         if(obj instanceof SendMsgWrapper){
@@ -215,6 +215,7 @@ public class ClientActionHandler {
 //        getChatMembers
 //        getAvailableChats*/
 //
-        return objToReturn;
+        /*return objToReturn;
     }
+    */
 }
