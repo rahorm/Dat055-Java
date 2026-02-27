@@ -85,13 +85,17 @@ public class Controller {
         lösenord korrekt -> set active user, returna login_succesful
 
         */
-        if(!checkUser(user)){
+        if(!facade.checkUser(user)){
             code = ReturnCode.USER_NOT_EXIST;
+        }
+
+        if(!facade.logIn(user, password)){
+            code = ReturnCode.INCORRECT_PASSWORD;
         }
 
         //ChatRoomFacade facade = Model.ChatRoomFacade.getInstance(); //test
         //facade.setActiveUser(user);// För att prova att skicka meddelanden
-        return ;
+        return code;
     }
 
     /**
@@ -100,7 +104,8 @@ public class Controller {
      * @param user String input that will be the users displayed name, not identifier in the system
      * @throws IllegalArgumentException if input is not a string
      * */
-    public void createUser(String user, String password) {
+    //@todo implement signUp
+    public void signUp(String user, String password) {
         if (user == null || user.isEmpty()) {
             throw new IllegalArgumentException("Username must not be null or empty");
         }

@@ -122,7 +122,7 @@ public final class ChatRoomFacade extends Observable {
     serverConnection.addChatMember(user);
 }
 
-    /// ----------------------------- Member <-> Server -----------------------------
+
     /**
      * Removes a user from the member list of this chat room.
      * If the user is not a member, nothing happens.
@@ -174,6 +174,35 @@ public void removeMessage(Message message) {
     messages.remove(message);
 }
 
+    /**
+     * Checks if a username is present in the database
+     * @param username username to check
+     * @return if username is present in database
+     */
+    public boolean checkUser(String username){
+        //@todo implement check user
+        return true;
+    }
+
+    /**
+     * Checks if users credentials matches saved ones
+     * @param username username of user trying to log in
+     * @param password password user is trying to log in with
+     * @return if users credentials are correct
+     */
+    public boolean logIn(String username, String password){
+        //@todo implement login
+        return true;
+    }
+
+    /**
+     * Adds a user to the database
+     * @param username username of user to add
+     * @param password password user wants to use to log in
+     */
+    public void createUser(String username, String password){
+        //@todo implement create userd
+    }
 
 // Duplicated method, existed both in facade and model ???
     public String getActiveUser() {
