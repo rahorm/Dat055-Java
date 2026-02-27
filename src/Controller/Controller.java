@@ -64,35 +64,6 @@ public class Controller {
     }
 
     /**
-     * Creates a new user of the type User
-     *
-     * @param user String input that will be the users displayed name, not identifier in the system
-     * @throws IllegalArgumentException if input is not a string
-     * */
-    public void createUser(String user) {
-        if (user == null || user.isEmpty()) {
-            throw new IllegalArgumentException("Username must not be null or empty");
-        }
-        facade.addMember(user);
-    }
-
-    /**
-     * Outputs the id of the current user
-     *
-     * @return  id int for the current user
-     * @throws IllegalStateException if the program is in a state where user has not been chosen yet
-     * */
-    public String checkUser() {
-        String activeUser = facade.getActiveUser();
-
-        if (activeUser == null) {
-            throw new IllegalStateException("No active user set");
-        }
-
-        return activeUser;
-    }
-
-    /**
      * sets the active user to the input id
      *
      * @param user String that represents id of a user in the system
@@ -102,9 +73,46 @@ public class Controller {
         facade.addMember(user);
     }
 
+    /**
+     * Checks if user is present in database
+     *
+     * @return if user exists or not
+     * @throws IllegalStateException if the program is in a state where user has not been chosen yet
+     * */
+    //@todo implement - check if user in database
+    public boolean checkUser() {
+        String activeUser = facade.getActiveUser();
+
+        if (activeUser == null) {
+            throw new IllegalStateException("No active user set");
+        }
+
+        return true;
+    }
+
     public boolean login(String user, String password){
+        /*
+        kolla om användaren finns
+        om ja, kolla lösenord
+        om nej, skicka felmeddelande
+        lösenord korrekt -> set active user
+
+        */
         ChatRoomFacade facade = Model.ChatRoomFacade.getInstance(); //test
         facade.setActiveUser(user);// För att prova att skicka meddelanden
         return true;
+    }
+
+    /**
+     * Creates a new user of the type User
+     *
+     * @param user String input that will be the users displayed name, not identifier in the system
+     * @throws IllegalArgumentException if input is not a string
+     * */
+    public void createUser(String user, String password) {
+        if (user == null || user.isEmpty()) {
+            throw new IllegalArgumentException("Username must not be null or empty");
+        }
+        facade.addMember(user);
     }
 }

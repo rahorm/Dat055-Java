@@ -100,7 +100,6 @@ public class ChatRoomModel {
         this.chatID = chatID;
     }
 
-
     public void removeChatRoom(int chatID) { // I don't know how to remove an existing model!!!! - choi
         System.out.println("model wants to remove chatroom right now");
     }
