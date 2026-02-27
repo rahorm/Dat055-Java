@@ -85,10 +85,14 @@ public class ServerConnection {
 
 //---------------------------------User med nya wrappers-----------------------------
 
-    //@todo implemenetera check_user
-    public void checkUserExists(String username){}
+
+    public boolean checkUserExists(String username){
+        serverHandler.broadcastMessage(new RequestWrapper(RequestType.CHECK_USER, username));
+        return true;
+    }
 
     //@todo implementera check login
+    //@todo använd userdata
     public void checkLogin(String username, String password){}
 
 
@@ -100,6 +104,7 @@ public class ServerConnection {
      *
      * @param username String id of user
      */
+    //@todo använd userdata
     public void createUser(String username, String password){
         serverHandler.broadcastMessage(
                 new RequestWrapper(RequestType.ADD_USER, username));
@@ -115,6 +120,7 @@ public class ServerConnection {
      *
      * @param user int id of user to be deleted
      */
+    //@todo använd string username
     public void deleteUser(int user){
         serverHandler.broadcastMessage(
                 new RequestWrapper(RequestType.DELETE_USER, user));

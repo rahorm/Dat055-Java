@@ -74,6 +74,7 @@ public class ClientActionHandler {
                         exists
                 );
             }
+//@todo använd userdata
 
 //            case CHECK_LOGIN -> {
 //                String username = (String) request.getData();
@@ -87,8 +88,8 @@ public class ClientActionHandler {
 //                        valid
 //                );
 //            }
+//@todo använd userdata
 
-            //@todo fix password
             case ADD_USER -> {
                 String username = (String) request.getData();
                 DBcon.createUser(username, "password123");
@@ -176,7 +177,7 @@ public class ClientActionHandler {
                         DBcon.getChatMembers(chatID)
                 );
             }
-
+//@todo FIX HARDCODED HERE!!!!
             case GET_AVAILABLE_CHATS -> {
                 objToReturn = new RequestWrapper(
                         RequestType.GET_AVAILABLE_CHATS,

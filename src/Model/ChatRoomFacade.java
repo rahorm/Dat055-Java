@@ -180,8 +180,7 @@ public void removeMessage(Message message) {
      * @return if username is present in database
      */
     public boolean checkUser(String username){
-        //@todo implement check user
-        return true;
+        return serverConnection.checkUserExists(username);
     }
 
     /**
