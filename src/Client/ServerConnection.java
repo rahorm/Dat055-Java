@@ -1,22 +1,8 @@
 package Client;
 
-//import Common.AddChatRoomWrapper;
-//// Wrappers som inte är implementerade än
-//import Common.DeleteChatRoomWrapper;
-//import Common.DeleteMessageWrapper;
-//import Common.SendMsgWrapper;
-//import Common.MsgHistoryWrapper;
-//import Common.CreateUserWrapper;
-//import Common.DeleteUserWrapper;
-//import Common.GetChatMembersWrapper;
-//import Common.AddChatMemberWrapper;
-//import Common.RemoveChatMemberWrapper;
-//import Common.GetAvailableChatsWrapper;
-
-
 import Common.RequestType;
 import Common.RequestWrapper;
-import Common.SendMsgWrapper;
+//import Common.SendMsgWrapper;
 import Other.Message;
 import java.net.Socket;
 import java.sql.*;
