@@ -84,19 +84,25 @@ public class ServerConnection {
     }
 
 //---------------------------------User med nya wrappers-----------------------------
+
+    //@todo implemenetera check_user
+    public void checkUserExists(String username){}
+
+    //@todo implementera check login
+    public void checkLogin(String username, String password){}
+
+
     /**
      * Creates a new user in the database
      * </p>
      * The parameter userName is the intended display name of the user. The user will recieve an id for internal use.
      * This method returns an int, 0, if no problems were encountered.
      *
-     * @param user String id of user
+     * @param username String id of user
      */
-
-    //Int för Id eller string?
-    public void createUser(int user){
+    public void createUser(String username, String password){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.ADD_USER, user));
+                new RequestWrapper(RequestType.ADD_USER, username));
     }
 
     /**

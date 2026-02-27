@@ -1,13 +1,15 @@
 package Controller;
 
 import Model.ChatRoomFacade;
+import Other.ReturnCode;
+import Server.DatabaseConnection;
 
 public class Controller {
 
     private final ChatRoomFacade facade;
 
-    public Controller(ChatRoomFacade modelF) {
-        this.facade = modelF;
+    public Controller(ChatRoomFacade chatFacade) {
+        this.facade = chatFacade;
     }
 
     /**
@@ -73,34 +75,23 @@ public class Controller {
         facade.addMember(user);
     }
 
-    /**
-     * Checks if user is present in database
-     *
-     * @return if user exists or not
-     * @throws IllegalStateException if the program is in a state where user has not been chosen yet
-     * */
-    //@todo implement - check if user in database
-    public boolean checkUser() {
-        String activeUser = facade.getActiveUser();
 
-        if (activeUser == null) {
-            throw new IllegalStateException("No active user set");
-        }
-
-        return true;
-    }
-
-    public boolean login(String user, String password){
+    public ReturnCode login(String user, String password){
+        ReturnCode code;
         /*
         kolla om användaren finns
         om ja, kolla lösenord
-        om nej, skicka felmeddelande
-        lösenord korrekt -> set active user
+        om nej, skicka usernotexist
+        lösenord korrekt -> set active user, returna login_succesful
 
         */
-        ChatRoomFacade facade = Model.ChatRoomFacade.getInstance(); //test
-        facade.setActiveUser(user);// För att prova att skicka meddelanden
-        return true;
+        if(!checkUser(user)){
+            code = ReturnCode.USER_NOT_EXIST;
+        }
+
+        //ChatRoomFacade facade = Model.ChatRoomFacade.getInstance(); //test
+        //facade.setActiveUser(user);// För att prova att skicka meddelanden
+        return ;
     }
 
     /**
