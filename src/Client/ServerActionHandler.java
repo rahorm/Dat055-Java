@@ -1,6 +1,5 @@
 package Client;
 
-import Common.MsgHistoryWrapper;
 import Common.RequestWrapper;
 import Model.ChatRoomFacade;
 import Model.ChatRoomModel;

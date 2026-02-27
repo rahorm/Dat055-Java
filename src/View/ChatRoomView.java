@@ -30,13 +30,7 @@ public class ChatRoomView implements Observer {
         this.model = model;
         this.ui = new UI(controller);
         model.addObserver(this);
-        ArrayList<Message> msg = new ArrayList<Message>();
-        msg.add(new Message("user1", 1, "a message"));
-        msg.add(new Message("user2", 1, "another message"));
-        msg.add(new Message("user1", 1, "a reply"));
-        msg.add(new Message("user2", 1, ":)"));
-        msg.add(new Message("user1", 1, ":)))))"));
-        ui.setMsg(msg);
+        ui.setMsg(model.getMSGList());
 
     }
 }
