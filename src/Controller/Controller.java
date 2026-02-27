@@ -78,13 +78,7 @@ public class Controller {
 
     public ReturnCode login(String user, String password){
         ReturnCode code;
-        /*
-        kolla om användaren finns
-        om ja, kolla lösenord
-        om nej, skicka usernotexist
-        lösenord korrekt -> set active user, returna login_succesful
 
-        */
         if(!facade.checkUser(user)){
             code = ReturnCode.USER_NOT_EXIST;
         }
@@ -93,8 +87,8 @@ public class Controller {
             code = ReturnCode.INCORRECT_PASSWORD;
         }
 
-        //ChatRoomFacade facade = Model.ChatRoomFacade.getInstance(); //test
-        //facade.setActiveUser(user);// För att prova att skicka meddelanden
+        code = ReturnCode.LOGIN_SUCCESSFUL;
+
         return code;
     }
 
