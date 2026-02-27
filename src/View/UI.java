@@ -8,10 +8,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class UI {
     JFrame frame;
+    JFrame messageFrame;
+    JList<Message> messageList;
     Controller controller;
+    JTextField roomInput;
+    JTextField removeChatInput;
     JTextArea messages;
     JTextArea messageInput;
     JTextField usernameInput;
@@ -23,6 +28,19 @@ public class UI {
         messages.setColumns(20);
         messages.setRows(10);
 
+        this.roomInput = new JTextField();
+        roomInput.setColumns(20);
+
+        this.removeChatInput = new JTextField();
+        removeChatInput.setColumns(20);
+
+        this.messageList = new JList<Message>();
+        messageList.setCellRenderer(new MessageRenderer());
+
+        this.messageFrame = new JFrame();
+        messageFrame.setLayout(new GridBagLayout());
+        //messageFrame.add(messageList);
+        //messageFrame.add(messageInput);
 
         this.controller = controller;
 
@@ -41,29 +59,36 @@ public class UI {
         frame = new JFrame();
         Container contentPane = frame.getContentPane();
 
-        //testknapp
-        JButton btn = new JButton();
-        btn.addActionListener((_) -> System.out.println("hallo"));
-        btn.setSize(100, 100);
-
         //skickar ett meddelande till servern
-        JButton btn2 = new JButton("send message");
-        btn2.addActionListener((_) -> controller.sendMessage(messageInput.getText(), "User1"));
-        btn2.setSize(100, 100);
+        JButton messageBtn = new JButton("send message");
+        messageBtn.addActionListener((_) -> controller.sendMessage(messageInput.getText(), "User1"));
 
         //loggar in som en användare
         JButton loginBtn = new JButton("login");
         //@TODO skapa loginmetod i controller och använd getpassword istället för gettext;
         loginBtn.addActionListener((_) -> controller.login(usernameInput.getText(), passwordInput.getText()));
 
+        JButton changeRoomBtn = new JButton("change room");
+        changeRoomBtn.addActionListener((_) -> controller.changeActiveRoom(Integer.parseInt(roomInput.getText())));
+
+        JButton removeChatBtn = new JButton("remove chat");
+        removeChatBtn.addActionListener((_) -> controller.removeChatRoom(Integer.parseInt(removeChatInput.getText())));
+
         //lägger till knappar till ui:n
-        //frame.add(btn);
-        contentPane.add(btn2);
-        contentPane.add(messages);
+        contentPane.add(messageBtn);
+        //contentPane.add(messages);
         contentPane.add(messageInput);
         contentPane.add(usernameInput);
         contentPane.add(passwordInput);
         contentPane.add(loginBtn);
+        JScrollPane messageListPane = new JScrollPane(messageList);
+        messageListPane.setPreferredSize(new Dimension(200, 200));
+        messageListPane.setMinimumSize(new Dimension(200, 20));
+        contentPane.add(messageListPane);
+        contentPane.add(removeChatBtn);
+        contentPane.add(removeChatInput);
+        contentPane.add(roomInput);
+        contentPane.add(changeRoomBtn);
 
         //constraints för springlayout
 
@@ -71,13 +96,15 @@ public class UI {
         layout.putConstraint("East", messageInput, 10, "East", contentPane);
 
         //position "Send Message" button
-        layout.putConstraint("North", btn2, 10, "South", messageInput);
-        layout.putConstraint("South", btn2, 10, "South", contentPane);
-        layout.putConstraint("East", btn2, 10, "East", contentPane);
+        layout.putConstraint("North", messageBtn, 10, "South", messageInput);
+        //layout.putConstraint("South", messageBtn, 10, "South", contentPane);
+        layout.putConstraint("East", messageBtn, 10, "East", contentPane);
 
-        //position message
-        layout.putConstraint("North", messageInput, 10, "South", messages);
-        layout.putConstraint("East", messages, 10, "East", contentPane);
+        //position messageListPane
+        layout.putConstraint("North", messageInput, 10, "South", messageListPane);
+        layout.putConstraint("East", contentPane, 10, "East", messageListPane);
+        layout.putConstraint("West", messageListPane, 10, "East", usernameInput);
+
 
         //position usernameInput
         layout.putConstraint("West", usernameInput, 10, "West", contentPane);
@@ -88,6 +115,18 @@ public class UI {
         //position för loginBtn
         layout.putConstraint("North", loginBtn, 10, "South", passwordInput);
 
+        //position för roomInput
+        layout.putConstraint("North", roomInput, 10, "South", loginBtn);
+
+        //position för changeRoomBtn
+        layout.putConstraint("North", changeRoomBtn, 10, "South", roomInput);
+
+        //position för removeChatInput
+        layout.putConstraint("North", removeChatInput, 10, "South", changeRoomBtn);
+
+        //position för removeChatBtn
+        layout.putConstraint("North", removeChatBtn, 10, "South", removeChatInput);
+
         //setup för fönstret
         frame.setSize(500, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,12 +135,15 @@ public class UI {
     }
 
     public void setMsg(ArrayList<Message> msg) {
+        /*
         String s = "";
         for (Message message : msg) {
             s = s.concat(message.getContent());
             s = s.concat("\n");
         }
         messages.setText(s);
-        frame.repaint();
+         */
+        Vector<Message> vector = new Vector<Message>(msg);
+        messageList.setListData(vector);
     }
 }
