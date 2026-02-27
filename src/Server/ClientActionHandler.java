@@ -65,12 +65,12 @@ public class ClientActionHandler {
                 );
             }
 
-            case GET_USERS -> {
+            case CHECK_USER -> {
                 String username = (String) request.getData();
                 boolean exists = DBcon.checkUserExists(username);
 
                 objToReturn = new RequestWrapper(
-                        RequestType.GET_USERS,
+                        RequestType.CHECK_USER,
                         exists
                 );
             }
