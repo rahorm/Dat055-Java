@@ -58,6 +58,7 @@ public class ServerActionHandler {
                 //facade.addMember(userName);
                 break;
 
+            //@todo lägga till case CheckUser
             default:
                 System.out.println("Unhandled request type: " + request.getType());
         }

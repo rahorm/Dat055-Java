@@ -215,7 +215,7 @@ MONA:
         bild id
         is msg
     [MONA] chat name (display name) implementation all over program (finns redan i databsen)
-
+    [] fixa att modellfacade actually används i serveractionhanlder
 
 # SEQUENCE DIAGRAM (?)
     [] add msg
