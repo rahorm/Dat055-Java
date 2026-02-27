@@ -183,7 +183,7 @@ MONA:
 # to-do:
     [X - CHOI] Implementera removeChatRoom i model, ska kalla på funktioner som tar bort cahtrummet från databasen.
         exists but poorly
-    [ADA] Clear message box after sending the msg
+    [X - ADA] Clear message box after sending the msg
     [X - ADA] load msg history when at launch or opening chat
     [MADDE] implement login all over program
         passwords

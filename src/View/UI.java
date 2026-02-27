@@ -61,7 +61,10 @@ public class UI {
 
         //skickar ett meddelande till servern
         JButton messageBtn = new JButton("send message");
-        messageBtn.addActionListener((_) -> controller.sendMessage(messageInput.getText(), "User1"));
+        messageBtn.addActionListener((_) -> {
+            controller.sendMessage(messageInput.getText(), "User1");
+            messageInput.setText("");
+        });
 
         //loggar in som en användare
         JButton loginBtn = new JButton("login");
@@ -73,6 +76,9 @@ public class UI {
 
         JButton removeChatBtn = new JButton("remove chat");
         removeChatBtn.addActionListener((_) -> controller.removeChatRoom(Integer.parseInt(removeChatInput.getText())));
+
+        JButton signUpBtn = new JButton("sign up");
+        signUpBtn.addActionListener((_) -> controller.signUp(usernameInput.getText(), passwordInput.getText()));
 
         //lägger till knappar till ui:n
         contentPane.add(messageBtn);
