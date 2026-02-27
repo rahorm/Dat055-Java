@@ -214,6 +214,7 @@ MONA:
 
     [] edit msg
     [] pictures
+    [X Mona] update UML- ALLL wrappers gone + connect to ServerActionHandler
 
 # SEQUENCE DIAGRAM (?)
     [] add msg
