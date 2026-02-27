@@ -181,38 +181,49 @@ MONA:
     implementation can be done similarly throughout the program.
 
 # to-do:
-    [] Implementera removeChatRoom i model, ska kalla på funktioner som tar bort cahtrummet från databasen.
+    [X - CHOI] Implementera removeChatRoom i model, ska kalla på funktioner som tar bort cahtrummet från databasen.
         exists but poorly
-    [] Clear message box after sending the msg
-    [] load msg history when at launch or opening chat
-    [] implement login all over program
+    [ADA] Clear message box after sending the msg
+    [X - ADA] load msg history when at launch or opening chat
+    [MADDE] implement login all over program
         passwords
         logic exists in database
         error messages
-    [] create user (sign up box)
-        controller - needs password
-        serverconn - needs usrname, password
-        (add member används i detta syfte i facaden, det ärnog fel, kolla in på det)
-        lägg till create user i facade?
-    [] scrollable msg box
-    [] write which user has made which msg
-    [] -||- timestamp
+    [ADA] create user (sign up box)
+        [MADDE] rest of program
+            controller - needs password
+            serverconn - needs usrname, password
+            (add member används i detta syfte i facaden, det ärnog fel, kolla in på det)
+            lägg till create user i facade?
+    [X - ADA] scrollable msg box
+    [X - ADA] write which user has made which msg
+    [ADA] -||- timestamp
     [] funktion för att ladda upp bilder i databasen
+        [ADA] knapp
+        [ANDY] över programet
+        [MADDE] nätverk/databas
     [] create new chat
-    [] display available chats
+        [ADA] knapp
+        [MONA] över program
+    [] logic for knowing available chats
+    [ADA] display available chats
     [] add members to chat
-    [] picture msg subclass
+        [ADA] GUI
+        [ANDY] överallt
+    [CHOI] picture msg subclass
         byte array
         bild id
         is msg
-    [] chat name implementation all over program (finns redan i databsen)
-    []
+    [MONA] chat name (display name) implementation all over program (finns redan i databsen)
 
-    [] edit msg
-    [] pictures
 
 # SEQUENCE DIAGRAM (?)
     [] add msg
-    []
+    [] edit messages (or delete code for  it?)
+
+# THOUGHTS
+ - create new chat
+    - put current user in it
+    - update available chat
 
 
