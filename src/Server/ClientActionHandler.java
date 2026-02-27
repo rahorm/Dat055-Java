@@ -88,6 +88,7 @@ public class ClientActionHandler {
 //                );
 //            }
 
+            //@todo fix password
             case ADD_USER -> {
                 String username = (String) request.getData();
                 DBcon.createUser(username, "password123");
