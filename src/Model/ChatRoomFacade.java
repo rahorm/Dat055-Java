@@ -200,6 +200,7 @@ public void removeMessage(Message message) {
      * @param password password user wants to use to log in
      */
     public void createUser(String username, String password){
+        serverConnection.createUser(username, password);
         //@todo implement create userd
     }
 

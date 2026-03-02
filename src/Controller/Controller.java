@@ -99,11 +99,13 @@ public class Controller {
      * @param user String input that will be the users displayed name, not identifier in the system
      * @throws IllegalArgumentException if input is not a string
      * */
-    //@todo implement signUp
+
     public void signUp(String user, String password) {
         if (user == null || user.isEmpty()) {
             throw new IllegalArgumentException("Username must not be null or empty");
         }
-        facade.addMember(user);
+        //@todo add checkUser before
+        facade.createUser(user, password);
+        // Wrong? facade.addMember(user); //why add member??
     }
 }
