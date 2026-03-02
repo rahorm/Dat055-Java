@@ -177,6 +177,31 @@ public final class DatabaseConnection {
     }
 
     /**
+     * Gets an image attached to the specified message from the database.
+     * @param msgId id of the message image is attached to
+     * @return byte[] returns the stored image as a byte array
+     */
+    public byte[] getImg(int msgId){
+        byte[] image = null;
+
+        try (PreparedStatement ps = conn.prepareStatement(
+                "SELECT image FROM chatmessages INNER JOIN Images USING (imgId) WHERE msgId = ?");){
+            ps.setInt(1, msgId);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()) {
+                image = rs.getBytes(1);
+
+            }
+
+        } catch (Exception e) {
+            System.out.println("ERROR: "+e.getMessage());
+        }
+
+        return image;
+    }
+
+    /**
      * Inserts a given message into the database
      * Uses table ChatMessages
      * Unique id required, user and chat must exist
@@ -204,10 +229,9 @@ public final class DatabaseConnection {
         IdGenerator idg = IdGenerator.getInstance();
         int imgId = idg.generateId();
 
-
         try(PreparedStatement ps = conn.prepareStatement(
                 "INSERT INTO ChatMessages VALUES (?, ?, ?, ?, ?, ?, ?)");){
-            ps.setInt(1, msg.getMessageID()); //needs fixing
+            ps.setInt(1, msg.getMessageID());
             ps.setInt(2, msg.getChatID());
             ps.setString(3, msg.getSender());
             ps.setTimestamp(4, Timestamp.valueOf(msg.getTimestamp().withNano(0)));
@@ -416,8 +440,6 @@ public final class DatabaseConnection {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DatabaseConnection DBconn = DatabaseConnection.getInstance();
         //DBconn.uploadImg();
-
-        //BufferedImage img = ImageIO.read(new ByteArrayInputStream(bytes));
     }
 
 }
