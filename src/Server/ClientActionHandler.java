@@ -175,11 +175,12 @@ public class ClientActionHandler {
                         DBcon.getChatMembers(chatID)
                 );
             }
-//@todo FIX HARDCODED HERE!!!!
+
             case GET_AVAILABLE_CHATS -> {
+                String user = (String) request.getData();
                 objToReturn = new RequestWrapper(
                         RequestType.GET_AVAILABLE_CHATS,
-                        DBcon.getAvailableChats("User1")
+                        DBcon.getAvailableChats(user)
                 );
             }
 
