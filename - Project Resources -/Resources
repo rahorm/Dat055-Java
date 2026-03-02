@@ -205,7 +205,6 @@ MONA:
         [ADA] knapp
         [ANDY] över programet
         [X MADDE] nätverk/databas
-        /* Upload image tar en file path som argument rn, får kolla om detta ska ändras */
     [] create new chat
         [ADA] knapp
         [MONA] över program
