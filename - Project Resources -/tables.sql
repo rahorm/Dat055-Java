@@ -6,6 +6,7 @@ In file inserts.sql, run all queries in the file, this fills all the tables with
 *******************************************************************************************/
 
 -- STEP 1 --
+DROP TABLE Images;
 DROP TABLE ChatMessages;
 DROP TABLE ChatMembers;
 DROP TABLE Users;
@@ -16,7 +17,7 @@ CREATE TABLE Users(
     username TEXT,
     pswd TEXT NOT NULL,
     PRIMARY KEY (username)
-); 
+);
 
 CREATE TABLE Chats(
     chatId INT,
@@ -43,7 +44,9 @@ CREATE TABLE ChatMessages(
     time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     content TEXT NOT NULL, --kan det vara null?, text can förvara upp till 65535 chars ~typ 20 sidor
     hasImg BOOLEAN NOT NULL,
+    imgId INT,
     PRIMARY KEY (msgId),
+    CHECK(hasImg AND (imgId IS NOT NULL)),
     FOREIGN KEY (chat) REFERENCES Chats(chatId)
         ON DELETE CASCADE
          ON UPDATE CASCADE,
@@ -55,10 +58,13 @@ CREATE TABLE ChatMessages(
          ON UPDATE CASCADE
 );
 
+------- Inte testad ---------------
 CREATE TABLE Images(
     imgId INT,
     message INT NOT NULL,
     image BYTEA NOT NULL,
     PRIMARY KEY (imgId),
     FOREIGN KEY (message) REFERENCES ChatMessages(msgId)
+        ON DELETE CASCADE
+         ON UPDATE CASCADE
 );

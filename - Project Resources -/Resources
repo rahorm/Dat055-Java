@@ -196,7 +196,7 @@ MONA:
         [\ MADDE] rest of program (*Basic implementation done, need to add checkUserExists*)
             controller - needs password
             serverconn - needs usrname, password
-            (add member används i detta syfte i facaden, det ärnog fel, kolla in på det)
+            (add member används i detta syfte i facaden, det är nog fel, kolla in på det)
             lägg till create user i facade?
     [X - ADA] scrollable msg box
     [X - ADA] write which user has made which msg
