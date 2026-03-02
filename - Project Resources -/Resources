@@ -193,7 +193,7 @@ MONA:
         logic exists in database
         error messages
     [ADA] create user (sign up box)
-        [MADDE] rest of program
+        [\ MADDE] rest of program (*Basic implementation done, need to add checkUserExists*)
             controller - needs password
             serverconn - needs usrname, password
             (add member används i detta syfte i facaden, det ärnog fel, kolla in på det)
@@ -204,7 +204,7 @@ MONA:
     [] funktion för att ladda upp bilder i databasen
         [ADA] knapp
         [ANDY] över programet
-        [X MADDE] nätverk/databas
+        [MADDE] nätverk/databas
     [] create new chat
         [ADA] knapp
         [MONA] över program
