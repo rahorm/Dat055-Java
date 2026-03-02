@@ -1,6 +1,7 @@
 package Server;
 
 //import Common.MsgHistoryWrapper;
+import Common.ChatData;
 import Common.RequestType;
 import Common.RequestWrapper;
 //import Common.SendMsgWrapper;
@@ -45,8 +46,8 @@ public class ClientActionHandler {
             }
 
             case ADD_CHATROOM -> {
-                String chatRoomName = (String) request.getData();
-                DBcon.createChatRoom(666, chatRoomName);
+                ChatData chatData = (ChatData) request.getData();
+                DBcon.createChatRoom(chatData.getChatId(), chatData.getChatName());
                 ChatRoomFacade model = ChatRoomFacade.getInstance();
 
                 objToReturn = new RequestWrapper(

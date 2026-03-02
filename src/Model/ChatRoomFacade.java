@@ -48,11 +48,11 @@ public final class ChatRoomFacade extends Observable {
     }
 
     /// ----------------------------- ChatRoom <-> Server -----------------------------
-    public void createChatRoom() {
+    public void createChatRoom(String chatName) {
         IdGenerator idGen = IdGenerator.getInstance();
         int new_id = idGen.generateId();
 
-        serverConnection.createChatRoom(new_id);
+        serverConnection.createChatRoom(new_id, chatName);
         serverConnection.addChatMember(model.getActiveUser());  // adding myself or inviting a new member?
 
         // changeActiveRoom to be called either here or in the controller

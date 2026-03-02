@@ -1,5 +1,6 @@
 package Client;
 
+import Common.ChatData;
 import Common.RequestType;
 import Common.RequestWrapper;
 //import Common.SendMsgWrapper;
@@ -66,9 +67,9 @@ public class ServerConnection {
      *
      * @param chatId int name of chat
      */
-    public void createChatRoom(int chatId){
+    public void createChatRoom(int chatId, String chatName){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.ADD_CHATROOM, chatId));
+                new RequestWrapper(RequestType.ADD_CHATROOM, new ChatData(chatId, chatName)));
     }
 
     /**
