@@ -2,7 +2,8 @@ package  Server;
 
 import Other.Message;
 
-import java.io.IOException;
+import javax.swing.*;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
@@ -348,25 +349,45 @@ public final class DatabaseConnection {
 
     }
 
-    public void uploadImg(){
-        byte[] array = null;
-        try {
-            array = Files.readAllBytes(Paths.get("C:\\Users\\Madelene\\Pictures\\Notion"));
-        } catch (IOException e) {
-            System.out.println("ERROR: "+e.getMessage());
+    public void uploadImg() {
+        File file = new File("C:\\Users\\Madelene\\One.jpg");
+        byte[] fileContent = null;
 
+        try {
+            fileContent = Files.readAllBytes(file.toPath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
+        /*FileInputStream fis = new FileInputStream(file);
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] buf = new byte[1024];
+        try {
+            for (int readNum; (readNum = fis.read(buf)) != -1;) {
+                bos.write(buf, 0, readNum);
+                //no doubt here is 0
+
+                System.out.println("read " + readNum + " bytes,");
+            }
+        } catch (IOException e) {
+            System.out.println("ERROR: "+ e.getMessage());
+        }
+        byte[] bytes = bos.toByteArray();
+*/
 
         //imgId, message, byteA
         try(PreparedStatement ps = conn.prepareStatement(
                 "INSERT INTO Images VALUES (?, ?, ?)");){
-            ps.setInt(1, 1); //needs fixing
+            ps.setInt(1, 14);
             ps.setInt(2, 134);
-            ps.setBytes(3, array);
+            ps.setBytes(3, fileContent);
             ps.executeUpdate();
         }  catch (SQLException e) {
             System.out.println("{\"error\":\""+getError(e)+"\"}");
         }
+
+
 
     }
 
@@ -381,8 +402,9 @@ public final class DatabaseConnection {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DatabaseConnection DBconn = DatabaseConnection.getInstance();
-        Message msg = new Message();
-        DBconn.sendMsg(msg);
+        DBconn.uploadImg();
 
+        //BufferedImage img = ImageIO.read(new ByteArrayInputStream(bytes));
     }
+
 }
