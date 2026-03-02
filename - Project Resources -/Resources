@@ -204,7 +204,7 @@ MONA:
     [] funktion för att ladda upp bilder i databasen
         [ADA] knapp
         [ANDY] över programet
-        [MADDE] nätverk/databas
+        [X MADDE] nätverk/databas
         /* Upload image tar en file path som argument rn, får kolla om detta ska ändras */
     [] create new chat
         [ADA] knapp

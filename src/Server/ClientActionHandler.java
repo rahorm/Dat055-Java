@@ -36,6 +36,7 @@ public class ClientActionHandler {
         switch (request.getType()) {
 
             case ADD_MESSAGE -> {
+                //@todo Kolla om det behöver vara olika requests för message och PictureMessage
                 Message message = (Message) request.getData();
                 DBcon.sendMsg(message);
 
