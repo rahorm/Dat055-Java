@@ -2,6 +2,9 @@ package  Server;
 
 import Other.Message;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -248,7 +251,6 @@ public final class DatabaseConnection {
         }
     }
 
-
     /**
      * !THIS CANNOT BE UNDONE!
      * Deletes a message from a chat
@@ -346,6 +348,27 @@ public final class DatabaseConnection {
 
     }
 
+    public void uploadImg(){
+        byte[] array = null;
+        try {
+            array = Files.readAllBytes(Paths.get("C:\\Users\\Madelene\\Pictures\\Notion"));
+        } catch (IOException e) {
+            System.out.println("ERROR: "+e.getMessage());
+
+        }
+
+        //imgId, message, byteA
+        try(PreparedStatement ps = conn.prepareStatement(
+                "INSERT INTO Images VALUES (?, ?, ?)");){
+            ps.setInt(1, 1); //needs fixing
+            ps.setInt(2, 134);
+            ps.setBytes(3, array);
+            ps.executeUpdate();
+        }  catch (SQLException e) {
+            System.out.println("{\"error\":\""+getError(e)+"\"}");
+        }
+
+    }
 
     // This is a hack to turn an SQLException into a JSON string error message. No need to change.
     public static String getError(SQLException e){
@@ -356,9 +379,10 @@ public final class DatabaseConnection {
        return message;
     }
 
-    /*public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DatabaseConnection DBconn = DatabaseConnection.getInstance();
-        Object obj = DBconn.checkLogin("User1", "Pswd1");
-        System.out.println("Output : " + obj);
-    }*/
+        Message msg = new Message();
+        DBconn.sendMsg(msg);
+
+    }
 }
