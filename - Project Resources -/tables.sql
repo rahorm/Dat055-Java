@@ -46,7 +46,8 @@ CREATE TABLE ChatMessages(
     hasImg BOOLEAN NOT NULL,
     imgId INT,
     PRIMARY KEY (msgId),
-    CHECK(hasImg AND (imgId IS NOT NULL)),
+    UNIQUE(imgId),
+    CHECK((hasImg AND (imgId IS NOT NULL)) OR (NOT hasImg AND (imgId IS NULL))),
     FOREIGN KEY (chat) REFERENCES Chats(chatId)
         ON DELETE CASCADE
          ON UPDATE CASCADE,
@@ -58,13 +59,16 @@ CREATE TABLE ChatMessages(
          ON UPDATE CASCADE
 );
 
-------- Inte testad ---------------
+
 CREATE TABLE Images(
     imgId INT,
     message INT NOT NULL,
     image BYTEA NOT NULL,
     PRIMARY KEY (imgId),
     FOREIGN KEY (message) REFERENCES ChatMessages(msgId)
+        ON DELETE CASCADE
+         ON UPDATE CASCADE,
+    FOREIGN KEY (imgId) REFERENCES ChatMessages(imgId)
         ON DELETE CASCADE
          ON UPDATE CASCADE
 );
