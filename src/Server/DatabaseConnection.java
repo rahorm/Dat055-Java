@@ -1,5 +1,6 @@
 package  Server;
 
+import Other.IdGenerator;
 import Other.Message;
 
 import javax.swing.*;
@@ -349,8 +350,13 @@ public final class DatabaseConnection {
 
     }
 
-    public void uploadImg() {
-        File file = new File("C:\\Users\\Madelene\\One.jpg");
+    /**
+     * Gives the image an id and uploads it to the database as a byte array
+     * @param msgId
+     * @param path
+     */
+    public void uploadImg(int msgId, String path) {
+        File file = new File(path);
         byte[] fileContent = null;
 
         try {
@@ -359,28 +365,15 @@ public final class DatabaseConnection {
             throw new RuntimeException(e);
         }
 
-        /*FileInputStream fis = new FileInputStream(file);
+        //Generates an image id
+        IdGenerator idg = IdGenerator.getInstance();
+        int imgId = idg.generateId();
 
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        byte[] buf = new byte[1024];
-        try {
-            for (int readNum; (readNum = fis.read(buf)) != -1;) {
-                bos.write(buf, 0, readNum);
-                //no doubt here is 0
-
-                System.out.println("read " + readNum + " bytes,");
-            }
-        } catch (IOException e) {
-            System.out.println("ERROR: "+ e.getMessage());
-        }
-        byte[] bytes = bos.toByteArray();
-*/
-
-        //imgId, message, byteA
+        //columns: imgId, message, byteA
         try(PreparedStatement ps = conn.prepareStatement(
                 "INSERT INTO Images VALUES (?, ?, ?)");){
-            ps.setInt(1, 14);
-            ps.setInt(2, 134);
+            ps.setInt(1, imgId);
+            ps.setInt(2, msgId);
             ps.setBytes(3, fileContent);
             ps.executeUpdate();
         }  catch (SQLException e) {
