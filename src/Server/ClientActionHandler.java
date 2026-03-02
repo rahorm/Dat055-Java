@@ -4,6 +4,7 @@ package Server;
 import Common.RequestType;
 import Common.RequestWrapper;
 //import Common.SendMsgWrapper;
+import Common.UserData;
 import Model.ChatRoomFacade;
 import Other.Message;
 
@@ -74,25 +75,22 @@ public class ClientActionHandler {
                         exists
                 );
             }
-//@todo använd userdata
 
-//            case CHECK_LOGIN -> {
-//                String username = (String) request.getData();
-//                boolean valid = DBcon.checkLogin(username);
-//                /************
-//                 * Behöver ha med passord också!!
-//                 ***********/
-//
-//                objToReturn = new RequestWrapper(
-//                        RequestType.CHECK_LOGIN,
-//                        valid
-//                );
-//            }
-//@todo använd userdata
+
+            case CHECK_LOGIN -> {
+                UserData userdata = (UserData) request.getData();
+                boolean valid = DBcon.checkLogin(userdata.getUsername(), userdata.getPassword());
+
+                objToReturn = new RequestWrapper(
+                        RequestType.CHECK_LOGIN,
+                        valid
+                );
+            }
+
 
             case ADD_USER -> {
-                String username = (String) request.getData();
-                DBcon.createUser(username, "password123");
+                UserData userdata = (UserData) request.getData();
+                DBcon.createUser(userdata.getUsername(), userdata.getPassword());
 
                 objToReturn = new RequestWrapper(
                         RequestType.ADD_USER,

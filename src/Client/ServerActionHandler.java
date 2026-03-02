@@ -58,7 +58,12 @@ public class ServerActionHandler {
                 //facade.addMember(userName);
                 break;
 
-            //@todo lägga till case CheckUser
+            case CHECK_USER:
+                boolean exists = (boolean) request.getData();
+                System.out.println("User exists: " + exists);
+                //facade.addMember(userName);
+                break;
+
             default:
                 System.out.println("Unhandled request type: " + request.getType());
         }

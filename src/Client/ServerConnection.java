@@ -3,6 +3,7 @@ package Client;
 import Common.RequestType;
 import Common.RequestWrapper;
 //import Common.SendMsgWrapper;
+import Common.UserData;
 import Other.Message;
 import java.net.Socket;
 import java.sql.*;
@@ -91,9 +92,11 @@ public class ServerConnection {
         return true;
     }
 
-    //@todo implementera check login
-    //@todo använd userdata
-    public void checkLogin(String username, String password){}
+
+    public void checkLogin(String username, String password){
+        serverHandler.broadcastMessage(
+                new RequestWrapper(RequestType.CHECK_LOGIN, new UserData(username, password)));
+    }
 
 
     /**
@@ -104,10 +107,10 @@ public class ServerConnection {
      *
      * @param username String id of user
      */
-    //@todo använd userdata
+
     public void createUser(String username, String password){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.ADD_USER, username));
+                new RequestWrapper(RequestType.ADD_USER, new UserData(username, password)));
     }
 
     /**
@@ -118,12 +121,12 @@ public class ServerConnection {
      * This cannot be undone.
      * This method returns an int, 0, if no problems were encountered.
      *
-     * @param user int id of user to be deleted
+     * @param username int id of user to be deleted
      */
-    //@todo använd string username
-    public void deleteUser(int user){
+
+    public void deleteUser(String username){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.DELETE_USER, user));
+                new RequestWrapper(RequestType.DELETE_USER, username));
     }
 
     //---------------------------------Chat med nya wrappers---------------------------------
