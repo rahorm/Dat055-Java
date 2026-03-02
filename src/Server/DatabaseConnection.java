@@ -2,6 +2,7 @@ package  Server;
 
 import Other.IdGenerator;
 import Other.Message;
+import Other.PictureMessage;
 
 import javax.swing.*;
 import java.io.*;
@@ -147,6 +148,35 @@ public final class DatabaseConnection {
     }
 
     /**
+     * Uploads an image to the database as a byte array
+     * @param imgId what id to give the image
+     * @param msgId what message the image is linked to
+     * @param path the path of the image, locally on the computer
+     */
+    private void uploadImg(int imgId, int msgId, String path) {
+        File file = new File(path);
+        byte[] fileContent = null;
+
+        try {
+            fileContent = Files.readAllBytes(file.toPath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        //columns: imgId, message, byteA
+        try(PreparedStatement ps = conn.prepareStatement(
+                "INSERT INTO Images VALUES (?, ?, ?)");){
+            ps.setInt(1, imgId);
+            ps.setInt(2, msgId);
+            ps.setBytes(3, fileContent);
+            ps.executeUpdate();
+        }  catch (SQLException e) {
+            System.out.println("{\"error\":\""+getError(e)+"\"}");
+        }
+
+    }
+
+    /**
      * Inserts a given message into the database
      * Uses table ChatMessages
      * Unique id required, user and chat must exist
@@ -156,16 +186,40 @@ public final class DatabaseConnection {
     public void sendMsg(Message msg){
         try(PreparedStatement ps = conn.prepareStatement(
                 "INSERT INTO ChatMessages VALUES (?, ?, ?, ?, ?, ?)");){
+            ps.setInt(1, msg.getMessageID());
+            ps.setInt(2, msg.getChatID());
+            ps.setString(3, msg.getSender());
+            ps.setTimestamp(4, Timestamp.valueOf(msg.getTimestamp().withNano(0)));
+            ps.setString(5, msg.getContent());
+            ps.setBoolean(6, false);
+            ps.executeUpdate();
+        }  catch (SQLException e) {
+            System.out.println("{\"error\":\""+getError(e)+"\"}");
+        }
+    }
+
+    public void sendMsg(PictureMessage msg){
+
+        //Generates an image id
+        IdGenerator idg = IdGenerator.getInstance();
+        int imgId = idg.generateId();
+
+
+        try(PreparedStatement ps = conn.prepareStatement(
+                "INSERT INTO ChatMessages VALUES (?, ?, ?, ?, ?, ?, ?)");){
             ps.setInt(1, msg.getMessageID()); //needs fixing
             ps.setInt(2, msg.getChatID());
             ps.setString(3, msg.getSender());
             ps.setTimestamp(4, Timestamp.valueOf(msg.getTimestamp().withNano(0)));
             ps.setString(5, msg.getContent());
-            ps.setBoolean(6, false); //needs fixing
+            ps.setBoolean(6, true);
+            ps.setInt(7, imgId);
             ps.executeUpdate();
         }  catch (SQLException e) {
             System.out.println("{\"error\":\""+getError(e)+"\"}");
         }
+
+        uploadImg(imgId, msg.getMessageID(), msg.getPath());
     }
 
     /**
@@ -350,40 +404,6 @@ public final class DatabaseConnection {
 
     }
 
-    /**
-     * Gives the image an id and uploads it to the database as a byte array
-     * @param msgId
-     * @param path
-     */
-    public void uploadImg(int msgId, String path) {
-        File file = new File(path);
-        byte[] fileContent = null;
-
-        try {
-            fileContent = Files.readAllBytes(file.toPath());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        //Generates an image id
-        IdGenerator idg = IdGenerator.getInstance();
-        int imgId = idg.generateId();
-
-        //columns: imgId, message, byteA
-        try(PreparedStatement ps = conn.prepareStatement(
-                "INSERT INTO Images VALUES (?, ?, ?)");){
-            ps.setInt(1, imgId);
-            ps.setInt(2, msgId);
-            ps.setBytes(3, fileContent);
-            ps.executeUpdate();
-        }  catch (SQLException e) {
-            System.out.println("{\"error\":\""+getError(e)+"\"}");
-        }
-
-
-
-    }
-
     // This is a hack to turn an SQLException into a JSON string error message. No need to change.
     public static String getError(SQLException e){
        String message = e.getMessage();
@@ -395,7 +415,7 @@ public final class DatabaseConnection {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         DatabaseConnection DBconn = DatabaseConnection.getInstance();
-        DBconn.uploadImg();
+        //DBconn.uploadImg();
 
         //BufferedImage img = ImageIO.read(new ByteArrayInputStream(bytes));
     }
