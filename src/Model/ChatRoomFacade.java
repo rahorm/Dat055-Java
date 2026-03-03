@@ -106,11 +106,6 @@ public final class ChatRoomFacade extends Observable {
 
 
 
-    /// ----------------------------- Message <-> UI -----------------------------
-    public ArrayList<Message> getMSGList(){
-
-        return model.retriveMSGList(); // how many elements to show?
-    }
 
 
     /// ----------------------------- Message <-> Server -----------------------------
