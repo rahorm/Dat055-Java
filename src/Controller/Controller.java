@@ -78,8 +78,8 @@ public class Controller {
 
 
     public void login(String user, String password){
-        facade.logIn(user, password);
         facade.setActiveUser(user);
+        facade.logIn(user, password);
         /*ReturnCode code;
 
         if(!facade.checkUser(user)){
@@ -107,6 +107,5 @@ public class Controller {
         }
         //@todo add checkUser before
         facade.createUser(user, password);
-        // Wrong? facade.addMember(user); //why add member??
     }
 }
