@@ -67,7 +67,7 @@ public class UI {
         //skickar ett meddelande till servern
         JButton messageBtn = new JButton("send message");
         messageBtn.addActionListener((_) -> {
-            controller.sendMessage(messageInput.getText(), "User1");
+            controller.sendMessage(messageInput.getText(), "User1"); //@todo hardcoded?
             messageInput.setText("");
         });
 

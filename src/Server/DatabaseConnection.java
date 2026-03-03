@@ -163,7 +163,7 @@ public final class DatabaseConnection {
             throw new RuntimeException(e);
         }
 
-        //columns: imgId, message, byteA
+        //columns: imgId, message, byteA @todo is this comment old, cant find byteA
         try(PreparedStatement ps = conn.prepareStatement(
                 "INSERT INTO Images VALUES (?, ?, ?)");){
             ps.setInt(1, imgId);

@@ -99,7 +99,6 @@ public class Controller {
      * @param user String input that will be the users displayed name, not identifier in the system
      * @throws IllegalArgumentException if input is not a string
      * */
-
     public void signUp(String user, String password) {
         if (user == null || user.isEmpty()) {
             throw new IllegalArgumentException("Username must not be null or empty");
