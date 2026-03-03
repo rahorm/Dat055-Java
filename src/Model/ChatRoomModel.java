@@ -19,6 +19,9 @@ public class ChatRoomModel {
     private String activeUser;
    // private final ArrayList<User> members = new ArrayList<>();
    // private User activeUser;
+
+    private final ArrayList<Integer> availableChatIds = new ArrayList<>();
+    private final ArrayList<String> availableChatNames = new ArrayList<>();
     private String username;
     private int chatID;
 
@@ -107,6 +110,12 @@ public class ChatRoomModel {
     /*public void removeChatRoom(int chatID) { // I don't know how to remove an existing model!!!! - choi
         System.out.println("model wants to remove chatroom right now");
     }*/
+
+
+    public void addAvailableChat(int chatId, String chatName) {
+        availableChatIds.add(chatId);
+        availableChatNames.add(chatName);
+    }
 }
 
 
