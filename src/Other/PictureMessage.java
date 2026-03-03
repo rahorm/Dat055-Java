@@ -14,4 +14,7 @@ public class PictureMessage extends Message{
     //@todo implement getter for path
     // this is just here as a placeholder
     public String getPath(){return "path";}
+
+    public boolean isEmpty() { return false; //@todo implement
+    }
 }
