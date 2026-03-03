@@ -222,7 +222,7 @@ public void removeMessage(Message message) {
      * Checks if users credentials matches saved ones
      * @param username username of user trying to log in
      * @param password password user is trying to log in with
-     * @return if users credentials are correct // Return type---> "how" is the question!
+     * @return if users credentials are correct
      */
     public void logIn(String username, String password){
         serverConnection.checkLogin(username, password); // Return type of CheckLogin in serverConnection to be boolean??

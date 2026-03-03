@@ -93,6 +93,8 @@ public class Controller {
         return code;*/
     }
 
+    public void addMember(String user) {facade.addMember(user);}
+
     /**
      * Creates a new user of the type User
      *

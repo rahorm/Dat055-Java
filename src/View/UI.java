@@ -1,12 +1,10 @@
 package View;
 
 import Controller.Controller;
-import Model.ChatRoomFacade;
 import Other.Message;
 
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -24,6 +22,7 @@ public class UI {
     JTextField usernameInput;
     JPasswordField passwordInput;
     JTextField newChatNameInput = new JTextField();
+    JTextField addMemberInput = new JTextField();
 
 
     public UI(Controller controller) {
@@ -60,6 +59,8 @@ public class UI {
         this.passwordInput = new JPasswordField();
         passwordInput.setColumns(20);
 
+        addMemberInput.setColumns(20);
+
         SpringLayout layout = new SpringLayout();
 
         frame = new JFrame();
@@ -90,6 +91,9 @@ public class UI {
         JButton createChatBtn = new JButton("create chat");
         createChatBtn.addActionListener((_) -> controller.addChatRoom(newChatNameInput.getText()));
 
+        JButton addMemberBtn = new JButton("add user");
+        addMemberBtn.addActionListener((_) -> controller.addMember(addMemberInput.getText()));
+
         //lägger till knappar till ui:n
         contentPane.add(messageBtn);
         //contentPane.add(messages);
@@ -117,6 +121,8 @@ public class UI {
         contentPane.add(removeChatInput);
         contentPane.add(roomInput);
         contentPane.add(changeRoomBtn);
+        contentPane.add(addMemberInput);
+        contentPane.add(addMemberBtn);
 
         //constraints för springlayout
         //pitfalls: write layout.putConstraint("North", thing1, pad, "South", thing2);
@@ -160,6 +166,12 @@ public class UI {
 
         //position för removeChatBtn
         layout.putConstraint("North", removeChatBtn, 10, "South", removeChatInput);
+
+        //position för addMemberInput
+        layout.putConstraint("North", addMemberInput, 10, "South", removeChatBtn);
+
+        //position för addMemberBtn
+        layout.putConstraint("North", addMemberBtn, 10, "South", addMemberInput);
 
         //setup för fönstret
         frame.setSize(500, 500);

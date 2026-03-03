@@ -221,9 +221,9 @@ Converting Image to Byte array
                                 chatId
                      -> [X MONA] Uppdatera i ChatRoomView och ServerActionHandler
     [X MONA] logic for knowing available chats
-    [ADA] display available chats
+    [X ADA] display available chats
     [] add members to chat
-        [ADA] GUI
+        [X - ADA] GUI
         [ANDY] överallt
     [CHOI] picture msg subclass
         byte array
