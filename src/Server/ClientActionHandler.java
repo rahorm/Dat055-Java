@@ -78,7 +78,6 @@ public class ClientActionHandler {
                 );
             }
 
-
             case CHECK_LOGIN -> {
                 UserData userdata = (UserData) request.getData();
                 boolean valid = DBcon.checkLogin(userdata.getUsername(), userdata.getPassword());
