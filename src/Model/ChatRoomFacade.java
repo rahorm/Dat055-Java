@@ -3,6 +3,7 @@ package Model;
 import Client.ServerConnection;
 import Other.IdGenerator;
 import Other.Message;
+import Server.DatabaseConnection;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -109,7 +110,7 @@ public final class ChatRoomFacade extends Observable {
 
     /// ----------------------------- Message <-> Server -----------------------------
     /**
-     * Uer writes a new message. Then this message information will be passed to the server
+     * User writes a new message. Then this message will be passed to the server
      * @param msg message that user write
      */
     public void storeMsg(String msg){
@@ -144,16 +145,17 @@ public final class ChatRoomFacade extends Observable {
     * @throws IllegalArgumentException if user is null
     */
     public void addMember(String user) {
-    if (user == null) {
-        throw new IllegalArgumentException("user must not be null");
-    }
+        if (user == null) {
+            throw new IllegalArgumentException("user must not be null");
+        }
 
-    ArrayList<String> members = model.retrieveUserList();
-    if (!members.contains(user)) {
-        model.addUser(user);
-    }
+        ArrayList<String> members = model.retrieveUserList();
 
-    serverConnection.addChatMember(user);
+        if (!members.contains(user)) {
+            model.addUser(user);
+        }
+
+        serverConnection.addChatMember(user);
 }
 
 
@@ -165,12 +167,12 @@ public final class ChatRoomFacade extends Observable {
      * @throws IllegalArgumentException if  user is null
      */
     public void removeMember(String user) {
-    if (user == null) {
-        throw new IllegalArgumentException("user must not be null");
-    }
-    model.removeUser(user);
+        if (user == null) {
+            throw new IllegalArgumentException("user must not be null");
+        }
+        model.removeUser(user);
 
-    serverConnection.removeChatMember(user);
+        serverConnection.removeChatMember(user);
 }
 
 
@@ -183,13 +185,11 @@ public final class ChatRoomFacade extends Observable {
      * @throws NullPointerException if  message is  null
      */
     public void addMessage(Message message) {
-    if (message == null) {
-        throw new IllegalArgumentException("message must not be null");
-    }
-    ArrayList<Message> messages = model.retriveMSGList();
-    messages.add(message);
-
-
+        if (message == null) {
+            throw new IllegalArgumentException("message must not be null");
+        }
+        ArrayList<Message> messages = model.retriveMSGList();
+        messages.add(message);
     // model.addMessage(message); <- can't we just use this method call instead of the above two lines?
 }
 
@@ -209,24 +209,24 @@ public void removeMessage(Message message) {
     messages.remove(message);
 }
 
-   /*/**
+    /**
      * Checks if a username is present in the database
      * @param username username to check
      * @return if username is present in database
      */
-    /*public boolean checkUser(String username){
+    public boolean checkUser(String username){
         return serverConnection.checkUserExists(username);
-    }*/
+    }
 
     /**
      * Checks if users credentials matches saved ones
      * @param username username of user trying to log in
      * @param password password user is trying to log in with
-     * @return if users credentials are correct
+     * @return if users credentials are correct // Return type---> "how" is the question!
      */
     public void logIn(String username, String password){
-        //@todo implement login
-        serverConnection.login(username, password); // Return type of CheckLogin in serverConnection to be boolean??
+        serverConnection.checkLogin(username, password); // Return type of CheckLogin in serverConnection to be boolean??
+                                                         // how can we verify is the question here
     }
 
     /**
@@ -235,12 +235,12 @@ public void removeMessage(Message message) {
      * @param password password user wants to use to log in
      */
     public void createUser(String username, String password){
+        serverConnection.createUser(username, password); // How to handle duplicated username?
+                                                         // This needs some sort of confirmation from server side as well
 
-        if(!serverConnection.createUser(username, password)){
-            throw new IllegalArgumentException("Username not valid");
-
-        }
-        else{model.setUsername(username);}
+        // If serverConnection.createUser succeeds -> can set this username as an activeUser.
+        // Or setActiveUser method can be called from server side directly using 'facade.setActiveUser' as well
+        model.setActiveUser(username);
     }
 
 

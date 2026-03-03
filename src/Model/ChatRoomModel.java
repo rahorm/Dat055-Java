@@ -17,8 +17,6 @@ public class ChatRoomModel {
     private ArrayList<Message> messages = new ArrayList<>();
     private final ArrayList<String> members = new ArrayList<>();
     private String activeUser;
-   // private final ArrayList<User> members = new ArrayList<>();
-   // private User activeUser;
 
     private final ArrayList<Integer> availableChatIds = new ArrayList<>();
     private final ArrayList<String> availableChatNames = new ArrayList<>();
@@ -85,7 +83,7 @@ public class ChatRoomModel {
 
     public void setActiveUser(String activeUser) {
 
-        this.activeUser = activeUser;  //  Lägg till / uppdatera
+        this.activeUser = activeUser;
     }
 
     public String getActiveUser(){
