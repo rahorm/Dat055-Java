@@ -174,7 +174,6 @@ public class ServerConnection {
         return new ArrayList<>(); // @todo what happens here? what will be in this arraylist?
     }
 
-
     /**
      * Gets the id's of all chats the specified user is a member in.
      * </p>
@@ -189,13 +188,14 @@ public class ServerConnection {
         return new ArrayList<>();
     }
 
-
-        public ServerHandler getServerHandler() {
-        return serverHandler;
-        }
-        public void setServerHandler(ServerHandler serverHandler) {
-        this.serverHandler = serverHandler;
+    //---------------------------------Getters and Setters---------------------------------
+    public ServerHandler getServerHandler() {
+    return serverHandler;
     }
+    public void setServerHandler(ServerHandler serverHandler) {
+    this.serverHandler = serverHandler;
+}
+
 }
 
 

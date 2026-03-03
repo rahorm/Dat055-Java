@@ -1,0 +1,397 @@
+// ANDY: I wanted to understand the UI fast so I made Claude explain it to me, maybe someone else would gain from reading this too
+
+/*
+package View;
+
+import Controller.Controller;
+import Model.ChatRoomFacade;
+import Other.Message;
+
+import javax.swing.*;
+import java.awt.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Vector;
+
+/**
+ * UI.java — The main graphical user interface for the chat application.
+ *
+ * This class builds and manages the application window using Java Swing.
+ *
+ * KEY CONCEPTS FOR BEGINNERS:
+ * ─────────────────────────────────────────────────────────────────────
+ * JFrame    → The actual window that appears on screen. Everything lives inside it.
+ * JPanel    → An invisible container used to group and organize other components.
+ * JButton   → A clickable button.
+ * JTextField→ A single-line text box the user can type in.
+ * JTextArea → A multi-line text box (good for messages or longer input).
+ * JList     → A scrollable list that displays a collection of items.
+ * JScrollPane → A wrapper that adds scroll bars to components like JList or JTextArea.
+ * SpringLayout → A layout manager that lets you position components by defining
+ *                relationships between their edges (e.g. "put this 10px below that").
+ *
+ * The Controller is the "brain" — the UI just sends user input to it and
+ * displays whatever data the Controller sends back.
+ */
+public class UI {
+
+    // ─────────────────────────────────────────────
+    // FIELDS — the components that make up the UI
+    // ─────────────────────────────────────────────
+
+    /** The main application window. */
+    JFrame frame;
+
+    /**
+     * A secondary window (currently unused/incomplete).
+     * Could be used to show messages in a separate popup.
+     */
+    JFrame messageFrame;
+
+    /**
+     * A JList that displays Message objects in the chat window.
+     * JList<Message> means it holds items of type Message (a custom class).
+     * It uses a custom MessageRenderer to control how each message looks.
+     */
+    JList<Message> messageList;
+
+    /**
+     * A JList that displays the names of available chat rooms as strings.
+     */
+    JList<String> chatList;
+
+    /**
+     * The controller this UI talks to.
+     * When the user clicks a button, the UI calls a method on the controller
+     * instead of doing the logic itself. This separates UI from business logic.
+     */
+    Controller controller;
+
+    /** Text field where the user types a room ID to switch to. */
+    JTextField roomInput;
+
+    /** Text field where the user types a room ID to remove/delete. */
+    JTextField removeChatInput;
+
+    /**
+     * A text area for displaying chat messages.
+     * NOTE: This is declared but currently not used — the messageList (JList)
+     * is used instead to display messages.
+     */
+    JTextArea messages;
+
+    /** Multi-line text area where the user types a new message to send. */
+    JTextArea messageInput;
+
+    /** Text field where the user types their username for login. */
+    JTextField usernameInput;
+
+    /** Password field — like a JTextField but hides the characters with dots/stars. */
+    JPasswordField passwordInput;
+
+    /**
+     * Text field for entering the name of a new chat room to create.
+     * Initialized here directly (not in the constructor) — both approaches work.
+     */
+    JTextField newChatNameInput = new JTextField();
+
+
+    // ─────────────────────────────────────────────
+    // CONSTRUCTOR — builds the entire UI
+    // ─────────────────────────────────────────────
+
+    /**
+     * Creates and displays the full chat UI.
+     *
+     * The constructor is called once when the app starts.
+     * It sets up every component, arranges them on screen,
+     * and attaches click listeners to all the buttons.
+     *
+     * @param controller The controller that handles all application logic.
+     */
+    public UI(Controller controller) {
+
+        // ── Text Areas ──────────────────────────────────────────────────
+
+        // Create the message display area (multiple lines, not editable by the user)
+        this.messages = new JTextArea();
+        messages.setEditable(false); // user can read but not type here
+        messages.setColumns(20);     // hint for preferred width (~20 characters wide)
+        messages.setRows(10);        // hint for preferred height (~10 lines tall)
+
+        // ── Text Fields ─────────────────────────────────────────────────
+
+        // Input for typing a room ID number to switch into
+        this.roomInput = new JTextField();
+        roomInput.setColumns(20);
+
+        // Input for typing a room ID number to delete
+        this.removeChatInput = new JTextField();
+        removeChatInput.setColumns(20);
+
+        // ── Message List ────────────────────────────────────────────────
+
+        // Creates the list that will display chat messages
+        // MessageRenderer is a custom class that controls how each Message is drawn
+        this.messageList = new JList<Message>();
+        messageList.setCellRenderer(new MessageRenderer());
+
+        // ── Chat Room List ───────────────────────────────────────────────
+
+        // Creates an empty list to show available chat rooms (filled in later)
+        this.chatList = new JList<>();
+
+        // ── Message Frame (secondary window) ────────────────────────────
+
+        // A second window — currently set up but not fully used
+        this.messageFrame = new JFrame();
+        messageFrame.setLayout(new GridBagLayout()); // GridBagLayout is a flexible grid system
+
+        // ── Store the Controller Reference ──────────────────────────────
+
+        this.controller = controller;
+
+        // ── Message Input ────────────────────────────────────────────────
+
+        // Multi-line area where the user writes their outgoing message
+        this.messageInput = new JTextArea();
+        messageInput.setColumns(20);
+        messageInput.setRows(5); // 5 lines tall
+
+        // ── Login Fields ─────────────────────────────────────────────────
+
+        this.usernameInput = new JTextField();
+        usernameInput.setColumns(20);
+
+        // JPasswordField automatically masks characters (shows ● or * instead of letters)
+        this.passwordInput = new JPasswordField();
+        passwordInput.setColumns(20);
+
+        // ── Layout Manager ───────────────────────────────────────────────
+
+        /**
+         * SpringLayout lets you define positions by describing relationships
+         * between component edges (North/South/East/West).
+         * Example: "Put the North edge of button 10px below the South edge of textfield"
+         * This gives fine-grained control compared to simpler layouts like FlowLayout.
+         */
+        SpringLayout layout = new SpringLayout();
+
+        // ── Main Frame Setup ─────────────────────────────────────────────
+
+        frame = new JFrame();
+
+        /**
+         * contentPane is the actual surface inside the JFrame where you add things.
+         * Think of JFrame as the window frame, and contentPane as the glass inside it.
+         */
+        Container contentPane = frame.getContentPane();
+
+
+        // ══════════════════════════════════════════
+        // BUTTONS — each button is wired to an action
+        // ══════════════════════════════════════════
+
+        /**
+         * HOW BUTTONS + LISTENERS WORK:
+         * addActionListener() registers a callback — a block of code that runs
+         * automatically when the button is clicked.
+         * The (_) -> syntax is a lambda expression (an anonymous function).
+         * The underscore (_) means "I don't need the event object that gets passed in."
+         */
+
+        // ── Send Message Button ──────────────────────────────────────────
+        JButton messageBtn = new JButton("send message");
+        messageBtn.addActionListener((_) -> {
+            // When clicked: send whatever is in messageInput to the controller
+            // "User1" is hardcoded here — ideally this would use the logged-in username
+            controller.sendMessage(messageInput.getText(), "User1");
+
+            // Clear the input field after sending
+            messageInput.setText("");
+        });
+
+        // ── Login Button ─────────────────────────────────────────────────
+        JButton loginBtn = new JButton("login");
+        // @TODO: Use passwordInput.getPassword() instead of getText() for security
+        // getPassword() returns a char[] which is safer than a String for passwords
+        loginBtn.addActionListener((_) -> controller.login(
+                usernameInput.getText(),
+                passwordInput.getText()
+        ));
+
+        // ── Change Room Button ────────────────────────────────────────────
+        JButton changeRoomBtn = new JButton("change room");
+        changeRoomBtn.addActionListener((_) ->
+                // Integer.parseInt() converts the String from the text field to an int
+                controller.changeActiveRoom(Integer.parseInt(roomInput.getText()))
+        );
+
+        // ── Remove Chat Button ────────────────────────────────────────────
+        JButton removeChatBtn = new JButton("remove chat");
+        removeChatBtn.addActionListener((_) ->
+                controller.removeChatRoom(Integer.parseInt(removeChatInput.getText()))
+        );
+
+        // ── Create Chat Button ────────────────────────────────────────────
+        JButton createChatBtn = new JButton("create chat");
+        createChatBtn.addActionListener((_) ->
+                controller.addChatRoom(newChatNameInput.getText())
+        );
+
+
+        // ══════════════════════════════════════════
+        // ADDING COMPONENTS TO THE WINDOW
+        // ══════════════════════════════════════════
+
+        /**
+         * contentPane.add() places a component into the window.
+         * At this point, the components are added but NOT yet positioned —
+         * positioning is handled below by the SpringLayout constraints.
+         */
+
+        contentPane.add(messageBtn);
+        contentPane.add(newChatNameInput);
+        contentPane.add(createChatBtn);
+        contentPane.add(messageInput);
+        contentPane.add(usernameInput);
+        contentPane.add(passwordInput);
+        contentPane.add(loginBtn);
+
+        /**
+         * JScrollPane wraps the messageList so it becomes scrollable.
+         * Without this, if the list gets too long, items would just be clipped.
+         * setPreferredSize() gives a size hint to the layout manager.
+         * setMinimumSize() ensures it never shrinks below a usable size.
+         */
+        JScrollPane messageListPane = new JScrollPane(messageList);
+        messageListPane.setPreferredSize(new Dimension(200, 200)); // 200x200 pixels
+        messageListPane.setMinimumSize(new Dimension(200, 20));
+        contentPane.add(messageListPane);
+
+        // Wrap the chatList in a scroll pane too
+        JScrollPane chatListPane = new JScrollPane(chatList);
+        chatListPane.setPreferredSize(new Dimension(200, 100));
+        contentPane.add(chatListPane);
+
+        contentPane.add(removeChatBtn);
+        contentPane.add(removeChatInput);
+        contentPane.add(roomInput);
+        contentPane.add(changeRoomBtn);
+
+
+        // ══════════════════════════════════════════
+        // SPRINGLAYOUT CONSTRAINTS — positioning components
+        // ══════════════════════════════════════════
+
+        /**
+         * HOW SpringLayout CONSTRAINTS WORK:
+         *
+         * layout.putConstraint(edge1, component1, gap, edge2, component2)
+         *
+         * This means: "Attach [edge1] of [component1] to [edge2] of [component2]
+         *              with a [gap] pixel offset."
+         *
+         * The edges are:
+         *   "North" = top edge
+         *   "South" = bottom edge
+         *   "East"  = right edge
+         *   "West"  = left edge
+         *
+         * Example:
+         *   layout.putConstraint("North", loginBtn, 10, "South", passwordInput)
+         *   → Place loginBtn so its top is 10px below the bottom of passwordInput
+         */
+
+        // messageInput: align its right edge 10px from the right edge of the window
+        layout.putConstraint("East", messageInput, 10, "East", contentPane);
+
+        // messageBtn: place it 10px below messageInput, aligned to the right
+        layout.putConstraint("North", messageBtn, 10, "South", messageInput);
+        layout.putConstraint("East", messageBtn, 10, "East", contentPane);
+
+        // messageListPane: place it above messageInput, with its right edge touching the window's right
+        layout.putConstraint("North", messageInput, 10, "South", messageListPane);
+        layout.putConstraint("East", contentPane, 10, "East", messageListPane);
+        // messageListPane starts 10px to the right of usernameInput
+        layout.putConstraint("West", messageListPane, 10, "East", usernameInput);
+
+        // usernameInput: 10px from the left edge of the window
+        layout.putConstraint("West", usernameInput, 10, "West", contentPane);
+
+        // passwordInput: 10px below usernameInput
+        layout.putConstraint("North", passwordInput, 10, "South", usernameInput);
+
+        // loginBtn: 10px below passwordInput
+        layout.putConstraint("North", loginBtn, 10, "South", passwordInput);
+
+        // roomInput: 10px below loginBtn
+        layout.putConstraint("North", roomInput, 10, "South", loginBtn);
+
+        // changeRoomBtn: 10px below roomInput
+        layout.putConstraint("North", changeRoomBtn, 10, "South", roomInput);
+
+        // removeChatInput: 10px below changeRoomBtn
+        layout.putConstraint("North", removeChatInput, 10, "South", changeRoomBtn);
+
+        // removeChatBtn: 10px below removeChatInput
+        layout.putConstraint("North", removeChatBtn, 10, "South", removeChatInput);
+
+
+        // ══════════════════════════════════════════
+        // FINAL WINDOW SETUP
+        // ══════════════════════════════════════════
+
+        frame.setSize(500, 500); // Set the window to 500x500 pixels
+
+        /**
+         * EXIT_ON_CLOSE means: when the user closes the window (clicks the X button),
+         * the entire Java application shuts down.
+         * Other options include DO_NOTHING_ON_CLOSE or DISPOSE_ON_CLOSE.
+         */
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Apply the SpringLayout to the content pane (must be done AFTER adding constraints)
+        contentPane.setLayout(layout);
+
+        // Make the window visible — nothing shows up until this line is called!
+        frame.setVisible(true);
+    }
+
+
+    // ══════════════════════════════════════════
+    // PUBLIC METHODS — called by the Controller to update the UI
+    // ══════════════════════════════════════════
+
+    /**
+     * Updates the message list with new messages.
+     *
+     * This is called by the Controller whenever the chat receives new messages.
+     * It replaces all items in the messageList with the provided list.
+     *
+     * @param msg An ArrayList of Message objects to display.
+     */
+    public void setMsg(ArrayList<Message> msg) {
+        /**
+         * JList requires a Vector (or array) to set its data — not an ArrayList.
+         * So we convert: ArrayList → Vector using the Vector constructor.
+         * setListData() replaces everything currently shown in the list.
+         */
+        Vector<Message> vector = new Vector<Message>(msg);
+        messageList.setListData(vector);
+    }
+
+    /**
+     * Updates the chat room list with the current available rooms.
+     *
+     * Called by the Controller when the list of chat rooms changes
+     * (e.g. a room was added or removed).
+     *
+     * @param chatNames An ArrayList of chat room name strings.
+     */
+    public void setAvailableChats(ArrayList<String> chatNames) {
+        Vector<String> vector = new Vector<>(chatNames);
+        chatList.setListData(vector);
+    }
+}
+*/

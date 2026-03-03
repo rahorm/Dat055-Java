@@ -157,6 +157,14 @@ public class UI {
         frame.setVisible(true);
     }
 
+    /**
+     * Updates the message list with new messages.
+     *
+     * This is called by the Controller whenever the chat receives new messages.
+     * It replaces all items in the messageList with the provided list.
+     *
+     * @param msg An ArrayList of Message objects to display.
+     */
     public void setMsg(ArrayList<Message> msg) {
         /*
         String s = "";
@@ -169,6 +177,15 @@ public class UI {
         Vector<Message> vector = new Vector<Message>(msg);
         messageList.setListData(vector);
     }
+
+    /**
+     * Updates the chat room list with the current available rooms.
+     *
+     * Called by the Controller when the list of chat rooms changes
+     * (e.g. a room was added or removed).
+     *
+     * @param chatNames An ArrayList of chat room name strings.
+     */
     public void setAvailableChats(ArrayList<String> chatNames) {
         Vector<String> vector = new Vector<>(chatNames);
         chatList.setListData(vector);
