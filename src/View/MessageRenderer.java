@@ -6,20 +6,26 @@ import javax.swing.*;
 import java.awt.*;
 
 class MessageRenderer extends JPanel implements ListCellRenderer<Message> {
-    private final JLabel titleLabel = new JLabel();
-    private final JLabel statusLabel = new JLabel();
+    private final JLabel sender = new JLabel();
+    private final JLabel messageContent = new JLabel();
+    private final JLabel messageTime = new JLabel();
     MessageRenderer() {
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
+        topPanel.add(sender);
+        topPanel.add(messageTime);
         setLayout(new BorderLayout(8, 0));
-        add(titleLabel, BorderLayout.NORTH);
-        add(statusLabel, BorderLayout.SOUTH);
+        add(topPanel, BorderLayout.NORTH);
+        add(messageContent, BorderLayout.SOUTH);
         setBorder(BorderFactory.createEmptyBorder(4, 8, 4, 8));
-        statusLabel.setFont(statusLabel.getFont().deriveFont(Font.PLAIN, 11f));
+        messageContent.setFont(messageContent.getFont().deriveFont(Font.PLAIN, 11f));
     }
 
     @Override
     public Component getListCellRendererComponent(JList<? extends Message> list, Message message, int index, boolean isSelected, boolean cellHasFocus) {
-        titleLabel.setText(message.getSender());
-        statusLabel.setText(message.getContent());
+        sender.setText(message.getSender());
+        messageContent.setText(message.getContent());
+        messageTime.setText(message.getTimestamp().toString());
         if (isSelected) {
             setBackground(list.getSelectionBackground());
             setForeground(list.getSelectionForeground());
@@ -27,8 +33,9 @@ class MessageRenderer extends JPanel implements ListCellRenderer<Message> {
             setBackground(list.getBackground());
             setForeground(list.getForeground());
         }
-        titleLabel.setForeground(getForeground());
-        statusLabel.setForeground(getForeground());
+        sender.setForeground(getForeground());
+        messageContent.setForeground(getForeground());
+        messageTime.setForeground(getForeground());
         setOpaque(true);
         return this;
     }
