@@ -14,6 +14,7 @@ public class UI {
     JFrame frame;
     JFrame messageFrame;
     JList<Message> messageList;
+    JList <String> chatList;
     Controller controller;
     JTextField roomInput;
     JTextField removeChatInput;
@@ -21,6 +22,8 @@ public class UI {
     JTextArea messageInput;
     JTextField usernameInput;
     JPasswordField passwordInput;
+    JTextField newChatNameInput = new JTextField();
+
 
     public UI(Controller controller) {
         this.messages = new JTextArea();
@@ -36,6 +39,8 @@ public class UI {
 
         this.messageList = new JList<Message>();
         messageList.setCellRenderer(new MessageRenderer());
+
+        this.chatList = new JList<>(); //tom chatRoom llista först
 
         this.messageFrame = new JFrame();
         messageFrame.setLayout(new GridBagLayout());
@@ -77,12 +82,19 @@ public class UI {
         JButton removeChatBtn = new JButton("remove chat");
         removeChatBtn.addActionListener((_) -> controller.removeChatRoom(Integer.parseInt(removeChatInput.getText())));
 
-        JButton signUpBtn = new JButton("sign up");
-        signUpBtn.addActionListener((_) -> controller.signUp(usernameInput.getText(), passwordInput.getText()));
+       // JButton signUpBtn = new JButton("sign up");
+       // signUpBtn.addActionListener((_) -> controller.signUp(usernameInput.getText(), passwordInput.getText()));
+
+
+        JButton createChatBtn = new JButton("create chat");
+        createChatBtn.addActionListener((_) -> controller.addChatRoom(newChatNameInput.getText()));
 
         //lägger till knappar till ui:n
         contentPane.add(messageBtn);
         //contentPane.add(messages);
+        contentPane.add(newChatNameInput);
+        contentPane.add(createChatBtn);
+
         contentPane.add(messageInput);
         contentPane.add(usernameInput);
         contentPane.add(passwordInput);
@@ -91,6 +103,11 @@ public class UI {
         messageListPane.setPreferredSize(new Dimension(200, 200));
         messageListPane.setMinimumSize(new Dimension(200, 20));
         contentPane.add(messageListPane);
+
+        JScrollPane chatListPane = new JScrollPane(chatList);
+        chatListPane.setPreferredSize(new Dimension(200, 100));
+        contentPane.add(chatListPane);
+
         contentPane.add(removeChatBtn);
         contentPane.add(removeChatInput);
         contentPane.add(roomInput);
@@ -152,4 +169,9 @@ public class UI {
         Vector<Message> vector = new Vector<Message>(msg);
         messageList.setListData(vector);
     }
+    public void setAvailableChats(ArrayList<String> chatNames) {
+        Vector<String> vector = new Vector<>(chatNames);
+        chatList.setListData(vector);
+    }
+
 }

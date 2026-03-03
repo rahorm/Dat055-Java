@@ -46,21 +46,40 @@ public final class ChatRoomFacade extends Observable {
         notifyObservers(); // ingen parameter
 
     }
+    // Forwarders till model för UI
+    public ArrayList<String> getAvailableChatNames() {
+        return model.getAvailableChatNames();
+    }
+
+    public ArrayList<Integer> getAvailableChatIds() {
+        return model.getAvailableChatIds();
+    }
+
 
     /// ----------------------------- ChatRoom <-> Server -----------------------------
     public void createChatRoom(String chatName) {
+        if (chatName == null || chatName.isEmpty()){
+            throw new IllegalArgumentException("chatName must not be null or empty");
+        }
+
         IdGenerator idGen = IdGenerator.getInstance();
         int new_id = idGen.generateId();
 
         serverConnection.createChatRoom(new_id, chatName);
-        serverConnection.addChatMember(model.getActiveUser());  // adding myself or inviting a new member?
+
+        String user = model.getActiveUser();
+
+        serverConnection.addChatMember(new_id + ":" + user);  // adding myself
+        //Lägg till i available-listorna
+        model.addAvailableChat(new_id, chatName);
 
         // changeActiveRoom to be called either here or in the controller
         changeActiveRoom(new_id);
+        setChanged();
+        notifyObservers();
 
         // dbconn creatChat has two arguments: chatiD, chatName
-        // serverConn has one argument: chatID
-
+        // + serverConn
     }
 
 
@@ -72,6 +91,20 @@ public final class ChatRoomFacade extends Observable {
         //setChanged();
         //notifyObservers();
     }
+
+    public void setAvailableChats(ArrayList<String> idNamePairs) {
+        model.setAvailableChats(idNamePairs);
+        setChanged();
+        notifyObservers();
+    }
+
+
+    /// ----------------------------- Message <-> UI -----------------------------
+    public ArrayList<Message> getMSGList(){
+        return model.retriveMSGList(); // how many elements to show?
+    }
+
+
 
     /// ----------------------------- Message <-> UI -----------------------------
     public ArrayList<Message> getMSGList(){

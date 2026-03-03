@@ -23,6 +23,10 @@ public class ChatRoomView implements Observer {
     public void update(Observable o, Object arg) {
         ArrayList<Message> msg = model.getMSGList();
         ui.setMsg(msg);
+//        //  available chats
+           ArrayList<String> chatNames = model.getAvailableChatNames();
+//        Vector<String> chatList = new Vector<>(chatNames);
+//        yourChatJList.setListData(chatList)
     }
 
     public ChatRoomView(Controller controller, ChatRoomFacade model) {

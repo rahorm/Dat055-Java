@@ -64,6 +64,12 @@ public class ServerActionHandler {
                 //facade.addMember(userName);
                 break;
 
+            case GET_AVAILABLE_CHATS:
+                ArrayList<String> data = (ArrayList<String>) request.getData();
+                System.out.println("Available chats received: " + data);
+                // facade.getInstance().setAvailableChats(data);
+                break;
+
             default:
                 System.out.println("Unhandled request type: " + request.getType());
         }
