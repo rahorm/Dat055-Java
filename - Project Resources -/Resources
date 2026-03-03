@@ -200,7 +200,7 @@ MONA:
             lägg till create user i facade?
     [X - ADA] scrollable msg box
     [X - ADA] write which user has made which msg
-    [ADA] -||- timestamp
+    [X - ADA] -||- timestamp
     [] funktion för att ladda upp bilder i databasen
         [ADA] knapp
         [ANDY] över programet

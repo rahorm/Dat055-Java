@@ -114,6 +114,12 @@ public class UI {
         contentPane.add(changeRoomBtn);
 
         //constraints för springlayout
+        //pitfalls: write layout.putConstraint("North", thing1, pad, "South", thing2);
+        //            NOT layout.putConstraint("South", thing1, pad, "North", thing2);
+        //unless you want overlapping components
+        //same with East and West
+        //layout.putConstraint("West", thing1, pad, "East", thing2); not overlapping
+        //layout.putConstraint("East", thing1, pad, "West", thing2); overlapping
 
         //position messageInput
         layout.putConstraint("East", messageInput, 10, "East", contentPane);
