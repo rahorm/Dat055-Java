@@ -68,9 +68,11 @@ public class ServerConnection {
      * @param chatId int name of chat
      */
     public void createChatRoom(int chatId, String chatName){
+        String data = chatId + ":" + chatName;
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.ADD_CHATROOM, new ChatData(chatId, chatName)));
+                new RequestWrapper(RequestType.ADD_CHATROOM, data));
     }
+
 
     /**
      * Deletes a chat from the database

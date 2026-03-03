@@ -207,16 +207,16 @@ MONA:
         [X MADDE] nätverk/databas
     [] create new chat
         [ADA] knapp
-         [MONA] över program
-                     -> [] Change ServerCon createChatRoom to take both chatId and chatName
+         [X MONA] över program
+                     -> [X MONA] Change ServerCon createChatRoom to take both chatId and chatName
                                  Logik: Använder requestWrapper+type.ADDCHATROOM som tidigare
                                         Använder id:name logik som i ADDCHATMEMBER
                      ->[X MONA] Nya listor och GETTERS i ChatroomModel för available ChatIds och ChatNames
                      ->[X MONA] Uppdatera i Facade CreateChatRoom så chatName tas in, usern
                                 läggs till i aktivt chatrum+ uppdatera available listor+
                                 chatId
-
-    [] logic for knowing available chats
+                     -> [X MONA] Uppdatera i ChatRoomView och ServerActionHandler
+    [X MONA] logic for knowing available chats
     [ADA] display available chats
     [] add members to chat
         [ADA] GUI
@@ -225,7 +225,7 @@ MONA:
         byte array
         bild id
         is msg
-    [MONA] chat name (display name) implementation all over program (finns redan i databsen)
+    [X MONA] chat name (display name) implementation all over program (finns redan i databsen)
     [] fixa att modellfacade actually används i serveractionhanlder
 
 # SEQUENCE DIAGRAM (?)
