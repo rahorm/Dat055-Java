@@ -1,8 +1,6 @@
 package Controller;
 
 import Model.ChatRoomFacade;
-import Other.ReturnCode;
-import Server.DatabaseConnection;
 
 public class Controller {
 

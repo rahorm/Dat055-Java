@@ -188,7 +188,7 @@ MONA:
         exists but poorly
     [X - ADA] Clear message box after sending the msg
     [X - ADA] load msg history when at launch or opening chat
-    [MADDE] implement login all over program
+    [\ MADDE] implement login all over program
         passwords
         logic exists in database
         error messages
