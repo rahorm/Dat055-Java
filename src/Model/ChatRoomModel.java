@@ -102,6 +102,19 @@ public class ChatRoomModel {
 
         return chatID;
     }
+    public ArrayList<Integer> getAvailableChatIds() {
+        return availableChatIds;
+    }
+
+    public ArrayList<String> getAvailableChatNames() {
+        return availableChatNames;
+    }
+
+    //Namn för specifik chatId
+    public String getChatNameForId(int chatId) {
+        int index = availableChatIds.indexOf(chatId);
+        return index >= 0 ? availableChatNames.get(index) : "Unknown (" + chatId + ")";
+    }
 
     public void changeActiveRoom(int chatID) {
         this.chatID = chatID;
@@ -110,6 +123,22 @@ public class ChatRoomModel {
     /*public void removeChatRoom(int chatID) { // I don't know how to remove an existing model!!!! - choi
         System.out.println("model wants to remove chatroom right now");
     }*/
+
+    // Sätt ny lista/uppdatera listan
+    public void setAvailableChats(ArrayList<String> idNamePairs) {
+
+        for (String s : idNamePairs) {
+            String[] parts = s.split(":");
+            int id = Integer.parseInt(parts[0]);
+            String name = parts[1];
+            availableChatIds.add(id);
+            availableChatNames.add(name);
+        }
+    }
+    public void clearAvailableChats(int chatId, String chatName){
+        availableChatIds.clear();
+        availableChatNames.clear();
+    }
 
 
     public void addAvailableChat(int chatId, String chatName) {

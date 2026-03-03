@@ -207,7 +207,15 @@ MONA:
         [X MADDE] nätverk/databas
     [] create new chat
         [ADA] knapp
-        [MONA] över program
+         [MONA] över program
+                     -> [] Change ServerCon createChatRoom to take both chatId and chatName
+                                 Logik: Använder requestWrapper+type.ADDCHATROOM som tidigare
+                                        Använder id:name logik som i ADDCHATMEMBER
+                     ->[X MONA] Nya listor och GETTERS i ChatroomModel för available ChatIds och ChatNames
+                     ->[X MONA] Uppdatera i Facade CreateChatRoom så chatName tas in, usern
+                                läggs till i aktivt chatrum+ uppdatera available listor+
+                                chatId
+
     [] logic for knowing available chats
     [ADA] display available chats
     [] add members to chat
