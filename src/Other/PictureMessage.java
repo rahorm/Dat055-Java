@@ -3,18 +3,55 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 
-public class PictureMessage extends Message{
+public class PictureMessage extends Message {
     // Message with an additional variable for image path e.g. "C:\Users\..."
     //@todo implement class
-    //imagePath;
+    private String imagePath;
+    private int pictureId;
+    private boolean isMsg;
+    private byte[] imageBytes;
 
-    //@todo implement getter for path
-    // this is just here as a placeholder
-    public String getPath(){return "path";}
-
-    public boolean isEmpty() { return false; //@todo implement
+    public PictureMessage(String sender, int chatID, String imagePath) {
+        super(sender, chatID, "No text content");
+        IdGenerator generator = IdGenerator.getInstance();
+        this.pictureId = generator.generateId();
+        this.isMsg = true;
+        this.imagePath = imagePath;
     }
+
+    public PictureMessage(int pictureId, String sender, int chatID, LocalDateTime time, String imagePath) {
+        super(null, sender, chatID, "No text content", time);
+        this.pictureId = pictureId;
+        this.isMsg = true;
+        this.imagePath = imagePath;
+    }
+
+
+    public byte[] getImageBytes(String imagePath) {
+        try {
+            this.imageBytes = toImageBytes(imagePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return this.imageBytes;
+    }
+
+    private static byte[] toImageBytes(String imagePath) throws IOException {
+        return Files.readAllBytes(new File(imagePath).toPath());
+
+    }
+
+    public String getPath() {
+        
+    }
+
 }
+
+    //byte array
+    //bild id
+    //is msg
+

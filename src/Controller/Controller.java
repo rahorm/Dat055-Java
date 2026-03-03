@@ -1,9 +1,6 @@
 package Controller;
 
 import Model.ChatRoomFacade;
-import Other.PictureMessage;
-import Other.ReturnCode;
-import Server.DatabaseConnection;
 
 public class Controller {
 
@@ -43,26 +40,6 @@ public class Controller {
         facade.storeMsg(msg);
         System.out.println("message left controller");
     }
-
-    /**
-     * @todo im usure what type the input should be sothat probably will need to be changed
-     * Takes Picture and stores it on the server
-     * @param pic PictureMessage that represents a picture that has been input from a user
-     * @param user integer value that represents a user in the active chat that is the sender of the message
-     * @throws IllegalArgumentException if userID is not an existing user
-     * @throws NumberFormatException if msg isn't a string
-     * */
-    public void sendMessage(PictureMessage pic, String user){
-        System.out.println("pic entered controller");
-        if (pic == null || pic.isEmpty()) {
-            throw new IllegalArgumentException("pic cannot be null or empty");
-        }
-        if (user == null || user.isEmpty()) {
-            throw new IllegalArgumentException("Username cannot be null or empty");
-        }
-        facade.storeMsg(pic);
-        System.out.println("pic left controller");
-    }
     /**
      * Removes the chatRoom, you can not remove the activeChatRoom
      * @param chatID integer that represents a chatRoom
@@ -98,8 +75,10 @@ public class Controller {
     }
 
 
-    public ReturnCode login(String user, String password){
-        ReturnCode code;
+    public void login(String user, String password){
+        facade.setActiveUser(user);
+        facade.logIn(user, password);
+        /*ReturnCode code;
 
         if(!facade.checkUser(user)){
             code = ReturnCode.USER_NOT_EXIST;
@@ -111,8 +90,10 @@ public class Controller {
 
         code = ReturnCode.LOGIN_SUCCESSFUL;
 
-        return code;
+        return code;*/
     }
+
+    public void addMember(String user) {facade.addMember(user);}
 
     /**
      * Creates a new user of the type User
@@ -126,6 +107,5 @@ public class Controller {
         }
         //@todo add checkUser before
         facade.createUser(user, password);
-        // Wrong? facade.addMember(user); //why add member??
     }
 }

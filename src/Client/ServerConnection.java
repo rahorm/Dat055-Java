@@ -1,6 +1,5 @@
 package Client;
 
-import Common.ChatData;
 import Common.RequestType;
 import Common.RequestWrapper;
 //import Common.SendMsgWrapper;
@@ -102,18 +101,17 @@ public class ServerConnection {
      *
      * @param username String representing the ID of a user
      * @param password String of the password
-     * @todo id doesnt return anything I dont understand how it works
      * */
-    public void checkLogin(String username, String password){
+    public void login(String username, String password){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.CHECK_LOGIN, new UserData(username, password)));
+                new RequestWrapper(RequestType.LOGIN, new UserData(username, password)));
     }
 
     /**
      * Creates a new user in the database. Easy but unsafe password handling.
      * </p>
      *  The user will recieve an id for internal use.
-     *  @todo should this be in the doc? will the user of this method have to know abput the id?
+     *  @todo should this be in the doc? will the user of this method have to know abput the id? //Javadoc is outdated, user no longer recievs id
      *
      * @param userName string parameter userName is the intended display name of the user.
      * @param password String

@@ -78,13 +78,13 @@ public class ClientActionHandler {
                 );
             }
 
-            case CHECK_LOGIN -> {
+            case LOGIN -> {
                 UserData userdata = (UserData) request.getData();
-                boolean valid = DBcon.checkLogin(userdata.getUsername(), userdata.getPassword());
+                boolean success = DBcon.checkLogin(userdata.getUsername(), userdata.getPassword());
 
                 objToReturn = new RequestWrapper(
-                        RequestType.CHECK_LOGIN,
-                        valid
+                        RequestType.LOGIN,
+                        success
                 );
             }
 
