@@ -63,17 +63,19 @@ public final class ChatRoomFacade extends Observable {
 
     }
 
+
     /// ----------------------------- ChatRoom <-> Server -----------------------------
     public void removeChatRoom(int chatID) {
 
         serverConnection.deleteChatRoom(chatID);
-        model.removeChatRoom(chatID);
-        setChanged();
-        notifyObservers();
+        //model.removeChatRoom(chatID);  this one doesnt need
+        //setChanged();
+        //notifyObservers();
     }
 
     /// ----------------------------- Message <-> UI -----------------------------
     public ArrayList<Message> getMSGList(){
+
         return model.retriveMSGList(); // how many elements to show?
     }
 
@@ -92,13 +94,18 @@ public final class ChatRoomFacade extends Observable {
 
     public void setHistory(ArrayList<Message> history){
         model.setHistory(history);
-        setChanged(); // Apparently it should be used before using notifyObservers
-        notifyObservers(); // ingen parameter
+        setChanged();
+        notifyObservers();
 
     }
 
     public void setActiveUser(String username){
         model.setActiveUser(username);
+    }
+
+    // Duplicated method, existed both in facade and model ???
+    public String getActiveUser() {
+        return model.getActiveUser();
     }
 
     /// ----------------------------- Member <-> Server -----------------------------
@@ -155,6 +162,7 @@ public final class ChatRoomFacade extends Observable {
     ArrayList<Message> messages = model.retriveMSGList();
     messages.add(message);
 
+
     // model.addMessage(message); <- can't we just use this method call instead of the above two lines?
 }
 
@@ -162,7 +170,7 @@ public final class ChatRoomFacade extends Observable {
 /**
  * Removes a message from this chat room.
  * If the message is not found, nothing happens.
- *
+ * 
  * @param message message to remove; must not be null
  * @throws IllegalArgumentException if message is null
  */
@@ -191,7 +199,7 @@ public void removeMessage(Message message) {
      */
     public boolean logIn(String username, String password){
         //@todo implement login
-        return true;
+        return serverConnection.checkLogin(username, password); // Return type of CheckLogin in serverConnection to be boolean??
     }
 
     /**
@@ -200,14 +208,15 @@ public void removeMessage(Message message) {
      * @param password password user wants to use to log in
      */
     public void createUser(String username, String password){
-        serverConnection.createUser(username, password);
-        //@todo implement create userd
+
+        if(!serverConnection.createUser(username, password)){
+            throw new IllegalArgumentException("Username not valid");
+
+        }
+        else{model.setUsername(username);}
     }
 
-// Duplicated method, existed both in facade and model ???
-    public String getActiveUser() {
-        return model.getActiveUser();
-    }
+
 
 
 }

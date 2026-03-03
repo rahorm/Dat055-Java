@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
-public class Message implements Serializable {
+public class Message implements Serializable{
     private String content;
     private LocalDateTime timestamp;
     private String sender;

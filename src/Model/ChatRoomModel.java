@@ -19,6 +19,7 @@ public class ChatRoomModel {
     private String activeUser;
    // private final ArrayList<User> members = new ArrayList<>();
    // private User activeUser;
+    private String username;
     private int chatID;
 
     /**
@@ -89,6 +90,9 @@ public class ChatRoomModel {
         return this.activeUser;
     }
 
+    public void setUsername(String username){
+        this.username = username;
+    }
 
     /// ----------------------------- ChatRoom-----------------------------
     public int getChatID() {
@@ -100,9 +104,9 @@ public class ChatRoomModel {
         this.chatID = chatID;
     }
 
-    public void removeChatRoom(int chatID) { // I don't know how to remove an existing model!!!! - choi
+    /*public void removeChatRoom(int chatID) { // I don't know how to remove an existing model!!!! - choi
         System.out.println("model wants to remove chatroom right now");
-    }
+    }*/
 }
 
 
