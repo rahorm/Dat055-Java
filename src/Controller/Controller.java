@@ -1,6 +1,9 @@
 package Controller;
 
 import Model.ChatRoomFacade;
+import Other.PictureMessage;
+
+import java.io.File;
 
 public class Controller {
 
@@ -40,6 +43,37 @@ public class Controller {
         facade.storeMsg(msg);
         System.out.println("message left controller");
     }
+
+    /**
+     * Takes a picture message and stores it in the program
+     * @param imagePath string that represents the local file path of the image to be sent
+     * @param user string that represents the username of the sender in the active chat
+     * @throws IllegalArgumentException if imagePath or user is null/empty
+     * @throws IllegalArgumentException if the file at imagePath does not exist
+     */
+    public void sendPictureMessage(String imagePath, String user) {
+        System.out.println("picture message entered controller");
+
+        if (imagePath == null || imagePath.isEmpty()) {
+            throw new IllegalArgumentException("Image path cannot be null or empty");
+        }
+        if (user == null || user.isEmpty()) {
+            throw new IllegalArgumentException("Username cannot be null or empty");
+        }
+
+        File imageFile = new File(imagePath);
+        if (!imageFile.exists() || !imageFile.isFile()) {
+            throw new IllegalArgumentException("No file found at path: " + imagePath);
+        }
+
+        PictureMessage pictureMessage = new PictureMessage(user, facade.getActiveChatRoom(), imagePath);
+        pictureMessage.getImageBytes(imagePath); // converts path to byte[]
+
+        facade.storePictureMsg(pictureMessage);
+
+        System.out.println("picture message left controller");
+    }
+
     /**
      * Removes the chatRoom, you can not remove the activeChatRoom
      * @param chatID integer that represents a chatRoom

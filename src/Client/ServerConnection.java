@@ -5,6 +5,8 @@ import Common.RequestWrapper;
 //import Common.SendMsgWrapper;
 import Common.UserData;
 import Other.Message;
+import Other.PictureMessage;
+
 import java.net.Socket;
 import java.sql.*;
 import java.util.*;
@@ -31,6 +33,8 @@ public class ServerConnection {
         System.out.println("message entered connection");
         serverHandler.broadcastMessage(new RequestWrapper(RequestType.ADD_MESSAGE, msg));
         System.out.println("message left connection");
+    }
+    public void sendPictureMsg(PictureMessage pictureMessage) {
     }
 
     /**

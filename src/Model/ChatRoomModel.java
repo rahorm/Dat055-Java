@@ -21,7 +21,7 @@ public class ChatRoomModel {
     private final ArrayList<Integer> availableChatIds = new ArrayList<>();
     private final ArrayList<String> availableChatNames = new ArrayList<>();
     private String username;
-    private int chatID;
+    private int activeChatRoomId;
 
     /**
      * This method creates a new chatroom model with chatID
@@ -35,7 +35,7 @@ public class ChatRoomModel {
             throw new IllegalArgumentException("This chat room can not be created");
         }
 
-        this.chatID = chatID;
+        this.activeChatRoomId = chatID;
         this.activeUser = activeUser;
 
     }
@@ -96,14 +96,12 @@ public class ChatRoomModel {
     }
 
     /// ----------------------------- ChatRoom-----------------------------
-    public int getChatID() {
-
-        return chatID;
+    public int getActiveChatRoomId() {
+        return activeChatRoomId;
     }
     public ArrayList<Integer> getAvailableChatIds() {
         return availableChatIds;
     }
-
     public ArrayList<String> getAvailableChatNames() {
         return availableChatNames;
     }
@@ -115,7 +113,7 @@ public class ChatRoomModel {
     }
 
     public void changeActiveRoom(int chatID) {
-        this.chatID = chatID;
+        this.activeChatRoomId = chatID;
     }
 
     /*public void removeChatRoom(int chatID) { // I don't know how to remove an existing model!!!! - choi
@@ -143,6 +141,7 @@ public class ChatRoomModel {
         availableChatIds.add(chatId);
         availableChatNames.add(chatName);
     }
+
 }
 
 

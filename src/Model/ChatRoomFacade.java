@@ -3,7 +3,7 @@ package Model;
 import Client.ServerConnection;
 import Other.IdGenerator;
 import Other.Message;
-import Server.DatabaseConnection;
+import Other.PictureMessage;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -115,9 +115,16 @@ public final class ChatRoomFacade extends Observable {
      */
     public void storeMsg(String msg){
         System.out.println("message entered facade");
-        serverConnection.sendMsg(new Message(model.getActiveUser(), model.getChatID(), msg));
+        serverConnection.sendMsg(new Message(model.getActiveUser(), model.getActiveChatRoomId(), msg));
         System.out.println("message left facade");
 
+    }
+    /**
+     * Stores a picture message by sending it through the server connection
+     * @param pictureMessage the PictureMessage object to be sent
+     */
+    public void storePictureMsg(PictureMessage pictureMessage) {
+        serverConnection.sendPictureMsg(pictureMessage);
     }
 
     public void setHistory(ArrayList<Message> history){
@@ -243,8 +250,8 @@ public void removeMessage(Message message) {
         model.setActiveUser(username);
     }
 
-
-
+/// -----------------------------Getters and Setters-----------------------------
+    public int getActiveChatRoom(){ return model.getActiveChatRoomId(); }
 
 }
 
