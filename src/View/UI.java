@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class UI {
+    private ArrayList<Integer> availableChatIds;
     JFrame frame;
     JFrame messageFrame;
     JList<Message> messageList;
@@ -107,6 +108,10 @@ public class UI {
         JScrollPane chatListPane = new JScrollPane(chatList);
         chatListPane.setPreferredSize(new Dimension(200, 100));
         contentPane.add(chatListPane);
+        chatList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        chatList.addListSelectionListener(_ -> {
+            controller.changeActiveRoom(availableChatIds.get(chatList.getSelectedIndex()));
+        });
 
         contentPane.add(removeChatBtn);
         contentPane.add(removeChatInput);
@@ -192,9 +197,10 @@ public class UI {
      *
      * @param chatNames An ArrayList of chat room name strings.
      */
-    public void setAvailableChats(ArrayList<String> chatNames) {
+    public void setAvailableChats(ArrayList<String> chatNames, ArrayList<Integer> chatIds) {
         Vector<String> vector = new Vector<>(chatNames);
         chatList.setListData(vector);
+        this.availableChatIds = chatIds;
     }
 
 }
