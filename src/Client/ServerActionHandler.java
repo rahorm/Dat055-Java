@@ -70,6 +70,16 @@ public class ServerActionHandler {
                 // facade.getInstance().setAvailableChats(data);
                 break;
 
+            case LOGIN:
+                boolean successful = (boolean) request.getData();
+                if(!successful){
+                    ChatRoomFacade f = Model.ChatRoomFacade.getInstance();
+                    f.setActiveUser(""); //@todo ska det finnas en metod för att ta bort användare (t.ex. när man loggar ut)?
+                    break;
+                }
+                //@todo meddela ui att användaren är inloggad
+                break;
+
             default:
                 System.out.println("Unhandled request type: " + request.getType());
         }

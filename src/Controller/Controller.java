@@ -77,8 +77,10 @@ public class Controller {
     }
 
 
-    public ReturnCode login(String user, String password){
-        ReturnCode code;
+    public void login(String user, String password){
+        facade.logIn(user, password);
+        facade.setActiveUser(user);
+        /*ReturnCode code;
 
         if(!facade.checkUser(user)){
             code = ReturnCode.USER_NOT_EXIST;
@@ -90,7 +92,7 @@ public class Controller {
 
         code = ReturnCode.LOGIN_SUCCESSFUL;
 
-        return code;
+        return code;*/
     }
 
     /**

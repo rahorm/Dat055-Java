@@ -3,7 +3,6 @@ package Model;
 import Client.ServerConnection;
 import Other.IdGenerator;
 import Other.Message;
-import Server.DatabaseConnection;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -210,14 +209,14 @@ public void removeMessage(Message message) {
     messages.remove(message);
 }
 
-    /**
+   /*/**
      * Checks if a username is present in the database
      * @param username username to check
      * @return if username is present in database
      */
-    public boolean checkUser(String username){
+    /*public boolean checkUser(String username){
         return serverConnection.checkUserExists(username);
-    }
+    }*/
 
     /**
      * Checks if users credentials matches saved ones
@@ -225,9 +224,9 @@ public void removeMessage(Message message) {
      * @param password password user is trying to log in with
      * @return if users credentials are correct
      */
-    public boolean logIn(String username, String password){
+    public void logIn(String username, String password){
         //@todo implement login
-        return serverConnection.checkLogin(username, password); // Return type of CheckLogin in serverConnection to be boolean??
+        serverConnection.login(username, password); // Return type of CheckLogin in serverConnection to be boolean??
     }
 
     /**
