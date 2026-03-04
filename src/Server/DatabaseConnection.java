@@ -1,5 +1,6 @@
 package  Server;
 
+import Common.ChatData;
 import Other.IdGenerator;
 import Other.Message;
 import Other.PictureMessage;
@@ -394,20 +395,20 @@ public final class DatabaseConnection {
      * @param username what user to get chats for
      * @return an ArrayList of chatIds
      */
-    public ArrayList<Integer> getAvailableChats(String username){
-        ArrayList<Integer> availableChats = new ArrayList<>();
+    public ArrayList<ChatData> getAvailableChats(String username){
+        ArrayList<ChatData> availableChats = new ArrayList<>();
 
         try (PreparedStatement ps = conn.prepareStatement(
-                "SELECT chat FROM chatmembers WHERE member = ?");) {
+                "SELECT chat, name FROM Chats LEFT JOIN ChatMembers ON Chats.chatid = ChatMembers.chat WHERE member = ?");) {
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                availableChats.add(rs.getInt(1));
+                availableChats.add(new ChatData(rs.getInt(1), rs.getString(2)));
             }
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("ERROR: "+e.getMessage());
         }
 
         return availableChats;
