@@ -16,7 +16,7 @@ import java.util.Properties;
 public final class DatabaseConnection {
 
     static final String DBNAME = "DAT055_ChatDB";
-    static final String DATABASE = "jdbc:postgresql://localhost:5432/"+DBNAME;
+    static final String DATABASE = "jdbc:postgresql://localhost:5432/" + DBNAME;
     static final String USERNAME = "postgres";
     static final String PASSWORD = "Dia:23Postgres";
 
@@ -38,7 +38,7 @@ public final class DatabaseConnection {
     }
 
     public static DatabaseConnection getInstance() throws SQLException, ClassNotFoundException {
-        if (instance == null){
+        if (instance == null) {
             instance = new DatabaseConnection();
         }
         return instance;
@@ -50,17 +50,18 @@ public final class DatabaseConnection {
      * Inserts a chatroom into the database
      * uses table Chats
      * Unique chatId is required
-     * @param chatId used to identify chat
+     *
+     * @param chatId   used to identify chat
      * @param chatName name to display in app
      */
-    public void createChatRoom(int chatId, String chatName){
-        try(PreparedStatement ps = conn.prepareStatement(
-                "INSERT INTO Chats VALUES (?, ?)");){
-            ps.setInt(1,chatId);
-            ps.setString(2,chatName);
+    public void createChatRoom(int chatId, String chatName) {
+        try (PreparedStatement ps = conn.prepareStatement(
+                "INSERT INTO Chats VALUES (?, ?)");) {
+            ps.setInt(1, chatId);
+            ps.setString(2, chatName);
             ps.executeUpdate();
-        }  catch (SQLException e) {
-            System.out.println("{\"error\":\""+getError(e)+"\"}");
+        } catch (SQLException e) {
+            System.out.println("{\"error\":\"" + getError(e) + "\"}");
         }
 
     }
@@ -71,27 +72,28 @@ public final class DatabaseConnection {
      *
      * @param chatId which chat to delete
      */
-    public void deleteChatRoom(int chatId){
-        try(PreparedStatement ps = conn.prepareStatement(
-                "DELETE FROM Chats WHERE chatId = ?");){
+    public void deleteChatRoom(int chatId) {
+        try (PreparedStatement ps = conn.prepareStatement(
+                "DELETE FROM Chats WHERE chatId = ?");) {
             ps.setInt(1, chatId);
             ps.executeUpdate();
-        }  catch (SQLException e) {
-            System.out.println("{\"error\":\""+getError(e)+"\"}");
+        } catch (SQLException e) {
+            System.out.println("{\"error\":\"" + getError(e) + "\"}");
         }
     }
 
     /**
      * Checks if username already exists
+     *
      * @return if user already exists
      */
-    public boolean checkUserExists(String username){
+    public boolean checkUserExists(String username) {
         try (PreparedStatement ps = conn.prepareStatement(
-                "SELECT username FROM Users WHERE username = ?");){
+                "SELECT username FROM Users WHERE username = ?");) {
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()) {
+            if (rs.next()) {
                 return true;
             }
 
@@ -105,17 +107,18 @@ public final class DatabaseConnection {
     /**
      * Checks if users login info is correct, meaning does
      * the users saved password match the one that was entered?
+     *
      * @param username what user to login
      * @param password password the user has entered
      * @return if the information is correct
      */
-    public boolean checkLogin(String username, String password){
+    public boolean checkLogin(String username, String password) {
         try (PreparedStatement ps = conn.prepareStatement(
-                "SELECT pswd FROM Users WHERE username = ?");){
+                "SELECT pswd FROM Users WHERE username = ?");) {
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
 
-            if(rs.next()) {
+            if (rs.next()) {
                 return (rs.getString(1).equals(password));
             }
 
@@ -130,22 +133,30 @@ public final class DatabaseConnection {
      * Inserts a user into the database
      * uses table Users
      * Unique username is required
+     *
      * @param username username of user to create
      * @param password password linked to that user
      * @return returns the username of just created user
      */
-    public String createUser(String username, String password){
+    public boolean createUser(String username, String password) {
+        if (!checkUserExists(username)) {
+            try (PreparedStatement ps = conn.prepareStatement(
+                    "INSERT INTO Users VALUES (?, ?)");) {
+                ps.setString(1, username);
+                ps.setString(2, password);
+                ps.executeUpdate();
 
-        try(PreparedStatement ps = conn.prepareStatement(
-                "INSERT INTO Users VALUES (?, ?)");){
-            ps.setString(1,username);
-            ps.setString(2,password);
-            ps.executeUpdate();
-        }  catch (SQLException e) {
-            System.out.println("{\"error\":\""+getError(e)+"\"}");
+                return true;
+
+
+            } catch (SQLException e) {
+                System.out.println("{\"error\":\"" + getError(e) + "\"}");
+            }
         }
-        return username;
+        return false;
+
     }
+
 
     /**
      * Uploads an image to the database as a byte array
@@ -269,7 +280,7 @@ public final class DatabaseConnection {
      * @param msg the original message
      * @param updateMsg the new message
      */
-    public void editMsg(Message msg, Message updateMsg){
+    /*public void editMsg(Message msg, Message updateMsg){
 
         try(PreparedStatement ps = conn.prepareStatement(
                 "UPDATE ChatMessages SET Content = ?, hasimg = ? WHERE msgId = ?");){
@@ -281,7 +292,7 @@ public final class DatabaseConnection {
             System.out.println("{\"error\":\""+getError(e)+"\"}");
         }
 
-    }
+    }*/
 
     /**
      * !THIS CANNOT BE UNDONE!

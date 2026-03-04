@@ -97,11 +97,11 @@ public class ClientActionHandler {
 
             case CREATE_USER -> {
                 UserData userdata = (UserData) request.getData();
-                DBcon.createUser(userdata.getUsername(), userdata.getPassword());
+                boolean created = DBcon.createUser(userdata.getUsername(), userdata.getPassword());
 
                 objToReturn = new RequestWrapper(
                         RequestType.CREATE_USER,
-                        true
+                        created
                 );
             }
 
@@ -144,15 +144,15 @@ public class ClientActionHandler {
                 );
             }
 
-//            case EDIT_MESSAGE -> {
-//                Message message = (Message) request.getData();
-//                DBcon.editMsg();
-//
-//                objToReturn = new RequestWrapper(
-//                        RequestType.GET_MESSAGES,
-//                        DBcon.getChatMessages(message.getChatID())
-//                );
-//            }
+            /*case EDIT_MESSAGE -> {
+                Message message = (Message) request.getData();
+                DBcon.editMsg();
+
+                objToReturn = new RequestWrapper(
+                        RequestType.GET_MESSAGES,
+                        DBcon.getChatMessages(message.getChatID())
+                );
+            }*/
 
 
             case DELETE_MESSAGE -> {

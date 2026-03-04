@@ -240,12 +240,7 @@ public void removeMessage(Message message) {
      * @param password password user wants to use to log in
      */
     public void createUser(String username, String password){
-        serverConnection.createUser(username, password); // How to handle duplicated username?
-                                                         // This needs some sort of confirmation from server side as well
-
-        // If serverConnection.createUser succeeds -> can set this username as an activeUser.
-        // Or setActiveUser method can be called from server side directly using 'facade.setActiveUser' as well
-        model.setActiveUser(username);
+        serverConnection.createUser(username, password);
     }
 
 /// -----------------------------Getters and Setters-----------------------------
