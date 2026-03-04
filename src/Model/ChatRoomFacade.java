@@ -95,6 +95,10 @@ public final class ChatRoomFacade extends Observable {
         notifyObservers();
     }
 
+    public int getActiveChatRoomId() {
+        return model.getActiveChatRoomId();
+    }
+
 
     /// ----------------------------- Message <-> UI -----------------------------
     public ArrayList<Message> getMSGList(){

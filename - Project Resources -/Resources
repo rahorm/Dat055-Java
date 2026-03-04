@@ -152,11 +152,12 @@ Until the 17th we will make the sequence data base
 
     Planering: Message + bilder
          Antingen fortsätt med HashMap (imgId som attachment),
-         [] eller lägg till en PictureMessage‑subklass och uppdatera UML.
+         [X Choi] eller lägg till en PictureMessage‑subklass och uppdatera UML.
 
     Fundering:
         * Heads up från både mig och Choi, när nytt chatRoom görs bla används bara det nya chatId:t från Facade,
          skickas även namn till Server som det ser ut nu? Koll i Facade och ändring i ServerCon därefter.
+         - (Fixat)
 
      För createUser/AddUser testning:
          [] AddUser- behövs kanske i Facade/ Model också? Används i Serverconnection och
@@ -227,7 +228,7 @@ Converting Image to Byte array
     [] add members to chat
         [X - ADA] GUI
         [ANDY] överallt
-    [CHOI] picture msg subclass
+    [X CHOI] picture msg subclass
         byte array -> If imagePath can be retrieved from the UI or Controller and sent it to the ModelFacade, that would be great!
         bild id
         is msg
