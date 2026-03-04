@@ -56,7 +56,7 @@ Until the 17th we will make the sequence data base
     [X Andy] delete the class user
     [X Mona] update UML diagram to include more server classes
     [X Choi] DB - table för bilder
-    [] ? - user ska kunna ladda upp bilder
+    [-> 260225] ? - user ska kunna ladda upp bilder
    /***********************************************
     ^^ Göra sekvensdiagram för detta?!
     ************************************************/
@@ -75,7 +75,7 @@ Until the 17th we will make the sequence data base
     [X Mona] Updated Model+Fasad in UML
     [--] notify() metod observer etc? (Fanns redan implementerat i java)
 
-    [] Initialize model med chat nummer etc
+    [X] Initialize model med chat nummer etc
     /***********************************************
     En fundering ang. init av chatmodel:
         När man startar appen, ska det vara en chat öppen eller inte?
@@ -92,7 +92,7 @@ Until the 17th we will make the sequence data base
      - En lista över vilka chattar (id och namn) som finns tillgängliga för den inloggade användaren 
     ************************************************/
 
-    [] Hur loggar man in som användare? ska clienthandler ha en variable username (ja?)
+    [X] Hur loggar man in som användare? ska clienthandler ha en variable username (ja?)
 
     /***********************************************
      Andy: Things I've hardcoded for now:
@@ -109,10 +109,10 @@ Until the 17th we will make the sequence data base
     [Under construction - Choi] implement method addChatRoom in ChatRoomFacade - Need feedback !
     [Under construction - Choi ] implement method removeChatRoom in ChatRoomFacade - Need feedback !
 
-    [] confused about how throws should work in server connection
-    [] CreateChatRoom in serverConnection does not deal with display name like intended right now. solution?
+    [X] confused about how throws should work in server connection (pratade med Wincent, hanteras serverside)
+    [X] CreateChatRoom in serverConnection does not deal with display name like intended right now. solution? (now takes name)
 
-    [] ^ similar thing with createUser
+    [X] ^ similar thing with createUser (takes name and password)
     [X Madde] Lägga till table för bilder, SQL
     /***********************************************
      Madde: DB notes
@@ -160,7 +160,7 @@ Until the 17th we will make the sequence data base
          - (Fixat)
 
      För createUser/AddUser testning:
-         [] AddUser- behövs kanske i Facade/ Model också? Används i Serverconnection och
+         [Outdated] AddUser- behövs kanske i Facade/ Model också? Används i Serverconnection och
          ServerActionHandler(createUser) + wrapping. Controller använder param user. Nu finns bara AddMember för att lägga till
          i Chatrum.
          --> när AddUser skapad/löst i Model/fasad avkommentera rad 42 i ServerActionHandler och hela
@@ -199,12 +199,11 @@ Converting Image to Byte array
         passwords
         logic exists in database
         error messages
-    [ADA] create user (sign up box)
-        [\ MADDE] rest of program (*Basic implementation done, need to add checkUserExists*)
-            controller - needs password
-            serverconn - needs usrname, password
-            (add member används i detta syfte i facaden, det är nog fel, kolla in på det)
-            lägg till create user i facade?
+    [X - ADA] create user (sign up box)
+        [MADDE] rest of program (*Basic implementation done*)
+            [X] controller - needs password
+            [X] serverconn - needs usrname, password
+            [] Hantering av användare efter tillägg, ServerActionHandler -uppdatera active user? 
     [X - ADA] scrollable msg box
     [X - ADA] write which user has made which msg
     [X - ADA] -||- timestamp
@@ -243,5 +242,8 @@ Converting Image to Byte array
  - create new chat
     - put current user in it
     - update available chat
+
+//----------- 260304 -----------//
+[] När modellen skapas intieras den med hårdkodade variabler
 
 
