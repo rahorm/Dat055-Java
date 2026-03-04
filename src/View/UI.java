@@ -21,7 +21,7 @@ public class UI {
     JTextArea messageInput;
     JTextField usernameInput;
     JPasswordField passwordInput;
-    JTextField newChatNameInput = new JTextField();
+    JTextField createChatInput = new JTextField();
     JTextField addMemberInput = new JTextField();
 
 
@@ -61,6 +61,8 @@ public class UI {
 
         addMemberInput.setColumns(20);
 
+        createChatInput.setColumns(20);
+
         SpringLayout layout = new SpringLayout();
 
         frame = new JFrame();
@@ -84,12 +86,12 @@ public class UI {
         JButton removeChatBtn = new JButton("remove chat");
         removeChatBtn.addActionListener((_) -> controller.removeChatRoom(Integer.parseInt(removeChatInput.getText())));
 
-       // JButton signUpBtn = new JButton("sign up");
-       // signUpBtn.addActionListener((_) -> controller.signUp(usernameInput.getText(), passwordInput.getText()));
+       JButton signUpBtn = new JButton("sign up");
+       signUpBtn.addActionListener((_) -> controller.signUp(usernameInput.getText(), passwordInput.getText()));
 
 
         JButton createChatBtn = new JButton("create chat");
-        createChatBtn.addActionListener((_) -> controller.addChatRoom(newChatNameInput.getText()));
+        createChatBtn.addActionListener((_) -> controller.addChatRoom(createChatInput.getText()));
 
         JButton addMemberBtn = new JButton("add user");
         addMemberBtn.addActionListener((_) -> controller.addMember(addMemberInput.getText()));
@@ -100,16 +102,17 @@ public class UI {
         //lägger till knappar till ui:n
         contentPane.add(messageBtn);
         //contentPane.add(messages);
-        contentPane.add(newChatNameInput);
+        contentPane.add(createChatInput);
         contentPane.add(createChatBtn);
 
         contentPane.add(messageInput);
         contentPane.add(usernameInput);
         contentPane.add(passwordInput);
         contentPane.add(loginBtn);
+        contentPane.add(signUpBtn);
         JScrollPane messageListPane = new JScrollPane(messageList);
-        messageListPane.setPreferredSize(new Dimension(200, 200));
-        messageListPane.setMinimumSize(new Dimension(200, 20));
+        //messageListPane.setPreferredSize(new Dimension(200, 200));
+        //messageListPane.setMinimumSize(new Dimension(200, 20));
         contentPane.add(messageListPane);
         contentPane.add(sendWithImageBtn);
 
@@ -141,26 +144,32 @@ public class UI {
 
         //position "Send Message" button
         layout.putConstraint("North", messageBtn, 10, "South", messageInput);
-        //layout.putConstraint("South", messageBtn, 10, "South", contentPane);
-        layout.putConstraint("East", messageBtn, 10, "East", contentPane);
 
-        //position för send with image button
+        //position send with image button
         layout.putConstraint("East", messageBtn, 10, "West", sendWithImageBtn);
+        layout.putConstraint("East", sendWithImageBtn, 10, "East", contentPane);
+        layout.putConstraint("North", sendWithImageBtn, 10, "South", messageInput);
 
         //position messageListPane
         layout.putConstraint("North", messageInput, 10, "South", messageListPane);
         layout.putConstraint("East", contentPane, 10, "East", messageListPane);
         layout.putConstraint("West", messageListPane, 10, "East", usernameInput);
 
+        //position chatListPane
+        layout.putConstraint("West", chatListPane, 0, "West", contentPane);
 
         //position usernameInput
-        layout.putConstraint("West", usernameInput, 10, "West", contentPane);
+        layout.putConstraint("North", usernameInput, 10, "South", chatListPane);
 
         //position passwordInput
         layout.putConstraint("North", passwordInput, 10, "South", usernameInput);
 
-        //position för loginBtn
+        //position loginBtn
         layout.putConstraint("North", loginBtn, 10, "South", passwordInput);
+
+        //position signUpBtn
+        layout.putConstraint("West", signUpBtn, 10, "East", loginBtn);
+        layout.putConstraint("North", signUpBtn, 10, "South", passwordInput);
 
         //position för roomInput
         layout.putConstraint("North", roomInput, 10, "South", loginBtn);
@@ -179,6 +188,12 @@ public class UI {
 
         //position för addMemberBtn
         layout.putConstraint("North", addMemberBtn, 10, "South", addMemberInput);
+
+        //position för createChatInput
+        layout.putConstraint("North", createChatInput, 10, "South", addMemberBtn);
+
+        //position för createChatBtn
+        layout.putConstraint("North", createChatBtn, 10, "South", createChatInput);
 
         //setup för fönstret
         frame.setSize(500, 500);
