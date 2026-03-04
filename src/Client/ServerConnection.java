@@ -53,10 +53,9 @@ public class ServerConnection {
      * @return Arraylist with Message type value
      * @todo question: does this return messages right now or an empty arraylist.
      */
-    public ArrayList<Message> getChatMessages(int chatId){
+    public void getChatMessages(int chatId){
         serverHandler.broadcastMessage(
                 new RequestWrapper(RequestType.GET_MESSAGES, chatId));
-        return new ArrayList<>(0);
     }
 
 //------------------------------------Chats med nya Wrappers----------------------------
