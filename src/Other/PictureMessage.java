@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 public class PictureMessage extends Message {
     // Message with an additional variable for image path e.g. "C:\Users\..."
-    private String imagePath;
+    //private String imagePath;
     private int pictureId;
     private byte[] imageBytes;
 
@@ -16,13 +16,19 @@ public class PictureMessage extends Message {
         super(sender, chatID, "");
         IdGenerator generator = IdGenerator.getInstance();
         this.pictureId = generator.generateId();
-        this.imagePath = imagePath;
+
+        try {
+            this.imageBytes = PictureMessage.toImageBytes(imagePath);
+        } catch (IOException e) {
+            System.out.println("ERROR: "+e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 
-    public PictureMessage(int msgId, int pictureId, String sender, int chatID, LocalDateTime time, String imagePath) {
+    public PictureMessage(int msgId, int pictureId, String sender, int chatID, LocalDateTime time, byte[] image) {
         super(msgId, sender, chatID, "", time);
         this.pictureId = pictureId;
-        this.imagePath = imagePath;
+        this.imageBytes = image;
     }
 
     public byte[] getImageBytes(String imagePath) {

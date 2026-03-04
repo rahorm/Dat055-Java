@@ -371,10 +371,14 @@ public final class DatabaseConnection {
 
                  boolean hasImg = rs.getBoolean(6);
 
+                 //int msgId, int pictureId, String sender, int chatID, LocalDateTime time, String imagePath
                  if(hasImg){
                      int imgId = rs.getInt(7);
                      byte[] img = rs.getBytes(8);
 
+
+
+                     msgHistory.add(new PictureMessage(msgId, imgId, sender, chat, time, img);
                  } else {
                      msgHistory.add(new Message(msgId, sender, chat, content, time));
                  }
