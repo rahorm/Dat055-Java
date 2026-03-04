@@ -90,12 +90,12 @@ public class ClientActionHandler {
             }
 
 
-            case ADD_USER -> {
+            case CREATE_USER -> {
                 UserData userdata = (UserData) request.getData();
                 DBcon.createUser(userdata.getUsername(), userdata.getPassword());
 
                 objToReturn = new RequestWrapper(
-                        RequestType.ADD_USER,
+                        RequestType.CREATE_USER,
                         true
                 );
             }

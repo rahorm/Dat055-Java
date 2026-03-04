@@ -122,7 +122,7 @@ public class ServerConnection {
      */
     public void createUser(String userName, String password){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.ADD_USER, new UserData(userName, password)));
+                new RequestWrapper(RequestType.CREATE_USER, new UserData(userName, password)));
     }
 
     /**

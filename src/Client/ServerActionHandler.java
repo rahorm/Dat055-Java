@@ -3,7 +3,6 @@ package Client;
 //import Common.MsgHistoryWrapper;
 import Common.RequestWrapper;
 import Model.ChatRoomFacade;
-import Model.ChatRoomModel;
 import Other.Message;
 
 import java.util.ArrayList;
@@ -22,59 +21,56 @@ public class ServerActionHandler {
 
         System.out.println("Received request: " + request);
 
+        ChatRoomFacade facade = Model.ChatRoomFacade.getInstance();
+
         switch (request.getType()) {
 
             case GET_MESSAGES:
-                ArrayList<Message> history;
-                history = (ArrayList<Message>) request.getData();
+                ArrayList<Message> history = (ArrayList<Message>) request.getData();
                 System.out.println("Message history received: " + history);
-                ChatRoomFacade facade = Model.ChatRoomFacade.getInstance();
                 facade.setHistory(history);
                 break;
 
-            case ADD_USER:
+            case CREATE_USER:
                 String user = (String) request.getData();
-                System.out.println("User received: " + user);
-                //ChatRoomFacade facade = Model.ChatRoomFacade.getInstance();
-                //facade.addUser(user);
+                System.out.println("User has been created: " + user);
+                //ska den nu sättas som active user?
                 break;
 
             case ADD_CHATROOM:
                 String room = (String) request.getData();
-                System.out.println("ChatRoom received: " + room);
-                // modelFacade.addChatRoom(room);
+                System.out.println("Chat has been created: " + room);
+                //ytterligare actions?
                 break;
 
             case DELETE_CHATROOM:
                 String chatRoom = (String) request.getData();
-                System.out.println("Delete chatroom: " + chatRoom);
-                // modelFacade.deleteChatRoom(roomName);
+                System.out.println("Chatroom deleted: " + chatRoom);
+                //yterligare actions?
                 break;
 
-            //Tillägg
             case ADD_CHAT_MEMBER:
-                String userName = (String) request.getData();
-                System.out.println("Chat member received: " + userName);
-                //facade.addMember(userName);
+                ArrayList<String> memberList = (ArrayList<String>) request.getData();
+                System.out.println("Chat members updated: " + memberList);
+                //vad ska göras med den uppdaterade members listan?
                 break;
 
             case CHECK_USER:
                 boolean exists = (boolean) request.getData();
                 System.out.println("User exists: " + exists);
-                //facade.addMember(userName);
+                //fler actions?
                 break;
 
             case GET_AVAILABLE_CHATS:
                 ArrayList<String> data = (ArrayList<String>) request.getData();
                 System.out.println("Available chats received: " + data);
-                // facade.getInstance().setAvailableChats(data);
+                facade.setAvailableChats(data);
                 break;
 
             case LOGIN:
                 boolean successful = (boolean) request.getData();
                 if(!successful){
-                    ChatRoomFacade f = Model.ChatRoomFacade.getInstance();
-                    f.setActiveUser(""); //@todo ska det finnas en metod för att ta bort användare (t.ex. när man loggar ut)?
+                    facade.setActiveUser(""); //@todo ska det finnas en metod för att ta bort användare (t.ex. när man loggar ut)?
                     break;
                 }
                 //@todo meddela ui att användaren är inloggad
