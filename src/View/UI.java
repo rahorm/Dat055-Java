@@ -69,7 +69,7 @@ public class UI {
         //skickar ett meddelande till servern
         JButton messageBtn = new JButton("send message");
         messageBtn.addActionListener((_) -> {
-            controller.sendMessage(messageInput.getText(), "User1"); //@todo hardcoded?
+            controller.sendMessage(messageInput.getText());
             messageInput.setText("");
         });
 
@@ -225,7 +225,7 @@ public class UI {
     private void addImageFileDialog() {
         JFileChooser fileDialog = new JFileChooser();
         if (fileDialog.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-            controller.sendPictureMessage(fileDialog.getSelectedFile().getAbsolutePath());
+            controller.sendPictureMessage(fileDialog.getSelectedFile().getAbsolutePath(), messageInput.getText());
         }
     }
 
