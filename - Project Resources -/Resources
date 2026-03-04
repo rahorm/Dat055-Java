@@ -235,7 +235,8 @@ Converting Image to Byte array
     [X MADDE] fixa att modellfacade actually används i serveractionhanlder
 
 # SEQUENCE DIAGRAM (?)
-    [message] add msg
+    [MADDE] update add msg
+    [CHOI] update create user
     [commented out code] edit messages (or delete code for  it?)
 
 # THOUGHTS
@@ -245,5 +246,6 @@ Converting Image to Byte array
 
 //----------- 260304 -----------//
 [] När modellen skapas intieras den med hårdkodade variabler
-
+[] Display messages on start
+[] Can't change chatRoom
 

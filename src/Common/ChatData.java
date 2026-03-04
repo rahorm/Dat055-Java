@@ -1,6 +1,8 @@
 package Common;
 
-public class ChatData {
+import java.io.Serializable;
+
+public class ChatData implements Serializable {
     private int chatId;
     private String chatName;
 
