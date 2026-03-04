@@ -33,7 +33,7 @@ public class ServerActionHandler {
                 break;
 
             case CREATE_USER:
-                String user = (String) request.getData();
+                boolean user = (boolean) request.getData();
                 System.out.println("User has been created: " + user);
                 //ska den nu sättas som active user?
                 break;
