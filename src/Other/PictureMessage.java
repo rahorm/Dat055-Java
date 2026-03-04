@@ -12,8 +12,8 @@ public class PictureMessage extends Message {
     private int pictureId;
     private byte[] imageBytes;
 
-    public PictureMessage(String sender, int chatID, String imagePath) {
-        super(sender, chatID, "");
+    public PictureMessage(String sender, int chatID, String imagePath, String message) {
+        super(sender, chatID, message);
         IdGenerator generator = IdGenerator.getInstance();
         this.pictureId = generator.generateId();
 
@@ -25,8 +25,8 @@ public class PictureMessage extends Message {
         }
     }
 
-    public PictureMessage(int msgId, int pictureId, String sender, int chatID, LocalDateTime time, byte[] image) {
-        super(msgId, sender, chatID, "", time);
+    public PictureMessage(int msgId, int pictureId, String sender, int chatID, LocalDateTime time, byte[] image, String message) {
+        super(msgId, sender, chatID, message, time);
         this.pictureId = pictureId;
         this.imageBytes = image;
     }

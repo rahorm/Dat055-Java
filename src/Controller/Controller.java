@@ -32,13 +32,10 @@ public class Controller {
      * @throws IllegalArgumentException if userID is not an existing user
      * @throws NumberFormatException if msg isn't a string
      * */
-    public void sendMessage(String msg, String user){
+    public void sendMessage(String msg){
         System.out.println("message entered controller");
         if (msg == null || msg.isEmpty()) {
             throw new IllegalArgumentException("Message cannot be null or empty");
-        }
-        if (user == null || user.isEmpty()) {
-            throw new IllegalArgumentException("Username cannot be null or empty");
         }
         facade.storeMsg(msg);
         System.out.println("message left controller");
@@ -51,14 +48,14 @@ public class Controller {
      * @throws IllegalArgumentException if imagePath or user is null/empty
      * @throws IllegalArgumentException if the file at imagePath does not exist
      */
-    public void sendPictureMessage(String imagePath, String user) {
+    public void sendPictureMessage(String imagePath, String message) {
         System.out.println("picture message entered controller");
 
         if (imagePath == null || imagePath.isEmpty()) {
             throw new IllegalArgumentException("Image path cannot be null or empty");
         }
-        if (user == null || user.isEmpty()) {
-            throw new IllegalArgumentException("Username cannot be null or empty");
+        if (message == null) {
+            throw new IllegalArgumentException("Message cannot be null");
         }
 
         File imageFile = new File(imagePath);
@@ -66,8 +63,7 @@ public class Controller {
             throw new IllegalArgumentException("No file found at path: " + imagePath);
         }
 
-        PictureMessage pictureMessage = new PictureMessage(user, facade.getActiveChatRoom(), imagePath);
-        pictureMessage.getImageBytes(imagePath); // converts path to byte[]
+        PictureMessage pictureMessage = new PictureMessage(facade.getActiveUser(), facade.getActiveChatRoom(), imagePath, message);
 
         facade.storePictureMsg(pictureMessage);
 
