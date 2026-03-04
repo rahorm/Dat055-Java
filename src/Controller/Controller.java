@@ -87,9 +87,9 @@ public class Controller {
      * Creates a new ChatRoom and makes that the activeChatRoom
      * @throws IllegalStateException if the max amount of chatRooms have been reached
      * */
-    public void addChatRoom() {
+    public void addChatRoom(String chatName) {
         //@todo add chatname as argument, fix hardcoding
-        facade.createChatRoom("chatName"); // need a user info
+        facade.createChatRoom(chatName); // need a user info
         facade.changeActiveRoom(facade.getMSGList().size());
     }
 
