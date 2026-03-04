@@ -33,9 +33,8 @@ public class ServerActionHandler {
                 break;
 
             case CREATE_USER:
-                boolean user = (boolean) request.getData();
-                System.out.println("User has been created: " + user);
-                //ska den nu sättas som active user?
+                boolean created = (boolean) request.getData();
+                System.out.println("User has been created: " + created);
                 break;
 
             case ADD_CHATROOM:
