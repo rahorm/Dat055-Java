@@ -134,6 +134,7 @@ public final class ChatRoomFacade extends Observable {
 
     }
 
+
     public void setActiveUser(String username){
         model.setActiveUser(username);
     }
