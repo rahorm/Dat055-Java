@@ -32,6 +32,8 @@ class MessageRenderer extends JPanel implements ListCellRenderer<Message> {
         if (message instanceof PictureMessage) {
             Icon icon = new ImageIcon(((PictureMessage) message).getImageBytes());
             imageContent.setIcon(icon);
+        } else {
+            imageContent.setIcon(null);
         }
         if (isSelected) {
             setBackground(list.getSelectionBackground());

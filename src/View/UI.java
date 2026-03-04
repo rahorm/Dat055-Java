@@ -148,15 +148,16 @@ public class UI {
 
         //position "Send Message" button
         layout.putConstraint("North", messageBtn, 10, "South", messageInput);
+        layout.putConstraint("West", messageBtn, 0, "West", messageListPane);
 
         //position send with image button
-        layout.putConstraint("East", messageBtn, 10, "West", sendWithImageBtn);
+        layout.putConstraint("West", sendWithImageBtn, 10, "East", messageBtn);
         layout.putConstraint("East", sendWithImageBtn, 10, "East", contentPane);
         layout.putConstraint("North", sendWithImageBtn, 10, "South", messageInput);
 
         //position messageListPane
         layout.putConstraint("North", messageInput, 10, "South", messageListPane);
-        layout.putConstraint("East", contentPane, 10, "East", messageListPane);
+        layout.putConstraint("East", contentPane, 0, "East", messageListPane);
         layout.putConstraint("West", messageListPane, 10, "East", usernameInput);
 
         //position chatListPane
