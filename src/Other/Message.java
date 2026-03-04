@@ -73,7 +73,7 @@ public class Message implements Serializable{
     }
 
     public String toString(){
-        return "msgId: "+this.messageID+", sender: "+this.sender+", chatId: "+this.chatID+", time: "+this.timestamp+", content: "+this.content+", hasImg: ";
+        return "msgId: "+this.messageID+", sender: "+this.sender+", chatId: "+this.chatID+", time: "+this.timestamp+", content: "+this.content+", hasImg: false";
     }
 
 }
