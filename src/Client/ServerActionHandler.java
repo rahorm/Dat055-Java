@@ -1,6 +1,7 @@
 package Client;
 
 //import Common.MsgHistoryWrapper;
+import Common.ChatData;
 import Common.RequestWrapper;
 import Common.UserData;
 import Model.ChatRoomFacade;
@@ -62,7 +63,7 @@ public class ServerActionHandler {
                 break;
 
             case GET_AVAILABLE_CHATS:
-                ArrayList<String> data = (ArrayList<String>) request.getData();
+                ArrayList<ChatData> data = (ArrayList<ChatData>) request.getData();
                 System.out.println("Available chats received: " + data);
                 facade.setAvailableChats(data);
                 break;

@@ -1,5 +1,6 @@
 package Model;
 
+import Common.ChatData;
 import Other.Message;
 
 import java.util.ArrayList;
@@ -121,14 +122,11 @@ public class ChatRoomModel {
     }*/
 
     // Sätt ny lista/uppdatera listan
-    public void setAvailableChats(ArrayList<String> idNamePairs) {
+    public void setAvailableChats(ArrayList<ChatData> idNamePairs) {
 
-        for (String s : idNamePairs) {
-            String[] parts = s.split(":");
-            int id = Integer.parseInt(parts[0]);
-            String name = parts[1];
-            availableChatIds.add(id);
-            availableChatNames.add(name);
+        for (ChatData d : idNamePairs) {
+            availableChatIds.add(d.getChatId());
+            availableChatNames.add(d.getChatName());
         }
     }
     public void clearAvailableChats(int chatId, String chatName){

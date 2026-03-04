@@ -1,6 +1,7 @@
 package Model;
 
 import Client.ServerConnection;
+import Common.ChatData;
 import Other.IdGenerator;
 import Other.Message;
 import Other.PictureMessage;
@@ -90,7 +91,7 @@ public final class ChatRoomFacade extends Observable {
         //notifyObservers();
     }
 
-    public void setAvailableChats(ArrayList<String> idNamePairs) {
+    public void setAvailableChats(ArrayList<ChatData> idNamePairs) {
         model.setAvailableChats(idNamePairs);
         setChanged();
         notifyObservers();
