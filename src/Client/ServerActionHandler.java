@@ -2,6 +2,7 @@ package Client;
 
 //import Common.MsgHistoryWrapper;
 import Common.RequestWrapper;
+import Common.UserData;
 import Model.ChatRoomFacade;
 import Other.Message;
 
@@ -68,9 +69,10 @@ public class ServerActionHandler {
                 break;
 
             case LOGIN:
-                boolean successful = (boolean) request.getData();
-                if(!successful){
-                    facade.setActiveUser(""); //@todo ska det finnas en metod för att ta bort användare (t.ex. när man loggar ut)?
+                Object[] loginInfo = (Object[]) request.getData();
+                if((boolean) loginInfo[0]){
+                    UserData userData = (UserData) loginInfo[1];
+                    facade.setActiveUser(userData.getUsername());
                     break;
                 }
                 //@todo meddela ui att användaren är inloggad
