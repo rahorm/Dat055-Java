@@ -133,7 +133,6 @@ public class Controller {
         if (user == null || user.isEmpty()) {
             throw new IllegalArgumentException("Username must not be null or empty");
         }
-        //@todo add checkUser before
         facade.createUser(user, password);
     }
 }

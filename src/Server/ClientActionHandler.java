@@ -97,11 +97,11 @@ public class ClientActionHandler {
 
             case CREATE_USER -> {
                 UserData userdata = (UserData) request.getData();
-                DBcon.createUser(userdata.getUsername(), userdata.getPassword());
+                boolean created = DBcon.createUser(userdata.getUsername(), userdata.getPassword());
 
                 objToReturn = new RequestWrapper(
                         RequestType.CREATE_USER,
-                        true
+                        created
                 );
             }
 
