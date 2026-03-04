@@ -235,7 +235,8 @@ Converting Image to Byte array
     [X MADDE] fixa att modellfacade actually används i serveractionhanlder
 
 # SEQUENCE DIAGRAM (?)
-    [message] add msg
+    [MADDE] update add msg
+    [CHOI] update create user
     [commented out code] edit messages (or delete code for  it?)
 
 # THOUGHTS
