@@ -37,4 +37,7 @@ public class PictureMessage extends Message {
         return Files.readAllBytes(new File(imagePath).toPath());
 
     }
+    public String toString(){
+        return "msgId: "+super.getMessageID()+", sender: "+this.getSender()+", chatId: "+this.getChatID()+", time: "+this.getTimestamp()+", content: "+this.getContent()+", hasImg: true, imgId: "+this.pictureId;
+    }
 }
