@@ -85,7 +85,7 @@ Until the 17th we will make the sequence data base
     //Madde
     ************************************************/
 
-    [Choi] hantera "AvailableChats"
+    [X Mona] hantera "AvailableChats"
    /***********************************************
      ^^
      - Sparas i Modelfasad?
@@ -108,8 +108,10 @@ Until the 17th we will make the sequence data base
 
     [Under construction - Choi] implement method addChatRoom in ChatRoomFacade - Need feedback !
     [Under construction - Choi ] implement method removeChatRoom in ChatRoomFacade - Need feedback !
+
     [] confused about how throws should work in server connection
     [] CreateChatRoom in serverConnection does not deal with display name like intended right now. solution?
+
     [] ^ similar thing with createUser
     [X Madde] Lägga till table för bilder, SQL
     /***********************************************
