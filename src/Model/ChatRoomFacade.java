@@ -232,7 +232,7 @@ public void removeMessage(Message message) {
      * @return if users credentials are correct
      */
     public void logIn(String username, String password){
-        serverConnection.checkLogin(username, password); // Return type of CheckLogin in serverConnection to be boolean??
+        serverConnection.login(username, password); // Return type of CheckLogin in serverConnection to be boolean??
                                                          // how can we verify is the question here
     }
 
