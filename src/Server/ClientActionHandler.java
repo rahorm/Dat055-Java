@@ -144,15 +144,15 @@ public class ClientActionHandler {
                 );
             }
 
-//            case EDIT_MESSAGE -> {
-//                Message message = (Message) request.getData();
-//                DBcon.editMsg();
-//
-//                objToReturn = new RequestWrapper(
-//                        RequestType.GET_MESSAGES,
-//                        DBcon.getChatMessages(message.getChatID())
-//                );
-//            }
+            /*case EDIT_MESSAGE -> {
+                Message message = (Message) request.getData();
+                DBcon.editMsg();
+
+                objToReturn = new RequestWrapper(
+                        RequestType.GET_MESSAGES,
+                        DBcon.getChatMessages(message.getChatID())
+                );
+            }*/
 
 
             case DELETE_MESSAGE -> {

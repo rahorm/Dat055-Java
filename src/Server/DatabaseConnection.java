@@ -280,7 +280,7 @@ public final class DatabaseConnection {
      * @param msg the original message
      * @param updateMsg the new message
      */
-    public void editMsg(Message msg, Message updateMsg){
+    /*public void editMsg(Message msg, Message updateMsg){
 
         try(PreparedStatement ps = conn.prepareStatement(
                 "UPDATE ChatMessages SET Content = ?, hasimg = ? WHERE msgId = ?");){
@@ -292,7 +292,7 @@ public final class DatabaseConnection {
             System.out.println("{\"error\":\""+getError(e)+"\"}");
         }
 
-    }
+    }*/
 
     /**
      * !THIS CANNOT BE UNDONE!
