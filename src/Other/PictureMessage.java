@@ -8,27 +8,22 @@ import java.time.LocalDateTime;
 
 public class PictureMessage extends Message {
     // Message with an additional variable for image path e.g. "C:\Users\..."
-    //@todo implement class
     private String imagePath;
     private int pictureId;
-    private boolean isMsg;
     private byte[] imageBytes;
 
     public PictureMessage(String sender, int chatID, String imagePath) {
         super(sender, chatID, "No text content");
         IdGenerator generator = IdGenerator.getInstance();
         this.pictureId = generator.generateId();
-        this.isMsg = true;
         this.imagePath = imagePath;
     }
 
     public PictureMessage(int pictureId, String sender, int chatID, LocalDateTime time, String imagePath) {
         super(null, sender, chatID, "No text content", time);
         this.pictureId = pictureId;
-        this.isMsg = true;
         this.imagePath = imagePath;
     }
-
 
     public byte[] getImageBytes(String imagePath) {
         try {
@@ -36,7 +31,6 @@ public class PictureMessage extends Message {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return this.imageBytes;
     }
 
@@ -44,14 +38,4 @@ public class PictureMessage extends Message {
         return Files.readAllBytes(new File(imagePath).toPath());
 
     }
-
-    public String getPath() {
-        
-    }
-
 }
-
-    //byte array
-    //bild id
-    //is msg
-

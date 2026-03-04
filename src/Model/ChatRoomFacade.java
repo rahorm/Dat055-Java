@@ -77,9 +77,6 @@ public final class ChatRoomFacade extends Observable {
         changeActiveRoom(new_id);
         setChanged();
         notifyObservers();
-
-        // dbconn creatChat has two arguments: chatiD, chatName
-        // + serverConn
     }
 
 
@@ -103,9 +100,6 @@ public final class ChatRoomFacade extends Observable {
     public ArrayList<Message> getMSGList(){
         return model.retriveMSGList(); // how many elements to show?
     }
-
-
-
 
 
     /// ----------------------------- Message <-> Server -----------------------------
