@@ -94,6 +94,9 @@ public class UI {
         JButton addMemberBtn = new JButton("add user");
         addMemberBtn.addActionListener((_) -> controller.addMember(addMemberInput.getText()));
 
+        JButton sendWithImageBtn = new JButton("send with image");
+        sendWithImageBtn.addActionListener((_) -> addImageFileDialog());
+
         //lägger till knappar till ui:n
         contentPane.add(messageBtn);
         //contentPane.add(messages);
@@ -108,6 +111,7 @@ public class UI {
         messageListPane.setPreferredSize(new Dimension(200, 200));
         messageListPane.setMinimumSize(new Dimension(200, 20));
         contentPane.add(messageListPane);
+        contentPane.add(sendWithImageBtn);
 
         JScrollPane chatListPane = new JScrollPane(chatList);
         chatListPane.setPreferredSize(new Dimension(200, 100));
@@ -139,6 +143,9 @@ public class UI {
         layout.putConstraint("North", messageBtn, 10, "South", messageInput);
         //layout.putConstraint("South", messageBtn, 10, "South", contentPane);
         layout.putConstraint("East", messageBtn, 10, "East", contentPane);
+
+        //position för send with image button
+        layout.putConstraint("East", messageBtn, 10, "West", sendWithImageBtn);
 
         //position messageListPane
         layout.putConstraint("North", messageInput, 10, "South", messageListPane);
@@ -213,6 +220,13 @@ public class UI {
         Vector<String> vector = new Vector<>(chatNames);
         chatList.setListData(vector);
         this.availableChatIds = chatIds;
+    }
+
+    private void addImageFileDialog() {
+        JFileChooser fileDialog = new JFileChooser();
+        if (fileDialog.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            controller.sendPictureMessage(fileDialog.getSelectedFile().getAbsolutePath());
+        }
     }
 
 }
