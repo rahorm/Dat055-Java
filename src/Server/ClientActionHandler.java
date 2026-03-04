@@ -37,7 +37,7 @@ public class ClientActionHandler {
         switch (request.getType()) {
 
             case ADD_MESSAGE -> {
-                if(request instanceof Message){
+                if(request.getData() instanceof Message){
                     Message message = (Message) request.getData();
                     DBcon.sendMsg(message);
 
