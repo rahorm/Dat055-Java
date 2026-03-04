@@ -21,12 +21,13 @@ public class ChatRoomView implements Observer {
      *            when arg isn't specified everything in the view gets updated
      */
     public void update(Observable o, Object arg) {
+        //messages
         ArrayList<Message> msg = model.getMSGList();
         ui.setMsg(msg);
-//        //  available chats
-           ArrayList<String> chatNames = model.getAvailableChatNames();
-//        Vector<String> chatList = new Vector<>(chatNames);
-//        yourChatJList.setListData(chatList)
+        //  available chats
+        ArrayList<String> chatNames = model.getAvailableChatNames();
+        ArrayList<Integer> chatIds = model.getAvailableChatIds();
+        ui.setAvailableChats(chatNames, chatIds);
     }
 
     public ChatRoomView(Controller controller, ChatRoomFacade model) {
