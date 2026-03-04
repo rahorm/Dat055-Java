@@ -8,6 +8,7 @@ import Common.RequestWrapper;
 import Common.UserData;
 import Model.ChatRoomFacade;
 import Other.Message;
+import Other.PictureMessage;
 
 import java.sql.SQLException;
 
@@ -36,14 +37,18 @@ public class ClientActionHandler {
         switch (request.getType()) {
 
             case ADD_MESSAGE -> {
-                //@todo Kolla om det behöver vara olika requests för message och PictureMessage
-                Message message = (Message) request.getData();
-                DBcon.sendMsg(message);
+                if(request instanceof Message){
+                    Message message = (Message) request.getData();
+                    DBcon.sendMsg(message);
 
-                objToReturn = new RequestWrapper(
-                        RequestType.GET_MESSAGES,
-                        DBcon.getChatMessages(message.getChatID())
-                );
+                    objToReturn = new RequestWrapper(
+                            RequestType.GET_MESSAGES,
+                            DBcon.getChatMessages(message.getChatID())
+                    );
+                } else {
+                    PictureMessage message = (PictureMessage) request.getData();
+                }
+
             }
 
             case ADD_CHATROOM -> {

@@ -44,7 +44,6 @@ public class Controller {
     /**
      * Takes a picture message and stores it in the program
      * @param imagePath string that represents the local file path of the image to be sent
-     * @param user string that represents the username of the sender in the active chat
      * @throws IllegalArgumentException if imagePath or user is null/empty
      * @throws IllegalArgumentException if the file at imagePath does not exist
      */

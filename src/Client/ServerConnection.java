@@ -30,11 +30,10 @@ public class ServerConnection {
      * @param msg the message to be sent in type Message
      */
     public void sendMsg(Message msg) {
-        System.out.println("message entered connection");
         serverHandler.broadcastMessage(new RequestWrapper(RequestType.ADD_MESSAGE, msg));
-        System.out.println("message left connection");
     }
     public void sendPictureMsg(PictureMessage pictureMessage) {
+        serverHandler.broadcastMessage(new RequestWrapper(RequestType.ADD_MESSAGE, pictureMessage));
     }
 
     /**

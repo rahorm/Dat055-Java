@@ -151,54 +151,19 @@ public final class DatabaseConnection {
      * Uploads an image to the database as a byte array
      * @param imgId what id to give the image
      * @param msgId what message the image is linked to
-     * @param path the path of the image, locally on the computer
+     * @param img the path of the image, locally on the computer
      */
-    private void uploadImg(int imgId, int msgId, String path) {
-        File file = new File(path);
-        byte[] fileContent = null;
-
-        try {
-            fileContent = Files.readAllBytes(file.toPath());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        //columns: imgId, message, image @todo is this comment old, cant find byteA
+    private void uploadImg(int imgId, int msgId, byte[] img) {
         try(PreparedStatement ps = conn.prepareStatement(
                 "INSERT INTO Images VALUES (?, ?, ?)");){
             ps.setInt(1, imgId);
             ps.setInt(2, msgId);
-            ps.setBytes(3, fileContent);
+            ps.setBytes(3, img);
             ps.executeUpdate();
         }  catch (SQLException e) {
             System.out.println("{\"error\":\""+getError(e)+"\"}");
         }
 
-    }
-
-    /**
-     * Gets an image attached to the specified message from the database.
-     * @param msgId id of the message image is attached to
-     * @return byte[] returns the stored image as a byte array
-     */
-    public byte[] getImg(int msgId){
-        byte[] image = null;
-
-        try (PreparedStatement ps = conn.prepareStatement(
-                "SELECT image FROM chatmessages INNER JOIN Images USING (imgId) WHERE msgId = ?");){
-            ps.setInt(1, msgId);
-            ResultSet rs = ps.executeQuery();
-
-            while(rs.next()) {
-                image = rs.getBytes(1);
-
-            }
-
-        } catch (Exception e) {
-            System.out.println("ERROR: "+e.getMessage());
-        }
-
-        return image;
     }
 
     /**
@@ -245,7 +210,7 @@ public final class DatabaseConnection {
             System.out.println("{\"error\":\""+getError(e)+"\"}");
         }
 
-        uploadImg(imgId, msg.getMessageID(), msg.getPath());
+        uploadImg(imgId, msg.getMessageID(), msg.getImageBytes());
     }
 
     /**
@@ -374,7 +339,7 @@ public final class DatabaseConnection {
                  if(hasImg){
                      int imgId = rs.getInt(7);
                      byte[] img = rs.getBytes(8);
-                     msgHistory.add(new PictureMessage(msgId, imgId, sender, chat, time, img));
+                     msgHistory.add(new PictureMessage(msgId, imgId, sender, chat, time, img, content));
 
                  } else {
                      msgHistory.add(new Message(msgId, sender, chat, content, time));

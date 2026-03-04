@@ -31,12 +31,7 @@ public class PictureMessage extends Message {
         this.imageBytes = image;
     }
 
-    public byte[] getImageBytes(String imagePath) {
-        try {
-            this.imageBytes = toImageBytes(imagePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public byte[] getImageBytes(){
         return this.imageBytes;
     }
 
