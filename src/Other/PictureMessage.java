@@ -15,15 +15,15 @@ public class PictureMessage extends Message {
     private byte[] imageBytes;
 
     public PictureMessage(String sender, int chatID, String imagePath) {
-        super(sender, chatID, "No text content");
+        super(sender, chatID, "");
         IdGenerator generator = IdGenerator.getInstance();
         this.pictureId = generator.generateId();
         this.isMsg = true;
         this.imagePath = imagePath;
     }
 
-    public PictureMessage(int pictureId, String sender, int chatID, LocalDateTime time, String imagePath) {
-        super(null, sender, chatID, "No text content", time);
+    public PictureMessage(int msgId, int pictureId, String sender, int chatID, LocalDateTime time, String imagePath) {
+        super(msgId, sender, chatID, "", time);
         this.pictureId = pictureId;
         this.isMsg = true;
         this.imagePath = imagePath;

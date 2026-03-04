@@ -357,7 +357,7 @@ public final class DatabaseConnection {
          ArrayList<Message> msgHistory = new ArrayList<Message>();
 
          try (PreparedStatement ps = conn.prepareStatement(
-                 "SELECT * FROM chatmessages WHERE chat = ? ORDER BY time ASC");){
+                 "SELECT msgid, chat, sender, time, content, hasimg, C.imgid, image FROM ChatMessages AS C LEFT OUTER JOIN Images AS I ON C.imgid = I.imgid WHERE chat = ? ORDER BY time ASC");){
              ps.setInt(1, chatId);
              ResultSet rs = ps.executeQuery();
 
@@ -368,9 +368,17 @@ public final class DatabaseConnection {
                  String sender = rs.getString(3);
                  LocalDateTime time = rs.getTimestamp(4).toLocalDateTime();
                  String content = rs.getString(5);
+
                  boolean hasImg = rs.getBoolean(6);
 
-                 msgHistory.add(new Message(msgId, sender, chat, content, time));
+                 if(hasImg){
+                     int imgId = rs.getInt(7);
+                     byte[] img = rs.getBytes(8);
+
+                 } else {
+                     msgHistory.add(new Message(msgId, sender, chat, content, time));
+                 }
+
 
              }
 
