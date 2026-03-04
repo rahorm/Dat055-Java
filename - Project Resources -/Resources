@@ -230,7 +230,7 @@ Converting Image to Byte array
         bild id
         is msg
     [X MONA] chat name (display name) implementation all over program (finns redan i databsen)
-    [] fixa att modellfacade actually används i serveractionhanlder
+    [X MADDE] fixa att modellfacade actually används i serveractionhanlder
 
 # SEQUENCE DIAGRAM (?)
     [] add msg

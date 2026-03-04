@@ -115,14 +115,14 @@ public class ServerConnection {
      * Creates a new user in the database. Easy but unsafe password handling.
      * </p>
      *  The user will recieve an id for internal use.
-     *  @todo should this be in the doc? will the user of this method have to know abput the id? //Javadoc is outdated, user no longer recievs id
+     *  @todo should this be in the doc? will the user of this method have to know about the id? //Javadoc is outdated, user no longer recievs id
      *
      * @param userName string parameter userName is the intended display name of the user.
      * @param password String
      */
     public void createUser(String userName, String password){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.ADD_USER, new UserData(userName, password)));
+                new RequestWrapper(RequestType.CREATE_USER, new UserData(userName, password)));
     }
 
     /**

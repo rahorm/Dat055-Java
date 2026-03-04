@@ -81,20 +81,21 @@ public class ClientActionHandler {
             case LOGIN -> {
                 UserData userdata = (UserData) request.getData();
                 boolean success = DBcon.checkLogin(userdata.getUsername(), userdata.getPassword());
+                Object[] data = {success, new UserData(userdata.getUsername(), userdata.getPassword())};
 
                 objToReturn = new RequestWrapper(
                         RequestType.LOGIN,
-                        success
+                        data
                 );
             }
 
 
-            case ADD_USER -> {
+            case CREATE_USER -> {
                 UserData userdata = (UserData) request.getData();
                 DBcon.createUser(userdata.getUsername(), userdata.getPassword());
 
                 objToReturn = new RequestWrapper(
-                        RequestType.ADD_USER,
+                        RequestType.CREATE_USER,
                         true
                 );
             }

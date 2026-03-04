@@ -110,7 +110,6 @@ public class Controller {
 
 
     public void login(String user, String password){
-        facade.setActiveUser(user);
         facade.logIn(user, password);
         /*ReturnCode code;
 
