@@ -55,6 +55,8 @@ public class UI {
 
         this.usernameInput = new JTextField();
         usernameInput.setColumns(20);
+        usernameInput.setMaximumSize(usernameInput.getPreferredSize());
+        usernameInput.setMinimumSize(usernameInput.getPreferredSize());
 
         this.passwordInput = new JPasswordField();
         passwordInput.setColumns(20);
@@ -141,6 +143,8 @@ public class UI {
 
         //position messageInput
         layout.putConstraint("East", messageInput, 10, "East", contentPane);
+        layout.putConstraint("West", messageInput, 0, "West", messageListPane);
+        layout.putConstraint("South", contentPane, 50, "South", messageInput);
 
         //position "Send Message" button
         layout.putConstraint("North", messageBtn, 10, "South", messageInput);
