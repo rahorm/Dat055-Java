@@ -247,5 +247,5 @@ Converting Image to Byte array
 //----------- 260304 -----------//
 [] När modellen skapas intieras den med hårdkodade variabler
 [] Display messages on start
-[] Can't change chatRoom
-
+[] Can't change see available chatRooms
+[] if user manually enters chat id of a chat they aren't in, chat is still displayed
