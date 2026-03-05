@@ -129,11 +129,10 @@ public class ChatRoomModel {
             availableChatNames.add(d.getChatName());
         }
     }
-    public void clearAvailableChats(int chatId, String chatName){
+    public void clearAvailableChats(int chatId, String chatName) {
         availableChatIds.clear();
         availableChatNames.clear();
     }
-
 
     public void addAvailableChat(int chatId, String chatName) {
         availableChatIds.add(chatId);
