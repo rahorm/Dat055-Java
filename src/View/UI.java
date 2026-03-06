@@ -13,9 +13,9 @@ public class UI {
     JFrame frame;
     JFrame messageFrame;
     JList<Message> messageList;
+    JLabel activeChat = new JLabel();
     JList <String> chatList;
     Controller controller;
-    JTextField roomInput;
     JTextField removeChatInput;
     JTextArea messages;
     JTextArea messageInput;
@@ -31,8 +31,6 @@ public class UI {
         messages.setColumns(20);
         messages.setRows(10);
 
-        this.roomInput = new JTextField();
-        roomInput.setColumns(20);
 
         this.removeChatInput = new JTextField();
         removeChatInput.setColumns(20);
@@ -82,15 +80,6 @@ public class UI {
         //@TODO skapa loginmetod i controller och använd getpassword istället för gettext;
         loginBtn.addActionListener((_) -> controller.login(usernameInput.getText(), passwordInput.getText()));
 
-        JButton changeRoomBtn = new JButton("change room");
-//        changeRoomBtn.addActionListener((_) -> controller.changeActiveRoom(Integer.parseInt(roomInput.getText())));
-        changeRoomBtn.addActionListener((_) -> {
-            String input = roomInput.getText().trim();
-            if (!input.isEmpty()) {
-                controller.changeActiveRoom(Integer.parseInt(input));
-            }
-        });
-
         JButton removeChatBtn = new JButton("remove chat");
 //        removeChatBtn.addActionListener((_) -> controller.removeChatRoom(Integer.parseInt(removeChatInput.getText())));
         removeChatBtn.addActionListener((_) -> {
@@ -130,6 +119,7 @@ public class UI {
         contentPane.add(messageListPane);
         contentPane.add(sendWithImageBtn);
 
+        contentPane.add(activeChat);
         JScrollPane chatListPane = new JScrollPane(chatList);
         chatListPane.setPreferredSize(new Dimension(200, 100));
         contentPane.add(chatListPane);
@@ -140,8 +130,6 @@ public class UI {
 
         contentPane.add(removeChatBtn);
         contentPane.add(removeChatInput);
-        contentPane.add(roomInput);
-        contentPane.add(changeRoomBtn);
         contentPane.add(addMemberInput);
         contentPane.add(addMemberBtn);
 
@@ -172,8 +160,12 @@ public class UI {
         layout.putConstraint("East", contentPane, 0, "East", messageListPane);
         layout.putConstraint("West", messageListPane, 10, "East", usernameInput);
 
+        //position activeChat
+        layout.putConstraint("West", activeChat, 0, "West", contentPane);
+
         //position chatListPane
         layout.putConstraint("West", chatListPane, 0, "West", contentPane);
+        layout.putConstraint("North", chatListPane, 10, "South", activeChat);
 
         //position usernameInput
         layout.putConstraint("North", usernameInput, 10, "South", chatListPane);
@@ -188,14 +180,8 @@ public class UI {
         layout.putConstraint("West", signUpBtn, 10, "East", loginBtn);
         layout.putConstraint("North", signUpBtn, 10, "South", passwordInput);
 
-        //position för roomInput
-        layout.putConstraint("North", roomInput, 10, "South", loginBtn);
-
-        //position för changeRoomBtn
-        layout.putConstraint("North", changeRoomBtn, 10, "South", roomInput);
-
         //position för removeChatInput
-        layout.putConstraint("North", removeChatInput, 10, "South", changeRoomBtn);
+        layout.putConstraint("North", removeChatInput, 10, "South", loginBtn);
 
         //position för removeChatBtn
         layout.putConstraint("North", removeChatBtn, 10, "South", removeChatInput);
@@ -263,6 +249,10 @@ public class UI {
 
     public void displayStatusMessage(String statusMessage) {
         JOptionPane.showMessageDialog(frame, statusMessage);
+    }
+
+    public void setActiveChat(String activeChatName) {
+        activeChat.setText(activeChatName);
     }
 
 }
