@@ -23,6 +23,11 @@ public class ChatRoomModel {
     private final ArrayList<String> availableChatNames = new ArrayList<>();
     private String username;
     private int activeChatRoomId;
+    private String statusMessage;
+
+
+
+
 
     /**
      * This method creates a new chatroom model with chatID
@@ -139,7 +144,17 @@ public class ChatRoomModel {
         availableChatNames.add(chatName);
     }
 
+
+    public void setStatusMessage(String statusmessage){
+        this.statusMessage = statusmessage;
+    }
+
+    public String getStatusMessage(){
+        return this.statusMessage;
+    }
+
 }
+
 
 
 

@@ -250,6 +250,22 @@ public void removeMessage(Message message) {
      */
     public void createUser(String username, String password){
         serverConnection.createUser(username, password);
+        setChanged();
+        notifyObservers();
+        // kommer från serveractionhandler.
+
+    }
+
+    /**
+     * When user tries to login or sign up this statusmessage will shows whether it is failed or succeeded
+     * @param statusmessage message that indicates signup or login status
+     */
+    public void setStatusMessage(String statusmessage){
+        model.setStatusMessage(statusmessage);
+    }
+
+    public String getStatusMessage(){
+        return model.getStatusMessage();
     }
 
 /// -----------------------------Getters and Setters-----------------------------
