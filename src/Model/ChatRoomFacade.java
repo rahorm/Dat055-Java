@@ -286,6 +286,9 @@ public final class ChatRoomFacade extends Observable {
 
 /// -----------------------------Getters and Setters-----------------------------
     public int getActiveChatRoom(){ return model.getActiveChatRoomId(); }
+    public int getChatIdByName(String name) {
+        return model.getChatIdByName(name);
+    }
 
 }
 

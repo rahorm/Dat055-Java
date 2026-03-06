@@ -119,6 +119,19 @@ public class ChatRoomModel {
         return this.statusMessage;
     }
 
+    public int getChatIdByName(String name) {
+        int index = availableChatNames.indexOf(name);
+        if (index != -1) {
+            return availableChatIds.get(index);
+        }
+        return -1;
+    }
+
+    /*
+    *     private final ArrayList<Integer> availableChatIds = new ArrayList<>();
+    private final ArrayList<String> availableChatNames = new ArrayList<>();
+    * */
+
 }
 
 

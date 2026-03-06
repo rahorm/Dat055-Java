@@ -92,11 +92,29 @@ public class UI {
         });
 
         JButton removeChatBtn = new JButton("remove chat");
-//      removeChatBtn.addActionListener((_) -> controller.removeChatRoom(Integer.parseInt(removeChatInput.getText())));
+////      removeChatBtn.addActionListener((_) -> controller.removeChatRoom(Integer.parseInt(removeChatInput.getText())));
+//        removeChatBtn.addActionListener((_) -> {
+//            String input = removeChatInput.getText().trim();
+//            if (!input.isEmpty()) {
+//                controller.removeChatRoom(Integer.parseInt(input));
+//            }
+//        });
         removeChatBtn.addActionListener((_) -> {
             String input = removeChatInput.getText().trim();
             if (!input.isEmpty()) {
-                controller.removeChatRoom(Integer.parseInt(input));
+                try {
+                    // if it parses as int, use it as ID directly
+                    int id = Integer.parseInt(input);
+                    controller.removeChatRoom(id);
+                } catch (NumberFormatException e) {
+                    // otherwise treat it as a name, look up the ID
+                    int id = controller.getChatIdByName(input);
+                    if (id != -1) {
+                        controller.removeChatRoom(id);
+                    } else {
+                        JOptionPane.showMessageDialog(frame, "Chatroom not found: " + input);
+                    }
+                }
             }
         });
 

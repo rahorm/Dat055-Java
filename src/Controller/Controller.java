@@ -138,4 +138,8 @@ public class Controller {
         }
         facade.createUser(user, password);
     }
+
+    public int getChatIdByName(String name) {
+        return facade.getChatIdByName(name);
+    }
 }
