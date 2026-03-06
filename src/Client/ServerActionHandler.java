@@ -2,6 +2,7 @@ package Client;
 
 //import Common.MsgHistoryWrapper;
 import Common.ChatData;
+import Common.ChatMemberData;
 import Common.RequestWrapper;
 import Common.UserData;
 import Model.ChatRoomFacade;
@@ -49,10 +50,11 @@ public class ServerActionHandler {
                 break;
 
             case ADD_CHATROOM:
-                String room = (String) request.getData();
-                System.out.println("Chat has been created: " + room);
-                //ytterligare actions?
-                break;
+                ChatData updated = (ChatData) request.getData();
+                facade.changeActiveRoom(updated.getChatId());
+                facade.addMember(facade.getActiveUser(), updated.getChatId());
+
+            break;
 
             case DELETE_CHATROOM:
                 String chatRoom = (String) request.getData();
@@ -61,9 +63,9 @@ public class ServerActionHandler {
                 break;
 
             case ADD_CHAT_MEMBER:
-                ArrayList<String> memberList = (ArrayList<String>) request.getData();
-                System.out.println("Chat members updated: " + memberList);
-                //vad ska göras med den uppdaterade members listan?
+                ChatMemberData added = (ChatMemberData) request.getData();
+                System.out.println("Member added: " + added);
+                facade.addMemberLocal(added.getUsername());
                 break;
 
             case CHECK_USER:
@@ -83,10 +85,14 @@ public class ServerActionHandler {
                 if((boolean) loginInfo[0]){
                     UserData userData = (UserData) loginInfo[1];
                     facade.setActiveUser(userData.getUsername());
+                    facade.setStatusMessage("Success!");
+                    facade.updateAvailableChatIds();
                     System.out.println("logged in clientside");
                     break;
                 }
+
                 //@todo meddela ui att användaren är inloggad
+                facade.setStatusMessage("Failed!");
                 break;
 
             default:
