@@ -75,15 +75,11 @@ public class ServerActionHandler {
                 break;
 
             case LOGIN:
-                Object[] loginInfo = (Object[]) request.getData();
-                if((boolean) loginInfo[0]){
-                    UserData userData = (UserData) loginInfo[1];
-                    facade.setActiveUser(userData.getUsername());
-                    System.out.println("logged in clientside");
-                    break;
-                }
-                //@todo meddela ui att användaren är inloggad
+                UserData userData = (UserData) request.getData();
+                facade.setActiveUser(userData.getUsername());
+                System.out.println("logged in clientside");
                 break;
+                //@todo meddela ui att användaren är inloggad
 
             default:
                 System.out.println("Unhandled request type: " + request.getType());

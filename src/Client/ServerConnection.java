@@ -137,15 +137,10 @@ public class ServerConnection {
     /**
      * Adds a user to the activeChat
      * </p>
-     * @param user String ID of user that should be added. @todo is this id or displayname
+     * @param user username of user that should be added.
+     * @param chatId id of chat to add user to
      */
-    //How does this know which chat to add user to??
-    //@todo add member escapades
-    /*public void addChatMember(String user){
-        serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.ADD_CHAT_MEMBER, user));
-    }*/
-    //@todo add member escapades
+
     public void addChatMember(String user, int chatId){
         serverHandler.broadcastMessage(
                 new RequestWrapper(RequestType.ADD_CHAT_MEMBER, new ChatMemberData(user, chatId)));
