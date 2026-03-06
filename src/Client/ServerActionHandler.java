@@ -40,10 +40,12 @@ public class ServerActionHandler {
 
                 if(created){
                     facade.setStatusMessage("Success!");
+                    facade.updateAvailableChatIds();
                 }
-                else if(!created){
+                else if(!created) {
                     facade.setStatusMessage("Failed!");
                 }
+
                 break;
 
             case ADD_CHATROOM:
@@ -81,12 +83,10 @@ public class ServerActionHandler {
                 if((boolean) loginInfo[0]){
                     UserData userData = (UserData) loginInfo[1];
                     facade.setActiveUser(userData.getUsername());
-                    facade.setStatusMessage("Success!");
                     System.out.println("logged in clientside");
                     break;
                 }
                 //@todo meddela ui att användaren är inloggad
-                facade.setStatusMessage("Failed!");
                 break;
 
             default:

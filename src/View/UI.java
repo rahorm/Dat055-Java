@@ -96,7 +96,7 @@ public class UI {
         createChatBtn.addActionListener((_) -> controller.addChatRoom(createChatInput.getText()));
 
         JButton addMemberBtn = new JButton("add user");
-        addMemberBtn.addActionListener((_) -> controller.addMember(addMemberInput.getText()));
+        addMemberBtn.addActionListener((_) -> controller.addMember(addMemberInput.getText())); //@todo, need to know what chatrrom to add user to
 
         JButton sendWithImageBtn = new JButton("send with image");
         sendWithImageBtn.addActionListener((_) -> addImageFileDialog());
@@ -247,6 +247,10 @@ public class UI {
         if (fileDialog.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             controller.sendPictureMessage(fileDialog.getSelectedFile().getAbsolutePath(), messageInput.getText());
         }
+    }
+
+    public void displayStatusMessage(String statusMessage) {
+        JOptionPane.showMessageDialog(frame, statusMessage);
     }
 
 }

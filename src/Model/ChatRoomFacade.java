@@ -15,6 +15,7 @@ public final class ChatRoomFacade extends Observable {
     private static ChatRoomFacade instance;
     private ChatRoomModel model;
     private ServerConnection serverConnection;
+    private String lastAttemptedLogin;
 
     private ChatRoomFacade(ChatRoomModel model) {
         this.model = model;
@@ -69,16 +70,16 @@ public final class ChatRoomFacade extends Observable {
 
         serverConnection.createChatRoom(new_id, chatName);
 
-        String user = model.getActiveUser();
+        /*String user = model.getActiveUser();
 
-        serverConnection.addChatMember(new_id + ":" + user);  // adding myself
+        serverConnection.addChatMember(user, new_id);  // adding myself
         //Lägg till i available-listorna
         model.addAvailableChat(new_id, chatName);
 
         // changeActiveRoom to be called either here or in the controller
         changeActiveRoom(new_id);
         setChanged();
-        notifyObservers();
+        notifyObservers();*/
     }
 
 
@@ -89,6 +90,10 @@ public final class ChatRoomFacade extends Observable {
         //model.removeChatRoom(chatID);  this one doesnt need
         //setChanged();
         //notifyObservers();
+    }
+
+    public void getAvailableChats(String user){
+        serverConnection.getAvailableChats(user);
     }
 
     public void setAvailableChats(ArrayList<ChatData> idNamePairs) {
@@ -138,6 +143,9 @@ public final class ChatRoomFacade extends Observable {
 
     public void setActiveUser(String username){
         model.setActiveUser(username);
+        serverConnection.getAvailableChats(username);
+        setChanged();
+        notifyObservers();
     }
 
     // Duplicated method, existed both in facade and model ???
@@ -150,10 +158,10 @@ public final class ChatRoomFacade extends Observable {
     * Adds a user to the member list of this chat room.
     * If the user is already a member, nothing
     *
-    * @param user user to add; must not be  null
     * @throws IllegalArgumentException if user is null
     */
-    public void addMember(String user) {
+    //@todo add member escapades
+    public void addMemberLocal(String user) {
         if (user == null) {
             throw new IllegalArgumentException("user must not be null");
         }
@@ -164,8 +172,20 @@ public final class ChatRoomFacade extends Observable {
             model.addUser(user);
         }
 
-        serverConnection.addChatMember(user);
-}
+    }
+
+    public void setMemberList(ArrayList<String> members){
+        model.setMembers(members);
+    }
+
+    //@todo add member escapades
+    public void addMember(String user, int chatId) {
+        if (user == null) {
+            throw new IllegalArgumentException("user must not be null");
+        }
+
+        serverConnection.addChatMember(user, chatId);
+    }
 
 
     /**
@@ -178,10 +198,12 @@ public final class ChatRoomFacade extends Observable {
     public void removeMember(String user) {
         if (user == null) {
             throw new IllegalArgumentException("user must not be null");
+        } else if (user.equals(getActiveUser())) {
+            throw new IllegalArgumentException("can't remove yourself from active chat");
         }
         model.removeUser(user);
 
-        serverConnection.removeChatMember(user);
+        serverConnection.removeChatMember(user, getActiveChatRoomId());
 }
 
 
@@ -233,11 +255,9 @@ public void removeMessage(Message message) {
      * @param password password user is trying to log in with
      */
     public void logIn(String username, String password){
-        serverConnection.login(username, password); // Return type of CheckLogin in serverConnection to be boolean??
-                                                         // how can we verify is the question here
-        setChanged();
-        notifyObservers();
-        // kommer från serveractionhandler.
+        serverConnection.login(username, password);
+        lastAttemptedLogin = username;
+
     }
 
     /**
@@ -259,10 +279,22 @@ public void removeMessage(Message message) {
      */
     public void setStatusMessage(String statusmessage){
         model.setStatusMessage(statusmessage);
+        setChanged();
+        notifyObservers();
     }
 
     public String getStatusMessage(){
-        return model.getStatusMessage();
+        String statusMessage = model.getStatusMessage();
+        model.setStatusMessage(null);
+        return statusMessage;
+    }
+
+    /**
+     * Send a request to the server for all available chatrooms that the recently logged in user is in
+     */
+    public void updateAvailableChatIds(){
+        //frågar servern efter vilka chattrum som vi är del av
+        serverConnection.getAvailableChats(lastAttemptedLogin);
     }
 
 /// -----------------------------Getters and Setters-----------------------------

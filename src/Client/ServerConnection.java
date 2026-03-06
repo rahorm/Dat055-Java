@@ -1,9 +1,7 @@
 package Client;
 
-import Common.RequestType;
-import Common.RequestWrapper;
+import Common.*;
 //import Common.SendMsgWrapper;
-import Common.UserData;
 import Other.Message;
 import Other.PictureMessage;
 
@@ -67,9 +65,8 @@ public class ServerConnection {
      * @param chatId int name of chat
      */
     public void createChatRoom(int chatId, String chatName){
-        String data = chatId + ":" + chatName;
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.ADD_CHATROOM, data));
+                new RequestWrapper(RequestType.ADD_CHATROOM, new ChatData(chatId, chatName)));
     }
 
 
@@ -140,11 +137,13 @@ public class ServerConnection {
     /**
      * Adds a user to the activeChat
      * </p>
-     * @param user String ID of user that should be added. @todo is this id or displayname
+     * @param user username of user that should be added.
+     * @param chatId id of chat to add user to
      */
-    public void addChatMember(String user){
+
+    public void addChatMember(String user, int chatId){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.ADD_CHAT_MEMBER, user));
+                new RequestWrapper(RequestType.ADD_CHAT_MEMBER, new ChatMemberData(user, chatId)));
     }
 
     /**
@@ -152,9 +151,9 @@ public class ServerConnection {
      * </p>
      * @param user the user that should be removed. Type String.
      */
-    public void removeChatMember(String user){
+    public void removeChatMember(String user, int chatId){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.REMOVE_CHAT_MEMBER, user));
+                new RequestWrapper(RequestType.REMOVE_CHAT_MEMBER, new ChatMemberData(user, chatId)));
     }
 
     /**
@@ -180,10 +179,9 @@ public class ServerConnection {
      *
      * @throws SQLException
      */
-    public ArrayList<Integer> getAvailableChats(String user){
+    public void getAvailableChats(String user){
         serverHandler.broadcastMessage(
                 new RequestWrapper(RequestType.GET_AVAILABLE_CHATS, user));
-        return new ArrayList<>();
     }
 
     //---------------------------------Getters and Setters---------------------------------
