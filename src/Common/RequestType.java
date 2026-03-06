@@ -8,6 +8,6 @@ public enum RequestType implements Serializable {
     // user requests
     CREATE_USER, DELETE_USER, CHECK_USER, LOGIN,
     // msg requests
-    ADD_MESSAGE, DELETE_MESSAGE, GET_MESSAGES, //EDIT_MESSAGE,
+    ADD_MESSAGE, DELETE_MESSAGE, GET_MESSAGES
 }
 
