@@ -35,6 +35,7 @@ public class ServerActionHandler {
 
             case CREATE_USER:
                 boolean created = (boolean) request.getData();
+                //skicka vidare till facaden
                 System.out.println("User has been created: " + created);
                 break;
 

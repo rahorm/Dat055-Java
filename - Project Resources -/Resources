@@ -247,9 +247,9 @@ Converting Image to Byte array
            [ANDY] överallt
    [] Create user
        [X - ADA] sign up box
-       [MADDE] rest of program (*Basic implementation done*)
-            [X] controller - needs password
-            [X] serverconn - needs usrname, password
-            [] Hantering av användare efter tillägg, ServerActionHandler -uppdatera active user? 
+       [] Create user rest of program (*Basic implementation done*)
+            [X - MADDE] controller - needs password
+            [X - MADDE] serverconn - needs usrname, password
+            [CHOI] Hantering av användare efter tillägg, ServerActionHandler -uppdatera active user?
     [CHOI] update create user
     [MONA] uppdatera UML diagram 
