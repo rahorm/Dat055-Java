@@ -109,7 +109,7 @@ public final class ChatRoomFacade extends Observable {
 
     /// ----------------------------- Message <-> UI -----------------------------
     public ArrayList<Message> getMSGList(){
-        return model.retriveMSGList(); // how many elements to show?
+        return model.getMessages(); // how many elements to show?
     }
 
 
@@ -219,7 +219,7 @@ public final class ChatRoomFacade extends Observable {
         if (message == null) {
             throw new IllegalArgumentException("message must not be null");
         }
-        ArrayList<Message> messages = model.retriveMSGList();
+        ArrayList<Message> messages = model.getMessages();
         messages.add(message);
     // model.addMessage(message); <- can't we just use this method call instead of the above two lines?
 }
@@ -236,7 +236,7 @@ public void removeMessage(Message message) {
     if (message == null) {
         throw new IllegalArgumentException("message must not be null");
     }
-    ArrayList<Message> messages = model.retriveMSGList();
+    ArrayList<Message> messages = model.getMessages();
     messages.remove(message);
 }
 

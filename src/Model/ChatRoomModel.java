@@ -49,16 +49,7 @@ public class ChatRoomModel {
 
 
     /// ----------------------------- Message -----------------------------
-    public ArrayList<Message> retriveMSGList() {
-        /**
-         * This method retrieves all messages from
-         * currently stored in MSGList for the room
-         * @param none
-         * @return list of messages
-         */
-        return new ArrayList<>(messages);
-    }
-
+    public ArrayList<Message> getMessages() { return messages; }
     public void setHistory(ArrayList<Message> history){ this.messages = history;}
     public void addMessage(Message message) {
         messages.add(message);
