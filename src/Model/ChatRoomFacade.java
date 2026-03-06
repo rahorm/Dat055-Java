@@ -141,7 +141,6 @@ public final class ChatRoomFacade extends Observable {
 
     }
 
-
     public void setActiveUser(String username){
         model.setActiveUser(username);
         serverConnection.getAvailableChats(username);
@@ -213,26 +212,23 @@ public final class ChatRoomFacade extends Observable {
         if (message == null) {
             throw new IllegalArgumentException("message must not be null");
         }
-        ArrayList<Message> messages = model.getMessages();
-        messages.add(message);
-    // model.addMessage(message); <- can't we just use this method call instead of the above two lines?
-}
-
-
-/**
- * Removes a message from this chat room.
- * If the message is not found, nothing happens.
- * 
- * @param message message to remove; must not be null
- * @throws IllegalArgumentException if message is null
- */
-public void removeMessage(Message message) {
-    if (message == null) {
-        throw new IllegalArgumentException("message must not be null");
+        model.addMessage(message);
     }
-    ArrayList<Message> messages = model.getMessages();
-    messages.remove(message);
-}
+
+    /**
+     * Removes a message from this chat room.
+     * If the message is not found, nothing happens.
+     *
+     * @param message message to remove; must not be null
+     * @throws IllegalArgumentException if message is null
+     */
+    public void removeMessage(Message message) {
+        if (message == null) {
+            throw new IllegalArgumentException("message must not be null");
+        }
+        ArrayList<Message> messages = model.getMessages();
+        messages.remove(message);
+    }
 
     /**
      * Checks if a username is present in the database
