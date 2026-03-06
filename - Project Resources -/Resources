@@ -237,11 +237,12 @@ Converting Image to Byte array
     - update available chat
 
 //----------- 260306 -----------//
-   [] När modellen skapas intieras den med hårdkodade variabler
+   * När modellen skapas intieras den med hårdkodade variabler
+   * Can't change see available chatRooms
+   * if user manually enters chat id of a chat they aren't in, chat is still displayed
+   * kolla när och var en bild får ett id
+
    [] Display messages on start
-   [] Can't change see available chatRooms
-   [] if user manually enters chat id of a chat they aren't in, chat is still displayed
-   [] kolla när och var en bild får ett id
    [] add members to chat
            [X - ADA] GUI
            [ANDY] överallt
