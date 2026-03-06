@@ -255,4 +255,9 @@ Converting Image to Byte array
             [X - MADDE] serverconn - needs usrname, password
             [CHOI] Hantering av användare efter tillägg, ServerActionHandler -uppdatera active user?
     [CHOI] update create user
-    [MONA] uppdatera UML diagram 
+    [MONA] uppdatera UML diagram
+
+    [X - MADDE] Handler create new chat all over program
+
+    * Login (serverActionHandler) behöver tittas på, den förväntas få en array, det får i verkligheten en userData whatever object
+    * kolla på add member i ui
