@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Dat055-Java.iml" filepath="$PROJECT_DIR$/.idea/Dat055-Java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/- Project Resources -/postgresql-42.7.10/postgresql-42.7.10.iml" filepath="$PROJECT_DIR$/- Project Resources -/postgresql-42.7.10/postgresql-42.7.10.iml" />
     </modules>
   </component>
 </project>
