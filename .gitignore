@@ -29,3 +29,4 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+/- Project Resources -/postgresql-42.7.10/
