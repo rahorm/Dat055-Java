@@ -83,8 +83,13 @@ public class UI {
         loginBtn.addActionListener((_) -> controller.login(usernameInput.getText(), passwordInput.getText()));
 
         JButton changeRoomBtn = new JButton("change room");
-        changeRoomBtn.addActionListener((_) -> controller.changeActiveRoom(Integer.parseInt(roomInput.getText())));
-
+//        changeRoomBtn.addActionListener((_) -> controller.changeActiveRoom(Integer.parseInt(roomInput.getText())));
+        changeRoomBtn.addActionListener((_) -> {
+            String input = roomInput.getText().trim();
+            if (!input.isEmpty()) {
+                controller.changeActiveRoom(Integer.parseInt(input));
+            }
+        });
 
         JButton removeChatBtn = new JButton("remove chat");
 //      removeChatBtn.addActionListener((_) -> controller.removeChatRoom(Integer.parseInt(removeChatInput.getText())));
