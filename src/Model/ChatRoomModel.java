@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class ChatRoomModel {
 
     private ArrayList<Message> messages = new ArrayList<>();
-    private final ArrayList<String> members = new ArrayList<>();
+    private ArrayList<String> members = new ArrayList<>();
     private String activeUser;
 
     private final ArrayList<Integer> availableChatIds = new ArrayList<>();
@@ -74,6 +74,9 @@ public class ChatRoomModel {
         return new ArrayList<>(members);
     }
 
+    public void setMembers(ArrayList<String> members){
+        this.members = members;
+    }
     public void addUser(String user) {
         members.add(user);
     }

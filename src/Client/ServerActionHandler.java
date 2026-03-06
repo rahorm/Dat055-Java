@@ -55,6 +55,8 @@ public class ServerActionHandler {
             case ADD_CHAT_MEMBER:
                 ChatMemberData added = (ChatMemberData) request.getData();
                 System.out.println("Member added: " + added);
+                facade.addMemberLocal(added.getUsername());
+
                 if(added.getUsername().equals(facade.getActiveUser())){
                     facade.getAvailableChats(added.getUsername());
                 }

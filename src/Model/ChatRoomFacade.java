@@ -154,12 +154,10 @@ public final class ChatRoomFacade extends Observable {
     * Adds a user to the member list of this chat room.
     * If the user is already a member, nothing
     *
-    * @param user user to add; must not be  null
     * @throws IllegalArgumentException if user is null
     */
     //@todo add member escapades
-    // THis does nothing with the database??
-    /*public void addMember(String user) {
+    public void addMemberLocal(String user) {
         if (user == null) {
             throw new IllegalArgumentException("user must not be null");
         }
@@ -170,8 +168,8 @@ public final class ChatRoomFacade extends Observable {
             model.addUser(user);
         }
 
-        serverConnection.addChatMember(user);
-    }*/
+    }
+
 
     //@todo add member escapades
     public void addMember(String user, int chatId) {

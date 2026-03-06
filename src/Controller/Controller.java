@@ -120,7 +120,6 @@ public class Controller {
         return code;*/
     }
 
-    //@todo add member escapades
     //public void addMember(String user) {facade.addMember(user);}
     public void addMember(String user, int chatId){
         facade.addMember(user, chatId);
