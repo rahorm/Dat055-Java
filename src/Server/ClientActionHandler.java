@@ -57,13 +57,25 @@ public class ClientActionHandler {
                 }
             }
 
+//            case ADD_CHATROOM -> {
+//                ChatData chatData = (ChatData) request.getData();
+//                DBcon.createChatRoom(chatData.getChatId(), chatData.getChatName());
+//
+//                objToReturn = new RequestWrapper(
+//                        RequestType.ADD_CHATROOM,
+//                        chatData
+//                );
+//            }
+
             case ADD_CHATROOM -> {
                 ChatData chatData = (ChatData) request.getData();
                 DBcon.createChatRoom(chatData.getChatId(), chatData.getChatName());
 
+                // return updated list instead of just the new chatData
+                ChatRoomFacade model = ChatRoomFacade.getInstance();
                 objToReturn = new RequestWrapper(
-                        RequestType.ADD_CHATROOM,
-                        chatData
+                        RequestType.GET_AVAILABLE_CHATS,
+                        DBcon.getAvailableChats(model.getActiveUser())
                 );
             }
 
