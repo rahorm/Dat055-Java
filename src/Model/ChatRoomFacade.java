@@ -290,6 +290,8 @@ public final class ChatRoomFacade extends Observable {
         return model.getChatIdByName(name);
     }
 
+    public String getActiveChatRoomName() { return model.getChatNameForId(model.getActiveChatRoomId()); }
+
 }
 
 

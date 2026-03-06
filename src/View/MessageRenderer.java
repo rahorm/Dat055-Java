@@ -15,6 +15,7 @@ class MessageRenderer extends JPanel implements ListCellRenderer<Message> {
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
         topPanel.add(sender);
+        topPanel.add(Box.createHorizontalGlue());
         topPanel.add(messageTime);
         setLayout(new BorderLayout(8, 0));
         add(topPanel, BorderLayout.NORTH);

@@ -33,6 +33,7 @@ public class ChatRoomView implements Observer {
         if (statusMessage != null) {
             ui.displayStatusMessage(statusMessage);
         }
+        ui.setActiveChat(model.getActiveChatRoomName());
     }
 
     public ChatRoomView(Controller controller, ChatRoomFacade model) {
