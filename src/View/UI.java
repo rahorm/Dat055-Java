@@ -96,7 +96,7 @@ public class UI {
         createChatBtn.addActionListener((_) -> controller.addChatRoom(createChatInput.getText()));
 
         JButton addMemberBtn = new JButton("add user");
-        addMemberBtn.addActionListener((_) -> controller.addMember(addMemberInput.getText()));
+        addMemberBtn.addActionListener((_) -> controller.addMember(addMemberInput.getText())); //@todo, need to know what chatrrom to add user to
 
         JButton sendWithImageBtn = new JButton("send with image");
         sendWithImageBtn.addActionListener((_) -> addImageFileDialog());

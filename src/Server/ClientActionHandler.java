@@ -1,11 +1,8 @@
 package Server;
 
 //import Common.MsgHistoryWrapper;
-import Common.ChatData;
-import Common.RequestType;
-import Common.RequestWrapper;
+import Common.*;
 //import Common.SendMsgWrapper;
-import Common.UserData;
 import Model.ChatRoomFacade;
 import Other.Message;
 import Other.PictureMessage;
@@ -38,6 +35,7 @@ public class ClientActionHandler {
 
             case ADD_MESSAGE -> {
                 if(request.getData() instanceof PictureMessage){
+                    System.out.println("Picturemessage being sent");
                     PictureMessage message = (PictureMessage) request.getData();
                     DBcon.sendMsg(message);
                     objToReturn = new RequestWrapper(
@@ -45,6 +43,7 @@ public class ClientActionHandler {
                             DBcon.getChatMessages(message.getChatID())
                     );
                 } else {
+                    System.out.println("normal message being sent");
                     Message message = (Message) request.getData();
                     DBcon.sendMsg(message);
                     objToReturn = new RequestWrapper(
@@ -62,9 +61,10 @@ public class ClientActionHandler {
                 DBcon.createChatRoom(chatData.getChatId(), chatData.getChatName());
                 ChatRoomFacade model = ChatRoomFacade.getInstance();
 
+                //@todo ska vara true eller false beroende av success?
                 objToReturn = new RequestWrapper(
-                        RequestType.GET_AVAILABLE_CHATS,
-                        DBcon.getAvailableChats(model.getActiveUser())
+                        RequestType.ADD_CHATROOM,
+                        true
                 );
             }
 
@@ -120,22 +120,18 @@ public class ClientActionHandler {
                         true
                 );
             }
-
+            //@todo add member escapades
             case ADD_CHAT_MEMBER -> {
-                // example format: "chatID:username"
-                String data = (String) request.getData();
-                String[] parts = data.split(":");
-                int chatID = Integer.parseInt(parts[0]);
-                String username = parts[1];
+                ChatMemberData data = (ChatMemberData) request.getData();
+                DBcon.addChatMember(data.getChatId(), data.getUsername());
 
-                DBcon.addChatMember(chatID, username);
 
                 objToReturn = new RequestWrapper(
-                        RequestType.GET_CHAT_MEMBERS,
-                        DBcon.getChatMembers(chatID)
+                        RequestType.ADD_CHAT_MEMBER,
+                        data
                 );
             }
-
+            //@todo add member escapades
             case REMOVE_CHAT_MEMBER -> {
                 String data = (String) request.getData();
                 String[] parts = data.split(":");

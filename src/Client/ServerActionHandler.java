@@ -2,6 +2,7 @@ package Client;
 
 //import Common.MsgHistoryWrapper;
 import Common.ChatData;
+import Common.ChatMemberData;
 import Common.RequestWrapper;
 import Common.UserData;
 import Model.ChatRoomFacade;
@@ -40,8 +41,23 @@ public class ServerActionHandler {
                 break;
 
             case ADD_CHATROOM:
-                String room = (String) request.getData();
-                System.out.println("Chat has been created: " + room);
+                ChatMemberData updated = (ChatMemberData) request.getData();
+                facade.addMember(updated.getUsername(), updated.getChatId());
+
+                /*
+        String user = model.getActiveUser();
+
+        serverConnection.addChatMember(new_id + ":" + user);  // adding myself
+        //Lägg till i available-listorna
+        model.addAvailableChat(new_id, chatName);
+
+        // changeActiveRoom to be called either here or in the controller
+        changeActiveRoom(new_id);
+        setChanged();
+        notifyObservers();
+                 */
+
+
                 //ytterligare actions?
                 break;
 
@@ -52,9 +68,11 @@ public class ServerActionHandler {
                 break;
 
             case ADD_CHAT_MEMBER:
-                ArrayList<String> memberList = (ArrayList<String>) request.getData();
-                System.out.println("Chat members updated: " + memberList);
-                //vad ska göras med den uppdaterade members listan?
+                ChatMemberData added = (ChatMemberData) request.getData();
+                System.out.println("Member added: " + added);
+                if(added.getUsername().equals(facade.getActiveUser())){
+                    facade.getAvailableChats(added.getUsername());
+                }
                 break;
 
             case CHECK_USER:

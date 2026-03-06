@@ -71,7 +71,7 @@ public final class ChatRoomFacade extends Observable {
 
         String user = model.getActiveUser();
 
-        serverConnection.addChatMember(new_id + ":" + user);  // adding myself
+        serverConnection.addChatMember(user, new_id);  // adding myself
         //Lägg till i available-listorna
         model.addAvailableChat(new_id, chatName);
 
@@ -89,6 +89,10 @@ public final class ChatRoomFacade extends Observable {
         //model.removeChatRoom(chatID);  this one doesnt need
         //setChanged();
         //notifyObservers();
+    }
+
+    public void getAvailableChats(String user){
+        serverConnection.getAvailableChats(user);
     }
 
     public void setAvailableChats(ArrayList<ChatData> idNamePairs) {
@@ -153,7 +157,9 @@ public final class ChatRoomFacade extends Observable {
     * @param user user to add; must not be  null
     * @throws IllegalArgumentException if user is null
     */
-    public void addMember(String user) {
+    //@todo add member escapades
+    // THis does nothing with the database??
+    /*public void addMember(String user) {
         if (user == null) {
             throw new IllegalArgumentException("user must not be null");
         }
@@ -165,7 +171,16 @@ public final class ChatRoomFacade extends Observable {
         }
 
         serverConnection.addChatMember(user);
-}
+    }*/
+
+    //@todo add member escapades
+    public void addMember(String user, int chatId) {
+        if (user == null) {
+            throw new IllegalArgumentException("user must not be null");
+        }
+
+        serverConnection.addChatMember(user, chatId);
+    }
 
 
     /**

@@ -87,9 +87,7 @@ public class Controller {
      * @throws IllegalStateException if the max amount of chatRooms have been reached
      * */
     public void addChatRoom(String chatName) {
-        //@todo add chatname as argument, fix hardcoding
-        facade.createChatRoom(chatName); // need a user info
-        facade.changeActiveRoom(facade.getMSGList().size());
+        facade.createChatRoom(chatName);
     }
 
     /**
@@ -98,8 +96,10 @@ public class Controller {
      * @param user String that represents id of a user in the system
      * @throws IllegalArgumentException if id is not associated with an id that exists in the system
      * */
+
     public void changeActiveUser(String user) {
-        facade.addMember(user);
+        facade.setActiveUser(user);
+        //facade.addMember(user); //Den här borde väl inte ha något med addMember att göra?
     }
 
 
@@ -120,8 +120,11 @@ public class Controller {
         return code;*/
     }
 
-    public void addMember(String user) {facade.addMember(user);}
-
+    //@todo add member escapades
+    //public void addMember(String user) {facade.addMember(user);}
+    public void addMember(String user, int chatId){
+        facade.addMember(user, chatId);
+    }
     /**
      * Creates a new user of the type User
      *
