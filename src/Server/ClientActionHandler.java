@@ -59,12 +59,10 @@ public class ClientActionHandler {
             case ADD_CHATROOM -> {
                 ChatData chatData = (ChatData) request.getData();
                 DBcon.createChatRoom(chatData.getChatId(), chatData.getChatName());
-                ChatRoomFacade model = ChatRoomFacade.getInstance();
 
-                //@todo ska vara true eller false beroende av success?
                 objToReturn = new RequestWrapper(
                         RequestType.ADD_CHATROOM,
-                        true
+                        chatData
                 );
             }
 
@@ -120,7 +118,7 @@ public class ClientActionHandler {
                         true
                 );
             }
-            //@todo add member escapades
+
             case ADD_CHAT_MEMBER -> {
                 ChatMemberData data = (ChatMemberData) request.getData();
                 DBcon.addChatMember(data.getChatId(), data.getUsername());

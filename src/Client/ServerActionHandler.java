@@ -41,9 +41,9 @@ public class ServerActionHandler {
                 break;
 
             case ADD_CHATROOM:
-                ChatMemberData updated = (ChatMemberData) request.getData();
-                facade.addMember(updated.getUsername(), updated.getChatId());
+                ChatData updated = (ChatData) request.getData();
                 facade.changeActiveRoom(updated.getChatId());
+                facade.addMember(facade.getActiveUser(), updated.getChatId());
                 break;
 
             case DELETE_CHATROOM:
