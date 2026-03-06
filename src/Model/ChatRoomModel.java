@@ -43,10 +43,7 @@ public class ChatRoomModel {
 
         this.activeChatRoomId = chatID;
         this.activeUser = activeUser;
-
     }
-
-
 
     /// ----------------------------- Message -----------------------------
     public ArrayList<Message> getMessages() { return messages; }
@@ -60,28 +57,17 @@ public class ChatRoomModel {
     }
 
     /// ----------------------------- USER -----------------------------
-    /**
-     * This method returns from
-     * currently stored in UserList for the room
-     * @return list of Users
-     */
-    public ArrayList<String> getMembers() { return members; }
-
-    public void setMembers(ArrayList<String> members){
-        this.members = members;
-    }
-    public void addUser(String user) {
-        members.add(user);
-    }
-
     public void removeUser(String user) {
         members.remove(user);
     }
 
+    public ArrayList<String> getMembers() { return members; }
+    public void setMembers(ArrayList<String> members){ this.members = members; }
+    public void addUser(String user) {
+        members.add(user);
+    }
     public void setActiveUser(String activeUser) { this.activeUser = activeUser; }
-
     public String getActiveUser(){ return activeUser; }
-
     public void setUsername(String username){
         this.username = username;
     }
