@@ -53,9 +53,6 @@ public class ClientActionHandler {
                             DBcon.getChatMessages(message.getChatID())
                     );
                 }
-
-
-
             }
 
             case ADD_CHATROOM -> {
@@ -100,7 +97,6 @@ public class ClientActionHandler {
                 );
             }
 
-
             case CREATE_USER -> {
                 UserData userdata = (UserData) request.getData();
                 boolean created = DBcon.createUser(userdata.getUsername(), userdata.getPassword());
@@ -124,7 +120,6 @@ public class ClientActionHandler {
             case ADD_CHAT_MEMBER -> {
                 ChatMemberData data = (ChatMemberData) request.getData();
                 DBcon.addChatMember(data.getChatId(), data.getUsername());
-
 
                 objToReturn = new RequestWrapper(
                         RequestType.ADD_CHAT_MEMBER,

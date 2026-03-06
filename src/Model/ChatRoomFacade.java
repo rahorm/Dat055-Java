@@ -188,7 +188,7 @@ public final class ChatRoomFacade extends Observable {
         if (user == null) {
             throw new IllegalArgumentException("user must not be null");
         }
-        serverConnection.(user, chatID);
+        serverConnection.addMember(user,chatID);
     }
 
     /**
