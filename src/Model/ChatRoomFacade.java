@@ -158,7 +158,7 @@ public final class ChatRoomFacade extends Observable {
             throw new IllegalArgumentException("user must not be null");
         }
 
-        ArrayList<String> members = model.retrieveUserList();
+        ArrayList<String> members = model.getMembers();
 
         if (!members.contains(user)) {
             model.addUser(user);

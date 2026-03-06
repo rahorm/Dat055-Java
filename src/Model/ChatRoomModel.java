@@ -69,15 +69,12 @@ public class ChatRoomModel {
     }
 
     /// ----------------------------- USER -----------------------------
-    public ArrayList<String> retrieveUserList() {
-        /**
-         * This method retrieves all User from
-         * currently stored in UserList for the room
-         * @param none
-         * @return list of Users
-         */
-        return new ArrayList<>(members);
-    }
+    /**
+     * This method returns from
+     * currently stored in UserList for the room
+     * @return list of Users
+     */
+    public ArrayList<String> getMembers() { return members; }
 
     public void addUser(String user) {
         members.add(user);
@@ -87,15 +84,9 @@ public class ChatRoomModel {
         members.remove(user);
     }
 
-    public void setActiveUser(String activeUser) {
+    public void setActiveUser(String activeUser) { this.activeUser = activeUser; }
 
-        this.activeUser = activeUser;
-    }
-
-    public String getActiveUser(){
-
-        return this.activeUser;
-    }
+    public String getActiveUser(){ return activeUser; }
 
     public void setUsername(String username){
         this.username = username;
