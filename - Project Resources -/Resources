@@ -195,25 +195,21 @@ Converting Image to Byte array
         exists but poorly
     [X - ADA] Clear message box after sending the msg
     [X - ADA] load msg history when at launch or opening chat
-    [X MADDE] implement login all over program
+    [X - MADDE] implement login all over program
         passwords
         logic exists in database
         error messages
-    [X - ADA] create user (sign up box)
-        [MADDE] rest of program (*Basic implementation done*)
-            [X] controller - needs password
-            [X] serverconn - needs usrname, password
-            [] Hantering av användare efter tillägg, ServerActionHandler -uppdatera active user? 
+
     [X - ADA] scrollable msg box
     [X - ADA] write which user has made which msg
     [X - ADA] -||- timestamp
-    [] funktion för att ladda upp bilder i databasen
-        [ADA] knapp
-        [ANDY] över programet
-        [X MADDE] nätverk/databas
-    [] create new chat
-        [ADA] knapp
-         [X MONA] över program
+    [X] funktion för att ladda upp bilder i databasen
+        [X - ADA] knapp
+        [X - ANDY] över programet
+        [X - MADDE] nätverk/databas
+    [X] create new chat
+         [X - ADA] knapp
+         [X - MONA] över program
                      -> [X MONA] Change ServerCon createChatRoom to take both chatId and chatName
                                  Logik: Använder requestWrapper+type.ADDCHATROOM som tidigare
                                         Använder id:name logik som i ADDCHATMEMBER
@@ -224,9 +220,6 @@ Converting Image to Byte array
                      -> [X MONA] Uppdatera i ChatRoomView och ServerActionHandler
     [X MONA] logic for knowing available chats
     [X ADA] display available chats
-    [] add members to chat
-        [X - ADA] GUI
-        [ANDY] överallt
     [X CHOI] picture msg subclass
         byte array -> If imagePath can be retrieved from the UI or Controller and sent it to the ModelFacade, that would be great!
         bild id
@@ -236,7 +229,6 @@ Converting Image to Byte array
 
 # SEQUENCE DIAGRAM (?)
     [X MADDE] update add msg
-    [CHOI] update create user
     [commented out code] edit messages (or delete code for  it?)
 
 # THOUGHTS
@@ -244,9 +236,20 @@ Converting Image to Byte array
     - put current user in it
     - update available chat
 
-//----------- 260304 -----------//
-[] När modellen skapas intieras den med hårdkodade variabler
-[] Display messages on start
-[] Can't change see available chatRooms
-[] if user manually enters chat id of a chat they aren't in, chat is still displayed
-[] kolla när och var en bild får ett id
+//----------- 260306 -----------//
+   [] När modellen skapas intieras den med hårdkodade variabler
+   [] Display messages on start
+   [] Can't change see available chatRooms
+   [] if user manually enters chat id of a chat they aren't in, chat is still displayed
+   [] kolla när och var en bild får ett id
+   [] add members to chat
+           [X - ADA] GUI
+           [ANDY] överallt
+   [] Create user
+       [X - ADA] sign up box
+       [MADDE] rest of program (*Basic implementation done*)
+            [X] controller - needs password
+            [X] serverconn - needs usrname, password
+            [] Hantering av användare efter tillägg, ServerActionHandler -uppdatera active user? 
+    [CHOI] update create user
+    [MONA] uppdatera UML diagram 
