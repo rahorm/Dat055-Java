@@ -138,6 +138,9 @@ public final class ChatRoomFacade extends Observable {
 
     public void setActiveUser(String username){
         model.setActiveUser(username);
+        serverConnection.getAvailableChats(username);
+        setChanged();
+        notifyObservers();
     }
 
     // Duplicated method, existed both in facade and model ???
