@@ -11,6 +11,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Observable;
 
+
 public final class ChatRoomFacade extends Observable {
     private static ChatRoomFacade instance;
     private ChatRoomModel model;
