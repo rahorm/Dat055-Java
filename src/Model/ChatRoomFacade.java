@@ -69,7 +69,7 @@ public final class ChatRoomFacade extends Observable {
 
         serverConnection.createChatRoom(new_id, chatName);
 
-        String user = model.getActiveUser();
+        /*String user = model.getActiveUser();
 
         serverConnection.addChatMember(user, new_id);  // adding myself
         //Lägg till i available-listorna
@@ -78,7 +78,7 @@ public final class ChatRoomFacade extends Observable {
         // changeActiveRoom to be called either here or in the controller
         changeActiveRoom(new_id);
         setChanged();
-        notifyObservers();
+        notifyObservers();*/
     }
 
 

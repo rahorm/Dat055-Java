@@ -43,22 +43,7 @@ public class ServerActionHandler {
             case ADD_CHATROOM:
                 ChatMemberData updated = (ChatMemberData) request.getData();
                 facade.addMember(updated.getUsername(), updated.getChatId());
-
-                /*
-        String user = model.getActiveUser();
-
-        serverConnection.addChatMember(new_id + ":" + user);  // adding myself
-        //Lägg till i available-listorna
-        model.addAvailableChat(new_id, chatName);
-
-        // changeActiveRoom to be called either here or in the controller
-        changeActiveRoom(new_id);
-        setChanged();
-        notifyObservers();
-                 */
-
-
-                //ytterligare actions?
+                facade.changeActiveRoom(updated.getChatId());
                 break;
 
             case DELETE_CHATROOM:
