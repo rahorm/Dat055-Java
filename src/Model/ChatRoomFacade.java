@@ -261,6 +261,10 @@ public void removeMessage(Message message) {
         model.setStatusMessage(statusmessage);
     }
 
+    public String getStatusMessage(){
+        return model.getStatusMessage();
+    }
+
 /// -----------------------------Getters and Setters-----------------------------
     public int getActiveChatRoom(){ return model.getActiveChatRoomId(); }
 
