@@ -49,8 +49,8 @@ public final class ChatRoomFacade extends Observable {
         getAvailableChats(model.getActiveUser());
         setChanged(); // Apparently it should be used before using notifyObservers
         notifyObservers(); // ingen parameter
-
     }
+
     // Forwarders till model för UI
     public ArrayList<String> getAvailableChatNames() {
         return model.getAvailableChatNames();
