@@ -15,6 +15,7 @@ public final class ChatRoomFacade extends Observable {
     private static ChatRoomFacade instance;
     private ChatRoomModel model;
     private ServerConnection serverConnection;
+    private String lastAttemptedLogin;
 
     private ChatRoomFacade(ChatRoomModel model) {
         this.model = model;
@@ -237,9 +238,7 @@ public void removeMessage(Message message) {
      */
     public void logIn(String username, String password){
         serverConnection.login(username, password);
-        serverConnection.getAvailableChats(username);
-        setChanged();
-        notifyObservers();
+        lastAttemptedLogin = username;
 
     }
 
@@ -266,6 +265,14 @@ public void removeMessage(Message message) {
 
     public String getStatusMessage(){
         return model.getStatusMessage();
+    }
+
+    /**
+     * Send a request to the server for all available chatrooms that the recently logged in user is in
+     */
+    public void updateAvailableChatIds(){
+        //frågar servern efter vilka chattrum som vi är del av
+        serverConnection.getAvailableChats(lastAttemptedLogin);
     }
 
 /// -----------------------------Getters and Setters-----------------------------

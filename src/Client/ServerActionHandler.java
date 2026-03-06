@@ -40,6 +40,7 @@ public class ServerActionHandler {
 
                 if(created){
                     facade.setStatusMessage("Success!");
+                    facade.updateAvailableChatIds();
                 }
                 else if(!created){
                     facade.setStatusMessage("Failed!");
@@ -82,6 +83,7 @@ public class ServerActionHandler {
                     UserData userData = (UserData) loginInfo[1];
                     facade.setActiveUser(userData.getUsername());
                     facade.setStatusMessage("Success!");
+                    facade.updateAvailableChatIds();
                     System.out.println("logged in clientside");
                     break;
                 }
