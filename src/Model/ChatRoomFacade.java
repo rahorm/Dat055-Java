@@ -235,6 +235,9 @@ public void removeMessage(Message message) {
     public void logIn(String username, String password){
         serverConnection.login(username, password); // Return type of CheckLogin in serverConnection to be boolean??
                                                          // how can we verify is the question here
+        setChanged();
+        notifyObservers();
+        // kommer från serveractionhandler.
     }
 
     /**
@@ -244,6 +247,18 @@ public void removeMessage(Message message) {
      */
     public void createUser(String username, String password){
         serverConnection.createUser(username, password);
+        setChanged();
+        notifyObservers();
+        // kommer från serveractionhandler.
+
+    }
+
+    /**
+     * When user tries to login or sign up this statusmessage will shows whether it is failed or succeeded
+     * @param statusmessage message that indicates signup or login status
+     */
+    public void setStatusMessage(String statusmessage){
+        model.setStatusMessage(statusmessage);
     }
 
 /// -----------------------------Getters and Setters-----------------------------
