@@ -46,6 +46,7 @@ public final class ChatRoomFacade extends Observable {
     public void changeActiveRoom(int chatID) {
         model.setActiveRoom(chatID);
         serverConnection.getChatMessages(chatID);
+        getAvailableChats(model.getActiveUser());
         setChanged(); // Apparently it should be used before using notifyObservers
         notifyObservers(); // ingen parameter
 
