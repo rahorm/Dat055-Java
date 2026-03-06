@@ -15,8 +15,8 @@ public class ServerHandler implements Runnable{
     public ServerHandler(Socket socket){
         try {
             this.socket = socket;
-            this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());  //bytestream wrapped in charstream, used to send things
-            this.objectInputStream = new ObjectInputStream(socket.getInputStream()); //used to recieve things
+            this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            this.objectInputStream = new ObjectInputStream(socket.getInputStream());
             this.serverActionHandler = new ServerActionHandler();
         } catch (IOException e){
             System.out.println(e.getMessage());
@@ -24,7 +24,7 @@ public class ServerHandler implements Runnable{
     }
 
     @Override
-    public void run(){ //want to run this on a separate thread from application handling since listening to messages is a blocking task
+    public void run(){
         Object objectFromServer;
 
         while(socket.isConnected()){
@@ -40,7 +40,6 @@ public class ServerHandler implements Runnable{
     }
 
     public void broadcastMessage(Object obj){
-        //System.out.println("broadcasting");
             try {
                 objectOutputStream.writeObject(obj);
                 objectOutputStream.flush();

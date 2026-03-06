@@ -1,6 +1,5 @@
 package Client;
 
-//import Common.MsgHistoryWrapper;
 import Common.ChatData;
 import Common.ChatMemberData;
 import Common.RequestWrapper;
@@ -36,7 +35,6 @@ public class ServerActionHandler {
 
             case CREATE_USER:
                 boolean created = (boolean) request.getData();
-                //skicka vidare till facaden
                 System.out.println("User has been created: " + created);
 
                 if(created){
@@ -59,7 +57,6 @@ public class ServerActionHandler {
             case DELETE_CHATROOM:
                 String chatRoom = (String) request.getData();
                 System.out.println("Chatroom deleted: " + chatRoom);
-                //yterligare actions?
                 break;
 
             case ADD_MEMBER:
@@ -71,7 +68,6 @@ public class ServerActionHandler {
             case CHECK_USER:
                 boolean exists = (boolean) request.getData();
                 System.out.println("User exists: " + exists);
-                //fler actions?
                 break;
 
             case GET_AVAILABLE_CHATS:
@@ -90,8 +86,6 @@ public class ServerActionHandler {
                     System.out.println("logged in clientside");
                     break;
                 }
-
-                //@todo meddela ui att användaren är inloggad
                 facade.setStatusMessage("Failed!");
                 break;
 
@@ -101,19 +95,3 @@ public class ServerActionHandler {
 
     }
 }
-
-    /*public void handle(Object obj) {
-        Object objToReturn = null;
-
-        if (obj instanceof MsgHistoryWrapper input) {
-
-            System.out.println("Output: " + input.toString());
-            ArrayList<Message> history;
-            history = (ArrayList<Message>) input.getMsgHistory();
-            System.out.println("Message history received: " + history);
-            ChatRoomFacade facade = Model.ChatRoomFacade.getInstance();
-            facade.setHistory(history);
-        }
-
-
-    }*/

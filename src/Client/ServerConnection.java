@@ -1,7 +1,6 @@
 package Client;
 
 import Common.*;
-//import Common.SendMsgWrapper;
 import Other.Message;
 import Other.PictureMessage;
 
@@ -16,7 +15,7 @@ public class ServerConnection {
 
     public ServerConnection(Socket socket) {
             this.serverHandler = new ServerHandler(socket);
-            Thread thread = new Thread(serverHandler);  //begins listening to the thread. When input is heard serverHanlers run() is invoked
+            Thread thread = new Thread(serverHandler);
             thread.start();
     }
 
@@ -30,39 +29,28 @@ public class ServerConnection {
     public void sendMsg(Message msg) {
         serverHandler.broadcastMessage(new RequestWrapper(RequestType.ADD_MESSAGE, msg));
     }
+    /**
+     * Adds a picture message to the database
+     * @param pictureMessage the message to be sent in type Message
+     */
     public void sendPictureMsg(PictureMessage pictureMessage) {
         serverHandler.broadcastMessage(new RequestWrapper(RequestType.ADD_MESSAGE, pictureMessage));
     }
 
     /**
-     * Removes a message from the history of the chat it belongs to.
-     * </p>
-     * @param msg - the message in type Message to be removed
-     */
-    public void deleteMsg(Message msg){
-        serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.DELETE_MESSAGE, msg));
-    }
-
-    /**
      * Gets chat history from specified chat, with the newest message last in the array.
-     * </p>
-     * @param chatId int value representing chat to get history from
-     * @return Arraylist with Message type value
-     * @todo question: does this return messages right now or an empty arraylist.
+     * @param chatId id of chat to get history from
      */
     public void getChatMessages(int chatId){
         serverHandler.broadcastMessage(
                 new RequestWrapper(RequestType.GET_MESSAGES, chatId));
     }
 
-//------------------------------------Chats med nya Wrappers----------------------------
     /**
      * Adds a new chat in the database
-     * </p>
-     * // The parameter chatName is the intended display name of the chat. The chat will recieve an id for internal use.
-     * @todo fix javadoc
+     *
      * @param chatId int name of chat
+     * @param chatName intended display name of chat
      */
     public void addChatRoom(int chatId, String chatName){
         serverHandler.broadcastMessage(
@@ -71,10 +59,9 @@ public class ServerConnection {
 
 
     /**
-     * This method deletes the chat and all related information, such as members and messages from the database.
+     * This method deletes the specified chat and all related information, such as members and messages from the database.
      * This cannot be undone.
-     * </p>
-     * @param chatId int of id of chat to be deleted
+     * @param chatId id of chat to be deleted
      */
     public void deleteChatRoom(int chatId){
         serverHandler.broadcastMessage(
@@ -84,22 +71,21 @@ public class ServerConnection {
 //---------------------------------User med nya wrappers-----------------------------
 
     /**
-     * Outputs true if given username corresponds to user in database
+     * Outputs true if given username exists in database
      *
-     * @param username String ID of user
-     * @todo double check that it should be string here
+     * @param username username to be checked
      * @return boolean representing if the given user exists in database
      * */
     public boolean checkUserExists(String username){
         serverHandler.broadcastMessage(new RequestWrapper(RequestType.CHECK_USER, username));
-        return true;
+        return true; //Have seen this issue, will fix
     }
 
     /**
-     * Check with the database if login is correct. Easy but unsafe implementation.
+     * Check with the database if login is correct.
      *
-     * @param username String representing the ID of a user
-     * @param password String of the password
+     * @param username username to check
+     * @param password password to check
      * */
     public void login(String username, String password){
         serverHandler.broadcastMessage(
@@ -107,11 +93,10 @@ public class ServerConnection {
     }
 
     /**
-     * Creates a new user in the database. Easy but unsafe password handling.
-     * </p>
+     * Creates a new user in the database.
      *
-     * @param userName string parameter userName is the intended display name of the user.
-     * @param password String
+     * @param userName username to identify user with
+     * @param password password used to access profile
      */
     public void createUser(String userName, String password){
         serverHandler.broadcastMessage(
@@ -120,12 +105,11 @@ public class ServerConnection {
 
     /**
      * Deletes a user from the database
-     * </p>
-     * This method deletes the user and all related information, such messages sent, and removes the user from any chats
-     * they were in from the database.
+     * This method deletes the user and all related information, like sent messages, any chats
+     * they were in, from the database.
      * This cannot be undone.
      *
-     * @param username string id of user to be deleted
+     * @param username username of user to be deleted
      */
 
     public void deleteUser(String username){
@@ -135,7 +119,7 @@ public class ServerConnection {
 
     //---------------------------------Chat med nya wrappers---------------------------------
     /**
-     * Adds a user to the activeChat
+     * Adds a user to the specified chat
      * </p>
      * @param user username of user that should be added.
      * @param chatId id of chat to add user to
@@ -147,9 +131,9 @@ public class ServerConnection {
     }
 
     /**
-     * Removes a user from the activeChat
-     * </p>
+     * Removes a user from the specified chat
      * @param user the user that should be removed. Type String.
+     * @param chatId id of chat to remove user from
      */
     public void removeChatMember(String user, int chatId){
         serverHandler.broadcastMessage(
@@ -158,26 +142,16 @@ public class ServerConnection {
 
     /**
      * Gets members of specified chat.
-     * ChatId specifies the id of the chat for which to get the members.
-     * </p>
-     * @param chatId chat to get history for
-     * @return Arraylist<User> members @todo ?? see next todo
-     *
-     * @throws SQLException
+     * @param chatId chat to get members for
      */
-    public ArrayList<String> getChatMembers(int chatId){
+    public void getChatMembers(int chatId){
         serverHandler.broadcastMessage(
                 new RequestWrapper(RequestType.GET_CHAT_MEMBERS, chatId));
-        return new ArrayList<>(); // @todo what happens here? what will be in this arraylist?
     }
 
     /**
-     * Gets the id's of all chats the specified user is a member in.
-     * </p>
+     * Gets the id's and names of all chats the specified user is a member in.
      * @param user user to get chats for
-     * @return Arraylist<int> chatId's
-     *
-     * @throws SQLException
      */
     public void getAvailableChats(String user){
         serverHandler.broadcastMessage(
@@ -193,24 +167,3 @@ public class ServerConnection {
 }
 
 }
-
-
-/*----------------------GAMLA ANTECKNINGAR---------------------------------
-    //boolean checkLogIn(String username, String password){}
-    //boolean checkUserExists(String username){}
-
-    /**
-     * Replaces the previous message with updated message.
-     *
-     * msg is the previous message which will be replaced. updatedMsg is what will be saved in its place.
-     *
-     * @param msg old message
-     * @param updatedMsg updated message
-     * @return int message
-     *
-     * @throws SQLException
-     */
-   /*public int editMsg(Message msg, Message updatedMsg){
-        return 0;
-    }
-*/
