@@ -63,9 +63,9 @@ public class ServerActionHandler {
                 break;
 
             case ADD_MEMBER:
-                ChatMemberData added = (ChatMemberData) request.getData();
-                System.out.println("Member added: " + added);
-                facade.addMemberLocal(added.getUsername());
+                ChatMemberData member = (ChatMemberData) request.getData();
+                System.out.println("Member added: " + member);
+                facade.updateMemberList(member.getUsername());
                 break;
 
             case CHECK_USER:

@@ -25,12 +25,8 @@ public class ChatRoomModel {
     private int activeChatRoomId;
     private String statusMessage;
 
-
-
-
-
     /**
-     * This method creates a new chatroom model with chatID
+     * Creates a new chatroom model with chatID
      * and activeUser
      *
      * @param chatID

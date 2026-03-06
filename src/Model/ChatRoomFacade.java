@@ -155,28 +155,20 @@ public final class ChatRoomFacade extends Observable {
     }
 
     /// ----------------------------- Member <-> Server -----------------------------
-//    /**
-//    * Adds a user to the member list of this chat room.
-//    * If the user is already a member, nothing
-//    *
-//    * @throws IllegalArgumentException if user is null
-//    */
-//    //@todo add member escapades
-//    public void addMemberLocal(String user) {
-//        if (user == null) {
-//            throw new IllegalArgumentException("user must not be null");
-//        }
-//
-//        ArrayList<String> members = model.getMembers();
-//
-//        if (!members.contains(user)) {
-//            model.addUser(user);
-//        }
-//
-//    }
-
-    public void setMemberList(ArrayList<String> members){
-        model.setMembers(members);
+    /**
+    * Adds a user to the member list of this chat room after a database update has happened
+    * If the user is already a member, nothing happens.
+    *
+    * @throws IllegalArgumentException if user is null
+    */
+    public void updateMemberList(String user) {
+        if (user == null) {
+            throw new IllegalArgumentException("user must not be null");
+        }
+        ArrayList<String> members = model.getMembers();
+        if (!members.contains(user)) {
+            model.addUser(user);
+        }
     }
 
     public void addMember(String user) {
@@ -206,12 +198,10 @@ public final class ChatRoomFacade extends Observable {
             throw new IllegalArgumentException("can't remove yourself from active chat");
         }
         model.removeUser(user);
-
         serverConnection.removeChatMember(user, getActiveChatRoomId());
 }
 
-
-    /// ----------------------------- Messages <-> UI!  -----------------------------
+    /// ----------------------------- Messages <-> UI -----------------------------
 
     /**
      * Adds a new message to this chat room.
