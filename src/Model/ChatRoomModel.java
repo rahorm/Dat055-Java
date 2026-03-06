@@ -89,9 +89,7 @@ public class ChatRoomModel {
         return index >= 0 ? availableChatNames.get(index) : "Unknown (" + chatId + ")";
     }
 
-    public void changeActiveRoom(int chatID) {
-        this.activeChatRoomId = chatID;
-    }
+    public void setActiveRoom(int chatID) { this.activeChatRoomId = chatID; }
 
     /*public void removeChatRoom(int chatID) { // I don't know how to remove an existing model!!!! - choi
         System.out.println("model wants to remove chatroom right now");
