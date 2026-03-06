@@ -154,39 +154,42 @@ public final class ChatRoomFacade extends Observable {
     }
 
     /// ----------------------------- Member <-> Server -----------------------------
-    /**
-    * Adds a user to the member list of this chat room.
-    * If the user is already a member, nothing
-    *
-    * @throws IllegalArgumentException if user is null
-    */
-    //@todo add member escapades
-    public void addMemberLocal(String user) {
-        if (user == null) {
-            throw new IllegalArgumentException("user must not be null");
-        }
-
-        ArrayList<String> members = model.getMembers();
-
-        if (!members.contains(user)) {
-            model.addUser(user);
-        }
-
-    }
+//    /**
+//    * Adds a user to the member list of this chat room.
+//    * If the user is already a member, nothing
+//    *
+//    * @throws IllegalArgumentException if user is null
+//    */
+//    //@todo add member escapades
+//    public void addMemberLocal(String user) {
+//        if (user == null) {
+//            throw new IllegalArgumentException("user must not be null");
+//        }
+//
+//        ArrayList<String> members = model.getMembers();
+//
+//        if (!members.contains(user)) {
+//            model.addUser(user);
+//        }
+//
+//    }
 
     public void setMemberList(ArrayList<String> members){
         model.setMembers(members);
     }
 
-    //@todo add member escapades
-    public void addMember(String user, int chatId) {
+    public void addMember(String user) {
         if (user == null) {
             throw new IllegalArgumentException("user must not be null");
         }
-
-        serverConnection.addChatMember(user, chatId);
+        serverConnection.addMember(user, getActiveChatRoomId());
     }
-
+    public void addMember(String user, int chatID) {
+        if (user == null) {
+            throw new IllegalArgumentException("user must not be null");
+        }
+        serverConnection.(user, chatID);
+    }
 
     /**
      * Removes a user from the member list of this chat room.

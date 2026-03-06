@@ -141,7 +141,7 @@ public class ServerConnection {
      * @param chatId id of chat to add user to
      */
 
-    public void addChatMember(String user, int chatId){
+    public void addMember(String user, int chatId){
         serverHandler.broadcastMessage(
                 new RequestWrapper(RequestType.ADD_CHAT_MEMBER, new ChatMemberData(user, chatId)));
     }

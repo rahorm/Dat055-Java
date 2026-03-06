@@ -120,9 +120,11 @@ public class Controller {
         return code;*/
     }
 
-    //public void addMember(String user) {facade.addMember(user);}
-    public void addMember(String user, int chatId){
-        facade.addMember(user, chatId);
+    public void addMember(String user){
+        facade.addMember(user);
+    }
+    public void addMember(String user, int chatID){
+        facade.addMember(user, chatID);
     }
     /**
      * Creates a new user of the type User
