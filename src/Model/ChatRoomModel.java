@@ -111,7 +111,6 @@ public class ChatRoomModel {
         availableChatNames.add(chatName);
     }
 
-
     public void setStatusMessage(String statusmessage){
         this.statusMessage = statusmessage;
     }
