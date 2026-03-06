@@ -62,26 +62,22 @@ public final class ChatRoomFacade extends Observable {
 
 
     /// ----------------------------- ChatRoom <-> Server -----------------------------
-    public void createChatRoom(String chatName) {
+    public void addChatRoom(String chatName) {
         if (chatName == null || chatName.isEmpty()){
             throw new IllegalArgumentException("chatName must not be null or empty");
         }
 
         IdGenerator idGen = IdGenerator.getInstance();
         int new_id = idGen.generateId();
-
-        serverConnection.createChatRoom(new_id, chatName);
-
-        /*String user = model.getActiveUser();
-
-        serverConnection.addChatMember(user, new_id);  // adding myself
+        serverConnection.addChatRoom(new_id, chatName);
+        String user = model.getActiveUser();
+        serverConnection.addMember(user, new_id);  // adding myself
         //Lägg till i available-listorna
         model.addAvailableChat(new_id, chatName);
-
         // changeActiveRoom to be called either here or in the controller
         changeActiveRoom(new_id);
         setChanged();
-        notifyObservers();*/
+        notifyObservers();
     }
 
 

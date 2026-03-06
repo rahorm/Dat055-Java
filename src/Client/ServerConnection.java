@@ -64,7 +64,7 @@ public class ServerConnection {
      * @todo fix javadoc
      * @param chatId int name of chat
      */
-    public void createChatRoom(int chatId, String chatName){
+    public void addChatRoom(int chatId, String chatName){
         serverHandler.broadcastMessage(
                 new RequestWrapper(RequestType.ADD_CHATROOM, new ChatData(chatId, chatName)));
     }

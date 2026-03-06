@@ -87,7 +87,7 @@ public class Controller {
      * @throws IllegalStateException if the max amount of chatRooms have been reached
      * */
     public void addChatRoom(String chatName) {
-        facade.createChatRoom(chatName);
+        facade.addChatRoom(chatName);
     }
 
     /**
