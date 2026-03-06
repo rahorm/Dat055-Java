@@ -40,14 +40,19 @@ public class ClientActionHandler {
                 if(request.getData() instanceof Message){
                     Message message = (Message) request.getData();
                     DBcon.sendMsg(message);
-
                     objToReturn = new RequestWrapper(
                             RequestType.GET_MESSAGES,
                             DBcon.getChatMessages(message.getChatID())
                     );
                 } else {
                     PictureMessage message = (PictureMessage) request.getData();
+                    objToReturn = new RequestWrapper(
+                            RequestType.GET_MESSAGES,
+                            DBcon.getChatMessages(message.getChatID())
+                    );
                 }
+
+
 
             }
 

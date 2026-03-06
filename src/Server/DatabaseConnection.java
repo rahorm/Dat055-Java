@@ -201,7 +201,8 @@ public final class DatabaseConnection {
     }
 
     /**
-     * sendMsg method with alternative signature */
+     * sendMsg method with alternative signature
+     */
     public void sendMsg(PictureMessage msg){
 
         //Generates an image id
