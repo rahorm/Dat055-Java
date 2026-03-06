@@ -47,11 +47,11 @@ public final class ChatRoomFacade extends Observable {
         model.setActiveRoom(chatID);
         serverConnection.getChatMessages(chatID);
         getAvailableChats(model.getActiveUser());
-        setChanged(); // Apparently it should be used before using notifyObservers
-        notifyObservers(); // ingen parameter
+        setChanged();
+        notifyObservers();
     }
 
-    // Forwarders till model för UI
+
     public ArrayList<String> getAvailableChatNames() {
         return model.getAvailableChatNames();
     }
@@ -71,10 +71,10 @@ public final class ChatRoomFacade extends Observable {
         int new_id = idGen.generateId();
         serverConnection.addChatRoom(new_id, chatName);
         String user = model.getActiveUser();
-        serverConnection.addMember(user, new_id);  // adding myself
-        //Lägg till i available-listorna
+        serverConnection.addMember(user, new_id);
+
         model.addAvailableChat(new_id, chatName);
-        // changeActiveRoom to be called either here or in the controller
+
         changeActiveRoom(new_id);
         setChanged();
         notifyObservers();
@@ -85,9 +85,6 @@ public final class ChatRoomFacade extends Observable {
     public void removeChatRoom(int chatID) {
 
         serverConnection.deleteChatRoom(chatID);
-        //model.removeChatRoom(chatID);  this one doesnt need
-        //setChanged();
-        //notifyObservers();
     }
 
     public void getAvailableChats(String user){
@@ -117,9 +114,8 @@ public final class ChatRoomFacade extends Observable {
      * @param msg message that user write
      */
     public void storeMsg(String msg){
-        //System.out.println("message entered facade");
+
         serverConnection.sendMsg(new Message(model.getActiveUser(), model.getActiveChatRoomId(), msg));
-        //System.out.println("message left facade");
 
     }
     /**
@@ -145,7 +141,7 @@ public final class ChatRoomFacade extends Observable {
         notifyObservers();
     }
 
-    // Duplicated method, existed both in facade and model ???
+
     public String getActiveUser() {
         return model.getActiveUser();
     }
@@ -256,7 +252,6 @@ public final class ChatRoomFacade extends Observable {
         serverConnection.createUser(username, password);
         setChanged();
         notifyObservers();
-        // kommer från serveractionhandler.
 
     }
 
@@ -280,7 +275,6 @@ public final class ChatRoomFacade extends Observable {
      * Send a request to the server for all available chatrooms that the recently logged in user is in
      */
     public void updateAvailableChatIds(){
-        //frågar servern efter vilka chattrum som vi är del av
         serverConnection.getAvailableChats(lastAttemptedLogin);
     }
 

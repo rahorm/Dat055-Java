@@ -87,11 +87,6 @@ public class ChatRoomModel {
 
     public void setActiveRoom(int chatID) { this.activeChatRoomId = chatID; }
 
-    /*public void removeChatRoom(int chatID) { // I don't know how to remove an existing model!!!! - choi
-        System.out.println("model wants to remove chatroom right now");
-    }*/
-
-    // Sätt ny lista/uppdatera listan
     public void setAvailableChats(ArrayList<ChatData> idNamePairs) {
 
         availableChatIds.clear();
@@ -126,11 +121,6 @@ public class ChatRoomModel {
         }
         return -1;
     }
-
-    /*
-    *     private final ArrayList<Integer> availableChatIds = new ArrayList<>();
-    private final ArrayList<String> availableChatNames = new ArrayList<>();
-    * */
 
 }
 
