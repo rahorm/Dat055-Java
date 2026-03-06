@@ -10,14 +10,14 @@ public class ClientHandler implements Runnable{
     private Socket socket;
     private ObjectInputStream objectInputstream;
     private ObjectOutputStream objectOutputStream;
-    private ClientActionHandler actionHandler;
+    private ClientActionHandler clientActionHandler;
 
     public ClientHandler(Socket socket){
         try {
             this.socket = socket;
             this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());  //bytestream wrapped in charstream, used to send things
             this.objectInputstream = new ObjectInputStream(socket.getInputStream()); //used to recieve things
-            this.actionHandler = new ClientActionHandler();
+            this.clientActionHandler = new ClientActionHandler();
 
             clientHandlers.add(this);
 
@@ -34,7 +34,7 @@ public class ClientHandler implements Runnable{
             try {
                 objectFromClient = objectInputstream.readObject();
                 System.out.println(objectFromClient);
-                Object output = actionHandler.handle(objectFromClient);
+                Object output = clientActionHandler.handle(objectFromClient);
                 //skickar nu responsen till alla clients som är anslutna, får ta beslut om huruvida det är korrekt eller inte
                 if(output != null){
                     broadcastMessage(output);
