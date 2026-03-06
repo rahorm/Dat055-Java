@@ -134,8 +134,8 @@ public class UI {
         chatListPane.setPreferredSize(new Dimension(200, 100));
         contentPane.add(chatListPane);
         chatList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        chatList.addListSelectionListener(_ -> {
-            controller.changeActiveRoom(availableChatIds.get(chatList.getSelectedIndex()));
+        chatList.addListSelectionListener(e -> {
+            controller.changeActiveRoom(availableChatIds.get(e.getFirstIndex()));
         });
 
         contentPane.add(removeChatBtn);
