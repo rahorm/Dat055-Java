@@ -236,8 +236,11 @@ public void removeMessage(Message message) {
      * @param password password user is trying to log in with
      */
     public void logIn(String username, String password){
-        serverConnection.login(username, password); // Return type of CheckLogin in serverConnection to be boolean??
-                                                         // how can we verify is the question here
+        serverConnection.login(username, password);
+        serverConnection.getAvailableChats(username);
+        setChanged();
+        notifyObservers();
+
     }
 
     /**
