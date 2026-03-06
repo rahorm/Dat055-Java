@@ -37,6 +37,15 @@ public class ServerActionHandler {
                 boolean created = (boolean) request.getData();
                 //skicka vidare till facaden
                 System.out.println("User has been created: " + created);
+
+                if(created){
+                    facade.setStatusMessage("Success!");
+                    facade.updateAvailableChatIds();
+                }
+                else if(!created) {
+                    facade.setStatusMessage("Failed!");
+                }
+
                 break;
 
             case ADD_CHATROOM:
