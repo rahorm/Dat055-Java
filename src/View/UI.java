@@ -249,4 +249,8 @@ public class UI {
         }
     }
 
+    public void displayStatusMessage(String statusMessage) {
+        JOptionPane.showMessageDialog(frame, statusMessage);
+    }
+
 }

@@ -261,10 +261,14 @@ public void removeMessage(Message message) {
      */
     public void setStatusMessage(String statusmessage){
         model.setStatusMessage(statusmessage);
+        setChanged();
+        notifyObservers();
     }
 
     public String getStatusMessage(){
-        return model.getStatusMessage();
+        String statusMessage = model.getStatusMessage();
+        model.setStatusMessage(null);
+        return statusMessage;
     }
 
     /**

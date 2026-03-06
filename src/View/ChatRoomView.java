@@ -28,6 +28,11 @@ public class ChatRoomView implements Observer {
         ArrayList<String> chatNames = model.getAvailableChatNames();
         ArrayList<Integer> chatIds = model.getAvailableChatIds();
         ui.setAvailableChats(chatNames, chatIds);
+        //status message
+        String statusMessage = model.getStatusMessage();
+        if (statusMessage != null) {
+            ui.displayStatusMessage(statusMessage);
+        }
     }
 
     public ChatRoomView(Controller controller, ChatRoomFacade model) {
