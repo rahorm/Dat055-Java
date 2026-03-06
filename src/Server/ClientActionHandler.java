@@ -17,8 +17,10 @@ public class ClientActionHandler {
     public ClientActionHandler() {
         try {
             DBcon = DatabaseConnection.getInstance();
+            System.out.println("✅ DB connected!");
         } catch (SQLException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
+            System.out.println("❌ DB error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

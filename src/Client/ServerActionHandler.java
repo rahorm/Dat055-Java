@@ -2,7 +2,6 @@ package Client;
 
 //import Common.MsgHistoryWrapper;
 import Common.ChatData;
-import Common.ChatMemberData;
 import Common.RequestWrapper;
 import Common.UserData;
 import Model.ChatRoomFacade;
@@ -41,9 +40,9 @@ public class ServerActionHandler {
                 break;
 
             case ADD_CHATROOM:
-                ChatData updated = (ChatData) request.getData();
-                facade.changeActiveRoom(updated.getChatId());
-                facade.addMember(facade.getActiveUser(), updated.getChatId());
+                String room = (String) request.getData();
+                System.out.println("Chat has been created: " + room);
+                //ytterligare actions?
                 break;
 
             case DELETE_CHATROOM:
@@ -53,13 +52,9 @@ public class ServerActionHandler {
                 break;
 
             case ADD_CHAT_MEMBER:
-                ChatMemberData added = (ChatMemberData) request.getData();
-                System.out.println("Member added: " + added);
-                facade.addMemberLocal(added.getUsername());
-
-                if(added.getUsername().equals(facade.getActiveUser())){
-                    facade.getAvailableChats(added.getUsername());
-                }
+                ArrayList<String> memberList = (ArrayList<String>) request.getData();
+                System.out.println("Chat members updated: " + memberList);
+                //vad ska göras med den uppdaterade members listan?
                 break;
 
             case CHECK_USER:
@@ -75,15 +70,14 @@ public class ServerActionHandler {
                 break;
 
             case LOGIN:
-                UserData userData = (UserData) request.getData();
-                facade.setActiveUser(userData.getUsername());
-                System.out.println("logged in clientside");
-                break;
+                Object[] loginInfo = (Object[]) request.getData();
+                if((boolean) loginInfo[0]){
+                    UserData userData = (UserData) loginInfo[1];
+                    facade.setActiveUser(userData.getUsername());
+                    System.out.println("logged in clientside");
+                    break;
+                }
                 //@todo meddela ui att användaren är inloggad
-
-            case GET_CHAT_MEMBERS:
-                ArrayList<String> members = (ArrayList<String>) request.getData();
-                facade.setMemberList(members);
                 break;
 
             default:

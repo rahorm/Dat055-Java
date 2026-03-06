@@ -15,6 +15,7 @@ public final class ChatRoomFacade extends Observable {
     private static ChatRoomFacade instance;
     private ChatRoomModel model;
     private ServerConnection serverConnection;
+    private String lastAttemptedLogin;
 
     private ChatRoomFacade(ChatRoomModel model) {
         this.model = model;
@@ -142,6 +143,9 @@ public final class ChatRoomFacade extends Observable {
 
     public void setActiveUser(String username){
         model.setActiveUser(username);
+        serverConnection.getAvailableChats(username);
+        setChanged();
+        notifyObservers();
     }
 
     // Duplicated method, existed both in facade and model ???
@@ -251,8 +255,9 @@ public void removeMessage(Message message) {
      * @param password password user is trying to log in with
      */
     public void logIn(String username, String password){
-        serverConnection.login(username, password); // Return type of CheckLogin in serverConnection to be boolean??
-                                                         // how can we verify is the question here
+        serverConnection.login(username, password);
+        lastAttemptedLogin = username;
+
     }
 
     /**
@@ -262,6 +267,34 @@ public void removeMessage(Message message) {
      */
     public void createUser(String username, String password){
         serverConnection.createUser(username, password);
+        setChanged();
+        notifyObservers();
+        // kommer från serveractionhandler.
+
+    }
+
+    /**
+     * When user tries to login or sign up this statusmessage will shows whether it is failed or succeeded
+     * @param statusmessage message that indicates signup or login status
+     */
+    public void setStatusMessage(String statusmessage){
+        model.setStatusMessage(statusmessage);
+        setChanged();
+        notifyObservers();
+    }
+
+    public String getStatusMessage(){
+        String statusMessage = model.getStatusMessage();
+        model.setStatusMessage(null);
+        return statusMessage;
+    }
+
+    /**
+     * Send a request to the server for all available chatrooms that the recently logged in user is in
+     */
+    public void updateAvailableChatIds(){
+        //frågar servern efter vilka chattrum som vi är del av
+        serverConnection.getAvailableChats(lastAttemptedLogin);
     }
 
 /// -----------------------------Getters and Setters-----------------------------
