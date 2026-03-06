@@ -61,17 +61,11 @@ public class UI {
 
         //loggar in som en användare
         JButton loginBtn = new JButton("login");
-        //@TODO skapa loginmetod i controller och använd getpassword istället för gettext;
+
         loginBtn.addActionListener((_) -> controller.login(usernameInput.getText(), passwordInput.getText()));
 
         JButton removeChatBtn = new JButton("remove chat");
-////      removeChatBtn.addActionListener((_) -> controller.removeChatRoom(Integer.parseInt(removeChatInput.getText())));
-//        removeChatBtn.addActionListener((_) -> {
-//            String input = removeChatInput.getText().trim();
-//            if (!input.isEmpty()) {
-//                controller.removeChatRoom(Integer.parseInt(input));
-//            }
-//        });
+
         removeChatBtn.addActionListener((_) -> {
             String input = removeChatInput.getText().trim();
             if (!input.isEmpty()) {
@@ -116,8 +110,7 @@ public class UI {
         contentPane.add(loginBtn);
         contentPane.add(signUpBtn);
         JScrollPane messageListPane = new JScrollPane(messageList);
-        //messageListPane.setPreferredSize(new Dimension(200, 200));
-        //messageListPane.setMinimumSize(new Dimension(200, 20));
+
         contentPane.add(messageListPane);
         contentPane.add(sendWithImageBtn);
 
@@ -136,13 +129,6 @@ public class UI {
         contentPane.add(addMemberBtn);
 
 ////------------------------------Setup constraints---------------------------------------------------------------------
-        //pitfalls: write layout.putConstraint("North", thing1, pad, "South", thing2);
-        //            NOT layout.putConstraint("South", thing1, pad, "North", thing2);
-        //unless you want overlapping components
-        //same with East and West
-        //layout.putConstraint("West", thing1, pad, "East", thing2); not overlapping
-        //layout.putConstraint("East", thing1, pad, "West", thing2); overlapping
-
         //position messageInput
         layout.putConstraint("East", messageInput, 10, "East", contentPane);
         layout.putConstraint("West", messageInput, 0, "West", messageListPane);
@@ -216,14 +202,6 @@ public class UI {
      * @param msg An ArrayList of Message objects to display.
      */
     public void setMsg(ArrayList<Message> msg) {
-        /*
-        String s = "";
-        for (Message message : msg) {
-            s = s.concat(message.getContent());
-            s = s.concat("\n");
-        }
-        messages.setText(s);
-         */
         Vector<Message> vector = new Vector<Message>(msg);
         messageList.setListData(vector);
     }
