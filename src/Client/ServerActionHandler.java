@@ -62,7 +62,7 @@ public class ServerActionHandler {
                 //yterligare actions?
                 break;
 
-            case ADD_CHAT_MEMBER:
+            case ADD_MEMBER:
                 ChatMemberData added = (ChatMemberData) request.getData();
                 System.out.println("Member added: " + added);
                 facade.addMemberLocal(added.getUsername());

@@ -5,15 +5,15 @@ import Other.IdGenerator;
 import Other.Message;
 import Other.PictureMessage;
 
-import javax.swing.*;
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Properties;
 
+/**
+ * 1. Creates a connection to a postgres database on your computer and contains all the necessary information for that to work
+ * 2. Has methods for each kind of action that can be made on the database and does this via INSERTS and DELETES and SELECTS
+ * */
 public final class DatabaseConnection {
 
     static final String DBNAME = "chatapp";
@@ -245,13 +245,12 @@ public final class DatabaseConnection {
     /**
      * Adds a user to a chat
      * @param chatId which chat the user should be added to
-     * @param username what user to add
+     * @param user what user to add
      */
-    public void addChatMember(int chatId, String username){
-        try(PreparedStatement ps = conn.prepareStatement(
-                "INSERT INTO ChatMembers VALUES (?, ?)");){
-            ps.setInt(1, chatId); //needs fixing
-            ps.setString(2, username);
+    public void addMember(int chatId, String user){
+        try(PreparedStatement ps = conn.prepareStatement("INSERT INTO ChatMembers VALUES (?, ?)");){
+            ps.setInt(1, chatId);
+            ps.setString(2, user);
             ps.executeUpdate();
         }  catch (SQLException e) {
             System.out.println("{\"error\":\""+getError(e)+"\"}");

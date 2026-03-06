@@ -10,14 +10,14 @@ public class ServerHandler implements Runnable{
     private Socket socket;
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
-    private ServerActionHandler actionHandler;
+    private ServerActionHandler serverActionHandler;
 
     public ServerHandler(Socket socket){
         try {
             this.socket = socket;
             this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());  //bytestream wrapped in charstream, used to send things
             this.objectInputStream = new ObjectInputStream(socket.getInputStream()); //used to recieve things
-            this.actionHandler = new ServerActionHandler();
+            this.serverActionHandler = new ServerActionHandler();
         } catch (IOException e){
             System.out.println(e.getMessage());
         }
@@ -31,7 +31,7 @@ public class ServerHandler implements Runnable{
             try {
                 objectFromServer = objectInputStream.readObject();
                 System.out.println(objectFromServer); // test
-                actionHandler.handle(objectFromServer);
+                serverActionHandler.handle(objectFromServer);
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println(e.getMessage());
                 break;

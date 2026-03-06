@@ -9,9 +9,7 @@ import java.util.ArrayList;
  * ClientHandler.run() is then called and it calls ClientActionHandler.handle() where all the logic exists for each kind of action
  * this server is meant to deal with.
  *
- * The second time the program flow arrives at this class is when ClientActionHandler.handle() returns a response such as
- * "yes the login was correct". Then ClientHandler.broadcastMessage() is called and every client connected to the server is notified that
- * an update has happened on the server.
+ * ClientActionHandler.handle() returns an object which is broadcasted back to the clients so that they know something has changed on the database
  * */
 public class ClientHandler implements Runnable{
     public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>(); //keeps track of all clients this is publisher/thing that notifies

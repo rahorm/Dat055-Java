@@ -9,7 +9,9 @@ import Other.PictureMessage;
 
 import java.sql.SQLException;
 
-
+/**
+ * logic for what we are to do with data that clienthandler recieves from clients
+ * */
 public class ClientActionHandler {
 
     private DatabaseConnection DBcon;
@@ -36,7 +38,7 @@ public class ClientActionHandler {
         switch (request.getType()) {
 
             case ADD_MESSAGE -> {
-                if(request.getData() instanceof PictureMessage){
+                if (request.getData() instanceof PictureMessage) {
                     System.out.println("Picturemessage being sent");
                     PictureMessage message = (PictureMessage) request.getData();
                     DBcon.sendMsg(message);
@@ -117,12 +119,12 @@ public class ClientActionHandler {
                 );
             }
 
-            case ADD_CHAT_MEMBER -> {
+            case ADD_MEMBER -> {
                 ChatMemberData data = (ChatMemberData) request.getData();
-                DBcon.addChatMember(data.getChatId(), data.getUsername());
+                DBcon.addMember(data.getChatId(), data.getUsername());
 
                 objToReturn = new RequestWrapper(
-                        RequestType.ADD_CHAT_MEMBER,
+                        RequestType.ADD_MEMBER,
                         data
                 );
             }
@@ -137,17 +139,6 @@ public class ClientActionHandler {
                         DBcon.getChatMembers(data.getChatId())
                 );
             }
-
-            /*case EDIT_MESSAGE -> {
-                Message message = (Message) request.getData();
-                DBcon.editMsg();
-
-                objToReturn = new RequestWrapper(
-                        RequestType.GET_MESSAGES,
-                        DBcon.getChatMessages(message.getChatID())
-                );
-            }*/
-
 
             case DELETE_MESSAGE -> {
                 Message message = (Message) request.getData();
@@ -190,34 +181,4 @@ public class ClientActionHandler {
 
         return objToReturn;
     }
-
-//
-    /*public Object handle(Object obj){
-        Object objToReturn = null;
-
-        if(obj instanceof SendMsgWrapper){
-            SendMsgWrapper input = (SendMsgWrapper)obj;
-            Message message = input.getMsg();
-            DBcon.sendMsg(message);
-            objToReturn = new MsgHistoryWrapper(DBcon.getChatMessages(message.getChatID()));
-        }
-//        /* Objects that need handling
-//        createChatRoom
-//        deleteChatRoom
-//        checkUserExists
-//        checkLogIn
-//        createUser
-//        deleteUser
-//        addChatMember
-//        removeChatMember
-//        sendMsg
-//        editMsg
-//        deleteMsg
-//        getChatMessages
-//        getChatMembers
-//        getAvailableChats*/
-//
-        /*return objToReturn;
-    }
-    */
 }

@@ -143,7 +143,7 @@ public class ServerConnection {
 
     public void addMember(String user, int chatId){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.ADD_CHAT_MEMBER, new ChatMemberData(user, chatId)));
+                new RequestWrapper(RequestType.ADD_MEMBER, new ChatMemberData(user, chatId)));
     }
 
     /**
