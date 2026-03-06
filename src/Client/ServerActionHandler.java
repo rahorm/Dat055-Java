@@ -81,6 +81,11 @@ public class ServerActionHandler {
                 break;
                 //@todo meddela ui att användaren är inloggad
 
+            case GET_CHAT_MEMBERS:
+                ArrayList<String> members = (ArrayList<String>) request.getData();
+                facade.setMemberList(members);
+                break;
+
             default:
                 System.out.println("Unhandled request type: " + request.getType());
         }

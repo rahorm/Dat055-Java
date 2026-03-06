@@ -151,11 +151,9 @@ public class ServerConnection {
      * </p>
      * @param user the user that should be removed. Type String.
      */
-    //this also has no chatId
-    //@todo add member escapades
-    public void removeChatMember(String user){
+    public void removeChatMember(String user, int chatId){
         serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.REMOVE_CHAT_MEMBER, user));
+                new RequestWrapper(RequestType.REMOVE_CHAT_MEMBER, new ChatMemberData(user, chatId)));
     }
 
     /**

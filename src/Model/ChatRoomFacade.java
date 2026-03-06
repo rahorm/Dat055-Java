@@ -170,6 +170,9 @@ public final class ChatRoomFacade extends Observable {
 
     }
 
+    public void setMemberList(ArrayList<String> members){
+        model.setMembers(members);
+    }
 
     //@todo add member escapades
     public void addMember(String user, int chatId) {
@@ -191,10 +194,12 @@ public final class ChatRoomFacade extends Observable {
     public void removeMember(String user) {
         if (user == null) {
             throw new IllegalArgumentException("user must not be null");
+        } else if (user.equals(getActiveUser())) {
+            throw new IllegalArgumentException("can't remove yourself from active chat");
         }
         model.removeUser(user);
 
-        serverConnection.removeChatMember(user);
+        serverConnection.removeChatMember(user, getActiveChatRoomId());
 }
 
 

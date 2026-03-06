@@ -129,18 +129,15 @@ public class ClientActionHandler {
                         data
                 );
             }
-            //@todo add member escapades
-            case REMOVE_CHAT_MEMBER -> {
-                String data = (String) request.getData();
-                String[] parts = data.split(":");
-                int chatID = Integer.parseInt(parts[0]);
-                String username = parts[1];
 
-                DBcon.removeChatMember(chatID, username);
+            case REMOVE_CHAT_MEMBER -> {
+                ChatMemberData data = (ChatMemberData) request.getData();
+
+                DBcon.removeChatMember(data.getChatId(), data.getUsername());
 
                 objToReturn = new RequestWrapper(
                         RequestType.GET_CHAT_MEMBERS,
-                        DBcon.getChatMembers(chatID)
+                        DBcon.getChatMembers(data.getChatId())
                 );
             }
 
