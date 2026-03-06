@@ -10,53 +10,37 @@ import java.util.Vector;
 
 public class UI {
     private ArrayList<Integer> availableChatIds;
-    JFrame frame;
-    JFrame messageFrame;
-    JList<Message> messageList;
-    JLabel activeChat = new JLabel();
-    JList <String> chatList;
     Controller controller;
-    JTextField removeChatInput;
-    JTextArea messages;
-    JTextArea messageInput;
-    JTextField usernameInput;
-    JPasswordField passwordInput;
-    JTextField createChatInput = new JTextField();
-    JTextField addMemberInput = new JTextField();
+
+    JFrame          frame           = new JFrame();
+    JFrame          messageFrame    = new JFrame();
+    JList<Message>  messageList     = new JList<Message>();
+    JTextArea       messageInput    = new JTextArea();
+    JLabel          activeChat      = new JLabel();
+    JList <String>  chatList        = new JList<String>();
+    JTextField      usernameInput   = new JTextField();
+    JPasswordField  passwordInput   = new JPasswordField();
+    JTextField      removeChatInput = new JTextField();
+    JTextField      createChatInput = new JTextField();
+    JTextField      addMemberInput  = new JTextField();
 
 
     public UI(Controller controller) {
-        this.messages = new JTextArea();
-        messages.setEditable(false);
-        messages.setColumns(20);
-        messages.setRows(10);
-
-
-        this.removeChatInput = new JTextField();
-        removeChatInput.setColumns(20);
-
-        this.messageList = new JList<Message>();
-        messageList.setCellRenderer(new MessageRenderer());
-
-        this.chatList = new JList<>(); //tom chatRoom llista först
-
-        this.messageFrame = new JFrame();
-        messageFrame.setLayout(new GridBagLayout());
-        //messageFrame.add(messageList);
-        //messageFrame.add(messageInput);
-
         this.controller = controller;
 
-        this.messageInput = new JTextArea();
+        removeChatInput.setColumns(20);
+
+        messageList.setCellRenderer(new MessageRenderer());
+
+        messageFrame.setLayout(new GridBagLayout());
+
         messageInput.setColumns(20);
         messageInput.setRows(5);
 
-        this.usernameInput = new JTextField();
         usernameInput.setColumns(20);
         usernameInput.setMaximumSize(usernameInput.getPreferredSize());
         usernameInput.setMinimumSize(usernameInput.getPreferredSize());
 
-        this.passwordInput = new JPasswordField();
         passwordInput.setColumns(20);
 
         addMemberInput.setColumns(20);
@@ -65,9 +49,9 @@ public class UI {
 
         SpringLayout layout = new SpringLayout();
 
-        frame = new JFrame();
         Container contentPane = frame.getContentPane();
 
+////-------------------------------Buttons------------------------------------------------------------------------------
         //skickar ett meddelande till servern
         JButton messageBtn = new JButton("send message");
         messageBtn.addActionListener((_) -> {
@@ -107,8 +91,8 @@ public class UI {
             }
         });
 
-       JButton signUpBtn = new JButton("sign up");
-       signUpBtn.addActionListener((_) -> controller.signUp(usernameInput.getText(), passwordInput.getText()));
+        JButton signUpBtn = new JButton("sign up");
+        signUpBtn.addActionListener((_) -> controller.signUp(usernameInput.getText(), passwordInput.getText()));
 
         JButton createChatBtn = new JButton("create chat");
         createChatBtn.addActionListener((_) -> controller.addChatRoom(createChatInput.getText()));
@@ -119,6 +103,7 @@ public class UI {
         JButton sendWithImageBtn = new JButton("send with image");
         sendWithImageBtn.addActionListener((_) -> addImageFileDialog());
 
+////---------------------------------Add components to the frame--------------------------------------------------------
         //lägger till knappar till ui:n
         contentPane.add(messageBtn);
         //contentPane.add(messages);
@@ -150,7 +135,7 @@ public class UI {
         contentPane.add(addMemberInput);
         contentPane.add(addMemberBtn);
 
-        //constraints för springlayout
+////------------------------------Setup constraints---------------------------------------------------------------------
         //pitfalls: write layout.putConstraint("North", thing1, pad, "South", thing2);
         //            NOT layout.putConstraint("South", thing1, pad, "North", thing2);
         //unless you want overlapping components
