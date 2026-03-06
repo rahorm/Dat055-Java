@@ -44,7 +44,7 @@ public final class ChatRoomFacade extends Observable {
      * @param chatID of a chatroom that user wants to open
      */
     public void changeActiveRoom(int chatID) {
-        model.changeActiveRoom(chatID);
+        model.setActiveRoom(chatID);
         serverConnection.getChatMessages(chatID);
         setChanged(); // Apparently it should be used before using notifyObservers
         notifyObservers(); // ingen parameter
@@ -110,7 +110,7 @@ public final class ChatRoomFacade extends Observable {
 
     /// ----------------------------- Message <-> UI -----------------------------
     public ArrayList<Message> getMSGList(){
-        return model.retriveMSGList(); // how many elements to show?
+        return model.getMessages(); // how many elements to show?
     }
 
 
@@ -167,7 +167,7 @@ public final class ChatRoomFacade extends Observable {
             throw new IllegalArgumentException("user must not be null");
         }
 
-        ArrayList<String> members = model.retrieveUserList();
+        ArrayList<String> members = model.getMembers();
 
         if (!members.contains(user)) {
             model.addUser(user);
@@ -220,7 +220,7 @@ public final class ChatRoomFacade extends Observable {
         if (message == null) {
             throw new IllegalArgumentException("message must not be null");
         }
-        ArrayList<Message> messages = model.retriveMSGList();
+        ArrayList<Message> messages = model.getMessages();
         messages.add(message);
     // model.addMessage(message); <- can't we just use this method call instead of the above two lines?
 }
@@ -237,7 +237,7 @@ public void removeMessage(Message message) {
     if (message == null) {
         throw new IllegalArgumentException("message must not be null");
     }
-    ArrayList<Message> messages = model.retriveMSGList();
+    ArrayList<Message> messages = model.getMessages();
     messages.remove(message);
 }
 

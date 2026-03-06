@@ -43,22 +43,10 @@ public class ChatRoomModel {
 
         this.activeChatRoomId = chatID;
         this.activeUser = activeUser;
-
     }
-
-
 
     /// ----------------------------- Message -----------------------------
-    public ArrayList<Message> retriveMSGList() {
-        /**
-         * This method retrieves all messages from
-         * currently stored in MSGList for the room
-         * @param none
-         * @return list of messages
-         */
-        return new ArrayList<>(messages);
-    }
-
+    public ArrayList<Message> getMessages() { return messages; }
     public void setHistory(ArrayList<Message> history){ this.messages = history;}
     public void addMessage(Message message) {
         messages.add(message);
@@ -69,37 +57,17 @@ public class ChatRoomModel {
     }
 
     /// ----------------------------- USER -----------------------------
-    public ArrayList<String> retrieveUserList() {
-        /**
-         * This method retrieves all User from
-         * currently stored in UserList for the room
-         * @param none
-         * @return list of Users
-         */
-        return new ArrayList<>(members);
-    }
-
-    public void setMembers(ArrayList<String> members){
-        this.members = members;
-    }
-    public void addUser(String user) {
-        members.add(user);
-    }
-
     public void removeUser(String user) {
         members.remove(user);
     }
 
-    public void setActiveUser(String activeUser) {
-
-        this.activeUser = activeUser;
+    public ArrayList<String> getMembers() { return members; }
+    public void setMembers(ArrayList<String> members){ this.members = members; }
+    public void addUser(String user) {
+        members.add(user);
     }
-
-    public String getActiveUser(){
-
-        return this.activeUser;
-    }
-
+    public void setActiveUser(String activeUser) { this.activeUser = activeUser; }
+    public String getActiveUser(){ return activeUser; }
     public void setUsername(String username){
         this.username = username;
     }
@@ -121,9 +89,7 @@ public class ChatRoomModel {
         return index >= 0 ? availableChatNames.get(index) : "Unknown (" + chatId + ")";
     }
 
-    public void changeActiveRoom(int chatID) {
-        this.activeChatRoomId = chatID;
-    }
+    public void setActiveRoom(int chatID) { this.activeChatRoomId = chatID; }
 
     /*public void removeChatRoom(int chatID) { // I don't know how to remove an existing model!!!! - choi
         System.out.println("model wants to remove chatroom right now");
