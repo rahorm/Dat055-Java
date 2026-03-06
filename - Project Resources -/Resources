@@ -264,3 +264,4 @@ Converting Image to Byte array
 
     * Login (serverActionHandler) behöver tittas på, den förväntas få en array, det får i verkligheten en userData whatever object
     * kolla på add member i ui
+    * Man behöver tekniskt sett inte logga in för att kunna skriva etc nu. Man är by default inloggad som user1 och använder deras konto
