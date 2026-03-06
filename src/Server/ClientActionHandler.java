@@ -1,8 +1,7 @@
 package Server;
 
-//import Common.MsgHistoryWrapper;
+
 import Common.*;
-//import Common.SendMsgWrapper;
 import Model.ChatRoomFacade;
 import Other.Message;
 import Other.PictureMessage;
@@ -56,16 +55,6 @@ public class ClientActionHandler {
                     );
                 }
             }
-
-//            case ADD_CHATROOM -> {
-//                ChatData chatData = (ChatData) request.getData();
-//                DBcon.createChatRoom(chatData.getChatId(), chatData.getChatName());
-//
-//                objToReturn = new RequestWrapper(
-//                        RequestType.ADD_CHATROOM,
-//                        chatData
-//                );
-//            }
 
             case ADD_CHATROOM -> {
                 ChatData chatData = (ChatData) request.getData();

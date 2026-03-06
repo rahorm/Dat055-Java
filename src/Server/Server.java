@@ -26,7 +26,7 @@ public class Server {
     public void startServer(){
         try{
             while(!serverSocket.isClosed()){
-                Socket socket = serverSocket.accept(); //blocking method. stops program until a client connects, returning the socket used to communicate with client (stored)
+                Socket socket = serverSocket.accept();
                 System.out.println("New client has connected");
                 ClientHandler clientHandler = new ClientHandler(socket);
 

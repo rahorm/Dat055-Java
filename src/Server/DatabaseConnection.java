@@ -275,42 +275,6 @@ public final class DatabaseConnection {
     }
 
     /**
-     * Edits an already existing message.
-     * The message will have the same msgId and timestamp as before,
-     * but the content and image properties may be changed
-     * @param msg the original message
-     * @param updateMsg the new message
-     */
-    /*public void editMsg(Message msg, Message updateMsg){
-
-        try(PreparedStatement ps = conn.prepareStatement(
-                "UPDATE ChatMessages SET Content = ?, hasimg = ? WHERE msgId = ?");){
-            ps.setString(1,updateMsg.getContent());
-            // ps.setBoolean(2,updateMsg.getHasImg());
-            ps.setInt(3, msg.getMessageID());
-            ps.executeUpdate();
-        }  catch (SQLException e) {
-            System.out.println("{\"error\":\""+getError(e)+"\"}");
-        }
-
-    }*/
-
-    /**
-     * !THIS CANNOT BE UNDONE!
-     * Deletes a message from a chat
-     * @param msgId the message id of the message to be deleted
-     */
-    public void deleteMsg(int msgId){
-        try(PreparedStatement ps = conn.prepareStatement(
-                "DELETE FROM ChatMessages WHERE msgId = ?");){
-            ps.setInt(1, msgId);
-            ps.executeUpdate();
-        }  catch (SQLException e) {
-            System.out.println("{\"error\":\""+getError(e)+"\"}");
-        }
-    }
-
-    /**
      * !THIS CANNOT BE UNDONE!
      * Deletes a message from a chat
      * @param msg the message to be deleted
@@ -415,7 +379,6 @@ public final class DatabaseConnection {
 
     }
 
-    // This is a hack to turn an SQLException into a JSON string error message. No need to change.
     public static String getError(SQLException e){
        String message = e.getMessage();
        int ix = message.indexOf('\n');
@@ -423,10 +386,5 @@ public final class DatabaseConnection {
        message = message.replace("\"","\\\"");
        return message;
     }
-
-    /*public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        DatabaseConnection DBconn = DatabaseConnection.getInstance();
-        //DBconn.uploadImg();
-    }*/
 
 }

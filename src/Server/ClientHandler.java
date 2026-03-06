@@ -22,8 +22,8 @@ public class ClientHandler implements Runnable{
     public ClientHandler(Socket socket){
         try {
             this.socket = socket;
-            this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());  //bytestream wrapped in charstream, used to send things
-            this.objectInputstream = new ObjectInputStream(socket.getInputStream()); //used to recieve things
+            this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            this.objectInputstream = new ObjectInputStream(socket.getInputStream());
             this.clientActionHandler = new ClientActionHandler();
 
             clientHandlers.add(this);
@@ -34,7 +34,7 @@ public class ClientHandler implements Runnable{
     }
 
     @Override
-    public void run(){ //want to run this on a separate thread from application handling since listening to messages is a blocking task
+    public void run(){
         Object objectFromClient;
 
         while(socket.isConnected()){
@@ -42,7 +42,7 @@ public class ClientHandler implements Runnable{
                 objectFromClient = objectInputstream.readObject();
                 System.out.println(objectFromClient);
                 Object output = clientActionHandler.handle(objectFromClient);
-                //skickar nu responsen till alla clients som är anslutna, får ta beslut om huruvida det är korrekt eller inte
+
                 if(output != null){
                     broadcastMessage(output);
                 }
