@@ -28,17 +28,16 @@ public class Controller {
     /**
      * Takes message and stores it in the program
      * @param msg string that represents a message that has been input from a user
-     * @param user integer value that represents a user in the active chat that is the sender of the message
      * @throws IllegalArgumentException if userID is not an existing user
      * @throws NumberFormatException if msg isn't a string
      * */
     public void sendMessage(String msg){
-        System.out.println("message entered controller");
+        //System.out.println("message entered controller");
         if (msg == null || msg.isEmpty()) {
             throw new IllegalArgumentException("Message cannot be null or empty");
         }
         facade.storeMsg(msg);
-        System.out.println("message left controller");
+        //System.out.println("message left controller");
     }
 
     /**
@@ -48,7 +47,7 @@ public class Controller {
      * @throws IllegalArgumentException if the file at imagePath does not exist
      */
     public void sendPictureMessage(String imagePath, String message) {
-        System.out.println("picture message entered controller");
+        //System.out.println("picture message entered controller");
 
         if (imagePath == null || imagePath.isEmpty()) {
             throw new IllegalArgumentException("Image path cannot be null or empty");
@@ -66,7 +65,7 @@ public class Controller {
 
         facade.storePictureMsg(pictureMessage);
 
-        System.out.println("picture message left controller");
+        //System.out.println("picture message left controller");
     }
 
     /**

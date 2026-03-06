@@ -114,9 +114,9 @@ public final class ChatRoomFacade extends Observable {
      * @param msg message that user write
      */
     public void storeMsg(String msg){
-        System.out.println("message entered facade");
+        //System.out.println("message entered facade");
         serverConnection.sendMsg(new Message(model.getActiveUser(), model.getActiveChatRoomId(), msg));
-        System.out.println("message left facade");
+        //System.out.println("message left facade");
 
     }
     /**
@@ -125,6 +125,7 @@ public final class ChatRoomFacade extends Observable {
      */
     public void storePictureMsg(PictureMessage pictureMessage) {
         serverConnection.sendPictureMsg(pictureMessage);
+
     }
 
     public void setHistory(ArrayList<Message> history){
