@@ -94,6 +94,8 @@ public class ChatRoomModel {
     // Sätt ny lista/uppdatera listan
     public void setAvailableChats(ArrayList<ChatData> idNamePairs) {
 
+        availableChatIds.clear();
+        availableChatNames.clear();
         for (ChatData d : idNamePairs) {
             availableChatIds.add(d.getChatId());
             availableChatNames.add(d.getChatName());
