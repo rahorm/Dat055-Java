@@ -23,4 +23,8 @@ public class ChatData implements Serializable {
     public void setChatName(String chatName) {
         this.chatName = chatName;
     }
+
+    public String toString(){
+        return "Chatdata: chatName - "+chatName+" chatId - "+chatId;
+    }
 }

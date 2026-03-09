@@ -21,5 +21,8 @@ public class ChatMemberData implements Serializable{
     public int getChatId() {return chatId;}
     public void setChatId(int chatId) {this.chatId = chatId;}
 
-
+    @Override
+    public String toString() {
+        return "ChatMemberData: member- "+username+" chatId - "+chatId;
+    }
 }

@@ -243,7 +243,7 @@ public final class ChatRoomFacade extends Observable {
      */
     public void logIn(String username, String password){
         serverConnection.login(username, password);
-        lastAttemptedLogin = username;
+        this.lastAttemptedLogin = username;
 
     }
 

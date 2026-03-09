@@ -101,6 +101,7 @@ public class ClientActionHandler {
             }
 
             case LOGIN -> {
+                System.out.println("Server handling login");
                 UserData userdata = (UserData) request.getData();
                 boolean success = DBcon.checkLogin(userdata.getUsername(), userdata.getPassword());
                 Object[] data = {success, new UserData(userdata.getUsername(), userdata.getPassword())};
@@ -109,6 +110,7 @@ public class ClientActionHandler {
                         RequestType.LOGIN,
                         data
                 );
+                System.out.println("Server finished trying to log in");
             }
 
             case CREATE_USER -> {

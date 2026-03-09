@@ -81,6 +81,7 @@ public class ServerActionHandler {
                 break;
 
             case LOGIN:
+                System.out.println("Client handling login");
                 Object[] loginInfo = (Object[]) request.getData();
                 if((boolean) loginInfo[0]){
                     UserData userData = (UserData) loginInfo[1];

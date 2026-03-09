@@ -21,6 +21,7 @@ public class ClientHandler implements Runnable{
 
     public ClientHandler(Socket socket){
         try {
+            System.out.println("Creating new client");
             this.socket = socket;
             this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());  //bytestream wrapped in charstream, used to send things
             this.objectInputstream = new ObjectInputStream(socket.getInputStream()); //used to recieve things
