@@ -29,7 +29,7 @@ public class ClientHandler implements Runnable{
             clientHandlers.add(this);
 
         } catch (IOException e){
-            System.out.println(e.getMessage());
+            System.out.println("ERROR: "+e.getMessage());
         }
     }
 
@@ -48,7 +48,7 @@ public class ClientHandler implements Runnable{
                 }
 
             } catch (IOException | ClassNotFoundException e) {
-                System.out.println(e.getMessage());
+                System.out.println("ERROR: "+e.getMessage());
                 break;
             }
         }
@@ -62,7 +62,7 @@ public class ClientHandler implements Runnable{
 
 
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                System.out.println("ERROR: "+e.getMessage());
             }
         }
     }

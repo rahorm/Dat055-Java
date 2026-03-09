@@ -19,7 +19,7 @@ public class ServerHandler implements Runnable{
             this.objectInputStream = new ObjectInputStream(socket.getInputStream()); //used to recieve things
             this.serverActionHandler = new ServerActionHandler();
         } catch (IOException e){
-            System.out.println(e.getMessage());
+            System.out.println("ERROR: "+e.getMessage());
         }
     }
 
@@ -33,7 +33,7 @@ public class ServerHandler implements Runnable{
                 System.out.println(objectFromServer); // test
                 serverActionHandler.handle(objectFromServer);
             } catch (IOException | ClassNotFoundException e) {
-                System.out.println(e.getMessage());
+                System.out.println("ERROR: "+e.getMessage());
                 break;
             }
         }
