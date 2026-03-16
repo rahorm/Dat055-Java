@@ -62,6 +62,13 @@ public final class ChatRoomFacade extends Observable {
 
 
     /// ----------------------------- ChatRoom <-> Server -----------------------------
+    /**
+     * User wants to add an active room, the chatroom that user wants to
+     * add will be identified by chatName, this chatName should be sent as a parameter
+     * when it's called in Control.
+     *
+     * @param chatName of a chatroom that user wants to open
+     */
     public void addChatRoom(String chatName) {
         if (chatName == null || chatName.isEmpty()){
             throw new IllegalArgumentException("chatName must not be null or empty");
@@ -82,6 +89,13 @@ public final class ChatRoomFacade extends Observable {
 
 
     /// ----------------------------- ChatRoom <-> Server -----------------------------
+    /**
+     * User wants to remove an active room, the chatroom that user wants to
+     * remove will be identified by chatID, this chatID should be sent as a parameter
+     * when it's called in Control.
+     *
+     * @param chatID of a chatroom that user wants to open
+     */
     public void removeChatRoom(int chatID) {
 
         serverConnection.deleteChatRoom(chatID);
@@ -94,6 +108,13 @@ public final class ChatRoomFacade extends Observable {
         serverConnection.getAvailableChats(user);
     }
 
+    /**
+     * Updates the list of available chats in the model and notifies all observers.
+     * @param idNamePairs
+     * The provided list contains ChatData objects that represent chat
+     * ID–name pairs, which will replace the current available chats in the model.
+     * After updating the model, all registered observers are notified of the change.
+     */
     public void setAvailableChats(ArrayList<ChatData> idNamePairs) {
         model.setAvailableChats(idNamePairs);
         setChanged();
@@ -117,11 +138,10 @@ public final class ChatRoomFacade extends Observable {
      * @param msg message that user write
      */
     public void storeMsg(String msg){
-        //System.out.println("message entered facade");
         serverConnection.sendMsg(new Message(model.getActiveUser(), model.getActiveChatRoomId(), msg));
-        //System.out.println("message left facade");
 
     }
+
     /**
      * Stores a picture message by sending it through the server connection
      * @param pictureMessage the PictureMessage object to be sent
@@ -131,13 +151,23 @@ public final class ChatRoomFacade extends Observable {
 
     }
 
+    /**
+     * Sets the history list of chats in the model and notifies all observers.
+     * @param history
+     * The provided list contains Message objects that represent messages
+     * After updating the model, all registered observers are notified of the change.
+     */
     public void setHistory(ArrayList<Message> history){
         model.setHistory(history);
         setChanged();
         notifyObservers();
 
     }
-
+    /**
+     * Sets activeUser setting the model, get availableChats for that user in serverconnection
+     * and notifying observers
+     * @param username
+     */
     public void setActiveUser(String username){
         model.setActiveUser(username);
         serverConnection.getAvailableChats(username);
@@ -154,7 +184,6 @@ public final class ChatRoomFacade extends Observable {
     /**
     * Adds a user to the member list of this chat room after a database update has happened
     * If the user is already a member, nothing happens.
-    *
     * @throws IllegalArgumentException if user is null
     */
     public void updateMemberList(String user) {
@@ -167,12 +196,24 @@ public final class ChatRoomFacade extends Observable {
         }
     }
 
+    /**
+     * add user to the activeChatRoom
+     * @param user String that represents id of a user in the system
+     * @throws IllegalArgumentException if  user is null
+     * */
     public void addMember(String user) {
         if (user == null) {
             throw new IllegalArgumentException("user must not be null");
         }
         serverConnection.addMember(user, getActiveChatRoomId());
     }
+
+    /**
+     * add user to a given ChatRoom
+     * @param user String that represents id of a user in the system
+     * @param chatID that represents the ChatRoom
+     * @throws IllegalArgumentException if  user is null
+     * */
     public void addMember(String user, int chatID) {
         if (user == null) {
             throw new IllegalArgumentException("user must not be null");
@@ -186,6 +227,7 @@ public final class ChatRoomFacade extends Observable {
      *
      * @param user user to remove; must not be  null
      * @throws IllegalArgumentException if  user is null
+     * @throws IllegalArgumentException if activeUser is being removed from chatRoom
      */
     public void removeMember(String user) {
         if (user == null) {
@@ -201,9 +243,8 @@ public final class ChatRoomFacade extends Observable {
 
     /**
      * Adds a new message to this chat room.
-     *
      * @param message message to add; must not be null
-     * @throws NullPointerException if  message is  null
+     * @throws IllegalArgumentException if  message is  null
      */
     public void addMessage(Message message) {
         if (message == null) {
@@ -215,7 +256,6 @@ public final class ChatRoomFacade extends Observable {
     /**
      * Removes a message from this chat room.
      * If the message is not found, nothing happens.
-     *
      * @param message message to remove; must not be null
      * @throws IllegalArgumentException if message is null
      */
@@ -289,7 +329,6 @@ public final class ChatRoomFacade extends Observable {
     public int getChatIdByName(String name) {
         return model.getChatIdByName(name);
     }
-
     public String getActiveChatRoomName() { return model.getChatNameForId(model.getActiveChatRoomId()); }
 
 }
