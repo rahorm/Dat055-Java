@@ -45,7 +45,6 @@ public final class DatabaseConnection {
         return instance;
     }
 
-//-----------------QUERIES-----------------//
 
     /**
      * Inserts a chatroom into the database
@@ -415,7 +414,13 @@ public final class DatabaseConnection {
 
     }
 
-    // This is a hack to turn an SQLException into a JSON string error message. No need to change.
+
+
+    /**
+     * This is a hack to turn an SQLException into a JSON string error message. No need to change.
+     * @param e
+     * @return
+     */
     public static String getError(SQLException e){
        String message = e.getMessage();
        int ix = message.indexOf('\n');
@@ -423,10 +428,5 @@ public final class DatabaseConnection {
        message = message.replace("\"","\\\"");
        return message;
     }
-
-    /*public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        DatabaseConnection DBconn = DatabaseConnection.getInstance();
-        //DBconn.uploadImg();
-    }*/
 
 }

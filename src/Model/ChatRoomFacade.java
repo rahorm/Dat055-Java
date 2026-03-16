@@ -111,7 +111,6 @@ public final class ChatRoomFacade extends Observable {
     }
 
 
-    /// ----------------------------- Message <-> Server -----------------------------
     /**
      * User writes a new message. Then this message will be passed to the server
      * @param msg message that user write

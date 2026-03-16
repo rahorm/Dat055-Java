@@ -12,19 +12,24 @@ import java.util.ArrayList;
  * ClientActionHandler.handle() returns an object which is broadcasted back to the clients so that they know something has changed on the database
  * */
 public class ClientHandler implements Runnable{
-    public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>(); //keeps track of all clients this is publisher/thing that notifies
+    public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
 
     private Socket socket;
     private ObjectInputStream objectInputstream;
     private ObjectOutputStream objectOutputStream;
     private ClientActionHandler clientActionHandler;
 
+    /**
+     * Creates a new ClientHandler and initializes the socket connection, sets up the input and output streams.
+     *
+     * @param socket the socket representing the connection between the server and the client
+     */
     public ClientHandler(Socket socket){
         try {
             System.out.println("Creating new client");
             this.socket = socket;
-            this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());  //bytestream wrapped in charstream, used to send things
-            this.objectInputstream = new ObjectInputStream(socket.getInputStream()); //used to recieve things
+            this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            this.objectInputstream = new ObjectInputStream(socket.getInputStream());
             this.clientActionHandler = new ClientActionHandler();
 
             clientHandlers.add(this);
@@ -34,8 +39,17 @@ public class ClientHandler implements Runnable{
         }
     }
 
+    /**
+     * This method reads serialized objects sent by the client through the ObjectInputStream, processes them using
+     * the clientActionHandler, and broadcasts the resulting response to all connected clients.
+     * The loop runs as long as the socket remains connected.
+     *
+     * IOException : when disconnected
+     * ClassNotFoundException : when disconnected
+     */
+
     @Override
-    public void run(){ //want to run this on a separate thread from application handling since listening to messages is a blocking task
+    public void run(){
         Object objectFromClient;
 
         while(socket.isConnected()){
@@ -43,7 +57,7 @@ public class ClientHandler implements Runnable{
                 objectFromClient = objectInputstream.readObject();
                 System.out.println(objectFromClient);
                 Object output = clientActionHandler.handle(objectFromClient);
-                //skickar nu responsen till alla clients som är anslutna, får ta beslut om huruvida det är korrekt eller inte
+
                 if(output != null){
                     broadcastMessage(output);
                 }
@@ -55,6 +69,12 @@ public class ClientHandler implements Runnable{
         }
     }
 
+    /**
+     * This method writes the given object to the ObjectOutputStream so it
+     * can be transmitted to the client. The stream is flushed after writing.
+     *
+     * @param obj the object to be sent to the client.
+     */
     public void broadcastMessage(Object obj){
         try {
             objectOutputStream.writeObject(obj);
@@ -66,6 +86,10 @@ public class ClientHandler implements Runnable{
         }
     }
 
+    /**
+     * This method removes a clientHandler.
+     *
+     */
     public void removeClientHandler(){
         clientHandlers.remove(this);
     }

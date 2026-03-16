@@ -1,8 +1,6 @@
 package Server;
 
-//import Common.MsgHistoryWrapper;
 import Common.*;
-//import Common.SendMsgWrapper;
 import Model.ChatRoomFacade;
 import Other.Message;
 import Other.PictureMessage;
@@ -11,11 +9,18 @@ import java.sql.SQLException;
 
 /**
  * logic for what we are to do with data that clienthandler recieves from clients
+ *
  * */
 public class ClientActionHandler {
 
     private DatabaseConnection DBcon;
 
+    /**
+     * Creates a new ClientActionHandler and initializes the database connection.
+     *
+     * If the connection fails, the exception is printed and the handler will
+     * continue running, but database operations may fail.
+     */
     public ClientActionHandler() {
         try {
             DBcon = DatabaseConnection.getInstance();
@@ -26,6 +31,24 @@ public class ClientActionHandler {
         }
     }
 
+
+    /**
+     * Processes a request received from the client.
+     *
+     * The method expects an object of type. Based on the request type contained in the request, it performs the
+     * corresponding operation on the database and constructs a response.
+     *
+     * Request types are the following:
+     * Add_Message, ADD_CHATROOM, DELETE_CHATROOM, CHECK_USER, LOGIN, CREATE_USER, DELETE_USER
+     * ADD_MEMBER, REMOVE_CHAT_MEMBER, DELETE_MESSAGE, GET_MESSAGES, GET_CHAT_MEMBERS, GET_AVAILABLE_CHATS
+
+     * @param obj the request object sent from the client. It should be an
+     *            instance of RequestWrapper.
+     *
+     * @return RequestWrapper, containing the response data that will be
+     *         sent back to the client, or null, if the request object
+     *         is invalid or cannot be processed.
+     */
     public Object handle(Object obj) {
 
         if (!(obj instanceof RequestWrapper request)) {

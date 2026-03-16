@@ -44,6 +44,7 @@ public class ChatRoomModel {
     /// ----------------------------- Message -----------------------------
     public ArrayList<Message> getMessages() { return messages; }
     public void setHistory(ArrayList<Message> history){ this.messages = history;}
+
     public void addMessage(Message message) {
         messages.add(message);
     }
