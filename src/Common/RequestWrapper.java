@@ -8,14 +8,10 @@ public class RequestWrapper implements Serializable {
 
     private RequestType type;
     private Object data; // can hold Message, User, ChatRoom, String, etc.
-    //private ChatRoomFacade chatRoomFacade = ChatRoomFacade.getInstance();
-    private String activeUser;
 
     public RequestWrapper(RequestType type, Object data) {
         this.type = type;
         this.data = data;
-        ChatRoomFacade facade = ChatRoomFacade.getInstance();
-        this.activeUser = facade.getActiveUser();
     }
 
     public RequestType getType() {
