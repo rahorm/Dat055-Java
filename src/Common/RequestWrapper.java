@@ -28,6 +28,6 @@ public class RequestWrapper implements Serializable {
 
     @Override
     public String toString() {
-        return "RequestWrapper type=" + type + ", data=" + data;
+        return "RequestWrapper type=" + type + ", data=" + data.toString();
     }
 }

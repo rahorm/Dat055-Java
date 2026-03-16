@@ -1,6 +1,6 @@
 {ServerConnection : checkUserExists - returnar alltid true??
 oh god vad utdaterad dokumentationen är, började fixa en del men gav upp, beöver kolla på detta innan sista inlämningen}
-
+när en är inloggad och den andra inte är det och den första öppnar en chat den andra får oxå upp den
 //Note before pasting UML//
 !Den första är UML diagram för hela projektet!
 
