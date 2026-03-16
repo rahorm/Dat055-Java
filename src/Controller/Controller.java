@@ -114,7 +114,8 @@ public class Controller {
 
     /**
      * add user to a given ChatRoom
-     * @param user String that represents id of a user in the system int chatId that represents the ChatRoom
+     * @param user String that represents id of a user in the system
+     * @param chatID that represents the ChatRoom
      * */
     public void addMember(String user, int chatID){
         facade.addMember(user, chatID);
