@@ -57,16 +57,6 @@ public class ClientActionHandler {
                 }
             }
 
-//            case ADD_CHATROOM -> {
-//                ChatData chatData = (ChatData) request.getData();
-//                DBcon.createChatRoom(chatData.getChatId(), chatData.getChatName());
-//
-//                objToReturn = new RequestWrapper(
-//                        RequestType.ADD_CHATROOM,
-//                        chatData
-//                );
-//            }
-
             case ADD_CHATROOM -> {
                 ChatData chatData = (ChatData) request.getData();
                 DBcon.createChatRoom(chatData.getChatId(), chatData.getChatName());
