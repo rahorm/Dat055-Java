@@ -18,8 +18,7 @@ public class ClientActionHandler {
     /**
      * Creates a new ClientActionHandler and initializes the database connection.
      *
-     * If the connection fails, the exception is printed and the handler will
-     * continue running, but database operations may fail.
+     * If the connection fails, the exception is printed and the handler will continue running, but database operations may fail.
      */
     public ClientActionHandler() {
         try {
