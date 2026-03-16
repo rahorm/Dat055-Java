@@ -28,26 +28,23 @@ public class Controller {
     /**
      * Takes message and stores it in the program
      * @param msg string that represents a message that has been input from a user
-     * @throws IllegalArgumentException if userID is not an existing user
-     * @throws NumberFormatException if msg isn't a string
+     * @throws IllegalArgumentException if msg is empty
      * */
     public void sendMessage(String msg){
-        //System.out.println("message entered controller");
         if (msg == null || msg.isEmpty()) {
             throw new IllegalArgumentException("Message cannot be null or empty");
         }
         facade.storeMsg(msg);
-        //System.out.println("message left controller");
+
     }
 
     /**
      * Takes a picture message and stores it in the program
      * @param imagePath string that represents the local file path of the image to be sent
-     * @throws IllegalArgumentException if imagePath or user is null/empty
+     * @throws IllegalArgumentException if imagePath is null/empty
      * @throws IllegalArgumentException if the file at imagePath does not exist
      */
     public void sendPictureMessage(String imagePath, String message) {
-        //System.out.println("picture message entered controller");
 
         if (imagePath == null || imagePath.isEmpty()) {
             throw new IllegalArgumentException("Image path cannot be null or empty");
@@ -65,20 +62,19 @@ public class Controller {
 
         facade.storePictureMsg(pictureMessage);
 
-        //System.out.println("picture message left controller");
+
     }
 
     /**
      * Removes the chatRoom, you can not remove the activeChatRoom
      * @param chatID integer that represents a chatRoom
      * @throws IllegalArgumentException if chatID does not represent a chatRoom that exists
-     * @throws IllegalArgumentException if the chatID given is the activeChatRoom
      * */
     public void removeChatRoom(int chatID) {
         if (chatID < 0) {
             throw new IllegalArgumentException("Invalid chatID");
         }
-        // assuming facade/model will check active room constraint
+
         facade.removeChatRoom(chatID);
     }
 
@@ -92,43 +88,40 @@ public class Controller {
 
     /**
      * sets the active user to the input id
-     *
      * @param user String that represents id of a user in the system
-     * @throws IllegalArgumentException if id is not associated with an id that exists in the system
      * */
 
     public void changeActiveUser(String user) {
         facade.setActiveUser(user);
-        //facade.addMember(user); //Den här borde väl inte ha något med addMember att göra?
+
     }
 
-
+    /**
+     * login function using the written user and password
+     * @param user String that represents id of a user in the system
+     * */
     public void login(String user, String password){
         facade.logIn(user, password);
-        /*ReturnCode code;
-
-        if(!facade.checkUser(user)){
-            code = ReturnCode.USER_NOT_EXIST;
-        }
-
-        if(!facade.logIn(user, password)){
-            code = ReturnCode.INCORRECT_PASSWORD;
-        }
-
-        code = ReturnCode.LOGIN_SUCCESSFUL;
-
-        return code;*/
     }
 
+    /**
+     * add user to the activeChatRoom
+     * @param user String that represents id of a user in the system
+     * */
     public void addMember(String user){
         facade.addMember(user);
     }
+
+    /**
+     * add user to a given ChatRoom
+     * @param user String that represents id of a user in the system int chatId that represents the ChatRoom
+     * */
     public void addMember(String user, int chatID){
         facade.addMember(user, chatID);
     }
+
     /**
      * Creates a new user of the type User
-     *
      * @param user String input that will be the users displayed name, not identifier in the system
      * @throws IllegalArgumentException if input is not a string
      * */
@@ -139,6 +132,11 @@ public class Controller {
         facade.createUser(user, password);
     }
 
+    /**
+     * Gets the ChatId by the given ChatName: name
+     * @param name String that represents id of a user in the system
+     * @returns ChatIdByName
+     * */
     public int getChatIdByName(String name) {
         return facade.getChatIdByName(name);
     }
