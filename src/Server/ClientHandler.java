@@ -56,15 +56,13 @@ public class ClientHandler implements Runnable{
     }
 
     public void broadcastMessage(Object obj){
-        for(ClientHandler ch : clientHandlers){
-            try {
-                ch.objectOutputStream.writeObject(obj);
-                ch.objectOutputStream.flush();
+        try {
+            objectOutputStream.writeObject(obj);
+            objectOutputStream.flush();
 
 
-            } catch (IOException e) {
-                System.out.println("ERROR: "+e.getMessage());
-            }
+        } catch (IOException e) {
+            System.out.println("ERROR: " + e.getMessage());
         }
     }
 
