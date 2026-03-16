@@ -18,8 +18,8 @@ public final class DatabaseConnection {
 
     static final String DBNAME = "DAT055_ChatDB";
     static final String DATABASE = "jdbc:postgresql://localhost:5432/" + DBNAME;
-    static final String USERNAME = "postgres";
-    static final String PASSWORD = "Dia:23Postgres";
+    static final String USERNAME = "postgres";//@todo add your postgress username here
+    static final String PASSWORD = "Dia:23Postgres";//@todo add your postgress password here
 
     private static DatabaseConnection instance;
     private Connection conn;

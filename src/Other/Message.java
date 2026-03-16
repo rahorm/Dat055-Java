@@ -2,7 +2,6 @@ package Other;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 
 public class Message implements Serializable{
     private String content;
@@ -28,6 +27,7 @@ public class Message implements Serializable{
         this.messageID = msgId;
     }
 
+//----- Getters and setters -----
     public String getContent() {
         return content;
     }
