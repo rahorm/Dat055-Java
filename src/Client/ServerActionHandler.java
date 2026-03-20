@@ -15,6 +15,23 @@ public class ServerActionHandler {
     public ServerActionHandler() {
     }
 
+    /**
+     * Handles incoming server responses by routing them to Model.ChatRoomFacade
+     * based on the RequestWrapper type.
+     *
+     * Handled request types:
+     * GET_MESSAGES forwards message history to the facade.
+     * CREATE_USER updates status message and available chats on success/failure.
+     * ADD_CHATROOM changes active room and adds current user as member.
+     * DELETE_CHATROOM logs the deleted chat room ID.
+     * ADD_MEMBER updates the member list with the new member's username.
+     * CHECK_USER logs whether the user exists.
+     * GET_AVAILABLE_CHATS updates the facade's available chats list.
+     * LOGIN sets active user and updates state on success, sets "Failed!" on failure.
+     *
+     * @param obj incoming server object, expected to be a RequestWrapper
+     * @throws ClassCastException if the data payload does not match the expected type for its request type
+     */
     public void handle(Object obj) {
 
         if (!(obj instanceof RequestWrapper request)) {
@@ -36,17 +53,15 @@ public class ServerActionHandler {
 
             case CREATE_USER:
                 boolean created = (boolean) request.getData();
-                //skicka vidare till facaden
                 System.out.println("User has been created: " + created);
 
                 if(created){
-                    facade.setStatusMessage("Successfully registered user");
+                    facade.setStatusMessage("Success!");
                     facade.updateAvailableChatIds();
                 }
                 else if(!created) {
-                    facade.setStatusMessage("Failed to register user");
+                    facade.setStatusMessage("Failed!");
                 }
-
                 break;
 
             case ADD_CHATROOM:
@@ -59,7 +74,6 @@ public class ServerActionHandler {
             case DELETE_CHATROOM:
                 String chatRoom = (String) request.getData();
                 System.out.println("Chatroom deleted: " + chatRoom);
-                //yterligare actions?
                 break;
 
             case ADD_MEMBER:
@@ -71,7 +85,6 @@ public class ServerActionHandler {
             case CHECK_USER:
                 boolean exists = (boolean) request.getData();
                 System.out.println("User exists: " + exists);
-                //fler actions?
                 break;
 
             case GET_AVAILABLE_CHATS:
@@ -86,14 +99,12 @@ public class ServerActionHandler {
                 if((boolean) loginInfo[0]){
                     UserData userData = (UserData) loginInfo[1];
                     facade.setActiveUser(userData.getUsername());
-                    facade.setStatusMessage("Successfully logged in");
+                    facade.setStatusMessage("Success!");
                     facade.updateAvailableChatIds();
                     System.out.println("logged in clientside");
                     break;
                 }
-
-                //@todo meddela ui att användaren är inloggad
-                facade.setStatusMessage("Failed to login");
+                facade.setStatusMessage("Failed!");
                 break;
 
             default:
@@ -102,19 +113,3 @@ public class ServerActionHandler {
 
     }
 }
-
-    /*public void handle(Object obj) {
-        Object objToReturn = null;
-
-        if (obj instanceof MsgHistoryWrapper input) {
-
-            System.out.println("Output: " + input.toString());
-            ArrayList<Message> history;
-            history = (ArrayList<Message>) input.getMsgHistory();
-            System.out.println("Message history received: " + history);
-            ChatRoomFacade facade = Model.ChatRoomFacade.getInstance();
-            facade.setHistory(history);
-        }
-
-
-    }*/
