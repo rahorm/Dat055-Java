@@ -16,12 +16,10 @@ public class ServerConnection {
 
     public ServerConnection(Socket socket) {
             this.serverHandler = new ServerHandler(socket);
-            Thread thread = new Thread(serverHandler);  //begins listening to the thread. When input is heard serverHanlers run() is invoked
+            Thread thread = new Thread(serverHandler);
             thread.start();
     }
 
-
-    //------------------------------- Messages med nya wrappers------------------------------
     /**
      * Adds a message to the database
      * </p>
@@ -30,6 +28,12 @@ public class ServerConnection {
     public void sendMsg(Message msg) {
         serverHandler.broadcastMessage(new RequestWrapper(RequestType.ADD_MESSAGE, msg));
     }
+
+    /**
+    * Adds a message that includes a picture to the database
+    * </p>
+    * @param pictureMessage the message to be sent in type PictureMessage
+    */
     public void sendPictureMsg(PictureMessage pictureMessage) {
         serverHandler.broadcastMessage(new RequestWrapper(RequestType.ADD_MESSAGE, pictureMessage));
     }
