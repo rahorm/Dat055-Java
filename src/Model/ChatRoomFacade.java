@@ -47,15 +47,20 @@ public final class ChatRoomFacade extends Observable {
         model.setActiveRoom(chatID);
         serverConnection.getChatMessages(chatID);
         getAvailableChats(model.getActiveUser());
-        setChanged(); // Apparently it should be used before using notifyObservers
-        notifyObservers(); // ingen parameter
+        setChanged();
+        notifyObservers();
     }
 
-    // Forwarders till model för UI
+    /**
+     * Returns availableChatNames for current logged in user from the model
+     */
     public ArrayList<String> getAvailableChatNames() {
         return model.getAvailableChatNames();
     }
 
+    /**
+     * Returns availableChatIds for current logged in user from the model
+     */
     public ArrayList<Integer> getAvailableChatIds() {
         return model.getAvailableChatIds();
     }
@@ -78,10 +83,10 @@ public final class ChatRoomFacade extends Observable {
         int new_id = idGen.generateId();
         serverConnection.addChatRoom(new_id, chatName);
         String user = model.getActiveUser();
-        serverConnection.addMember(user, new_id);  // adding myself
-        //Lägg till i available-listorna
+        serverConnection.addMember(user, new_id);
+
         model.addAvailableChat(new_id, chatName);
-        // changeActiveRoom to be called either here or in the controller
+
         changeActiveRoom(new_id);
         setChanged();
         notifyObservers();
@@ -99,9 +104,6 @@ public final class ChatRoomFacade extends Observable {
     public void removeChatRoom(int chatID) {
 
         serverConnection.deleteChatRoom(chatID);
-        //model.removeChatRoom(chatID);  this one doesnt need
-        //setChanged();
-        //notifyObservers();
     }
 
     public void getAvailableChats(String user){
@@ -121,12 +123,21 @@ public final class ChatRoomFacade extends Observable {
         notifyObservers();
     }
 
+
+    /**
+     * Returns the current activeChatRoom by its Id
+     */
     public int getActiveChatRoomId() {
         return model.getActiveChatRoomId();
     }
 
 
     /// ----------------------------- Message <-> UI -----------------------------
+
+    /**
+     * Returns the MSGlist in the model, messages.
+     * The provided list contains Message objects that represent messages
+     */
     public ArrayList<Message> getMSGList(){
         return model.getMessages(); // how many elements to show?
     }
@@ -174,7 +185,9 @@ public final class ChatRoomFacade extends Observable {
         notifyObservers();
     }
 
-    // Duplicated method, existed both in facade and model ???
+    /**
+     * Gets activeUser, ie the logged in user from the model
+     */
     public String getActiveUser() {
         return model.getActiveUser();
     }
@@ -267,15 +280,6 @@ public final class ChatRoomFacade extends Observable {
     }
 
     /**
-     * Checks if a username is present in the database
-     * @param username username to check
-     * @return if username is present in database
-     */
-    public boolean checkUser(String username){
-        return serverConnection.checkUserExists(username);
-    }
-
-    /**
      * Checks if users credentials matches saved ones
      * @param username username of user trying to log in
      * @param password password user is trying to log in with
@@ -295,7 +299,6 @@ public final class ChatRoomFacade extends Observable {
         serverConnection.createUser(username, password);
         setChanged();
         notifyObservers();
-        // kommer från serveractionhandler.
 
     }
 
@@ -309,6 +312,10 @@ public final class ChatRoomFacade extends Observable {
         notifyObservers();
     }
 
+    /**
+     * When user tries to login or sign up this statusmessage will shows whether it is failed or succeeded
+     * @returns statusMessage
+     */
     public String getStatusMessage(){
         String statusMessage = model.getStatusMessage();
         model.setStatusMessage(null);
@@ -319,15 +326,30 @@ public final class ChatRoomFacade extends Observable {
      * Send a request to the server for all available chatrooms that the recently logged in user is in
      */
     public void updateAvailableChatIds(){
-        //frågar servern efter vilka chattrum som vi är del av
+
         serverConnection.getAvailableChats(lastAttemptedLogin);
     }
 
 /// -----------------------------Getters and Setters-----------------------------
+
+    /**
+     * Returns the current activeChatRoom by its Id from the model
+     */
     public int getActiveChatRoom(){ return model.getActiveChatRoomId(); }
+
+
+    /**
+     * Returns ChatId for current logged in user by
+     * given chatname for the chatRoom
+     * @param name
+     */
     public int getChatIdByName(String name) {
         return model.getChatIdByName(name);
     }
+
+    /**
+     * Returns the current activeChatRoom by its Id from the model
+     */
     public String getActiveChatRoomName() { return model.getChatNameForId(model.getActiveChatRoomId()); }
 
 }
