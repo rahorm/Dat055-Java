@@ -157,7 +157,6 @@ public final class DatabaseConnection {
 
     }
 
-
     /**
      * Uploads an image to the database as a byte array
      * @param imgId what id to give the image
@@ -413,7 +412,6 @@ public final class DatabaseConnection {
         return availableChats;
 
     }
-
 
 
     /**

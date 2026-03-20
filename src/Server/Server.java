@@ -8,6 +8,10 @@ public class Server {
     private static Server instance;
     private ServerSocket serverSocket;
 
+    /**
+     * If Server instance is null, create a new server instance and return
+     * @return instance
+     */
     public static Server getInstance(){
         if(instance == null){
             try{
@@ -23,6 +27,10 @@ public class Server {
         this.serverSocket = serverSocket;
     }
 
+    /**
+     * This method is used to startServer
+     * while serverSocket is not closed, it connects a new client to the server
+     */
     public void startServer(){
         try{
             while(!serverSocket.isClosed()){
@@ -38,6 +46,9 @@ public class Server {
         }
     }
 
+    /**
+     * Closes the serversocket if it is open
+     */
     public void closeServerSocket() {
         try {
             if(serverSocket != null){
