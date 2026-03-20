@@ -24,7 +24,6 @@ public class UI {
     JTextField      createChatInput = new JTextField();
     JTextField      addMemberInput  = new JTextField();
 
-
     public UI(Controller controller) {
         this.controller = controller;
 
@@ -52,26 +51,19 @@ public class UI {
         Container contentPane = frame.getContentPane();
 
 ////-------------------------------Buttons------------------------------------------------------------------------------
-        //skickar ett meddelande till servern
+        // send a message as server
         JButton messageBtn = new JButton("send message");
         messageBtn.addActionListener((_) -> {
             controller.sendMessage(messageInput.getText());
             messageInput.setText("");
         });
 
-        //loggar in som en användare
+        //logging is as user
         JButton loginBtn = new JButton("login");
-        //@TODO skapa loginmetod i controller och använd getpassword istället för gettext;
         loginBtn.addActionListener((_) -> controller.login(usernameInput.getText(), passwordInput.getText()));
 
         JButton removeChatBtn = new JButton("remove chat");
-////      removeChatBtn.addActionListener((_) -> controller.removeChatRoom(Integer.parseInt(removeChatInput.getText())));
-//        removeChatBtn.addActionListener((_) -> {
-//            String input = removeChatInput.getText().trim();
-//            if (!input.isEmpty()) {
-//                controller.removeChatRoom(Integer.parseInt(input));
-//            }
-//        });
+
         removeChatBtn.addActionListener((_) -> {
             String input = removeChatInput.getText().trim();
             if (!input.isEmpty()) {
@@ -104,9 +96,8 @@ public class UI {
         sendWithImageBtn.addActionListener((_) -> addImageFileDialog());
 
 ////---------------------------------Add components to the frame--------------------------------------------------------
-        //lägger till knappar till ui:n
+        //adds buttons to the UI
         contentPane.add(messageBtn);
-        //contentPane.add(messages);
         contentPane.add(createChatInput);
         contentPane.add(createChatBtn);
 
@@ -116,8 +107,6 @@ public class UI {
         contentPane.add(loginBtn);
         contentPane.add(signUpBtn);
         JScrollPane messageListPane = new JScrollPane(messageList);
-        //messageListPane.setPreferredSize(new Dimension(200, 200));
-        //messageListPane.setMinimumSize(new Dimension(200, 20));
         contentPane.add(messageListPane);
         contentPane.add(sendWithImageBtn);
 
@@ -136,12 +125,6 @@ public class UI {
         contentPane.add(addMemberBtn);
 
 ////------------------------------Setup constraints---------------------------------------------------------------------
-        //pitfalls: write layout.putConstraint("North", thing1, pad, "South", thing2);
-        //            NOT layout.putConstraint("South", thing1, pad, "North", thing2);
-        //unless you want overlapping components
-        //same with East and West
-        //layout.putConstraint("West", thing1, pad, "East", thing2); not overlapping
-        //layout.putConstraint("East", thing1, pad, "West", thing2); overlapping
 
         //position messageInput
         layout.putConstraint("East", messageInput, 10, "East", contentPane);
@@ -182,25 +165,25 @@ public class UI {
         layout.putConstraint("West", signUpBtn, 10, "East", loginBtn);
         layout.putConstraint("North", signUpBtn, 10, "South", passwordInput);
 
-        //position för removeChatInput
+        //position for removeChatInput
         layout.putConstraint("North", removeChatInput, 10, "South", loginBtn);
 
-        //position för removeChatBtn
+        //position for removeChatBtn
         layout.putConstraint("North", removeChatBtn, 10, "South", removeChatInput);
 
-        //position för addMemberInput
+        //position for addMemberInput
         layout.putConstraint("North", addMemberInput, 10, "South", removeChatBtn);
 
-        //position för addMemberBtn
+        //position for addMemberBtn
         layout.putConstraint("North", addMemberBtn, 10, "South", addMemberInput);
 
-        //position för createChatInput
+        //position for createChatInput
         layout.putConstraint("North", createChatInput, 10, "South", addMemberBtn);
 
-        //position för createChatBtn
+        //position for createChatBtn
         layout.putConstraint("North", createChatBtn, 10, "South", createChatInput);
 
-        //setup för fönstret
+        //setup för fonstret
         frame.setSize(500, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         contentPane.setLayout(layout);
@@ -208,40 +191,36 @@ public class UI {
     }
 
     /**
-     * Updates the message list with new messages.
-     *
-     * This is called by the Controller whenever the chat receives new messages.
-     * It replaces all items in the messageList with the provided list.
-     *
-     * @param msg An ArrayList of Message objects to display.
-     */
+    * Updates the message list with new messages.
+    *
+    * This is called by the Controller whenever the chat receives new messages.
+    * It replaces all items in the messageList with the provided list.
+    *
+    * @param msg An ArrayList of Message objects to display.
+    */
     public void setMsg(ArrayList<Message> msg) {
-        /*
-        String s = "";
-        for (Message message : msg) {
-            s = s.concat(message.getContent());
-            s = s.concat("\n");
-        }
-        messages.setText(s);
-         */
         Vector<Message> vector = new Vector<Message>(msg);
         messageList.setListData(vector);
     }
 
     /**
-     * Updates the chat room list with the current available rooms.
-     *
-     * Called by the Controller when the list of chat rooms changes
-     * (e.g. a room was added or removed).
-     *
-     * @param chatNames An ArrayList of chat room name strings.
-     */
+    * Updates the chat room list with the current available rooms.
+    *
+    * Called by the Controller when the list of chat rooms changes
+    * (e.g. a room was added or removed).
+    *
+    * @param chatNames An ArrayList of chat room name strings.
+    * @param chatIds An Integer ArrayList of chat room IDs.
+    */
     public void setAvailableChats(ArrayList<String> chatNames, ArrayList<Integer> chatIds) {
         Vector<String> vector = new Vector<>(chatNames);
         chatList.setListData(vector);
         this.availableChatIds = chatIds;
     }
 
+    /**
+    * Opens a file chooser dialog and sends the selected image as a picture message.
+    */
     private void addImageFileDialog() {
         JFileChooser fileDialog = new JFileChooser();
         if (fileDialog.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
@@ -249,6 +228,11 @@ public class UI {
         }
     }
 
+    /**
+    * Displays a popup dialog with the given status message.
+    *
+    * @param statusMessage the message to display in type String.
+    */
     public void displayStatusMessage(String statusMessage) {
         JOptionPane.showMessageDialog(frame, statusMessage);
     }
