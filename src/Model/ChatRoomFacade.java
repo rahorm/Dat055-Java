@@ -47,8 +47,8 @@ public final class ChatRoomFacade extends Observable {
         model.setActiveRoom(chatID);
         serverConnection.getChatMessages(chatID);
         getAvailableChats(model.getActiveUser());
-        setChanged(); // Apparently it should be used before using notifyObservers
-        notifyObservers(); // ingen parameter
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -83,10 +83,10 @@ public final class ChatRoomFacade extends Observable {
         int new_id = idGen.generateId();
         serverConnection.addChatRoom(new_id, chatName);
         String user = model.getActiveUser();
-        serverConnection.addMember(user, new_id);  // adding myself
-        //Lägg till i available-listorna
+        serverConnection.addMember(user, new_id);
+
         model.addAvailableChat(new_id, chatName);
-        // changeActiveRoom to be called either here or in the controller
+
         changeActiveRoom(new_id);
         setChanged();
         notifyObservers();
