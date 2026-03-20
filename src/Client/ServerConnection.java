@@ -51,6 +51,7 @@ public class ServerConnection {
     /**
      * Gets chat history from specified chat, with the newest message last in the array.
      * </p>
+     * An array of type ArrayList<Message> gets sent back from the server to ServerActionHandler
      * @param chatId int value representing chat to get history from
      */
     public void getChatMessages(int chatId){
