@@ -335,7 +335,7 @@ public final class ChatRoomFacade extends Observable {
      * Send a request to the server for all available chatrooms that the recently logged in user is in
      */
     public void updateAvailableChatIds(){
-        //frågar servern efter vilka chattrum som vi är del av
+
         serverConnection.getAvailableChats(lastAttemptedLogin);
     }
 
