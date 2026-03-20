@@ -17,11 +17,9 @@ public class RequestWrapper implements Serializable {
     public RequestType getType() {
         return type;
     }
-
     public Object getData() {
         return data;
     }
-
     @Override
     public String toString() {
         return "RequestWrapper type=" + type + ", data=" + data.toString();
