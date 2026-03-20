@@ -11,6 +11,7 @@ class MessageRenderer extends JPanel implements ListCellRenderer<Message> {
     private final JLabel messageContent = new JLabel();
     private final JLabel messageTime = new JLabel();
     private final JLabel imageContent = new JLabel();
+
     MessageRenderer() {
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
@@ -30,6 +31,7 @@ class MessageRenderer extends JPanel implements ListCellRenderer<Message> {
         sender.setText(message.getSender());
         messageContent.setText(message.getContent());
         messageTime.setText(message.getTimestamp().toString());
+        // render image only for PictureMessage, clear icon otherwise
         if (message instanceof PictureMessage) {
             Icon icon = new ImageIcon(((PictureMessage) message).getImageBytes());
             imageContent.setIcon(icon);
