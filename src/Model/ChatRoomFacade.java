@@ -51,11 +51,16 @@ public final class ChatRoomFacade extends Observable {
         notifyObservers(); // ingen parameter
     }
 
-    // Forwarders till model för UI
+    /**
+     * Returns availableChatNames for current logged in user from the model
+     */
     public ArrayList<String> getAvailableChatNames() {
         return model.getAvailableChatNames();
     }
 
+    /**
+     * Returns availableChatIds for current logged in user from the model
+     */
     public ArrayList<Integer> getAvailableChatIds() {
         return model.getAvailableChatIds();
     }
@@ -99,9 +104,6 @@ public final class ChatRoomFacade extends Observable {
     public void removeChatRoom(int chatID) {
 
         serverConnection.deleteChatRoom(chatID);
-        //model.removeChatRoom(chatID);  this one doesnt need
-        //setChanged();
-        //notifyObservers();
     }
 
     public void getAvailableChats(String user){
@@ -121,12 +123,21 @@ public final class ChatRoomFacade extends Observable {
         notifyObservers();
     }
 
+
+    /**
+     * Returns the current activeChatRoom by its Id
+     */
     public int getActiveChatRoomId() {
         return model.getActiveChatRoomId();
     }
 
 
     /// ----------------------------- Message <-> UI -----------------------------
+
+    /**
+     * Returns the MSGlist in the model, messages.
+     * The provided list contains Message objects that represent messages
+     */
     public ArrayList<Message> getMSGList(){
         return model.getMessages(); // how many elements to show?
     }
@@ -174,7 +185,9 @@ public final class ChatRoomFacade extends Observable {
         notifyObservers();
     }
 
-    // Duplicated method, existed both in facade and model ???
+    /**
+     * Gets activeUser, ie the logged in user from the model
+     */
     public String getActiveUser() {
         return model.getActiveUser();
     }
@@ -295,7 +308,6 @@ public final class ChatRoomFacade extends Observable {
         serverConnection.createUser(username, password);
         setChanged();
         notifyObservers();
-        // kommer från serveractionhandler.
 
     }
 
@@ -309,6 +321,10 @@ public final class ChatRoomFacade extends Observable {
         notifyObservers();
     }
 
+    /**
+     * When user tries to login or sign up this statusmessage will shows whether it is failed or succeeded
+     * @returns statusMessage
+     */
     public String getStatusMessage(){
         String statusMessage = model.getStatusMessage();
         model.setStatusMessage(null);
@@ -324,10 +340,25 @@ public final class ChatRoomFacade extends Observable {
     }
 
 /// -----------------------------Getters and Setters-----------------------------
+
+    /**
+     * Returns the current activeChatRoom by its Id from the model
+     */
     public int getActiveChatRoom(){ return model.getActiveChatRoomId(); }
+
+
+    /**
+     * Returns ChatId for current logged in user by
+     * given chatname for the chatRoom
+     * @param name
+     */
     public int getChatIdByName(String name) {
         return model.getChatIdByName(name);
     }
+
+    /**
+     * Returns the current activeChatRoom by its Id from the model
+     */
     public String getActiveChatRoomName() { return model.getChatNameForId(model.getActiveChatRoomId()); }
 
 }
