@@ -61,11 +61,10 @@ public class ServerConnection {
 
 //------------------------------------Chats med nya Wrappers----------------------------
     /**
-     * Adds a new chat in the database
+     * Adds a new chatroom to the database
      * </p>
-     * // The parameter chatName is the intended display name of the chat. The chat will recieve an id for internal use.
-     * @todo fix javadoc
-     * @param chatId int name of chat
+     * @param chatId id for the chatroom
+     * @param chatName the name of the chatroom
      */
     public void addChatRoom(int chatId, String chatName){
         serverHandler.broadcastMessage(
@@ -77,7 +76,7 @@ public class ServerConnection {
      * This method deletes the chat and all related information, such as members and messages from the database.
      * This cannot be undone.
      * </p>
-     * @param chatId int of id of chat to be deleted
+     * @param chatId id of chat to be deleted
      */
     public void deleteChatRoom(int chatId){
         serverHandler.broadcastMessage(
@@ -86,17 +85,6 @@ public class ServerConnection {
 
 //---------------------------------User med nya wrappers-----------------------------
 
-    /**
-     * Outputs true if given username corresponds to user in database
-     *
-     * @param username String ID of user
-     * @todo double check that it should be string here
-     * @return boolean representing if the given user exists in database
-     * */
-    public boolean checkUserExists(String username){
-        serverHandler.broadcastMessage(new RequestWrapper(RequestType.CHECK_USER, username));
-        return true;
-    }
 
     /**
      * Check with the database if login is correct. Easy but unsafe implementation.
@@ -157,21 +145,6 @@ public class ServerConnection {
     public void removeChatMember(String user, int chatId){
         serverHandler.broadcastMessage(
                 new RequestWrapper(RequestType.REMOVE_CHAT_MEMBER, new ChatMemberData(user, chatId)));
-    }
-
-    /**
-     * Gets members of specified chat.
-     * ChatId specifies the id of the chat for which to get the members.
-     * </p>
-     * @param chatId chat to get history for
-     * @return Arraylist<User> members @todo ?? see next todo
-     *
-     * @throws SQLException
-     */
-    public ArrayList<String> getChatMembers(int chatId){
-        serverHandler.broadcastMessage(
-                new RequestWrapper(RequestType.GET_CHAT_MEMBERS, chatId));
-        return new ArrayList<>(); // @todo what happens here? what will be in this arraylist?
     }
 
     /**

@@ -280,15 +280,6 @@ public final class ChatRoomFacade extends Observable {
     }
 
     /**
-     * Checks if a username is present in the database
-     * @param username username to check
-     * @return if username is present in database
-     */
-    public boolean checkUser(String username){
-        return serverConnection.checkUserExists(username);
-    }
-
-    /**
      * Checks if users credentials matches saved ones
      * @param username username of user trying to log in
      * @param password password user is trying to log in with
