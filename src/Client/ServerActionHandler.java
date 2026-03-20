@@ -40,11 +40,11 @@ public class ServerActionHandler {
                 System.out.println("User has been created: " + created);
 
                 if(created){
-                    facade.setStatusMessage("Success!");
+                    facade.setStatusMessage("Successfully registered user");
                     facade.updateAvailableChatIds();
                 }
                 else if(!created) {
-                    facade.setStatusMessage("Failed!");
+                    facade.setStatusMessage("Failed to register user");
                 }
 
                 break;
@@ -86,14 +86,14 @@ public class ServerActionHandler {
                 if((boolean) loginInfo[0]){
                     UserData userData = (UserData) loginInfo[1];
                     facade.setActiveUser(userData.getUsername());
-                    facade.setStatusMessage("Success!");
+                    facade.setStatusMessage("Successfully logged in");
                     facade.updateAvailableChatIds();
                     System.out.println("logged in clientside");
                     break;
                 }
 
                 //@todo meddela ui att användaren är inloggad
-                facade.setStatusMessage("Failed!");
+                facade.setStatusMessage("Failed to login");
                 break;
 
             default:
